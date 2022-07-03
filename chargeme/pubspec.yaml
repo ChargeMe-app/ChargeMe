@@ -37,6 +37,9 @@ dependencies:
   google_maps_flutter: ^2.1.5
   http: ^0.13.4
   json_serializable: ^6.2.0
+  provider: ^6.0.0
+  flutter_picker:
+    git: https://github.com/yangyxd/flutter_picker.git
 
 dev_dependencies:
   flutter_test:

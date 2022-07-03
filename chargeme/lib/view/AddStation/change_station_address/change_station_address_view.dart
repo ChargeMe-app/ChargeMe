@@ -1,15 +1,14 @@
 import 'package:chargeme/extensions/color_pallete.dart';
-import 'package:chargeme/view/AddStation/AddStationView.dart';
 import 'package:chargeme/view_model/AddStationViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ChangeStationNameView extends StatelessWidget {
+class ChangeStationAddressView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Change Name'),
+        title: const Text('Change address'),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(
@@ -17,20 +16,20 @@ class ChangeStationNameView extends StatelessWidget {
           child: Column(
             children: [
               const Text(
-                'Enter Name',
+                'Enter address',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               TextFormField(
-                initialValue: context.read<AddStationViewModel>().name,
+                initialValue: context.read<AddStationViewModel>().address,
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Name',
+                  labelText: 'Address',
                 ),
                 onChanged: (text) {
                   var model = Provider.of<AddStationViewModel>(context, listen: false);
-                  model.name = text;
+                  model.address = text;
                 },
               )
             ]
