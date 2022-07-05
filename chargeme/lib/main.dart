@@ -8,11 +8,7 @@ import 'package:chargeme/view/AddStation/AddStationView.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-      // MultiProvider(
-      // providers: [ChangeNotifierProvider(create: (_) => AddStationViewModel())],
-      ChangeNotifierProvider(
-          create: (context) => AddStationViewModel(), child: const MyApp()));
+  runApp(ChangeNotifierProvider(create: (context) => AddStationViewModel(), child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -32,6 +28,5 @@ class _MyAppState extends State<MyApp> {
           ),
           body: AddStationView()), // GMap()),
     );
-    // ));
   }
 }
