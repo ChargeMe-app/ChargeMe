@@ -16,30 +16,30 @@ class _GMap extends State<GMap> {
   final Map<String, Marker> _markers = {};
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    final googleOffices = await locations.getGoogleOffices();
+    // final googleOffices = await locations.getGoogleOffices();
     setState(() {
-      _markers.clear();
-      for (final office in googleOffices.offices) {
-        final marker = Marker(
-          markerId: MarkerId(office.name),
-          position: LatLng(office.lat, office.lng),
-          infoWindow: InfoWindow(
-            title: office.name,
-            snippet: office.address,
-          ),
-        );
-        _markers[office.name] = marker;
-      }
+      // _markers.clear();
+      // for (final office in googleOffices.offices) {
+      // final marker = Marker(
+      //   markerId: MarkerId(office.name),
+      //   position: LatLng(office.lat, office.lng),
+      //   infoWindow: InfoWindow(
+      //     title: office.name,
+      //     snippet: office.address,
+      //   ),
+      // );
+      // _markers[office.name] = marker;
+      // }
     });
   }
 
   Widget build(BuildContext context) {
     return GoogleMap(
-        onMapCreated: _onMapCreated,
+        // onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 11.0,
-        ),
-        markers: _markers.values.toSet());
+      target: _center,
+      zoom: 11.0,
+    ));
+    // markers: _markers.values.toSet());
   }
 }

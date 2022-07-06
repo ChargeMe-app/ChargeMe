@@ -1,10 +1,15 @@
+import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/view_model/AddStationViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/src/locations.dart' as locations;
 import 'package:chargeme/view/map/map.dart';
-import 'package:chargeme/view/AddStation/AddStationView.dart';
+import 'package:chargeme/view/add_station/add_station_view.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(ChangeNotifierProvider(create: (context) => AddStationViewModel(), child: const MyApp()));
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -18,8 +23,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: const Text('Maps Sample App'),
-            backgroundColor: Colors.green[700],
+            title: const Text('Add station'),
+            backgroundColor: ColorPallete.violetBlue,
           ),
           body: AddStationView()), // GMap()),
     );
