@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/src/locations.dart' as locations;
 import 'package:chargeme/view/map/map.dart';
-import 'package:chargeme/view/AddStation/AddStationView.dart';
+import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
