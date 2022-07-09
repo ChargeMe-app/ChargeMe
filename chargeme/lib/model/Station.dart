@@ -1,3 +1,5 @@
+import 'package:json_annotation/json_annotation.dart';
+
 class Station {
   String name;
   String? description;
@@ -58,20 +60,44 @@ class Hours {
   });
 }
 
-enum StationType { type1, type2, chademo, cssCombo }
+enum StationType {
+  @JsonValue(2)
+  type1,
+  @JsonValue(3)
+  chademo,
+  @JsonValue(6)
+  tesla,
+  @JsonValue(7)
+  type2,
+  @JsonValue(10)
+  wallEuro,
+  @JsonValue(13)
+  cssCombo,
+  @JsonValue(14)
+  threePhase
+}
+
+extension MyEnumExtension on StationType {
+  String get str {
+    switch (this) {
+      case StationType.type1:
+        return "J-1772";
+      case StationType.chademo:
+        return "CHAdeMO";
+      case StationType.tesla:
+        return "Tesla";
+      case StationType.type2:
+        return "Type 2";
+      case StationType.wallEuro:
+        return "Wall (euro)";
+      case StationType.cssCombo:
+        return "CCS/SAE";
+      case StationType.threePhase:
+        return "Three Phase";
+    }
+  }
+}
 
 enum Access { public, restrictes }
 
-enum Amenities {
-  lodging,
-  dining,
-  restrooms,
-  evParking,
-  valetParking,
-  park,
-  wifi,
-  shopping,
-  grocery,
-  hiking,
-  camping
-}
+enum Amenities { lodging, dining, restrooms, evParking, valetParking, park, wifi, shopping, grocery, hiking, camping }
