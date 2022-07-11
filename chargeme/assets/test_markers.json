@@ -1,0 +1,2659 @@
+[
+    {
+        "access": 1,
+        "address": "Zelenyy Prospekt, 7 строение 2, Moskva, Moscow Oblast, Russia, 111141",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 213994,
+        "latitude": 55.75013,
+        "longitude": 37.775612,
+        "name": "МГТС Зеленый проспект",
+        "score": 8.2,
+        "stations": [
+            {
+                "id": 460706,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 972747,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 1102194,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 1102195,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/213994"
+    },
+    {
+        "access": 1,
+        "address": "Elektrozavodskaya Ulitsa, 58, Moskva, Russia, 107076",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 213997,
+        "latitude": 55.793525,
+        "longitude": 37.708683,
+        "name": "МГТС Электрозаводская",
+        "score": 10,
+        "stations": [
+            {
+                "id": 460710,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 972751,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 1102197,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 1102196,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/213997"
+    },
+    {
+        "access": 1,
+        "address": "Leninskiy Prospekt, 107, Moskva, Russia, 119421",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 313669,
+        "latitude": 55.664951,
+        "longitude": 37.51222,
+        "name": "Порше Центр Ленинский",
+        "score": 7,
+        "stations": [
+            {
+                "id": 730908,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2196850,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 730909,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2196851,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 860882,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2389007,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 860883,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2389008,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/313669"
+    },
+    {
+        "access": 1,
+        "address": "Волгоградский Просп., 42 корпус 35, Moskva, Moscow Oblast, Russia, 109548",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 95123,
+        "latitude": 55.709872,
+        "longitude": 37.721456,
+        "name": "Инновационный учебный центр АББ / Технополис Москва",
+        "score": 10,
+        "stations": [
+            {
+                "id": 153712,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 460358,
+                        "kilowatts": 43,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 460359,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 460360,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/95123"
+    },
+    {
+        "access": 1,
+        "address": "Москва, Нахимовский проспект, 58",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 266288,
+        "latitude": 55.683517,
+        "longitude": 37.553701,
+        "name": "Бизнес центр iCUBE",
+        "score": 10,
+        "stations": [
+            {
+                "id": 585164,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 1616073,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 1616075,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 1616074,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/266288"
+    },
+    {
+        "access": 1,
+        "address": "5-Y Novopodmoskovnyy Pereulok, 6 строение 4, Moskva, Russia, 125130",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 213998,
+        "latitude": 55.822711,
+        "longitude": 37.507675,
+        "name": "МГТС Новоподмосковный",
+        "score": 10,
+        "stations": [
+            {
+                "id": 464788,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 1014285,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 1014287,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2287533,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/213998"
+    },
+    {
+        "access": 1,
+        "address": "Novoryazanskoye Shosse, 5/2, Lyubertsy, Moskovskaya oblast', Russia, 140011",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 371990,
+        "latitude": 55.665058,
+        "longitude": 37.884293,
+        "name": "Леруа Мерлен Люберцы",
+        "stations": [
+            {
+                "id": 893847,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2439473,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2433602,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 2433603,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/371990"
+    },
+    {
+        "access": 1,
+        "address": "Лесная улица, 7, Москва, Россия, 125047",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 201305,
+        "latitude": 55.779035,
+        "longitude": 37.587509,
+        "name": "Белые сады",
+        "score": 10,
+        "stations": [
+            {
+                "id": 427451,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 748342,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 748343,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 748344,
+                        "kilowatts": 43,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/201305"
+    },
+    {
+        "access": 1,
+        "address": "Ulitsa Testovskaya, владение 8, Moskva, Russia, 123317",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 358048,
+        "latitude": 55.752246,
+        "longitude": 37.531447,
+        "name": "Тестовская",
+        "score": 10,
+        "stations": [
+            {
+                "id": 854132,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2379368,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2379369,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 854133,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2379370,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2379371,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/358048"
+    },
+    {
+        "access": 1,
+        "address": "Красногорск, Московская область, Россия, 143402, Международная улица, 8",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 368533,
+        "latitude": 55.818225,
+        "longitude": 37.387943,
+        "name": "Скорость Света, Крокус Сити Молл",
+        "stations": [
+            {
+                "id": 884803,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2421776,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884804,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2421777,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/368533"
+    },
+    {
+        "access": 1,
+        "address": "Варшавское ш., 97, ТЦ \"Ритейл Парк, Москва, Россия, 117556",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 365041,
+        "latitude": 55.633922,
+        "longitude": 37.62311,
+        "name": "Ритейл Парк",
+        "score": 10,
+        "stations": [
+            {
+                "id": 872490,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2405447,
+                        "kilowatts": 60,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 2411405,
+                        "kilowatts": 60,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/365041"
+    },
+    {
+        "access": 1,
+        "address": "Москва, МКАД 61-й километр, строение 1",
+        "icon": "https://assets.plugshare.com/icons/YR.png",
+        "icon_type": "YR",
+        "id": 335447,
+        "latitude": 55.766918,
+        "longitude": 37.367292,
+        "name": "Порше Центр Рублевский (Coming Soon)",
+        "stations": [
+            {
+                "id": 884852,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2421831,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884853,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2421832,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884854,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2421833,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/335447"
+    },
+    {
+        "access": 1,
+        "address": "Bakuninskaya Ulitsa, 32/36, Moskva, Russia, 105082",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 392917,
+        "latitude": 55.775514,
+        "longitude": 37.685661,
+        "name": "Бакунинская",
+        "stations": [
+            {
+                "id": 948405,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2520974,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2520975,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/392917"
+    },
+    {
+        "access": 1,
+        "address": "ул. Барклая, д. 11, Moskva, Russia, 121309",
+        "icon": "https://assets.plugshare.com/icons/YR.png",
+        "icon_type": "YR",
+        "id": 369214,
+        "latitude": 55.744886,
+        "longitude": 37.496783,
+        "name": "Барклая 11 (Coming Soon)",
+        "stations": [
+            {
+                "id": 884089,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2420885,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2420886,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/369214"
+    },
+    {
+        "access": 1,
+        "address": "Москва, Кутузовский пр. 57",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 353608,
+        "latitude": 55.728126,
+        "longitude": 37.476103,
+        "name": "Океания Скорость Света",
+        "score": 7.9,
+        "stations": [
+            {
+                "id": 884855,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2421834,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884856,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2421835,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884857,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2421836,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/353608"
+    },
+    {
+        "access": 1,
+        "address": "Москва, Каширское шоссе, д.3, к.2, стр.5",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 357365,
+        "latitude": 55.673193,
+        "longitude": 37.631492,
+        "name": "GREEN DRIVE. БЦ Сириус-Парк",
+        "score": 9.6,
+        "stations": [
+            {
+                "id": 852260,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2376723,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 908513,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2457653,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/357365"
+    },
+    {
+        "access": 1,
+        "address": "Ulitsa Alabyana, 19 корпус 1, Moskva, Russia, 125252",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 373535,
+        "latitude": 55.799006,
+        "longitude": 37.503488,
+        "name": "Алабяна",
+        "stations": [
+            {
+                "id": 898204,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2439455,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2439456,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/373535"
+    },
+    {
+        "access": 1,
+        "address": "Moskovskaya Kol'tsevaya Avtomobil'naya Doroga, 51с10, Moskva, Russia, 121471",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 254720,
+        "latitude": 55.694748,
+        "longitude": 37.409679,
+        "name": "Ауди центр Запад",
+        "score": 10,
+        "stations": [
+            {
+                "id": 559165,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 1545434,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 1545435,
+                        "kilowatts": 43,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 1545433,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/254720"
+    },
+    {
+        "access": 1,
+        "address": "Ленинский проспект, 123, Москва, Россия, 117513",
+        "icon": "https://assets.plugshare.com/icons/G.png",
+        "icon_type": "G",
+        "id": 247093,
+        "latitude": 55.646184,
+        "longitude": 37.479639,
+        "name": "DreamCar Studio",
+        "stations": [
+            {
+                "id": 537433,
+                "outlets": [
+                    {
+                        "connector": 2,
+                        "id": 1460218,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 537446,
+                "outlets": [
+                    {
+                        "connector": 10,
+                        "id": 1460296,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/247093"
+    },
+    {
+        "access": 1,
+        "address": "9-Y Arbitrazhnyy Apellyatsionnyy Sud, Moskva, Russia, 127206",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 373553,
+        "latitude": 55.808109,
+        "longitude": 37.562555,
+        "name": "Соломенной Сторожки",
+        "stations": [
+            {
+                "id": 898226,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2439482,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2439483,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/373553"
+    },
+    {
+        "access": 1,
+        "address": "Moskvorech'ye Ulitsa, 14с2, Moskva, Russia, 115522",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 213992,
+        "latitude": 55.644345,
+        "longitude": 37.663675,
+        "name": "МГТС Москворечье",
+        "score": 10,
+        "stations": [
+            {
+                "id": 460704,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 1102192,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 1102193,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 972745,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/213992"
+    },
+    {
+        "access": 1,
+        "address": "Kashirskaya, Moskva, Russia, 115522",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 246673,
+        "latitude": 55.652991,
+        "longitude": 37.645838,
+        "name": "ТРК Москворечье",
+        "score": 8.8,
+        "stations": [
+            {
+                "id": 535917,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 1454847,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 866674,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2397387,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2397388,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/246673"
+    },
+    {
+        "access": 1,
+        "address": "Krasnaya Presnya St, 23с1А, Moskva, Russia, 123376",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 384029,
+        "latitude": 55.761979,
+        "longitude": 37.567336,
+        "name": "Красная Пресня, 23",
+        "stations": [
+            {
+                "id": 923244,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2480610,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2480611,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/384029"
+    },
+    {
+        "access": 1,
+        "address": "MRGP+3H Kotelniki, Moscow Oblast, Russia",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 368242,
+        "latitude": 55.675198,
+        "longitude": 37.836404,
+        "name": "ЭЗС Нефтьмагистраль №060",
+        "score": 10,
+        "stations": [
+            {
+                "id": 881356,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2417325,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2417326,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2417327,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 881616,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2417692,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2417693,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2417694,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/368242"
+    },
+    {
+        "access": 1,
+        "address": "Leontyevskiy per., 25, Moskva, Russia, 125009",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 127528,
+        "latitude": 55.761946,
+        "longitude": 37.60712,
+        "name": "Леонтьевский 25",
+        "score": 1,
+        "stations": [
+            {
+                "id": 240231,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 497559,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 940103,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2508648,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2508649,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 229869,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 480132,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/127528"
+    },
+    {
+        "access": 1,
+        "address": "55°42'27.7\"N 37°22'29.3\"E",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 210352,
+        "latitude": 55.707702,
+        "longitude": 37.374915,
+        "name": "ZEVS",
+        "score": 1.4,
+        "stations": [
+            {
+                "id": 802801,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2302916,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2302917,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2302918,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/210352"
+    },
+    {
+        "access": 1,
+        "address": "Новая, 100с11, Москва, Россия",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 357420,
+        "latitude": 55.694717,
+        "longitude": 37.387266,
+        "name": "ZEVS в Сколково",
+        "score": 9.6,
+        "stations": [
+            {
+                "id": 852298,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2376772,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 2376976,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/357420"
+    },
+    {
+        "access": 1,
+        "address": "ул. Нижние Мнёвники, 37А, Москва, Россия",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 354015,
+        "latitude": 55.752035,
+        "longitude": 37.454886,
+        "name": "ЖК «Остров»",
+        "score": 10,
+        "stations": [
+            {
+                "id": 843405,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2365035,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2365036,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2365037,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/354015"
+    },
+    {
+        "access": 1,
+        "address": "Аминьевское ш., 6 Квартал, Москва, Россия, 119530",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 368048,
+        "latitude": 55.707744,
+        "longitude": 37.45712,
+        "name": "ТРЦ Kvartal West",
+        "score": 8.8,
+        "stations": [
+            {
+                "id": 880871,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2437137,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2416682,
+                        "kilowatts": 150,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/368048"
+    },
+    {
+        "access": 1,
+        "address": "ул. Вересаева, 11, Москва, Россия, 121357",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 365990,
+        "latitude": 55.719274,
+        "longitude": 37.445105,
+        "name": "Вересаева",
+        "stations": [
+            {
+                "id": 875332,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2409082,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 2409073,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/365990"
+    },
+    {
+        "access": 1,
+        "address": "Ulitsa Fabritsiusa, 56 корпус 1 строение 2, Moskva, Russia, 125459",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 213996,
+        "latitude": 55.845328,
+        "longitude": 37.422026,
+        "name": "МГТС Фабрициуса",
+        "score": 10,
+        "stations": [
+            {
+                "id": 460709,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 972750,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 1102199,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 1102198,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/213996"
+    },
+    {
+        "access": 1,
+        "address": "Bul'var Yana Raynisa, 1к1, Moscow, Russia, 125363",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 333148,
+        "latitude": 55.850326,
+        "longitude": 37.437702,
+        "name": "Бульвар Яна Райниса",
+        "score": 10,
+        "stations": [
+            {
+                "id": 813134,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2316205,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2316206,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/333148"
+    },
+    {
+        "access": 1,
+        "address": "Москва, Лужнецкая набережная, 10Ас3",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 345116,
+        "latitude": 55.715939,
+        "longitude": 37.57073,
+        "name": "REWATT DC Лужники",
+        "score": 10,
+        "stations": [
+            {
+                "id": 784490,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2278958,
+                        "kilowatts": 62.5,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/345116"
+    },
+    {
+        "access": 1,
+        "address": "Sadovnicheskaya St, 36, Moskva, Russia, 115035",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 28105,
+        "latitude": 55.745504,
+        "longitude": 37.634374,
+        "name": "ПАО «Россети Московский регион»",
+        "score": 5.4,
+        "stations": [
+            {
+                "id": 282888,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 552824,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 270344,
+                "outlets": [
+                    {
+                        "connector": 10,
+                        "id": 537803,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2152009,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 282886,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 552822,
+                        "kilowatts": 43,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 2152006,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2152007,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 270346,
+                "outlets": [
+                    {
+                        "connector": 10,
+                        "id": 537805,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2152012,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/28105"
+    },
+    {
+        "access": 1,
+        "address": "Bol'shoy Drovyanoy Pereulok, 17, Moskva, Russia, 109004",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 360885,
+        "latitude": 55.745649,
+        "longitude": 37.658326,
+        "name": "Большой Дровяной переулок Парковка",
+        "score": 10,
+        "stations": [
+            {
+                "id": 861835,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2390519,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 2390518,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/360885"
+    },
+    {
+        "access": 1,
+        "address": "Нижний Сусальный переулок, 5с4",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 357733,
+        "latitude": 55.759572,
+        "longitude": 37.663335,
+        "name": "GREEN DRIVE. АРМА Бизнес-квартал",
+        "score": 10,
+        "stations": [
+            {
+                "id": 853293,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2378138,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2378139,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/357733"
+    },
+    {
+        "access": 1,
+        "address": "Khoroshevskiy Proyezd, 14, 3 Etazh, Nemchinovka, Moskovskaya oblast', Russia, 143025",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 423382,
+        "latitude": 55.721342,
+        "longitude": 37.378801,
+        "name": "Скорость света #021 Вегас - Кунцево (DC120+DC60)",
+        "stations": [
+            {
+                "id": 1020473,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2640994,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2640995,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/423382"
+    },
+    {
+        "access": 1,
+        "address": "Mikhaylovskiy Proyezd, 3 строение 25, Moskva, Moscow Oblast, Russia, 109029",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 337336,
+        "latitude": 55.731047,
+        "longitude": 37.685373,
+        "name": "Ауди Центр Таганка",
+        "score": 9,
+        "stations": [
+            {
+                "id": 795670,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2293309,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2407570,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2407571,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/337336"
+    },
+    {
+        "access": 1,
+        "address": "Волгоградский пр-т., 32к31, Moskva, Russia, 109316",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 362745,
+        "latitude": 55.718424,
+        "longitude": 37.690454,
+        "name": "РТС Волгоградский",
+        "score": 10,
+        "stations": [
+            {
+                "id": 866683,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2397399,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2397400,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2397401,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/362745"
+    },
+    {
+        "access": 1,
+        "address": "Khodynskiy Bul'var, 4, Moskva, Russia, 125167",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 358683,
+        "latitude": 55.790206,
+        "longitude": 37.531332,
+        "name": "СКОРОСТЬ СВЕТА, Авиапарк",
+        "score": 10,
+        "stations": [
+            {
+                "id": 884862,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2421841,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884860,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2421839,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884861,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2421840,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884863,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2421842,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 884864,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2421843,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/358683"
+    },
+    {
+        "access": 1,
+        "address": "Последний пер., 3, Москва, Россия, 107045",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 368035,
+        "latitude": 55.769844,
+        "longitude": 37.625995,
+        "name": "Последний переулок",
+        "stations": [
+            {
+                "id": 880848,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2416652,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2416653,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/368035"
+    },
+    {
+        "access": 1,
+        "address": "Nikolskaya St, 10, Moskva, Moscow Oblast, Russia, 109012",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 254602,
+        "latitude": 55.758495,
+        "longitude": 37.624852,
+        "name": "Nikolskaya St Парковка",
+        "score": 10,
+        "stations": [
+            {
+                "id": 781550,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2303289,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2303290,
+                        "kilowatts": 22,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2275169,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/254602"
+    },
+    {
+        "access": 1,
+        "address": "ул. стр., Myasnitskaya Ulitsa, 13 строение 10, Moskva, Russia, 101000",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 355487,
+        "latitude": 55.762903,
+        "longitude": 37.633811,
+        "name": "Мясницкая",
+        "score": 8.9,
+        "stations": [
+            {
+                "id": 847147,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2370090,
+                        "kilowatts": 100,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2370091,
+                        "kilowatts": 180,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/355487"
+    },
+    {
+        "access": 1,
+        "address": "Sadovnicheskaya Naberezhnaya, д. 77, Moskva, Russia, 115035",
+        "icon": "https://assets.plugshare.com/icons/YR.png",
+        "icon_type": "YR",
+        "id": 366968,
+        "latitude": 55.735591,
+        "longitude": 37.641029,
+        "name": "Садовническая набережная (Coming Soon)",
+        "stations": [
+            {
+                "id": 878025,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2412788,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2412789,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/366968"
+    },
+    {
+        "access": 1,
+        "address": "ул. Поликарпова, 23А корпус 38, Moskva, Russia, 125284",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 367909,
+        "latitude": 55.784961,
+        "longitude": 37.54126,
+        "name": "Авиаконструктора Сухого",
+        "score": 10,
+        "stations": [
+            {
+                "id": 880510,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2416204,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2416205,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/367909"
+    },
+    {
+        "access": 1,
+        "address": "Иерусалимская, д.3 офис 4",
+        "icon": "https://assets.plugshare.com/icons/G.png",
+        "icon_type": "G",
+        "id": 332490,
+        "latitude": 55.732516,
+        "longitude": 37.677789,
+        "name": "Tesla Drive",
+        "stations": [
+            {
+                "id": 782823,
+                "outlets": [
+                    {
+                        "connector": 2,
+                        "id": 2276729,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 782824,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2276730,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 782832,
+                "outlets": [
+                    {
+                        "connector": 14,
+                        "id": 2276741,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/332490"
+    },
+    {
+        "access": 1,
+        "address": "парк Горького/Крымский Мост",
+        "icon": "https://assets.plugshare.com/icons/GR.png",
+        "icon_type": "GR",
+        "id": 373493,
+        "latitude": 55.732759,
+        "longitude": 37.601989,
+        "name": "Парк культуры и отдыха им. Горького / иТайгер (Coming Soon)",
+        "stations": [
+            {
+                "id": 898143,
+                "outlets": [
+                    {
+                        "connector": 2,
+                        "id": 2439379,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2439380,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/373493"
+    },
+    {
+        "access": 1,
+        "address": "Ленинградский пр-т., 35 строение 10, Москва, Россия, 125284",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 315187,
+        "latitude": 55.790122,
+        "longitude": 37.552003,
+        "name": "Квартал Искра-Парк",
+        "score": 1,
+        "stations": [
+            {
+                "id": 734793,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2212608,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2422641,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2422642,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/315187"
+    },
+    {
+        "access": 1,
+        "address": "Bol'shoy Sukharevskiy Pereulok, 24, Moskva, Russia, 107045",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 383663,
+        "latitude": 55.770684,
+        "longitude": 37.630463,
+        "name": "Большой Сухаревский переулок",
+        "stations": [
+            {
+                "id": 922130,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2478890,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2478891,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/383663"
+    },
+    {
+        "access": 1,
+        "address": "пл. Европы, Москва, Россия, 121059",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 357439,
+        "latitude": 55.74312,
+        "longitude": 37.570877,
+        "name": "Площадь Европы",
+        "score": 10,
+        "stations": [
+            {
+                "id": 852331,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2376820,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2376821,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 852332,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2376822,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2376823,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 893055,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2432326,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2432327,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/357439"
+    },
+    {
+        "access": 1,
+        "address": "Belaya Dacha mikrorayon, Kotel'niki, Центральный Федеральный Округ, Россия 140054",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 340782,
+        "latitude": 55.657571,
+        "longitude": 37.84351,
+        "name": "МЕГА Белая Дача, Центральный вход ОБИ",
+        "score": 10,
+        "stations": [
+            {
+                "id": 805364,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2305909,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2305910,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2305911,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 805365,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2305912,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2305913,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2305914,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/340782"
+    },
+    {
+        "access": 1,
+        "address": "ул. Плющиха, д. 42, Москва, Россия, 119121",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 363572,
+        "latitude": 55.741881,
+        "longitude": 37.57734,
+        "name": "Плющиха",
+        "score": 10,
+        "stations": [
+            {
+                "id": 868778,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2400268,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 2400271,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/363572"
+    },
+    {
+        "access": 1,
+        "address": "1-Y Vrazhskiy Pereulok, 4, Moskva, Russia, 119121",
+        "icon": "https://assets.plugshare.com/icons/YR.png",
+        "icon_type": "YR",
+        "id": 368693,
+        "latitude": 55.739886,
+        "longitude": 37.573826,
+        "name": "1-й Вражский переулок (Coming Soon)",
+        "stations": [
+            {
+                "id": 882681,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2419131,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2419132,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/368693"
+    },
+    {
+        "access": 1,
+        "address": "МЕГА Белая Дача, Центральный вход",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 336535,
+        "latitude": 55.655406,
+        "longitude": 37.847107,
+        "name": "МЕГА Белая Дача, Центральный вход ИКЕЯ",
+        "score": 10,
+        "stations": [
+            {
+                "id": 795640,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2293268,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2293269,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2293270,
+                        "kilowatts": 43,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 793650,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2290771,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2290772,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 2290773,
+                        "kilowatts": 43,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/336535"
+    },
+    {
+        "access": 1,
+        "address": "1-й Покровский пр-д, 4, Котельники, Московская обл., 140055",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 171037,
+        "latitude": 55.652155,
+        "longitude": 37.845373,
+        "name": "МЕГА Белая дача",
+        "score": 10,
+        "stations": [
+            {
+                "id": 521074,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 1321189,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 1321190,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 521073,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 1321186,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 1321187,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 7,
+                        "id": 1321188,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/171037"
+    },
+    {
+        "access": 1,
+        "address": "улица Лесная, дом 20 строение 3, Moskva, Russia, 125047",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 365066,
+        "latitude": 55.779513,
+        "longitude": 37.592825,
+        "name": "ZEVS в ДЕПО",
+        "score": 9,
+        "stations": [
+            {
+                "id": 872533,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2405503,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2405504,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/365066"
+    },
+    {
+        "access": 1,
+        "address": "Lesnaya Ulitsa, 61 строение 1, Moskva, Russia, 127055",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 367763,
+        "latitude": 55.782276,
+        "longitude": 37.594082,
+        "name": "Лесная Парковка",
+        "score": 3.1,
+        "stations": [
+            {
+                "id": 880163,
+                "network_id": 1052,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2415784,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2415785,
+                        "kilowatts": 50,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/367763"
+    },
+    {
+        "access": 1,
+        "address": "Афимолл Сити",
+        "icon": "https://assets.plugshare.com/icons/G.png",
+        "icon_type": "G",
+        "id": 320488,
+        "latitude": 55.748963,
+        "longitude": 37.539179,
+        "name": "Афимолл Сити  паркинг -2 D10 32A",
+        "score": 1.4,
+        "stations": [
+            {
+                "id": 748821,
+                "outlets": [
+                    {
+                        "connector": 2,
+                        "id": 2231821,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": "UNKNOWN"
+                    }
+                ]
+            },
+            {
+                "id": 748822,
+                "outlets": [
+                    {
+                        "connector": 10,
+                        "id": 2231822,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": "UNKNOWN"
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/320488"
+    },
+    {
+        "access": 1,
+        "address": "Москва, ул. садовники д11 к2 стр20",
+        "icon": "https://assets.plugshare.com/icons/G.png",
+        "icon_type": "G",
+        "id": 130286,
+        "latitude": 55.675253,
+        "longitude": 37.658164,
+        "name": "HYBRIDs.ru service parking",
+        "score": 10,
+        "stations": [
+            {
+                "id": 236436,
+                "outlets": [
+                    {
+                        "connector": 2,
+                        "id": 491038,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/130286"
+    },
+    {
+        "access": 1,
+        "address": "ул. Производственная д.12 кор 1, Москва, Россия, 119619",
+        "icon": "https://assets.plugshare.com/icons/G.png",
+        "icon_type": "G",
+        "id": 326646,
+        "latitude": 55.644075,
+        "longitude": 37.388675,
+        "name": "Longreed",
+        "stations": [
+            {
+                "id": 766534,
+                "network_id": 1,
+                "outlets": [
+                    {
+                        "connector": 2,
+                        "id": 2255214,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/326646"
+    },
+    {
+        "access": 1,
+        "address": "Leont'yevskiy Pereulok, 22, Moskva, Russia, 125009",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 406236,
+        "latitude": 55.76093,
+        "longitude": 37.60683,
+        "name": "Леонтьевский 22",
+        "stations": [
+            {
+                "id": 979325,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2572430,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2572431,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 979326,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2572432,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2572433,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/406236"
+    },
+    {
+        "access": 1,
+        "address": "Сколковское ш., 50, Moskva, Russia, 143025",
+        "icon": "https://assets.plugshare.com/icons/G.png",
+        "icon_type": "G",
+        "id": 347364,
+        "latitude": 55.695123,
+        "longitude": 37.380133,
+        "name": "Гольф Клуб Сколково",
+        "score": 6.9,
+        "stations": [
+            {
+                "id": 861783,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2390457,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 861784,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2390458,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 861785,
+                "outlets": [
+                    {
+                        "connector": 7,
+                        "id": 2390459,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            },
+            {
+                "id": 866708,
+                "outlets": [
+                    {
+                        "connector": 6,
+                        "id": 2397429,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/347364"
+    },
+    {
+        "access": 1,
+        "address": "Leninskiy Prospekt, 37А, Moskva, Russia, 119334",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 404523,
+        "latitude": 55.709381,
+        "longitude": 37.585554,
+        "name": "Ленинский проспект 37А",
+        "stations": [
+            {
+                "id": 968431,
+                "outlets": [
+                    {
+                        "connector": 13,
+                        "id": 2557256,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 3,
+                        "id": 2576809,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/404523"
+    },
+    {
+        "access": 1,
+        "address": "Bakuninskaya Ulitsa, 32/36, Moskva, Russia, 105082",
+        "icon": "https://assets.plugshare.com/icons/Y.png",
+        "icon_type": "Y",
+        "id": 392918,
+        "latitude": 55.775514,
+        "longitude": 37.685661,
+        "name": "Бакунинская",
+        "stations": [
+            {
+                "id": 948406,
+                "outlets": [
+                    {
+                        "connector": 3,
+                        "id": 2520976,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    },
+                    {
+                        "connector": 13,
+                        "id": 2520977,
+                        "kilowatts": null,
+                        "power": 0,
+                        "status": null
+                    }
+                ]
+            }
+        ],
+        "url": "http://api.plugshare.com/view/location/392918"
+    }
+]

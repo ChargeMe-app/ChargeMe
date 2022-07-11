@@ -35,6 +35,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.1.8
+  custom_info_window: ^1.0.1
+  geolocator: ^9.0.0 
   http: ^0.13.4
   json_serializable: ^6.2.0
   provider: ^6.0.0
@@ -66,6 +68,8 @@ flutter:
 
   assets:
     - assets/locations.json
+    - assets/test_markers.json
+    - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
