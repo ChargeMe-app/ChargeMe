@@ -64,7 +64,6 @@ class MarkerOutlet {
 }
 
 Future<List<StationMarker>> getTestStationMarkers() async {
-  // return StationMarker.fromJson(json.decode(await rootBundle.loadString('assets/test_markers.json')));
   List<StationMarker> stations;
   var response = await rootBundle.loadString('assets/test_markers.json');
 

@@ -25,10 +25,10 @@ class MarkerInfoView extends StatelessWidget {
                     : Padding(
                         padding: EdgeInsets.all(6),
                         child: Text(
-                          score.toString(),
+                          score!.toInt() == score ? score!.toInt().toString() : score.toString(),
                           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                         ))),
-            const SizedBox(width: 12),
+            score == null ? Container() : const SizedBox(width: 8),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Container(
                   constraints: BoxConstraints(maxWidth: score == null ? 190 : 142),

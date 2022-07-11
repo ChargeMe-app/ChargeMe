@@ -70,11 +70,18 @@ Map<String, dynamic> _$MarkerOutletToJson(MarkerOutlet instance) =>
     };
 
 const _$StationTypeEnumMap = {
+  StationType.wall: 1,
   StationType.type1: 2,
   StationType.chademo: 3,
+  StationType.teslaRoadster: 4,
+  StationType.nema1450: 5,
   StationType.tesla: 6,
   StationType.type2: 7,
   StationType.wallEuro: 10,
+  StationType.commando: 11,
   StationType.cssCombo: 13,
   StationType.threePhase: 14,
+  StationType.caravanMainsSocket: 15,
+  StationType.gbt: 16,
+  StationType.type3a: 24,
 };

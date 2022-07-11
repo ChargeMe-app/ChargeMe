@@ -61,39 +61,67 @@ class Hours {
 }
 
 enum StationType {
+  @JsonValue(1)
+  wall,
   @JsonValue(2)
   type1,
   @JsonValue(3)
   chademo,
+  @JsonValue(4)
+  teslaRoadster,
+  @JsonValue(5)
+  nema1450,
   @JsonValue(6)
   tesla,
   @JsonValue(7)
   type2,
   @JsonValue(10)
   wallEuro,
+  @JsonValue(11)
+  commando,
   @JsonValue(13)
   cssCombo,
   @JsonValue(14)
-  threePhase
+  threePhase,
+  @JsonValue(15)
+  caravanMainsSocket,
+  @JsonValue(16)
+  gbt,
+  @JsonValue(24)
+  type3a
 }
 
 extension MyEnumExtension on StationType {
   String get str {
     switch (this) {
+      case StationType.wall:
+        return "Wall";
       case StationType.type1:
         return "J-1772";
       case StationType.chademo:
         return "CHAdeMO";
+      case StationType.teslaRoadster:
+        return "Tesla (Roadster)";
+      case StationType.nema1450:
+        return "NEMA 14-50";
       case StationType.tesla:
         return "Tesla";
       case StationType.type2:
         return "Type 2";
       case StationType.wallEuro:
         return "Wall (euro)";
+      case StationType.commando:
+        return "Commando";
       case StationType.cssCombo:
         return "CCS/SAE";
       case StationType.threePhase:
         return "Three Phase";
+      case StationType.caravanMainsSocket:
+        return "Caravan Mains Socket";
+      case StationType.gbt:
+        return "GB/T";
+      case StationType.type3a:
+        return "Type 3A";
     }
   }
 }
