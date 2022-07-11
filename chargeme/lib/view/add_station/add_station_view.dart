@@ -19,19 +19,24 @@ class AddStationView extends StatefulWidget {
 class _AddStationViewState extends State<AddStationView> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<AddStationViewModel>(
-        builder: (context, viewModel, child) => ListView(
-              children: [
-                CardEntry("Name", viewModel.name, true, (_) => ChangeStationNameView()),
-                CardEntry("Description", viewModel.description, false, (_) => ChangeStationDescriptionView()),
-                CardEntry("Phone number", viewModel.phoneNumber, false, (_) => ChangeStationPhoneView()),
-                CardEntry("Address", viewModel.address, false, (_) => ChangeStationAddressView()),
-                CardEntry("Location", viewModel.location == null ? "" : "Successfully set", true,
-                    (_) => ChangeStationLocationView()),
-                CardEntry("Stations", viewModel.stationTypes.isEmpty ? "" : viewModel.stationTypes.length.toString(),
-                    true, (_) => ChangeStationTypesView())
-              ],
-            ));
+    return Scaffold(
+        appBar: AppBar(title: const Text('Add station'), backgroundColor: ColorPallete.violetBlue),
+        body: Consumer<AddStationViewModel>(
+            builder: (context, viewModel, child) => ListView(
+                  children: [
+                    CardEntry("Name", viewModel.name, true, (_) => ChangeStationNameView()),
+                    CardEntry("Description", viewModel.description, false, (_) => ChangeStationDescriptionView()),
+                    CardEntry("Phone number", viewModel.phoneNumber, false, (_) => ChangeStationPhoneView()),
+                    CardEntry("Address", viewModel.address, false, (_) => ChangeStationAddressView()),
+                    CardEntry("Location", viewModel.location == null ? "" : "Successfully set", true,
+                        (_) => ChangeStationLocationView()),
+                    CardEntry(
+                        "Stations",
+                        viewModel.stationTypes.isEmpty ? "" : viewModel.stationTypes.length.toString(),
+                        true,
+                        (_) => ChangeStationTypesView())
+                  ],
+                )));
   }
 }
 

@@ -21,12 +21,29 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Add station'),
-            backgroundColor: ColorPallete.violetBlue,
-          ),
-          body: AddStationView()), // GMap()),
+      home: HomeView(),
     );
+  }
+}
+
+class HomeView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('ChargeMe'),
+          backgroundColor: ColorPallete.violetBlue,
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddStationView(),
+                  ),
+                );
+              },
+              child: const Icon(Icons.location_pin)),
+        ),
+        body: const GMap());
   }
 }
