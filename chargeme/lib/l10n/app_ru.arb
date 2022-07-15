@@ -1,3 +1,29 @@
 {
-    "appTitle": "ЧарджМи"
+    "appTitle": "ChargeMe",
+    "addStation": "Добавить станцию",
+    "name": "Название",
+    "description": "Описание",
+    "phoneNumber": "Номер телефона",
+    "address": "Адрес",
+    "location": "Геолокация",
+    "stations": "Станции",
+
+    "changeName": "Изменить название",
+    "enterName": "Введите название",
+
+    "changeDescription": "Изменить описание",
+    "enterDescription": "Введите описание",
+
+    "changePhoneNumber": "Изменить номер телефона",
+    "enterPhoneNumber": "Введите номер телефона",
+
+    "changeAddress": "Изменить адрес",
+    "enterAddress": "Введите адрес",
+
+    "editLocation": "Изменить геолокацию",
+
+    "editStationTypes": "Изменить станции",
+    "noAddedStations": "Нет станций",
+    "addStationType": "Добавить станцию",
+    "selectIcon": "Выберите иконку"
 }

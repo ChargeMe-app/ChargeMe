@@ -8,6 +8,7 @@ import 'package:chargeme/view/add_station/change_station_types/change_station_ty
 import 'package:chargeme/view_model/AddStationViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddStationView extends StatefulWidget {
   const AddStationView({Key? key}) : super(key: key);
@@ -19,19 +20,20 @@ class AddStationView extends StatefulWidget {
 class _AddStationViewState extends State<AddStationView> {
   @override
   Widget build(BuildContext context) {
+    var l10n = AppLocalizations.of(context);
     return Scaffold(
-        appBar: AppBar(title: const Text('Add station'), backgroundColor: ColorPallete.violetBlue),
+        appBar: AppBar(title: Text(l10n.addStation), backgroundColor: ColorPallete.violetBlue),
         body: Consumer<AddStationViewModel>(
             builder: (context, viewModel, child) => ListView(
                   children: [
-                    CardEntry("Name", viewModel.name, true, (_) => ChangeStationNameView()),
-                    CardEntry("Description", viewModel.description, false, (_) => ChangeStationDescriptionView()),
-                    CardEntry("Phone number", viewModel.phoneNumber, false, (_) => ChangeStationPhoneView()),
-                    CardEntry("Address", viewModel.address, false, (_) => ChangeStationAddressView()),
-                    CardEntry("Location", viewModel.location == null ? "" : "Successfully set", true,
+                    CardEntry(l10n.name, viewModel.name, true, (_) => ChangeStationNameView()),
+                    CardEntry(l10n.description, viewModel.description, false, (_) => ChangeStationDescriptionView()),
+                    CardEntry(l10n.phoneNumber, viewModel.phoneNumber, false, (_) => ChangeStationPhoneView()),
+                    CardEntry(l10n.address, viewModel.address, false, (_) => ChangeStationAddressView()),
+                    CardEntry(l10n.location, viewModel.location == null ? "" : "Successfully set", true,
                         (_) => ChangeStationLocationView()),
                     CardEntry(
-                        "Stations",
+                        l10n.stations,
                         viewModel.stationTypes.isEmpty ? "" : viewModel.stationTypes.length.toString(),
                         true,
                         (_) => ChangeStationTypesView())
