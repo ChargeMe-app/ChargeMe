@@ -1,12 +1,12 @@
 import 'package:chargeme/extensions/color_pallete.dart';
-import 'package:chargeme/model/Station.dart';
+import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view/map/marker_info_view.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import '../../src/locations.dart' as locations;
-import '../../model/station_marker.dart' as stationMarker;
+import '../../model/station_marker/station_marker.dart' as stationMarker;
 
 class GMap extends StatefulWidget {
   const GMap({Key? key}) : super(key: key);

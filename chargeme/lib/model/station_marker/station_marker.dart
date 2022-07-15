@@ -1,7 +1,7 @@
 import 'dart:convert';
 // import 'dart:ffi';
 
-import 'package:chargeme/model/Station.dart';
+import 'package:chargeme/model/charging_place/station.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -51,7 +51,7 @@ class MarkerStations {
 
 @JsonSerializable()
 class MarkerOutlet {
-  StationType connector;
+  ConnectorType connector;
   int id;
   double? kilowatts;
   int? power;

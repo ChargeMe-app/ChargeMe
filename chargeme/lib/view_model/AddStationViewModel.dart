@@ -1,4 +1,4 @@
-import 'package:chargeme/model/Station.dart';
+import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
 
 class AddStationViewModel extends ChangeNotifier {
@@ -7,7 +7,7 @@ class AddStationViewModel extends ChangeNotifier {
   String _phoneNumber = "";
   String _address = "";
   Location? location;
-  List<StationType> stationTypes = [];
+  List<ConnectorType> stationTypes = [];
 
   String get name => _name;
   void set name(String value) {

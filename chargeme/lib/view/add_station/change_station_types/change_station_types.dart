@@ -1,5 +1,5 @@
 import 'package:chargeme/extensions/color_pallete.dart';
-import 'package:chargeme/model/Station.dart';
+import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view_model/AddStationViewModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class ChangeStationTypesView extends StatelessWidget {
 
   showPickerArray(BuildContext context) {
     List<PickerItem> pickerItems = [];
-    for (var stationType in StationType.values) {
+    for (var stationType in ConnectorType.values) {
       pickerItems.add(PickerItem(
           text: Center(child: Text(stationType.toString(), style: TextStyle(fontSize: 18, color: Colors.black)))));
     }
