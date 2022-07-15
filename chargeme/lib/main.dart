@@ -6,6 +6,7 @@ import 'package:chargeme/src/locations.dart' as locations;
 import 'package:chargeme/view/map/map.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(create: (context) => AddStationViewModel(), child: const MyApp()));
@@ -21,6 +22,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: [const Locale("en"), const Locale("ru")],
       home: HomeView(),
     );
   }
