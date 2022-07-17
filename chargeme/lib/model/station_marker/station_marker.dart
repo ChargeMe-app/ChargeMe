@@ -1,8 +1,4 @@
 import 'dart:convert';
-<<<<<<< HEAD
-// import 'dart:ffi';
-=======
->>>>>>> 24c5511 (models for charging place)
 
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:json_annotation/json_annotation.dart';
