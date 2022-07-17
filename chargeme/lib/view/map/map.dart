@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import '../../src/locations.dart' as locations;
 import '../../model/station_marker/station_marker.dart' as stationMarker;
+import '../../model/charging_place/charging_place.dart' as chargingPlace;
 
 class GMap extends StatefulWidget {
   const GMap({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class _GMap extends State<GMap> {
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     // mapController = controller;
+    final station = await chargingPlace.getTestStation();
     final stationMarkers = await stationMarker.getTestStationMarkers();
     _customInfoWindowController.googleMapController = controller;
     final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);

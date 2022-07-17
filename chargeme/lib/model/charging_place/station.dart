@@ -2,9 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'station.g.dart';
 
-// TODO: Convert to snake_case!
-
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Station {
   int id;
   int locationId;
@@ -33,37 +31,17 @@ class Station {
   Map<String, dynamic> toJson() => _$StationToJson(this);
 }
 
-// class Location {
-//   double lat;
-//   double lng;
+class Location {
+  double lat;
+  double lng;
 
-//   Location({
-//     required this.lat,
-//     required this.lng,
-//   });
-// }
+  Location({
+    required this.lat,
+    required this.lng,
+  });
+}
 
-// class Cost {
-//   bool isFeeRequired;
-//   String description;
-
-//   Cost({
-//     required this.isFeeRequired,
-//     required this.description,
-//   });
-// }
-
-// class Hours {
-//   bool isAlwaysOpened;
-//   String description;
-
-//   Hours({
-//     required this.isAlwaysOpened,
-//     required this.description,
-//   });
-// }
-
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Outlet {
   int id;
   int available;
@@ -77,10 +55,19 @@ class Outlet {
   Map<String, dynamic> toJson() => _$OutletToJson(this);
 }
 
-enum VehicleType {
-  @JsonValue(4)
-  teslaModelS
+@JsonSerializable(fieldRename: FieldRename.snake)
+class Amenity {
+  int locationId;
+  // AmenityType type;
+  int type;
+
+  Amenity({required this.locationId, required this.type});
+
+  factory Amenity.fromJson(Map<String, dynamic> json) => _$AmenityFromJson(json);
+  Map<String, dynamic> toJson() => _$AmenityToJson(this);
 }
+
+enum VehicleType { teslaModelS }
 
 enum ConnectorType {
   @JsonValue(1)
@@ -151,15 +138,3 @@ extension MyEnumExtension on ConnectorType {
 enum Access { public, restrictes }
 
 enum AmenityType { lodging, dining, restrooms, evParking, valetParking, park, wifi, shopping, grocery, hiking, camping }
-
-@JsonSerializable()
-class Amenity {
-  int locationId;
-  // AmenityType type;
-  int type;
-
-  Amenity({required this.locationId, required this.type});
-
-  factory Amenity.fromJson(Map<String, dynamic> json) => _$AmenityFromJson(json);
-  Map<String, dynamic> toJson() => _$AmenityToJson(this);
-}

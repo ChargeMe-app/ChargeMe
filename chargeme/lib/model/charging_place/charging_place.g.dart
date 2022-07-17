@@ -10,28 +10,24 @@ ChargingPlace _$ChargingPlaceFromJson(Map<String, dynamic> json) =>
     ChargingPlace(
       name: json['name'] as String,
       description: json['description'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
+      phoneNumber: json['phone_number'] as String?,
       address: json['address'] as String?,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
-      stationTypes: (json['stationTypes'] as List<dynamic>)
-          .map((e) => $enumDecode(_$ConnectorTypeEnumMap, e))
-          .toList(),
       access: json['access'] as int?,
-      accessRestriction: json['accessRestriction'] as String?,
+      accessRestriction: json['access_restriction'] as String?,
       accessRestrictionDescription:
-          json['accessRestrictionDescription'] as String?,
-      accessRestrictions: (json['accessRestrictions'] as List<dynamic>?)
+          json['access_restriction_description'] as String?,
+      accessRestrictions: (json['access_restrictions'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
       cost: json['cost'] as bool?,
-      costDescription: json['costDescription'] as String?,
+      costDescription: json['cost_description'] as String?,
       hours: json['hours'] as String?,
       open247: json['open247'] as bool?,
       amenities: (json['amenities'] as List<dynamic>?)
           ?.map((e) => Amenity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      isOpenOrActive: json['isOpenOrActive'] as bool,
       photos: (json['photos'] as List<dynamic>)
           .map((e) => Photo.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -42,36 +38,78 @@ ChargingPlace _$ChargingPlaceFromJson(Map<String, dynamic> json) =>
           .map((e) => Station.fromJson(e as Map<String, dynamic>))
           .toList(),
       score: (json['score'] as num?)?.toDouble(),
-      totalPhotos: json['totalPhotos'] as int,
-      totalReviews: json['totalReviews'] as int,
+      totalPhotos: json['total_photos'] as int,
+      totalReviews: json['total_reviews'] as int,
     );
 
 Map<String, dynamic> _$ChargingPlaceToJson(ChargingPlace instance) =>
     <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
-      'phoneNumber': instance.phoneNumber,
+      'phone_number': instance.phoneNumber,
       'address': instance.address,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
-      'stationTypes':
-          instance.stationTypes.map((e) => _$ConnectorTypeEnumMap[e]).toList(),
       'access': instance.access,
-      'accessRestriction': instance.accessRestriction,
-      'accessRestrictionDescription': instance.accessRestrictionDescription,
-      'accessRestrictions': instance.accessRestrictions,
+      'access_restriction': instance.accessRestriction,
+      'access_restriction_description': instance.accessRestrictionDescription,
+      'access_restrictions': instance.accessRestrictions,
       'cost': instance.cost,
-      'costDescription': instance.costDescription,
+      'cost_description': instance.costDescription,
       'hours': instance.hours,
       'open247': instance.open247,
       'amenities': instance.amenities,
-      'isOpenOrActive': instance.isOpenOrActive,
       'photos': instance.photos,
       'reviews': instance.reviews,
       'stations': instance.stations,
       'score': instance.score,
-      'totalPhotos': instance.totalPhotos,
-      'totalReviews': instance.totalReviews,
+      'total_photos': instance.totalPhotos,
+      'total_reviews': instance.totalReviews,
+    };
+
+Photo _$PhotoFromJson(Map<String, dynamic> json) => Photo(
+      caption: json['caption'] as String,
+      createdAt: DateTime.parse(json['created_at'] as String),
+      id: json['id'] as int,
+      url: Uri.parse(json['url'] as String),
+      userId: json['user_id'] as int,
+    );
+
+Map<String, dynamic> _$PhotoToJson(Photo instance) => <String, dynamic>{
+      'caption': instance.caption,
+      'created_at': instance.createdAt.toIso8601String(),
+      'id': instance.id,
+      'url': instance.url.toString(),
+      'user_id': instance.userId,
+    };
+
+Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
+      comment: json['comment'] as String,
+      connectorType:
+          $enumDecodeNullable(_$ConnectorTypeEnumMap, json['connector_type']),
+      createdAt: DateTime.parse(json['created_at'] as String),
+      id: json['id'] as int,
+      outletId: json['outlet_id'] as int?,
+      stationId: json['station_id'] as int?,
+      rating: $enumDecode(_$RatingEnumMap, json['rating']),
+      vehicleName: json['vehicle_name'] as String?,
+      vehicleType: $enumDecodeNullable(
+          _$VehicleTypeEnumMap, json['vehicle_type'],
+          unknownValue: VehicleType.teslaModelS),
+      user: PlugshareUser.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ReviewToJson(Review instance) => <String, dynamic>{
+      'comment': instance.comment,
+      'connector_type': _$ConnectorTypeEnumMap[instance.connectorType],
+      'created_at': instance.createdAt.toIso8601String(),
+      'id': instance.id,
+      'outlet_id': instance.outletId,
+      'station_id': instance.stationId,
+      'rating': _$RatingEnumMap[instance.rating],
+      'vehicle_name': instance.vehicleName,
+      'vehicle_type': _$VehicleTypeEnumMap[instance.vehicleType],
+      'user': instance.user,
     };
 
 const _$ConnectorTypeEnumMap = {
@@ -91,50 +129,6 @@ const _$ConnectorTypeEnumMap = {
   ConnectorType.type3a: 24,
 };
 
-Photo _$PhotoFromJson(Map<String, dynamic> json) => Photo(
-      caption: json['caption'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      id: json['id'] as int,
-      url: Uri.parse(json['url'] as String),
-      userId: json['userId'] as int,
-    );
-
-Map<String, dynamic> _$PhotoToJson(Photo instance) => <String, dynamic>{
-      'caption': instance.caption,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'id': instance.id,
-      'url': instance.url.toString(),
-      'userId': instance.userId,
-    };
-
-Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
-      comment: json['comment'] as String,
-      connectorType:
-          $enumDecodeNullable(_$ConnectorTypeEnumMap, json['connectorType']),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      id: json['id'] as int,
-      outletId: json['outletId'] as int,
-      stationId: json['stationId'] as int,
-      rating: $enumDecode(_$RatingEnumMap, json['rating']),
-      vehicleName: json['vehicleName'] as String?,
-      vehicleType:
-          $enumDecodeNullable(_$VehicleTypeEnumMap, json['vehicleType']),
-      user: PlugshareUser.fromJson(json['user'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$ReviewToJson(Review instance) => <String, dynamic>{
-      'comment': instance.comment,
-      'connectorType': _$ConnectorTypeEnumMap[instance.connectorType],
-      'createdAt': instance.createdAt.toIso8601String(),
-      'id': instance.id,
-      'outletId': instance.outletId,
-      'stationId': instance.stationId,
-      'rating': _$RatingEnumMap[instance.rating],
-      'vehicleName': instance.vehicleName,
-      'vehicleType': _$VehicleTypeEnumMap[instance.vehicleType],
-      'user': instance.user,
-    };
-
 const _$RatingEnumMap = {
   Rating.negative: -1,
   Rating.neutral: 0,
@@ -142,24 +136,25 @@ const _$RatingEnumMap = {
 };
 
 const _$VehicleTypeEnumMap = {
-  VehicleType.teslaModelS: 4,
+  VehicleType.teslaModelS: 'teslaModelS',
 };
 
 PlugshareUser _$PlugshareUserFromJson(Map<String, dynamic> json) =>
     PlugshareUser(
-      countryCode: json['countryCode'] as String?,
-      displayName: json['displayName'] as String,
+      countryCode: json['country_code'] as String?,
+      displayName: json['display_name'] as String,
       id: json['id'] as int,
-      vehicleDescription: json['vehicleDescription'] as String?,
-      vehicleType:
-          $enumDecodeNullable(_$VehicleTypeEnumMap, json['vehicleType']),
+      vehicleDescription: json['vehicle_description'] as String?,
+      vehicleType: $enumDecodeNullable(
+          _$VehicleTypeEnumMap, json['vehicle_type'],
+          unknownValue: VehicleType.teslaModelS),
     );
 
 Map<String, dynamic> _$PlugshareUserToJson(PlugshareUser instance) =>
     <String, dynamic>{
-      'countryCode': instance.countryCode,
-      'displayName': instance.displayName,
+      'country_code': instance.countryCode,
+      'display_name': instance.displayName,
       'id': instance.id,
-      'vehicleDescription': instance.vehicleDescription,
-      'vehicleType': _$VehicleTypeEnumMap[instance.vehicleType],
+      'vehicle_description': instance.vehicleDescription,
+      'vehicle_type': _$VehicleTypeEnumMap[instance.vehicleType],
     };

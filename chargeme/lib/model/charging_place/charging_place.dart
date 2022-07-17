@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 part 'charging_place.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChargingPlace {
   String name;
   String? description;
@@ -11,8 +14,6 @@ class ChargingPlace {
   String? address;
   double latitude;
   double longitude;
-  // Location location;
-  List<ConnectorType> stationTypes;
 
   int? access;
   String? accessRestriction;
@@ -25,13 +26,11 @@ class ChargingPlace {
   String? hours;
   bool? open247;
 
-  // Hours? hours;
   List<Amenity>? amenities;
-  bool isOpenOrActive;
-
   List<Photo> photos;
   List<Review> reviews;
   List<Station> stations;
+
   double? score;
 
   int totalPhotos;
@@ -44,7 +43,6 @@ class ChargingPlace {
       this.address,
       required this.latitude,
       required this.longitude,
-      required this.stationTypes,
       this.access,
       this.accessRestriction,
       this.accessRestrictionDescription,
@@ -54,7 +52,6 @@ class ChargingPlace {
       this.hours,
       this.open247,
       this.amenities,
-      required this.isOpenOrActive,
       required this.photos,
       required this.reviews,
       required this.stations,
@@ -66,7 +63,7 @@ class ChargingPlace {
   Map<String, dynamic> toJson() => _$ChargingPlaceToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Photo {
   String caption;
   DateTime createdAt;
@@ -75,18 +72,22 @@ class Photo {
   int userId;
 
   Photo({required this.caption, required this.createdAt, required this.id, required this.url, required this.userId});
+
+  factory Photo.fromJson(Map<String, dynamic> json) => _$PhotoFromJson(json);
+  Map<String, dynamic> toJson() => _$PhotoToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Review {
   String comment;
   ConnectorType? connectorType;
   DateTime createdAt;
   int id;
-  int outletId;
-  int stationId;
+  int? outletId;
+  int? stationId;
   Rating rating;
   String? vehicleName;
+  @JsonKey(unknownEnumValue: VehicleType.teslaModelS)
   VehicleType? vehicleType;
   PlugshareUser user;
 
@@ -95,8 +96,8 @@ class Review {
       this.connectorType,
       required this.createdAt,
       required this.id,
-      required this.outletId,
-      required this.stationId,
+      this.outletId,
+      this.stationId,
       required this.rating,
       this.vehicleName,
       this.vehicleType,
@@ -106,12 +107,13 @@ class Review {
   Map<String, dynamic> toJson() => _$ReviewToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PlugshareUser {
   String? countryCode;
   String displayName;
   int id;
   String? vehicleDescription;
+  @JsonKey(unknownEnumValue: VehicleType.teslaModelS)
   VehicleType? vehicleType;
 
   PlugshareUser(
@@ -128,4 +130,12 @@ enum Rating {
   neutral,
   @JsonValue(1)
   positive
+}
+
+Future<List<ChargingPlace>> getTestStation() async {
+  List<ChargingPlace> stations;
+  var response = await rootBundle.loadString('assets/test_station.json');
+
+  stations = (json.decode(response) as List).map((i) => ChargingPlace.fromJson(i)).toList();
+  return stations;
 }

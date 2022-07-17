@@ -8,7 +8,7 @@ part of 'station.dart';
 
 Station _$StationFromJson(Map<String, dynamic> json) => Station(
       id: json['id'] as int,
-      locationId: json['locationId'] as int,
+      locationId: json['location_id'] as int,
       available: json['available'] as int,
       cost: json['cost'] as int,
       outlets: (json['outlets'] as List<dynamic>)
@@ -16,20 +16,20 @@ Station _$StationFromJson(Map<String, dynamic> json) => Station(
           .toList(),
       name: json['name'] as String?,
       manufacturer: json['manufacturer'] as String?,
-      costDescription: json['costDescription'] as String?,
+      costDescription: json['cost_description'] as String?,
       hours: json['hours'] as String?,
       kilowawtts: (json['kilowawtts'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$StationToJson(Station instance) => <String, dynamic>{
       'id': instance.id,
-      'locationId': instance.locationId,
+      'location_id': instance.locationId,
       'available': instance.available,
       'cost': instance.cost,
       'outlets': instance.outlets,
       'name': instance.name,
       'manufacturer': instance.manufacturer,
-      'costDescription': instance.costDescription,
+      'cost_description': instance.costDescription,
       'hours': instance.hours,
       'kilowawtts': instance.kilowawtts,
     };
@@ -37,7 +37,8 @@ Map<String, dynamic> _$StationToJson(Station instance) => <String, dynamic>{
 Outlet _$OutletFromJson(Map<String, dynamic> json) => Outlet(
       id: json['id'] as int,
       available: json['available'] as int,
-      connectorType: $enumDecode(_$ConnectorTypeEnumMap, json['connectorType']),
+      connectorType:
+          $enumDecode(_$ConnectorTypeEnumMap, json['connector_type']),
       kilowatts: (json['kilowatts'] as num?)?.toDouble(),
       description: json['description'] as String?,
     );
@@ -45,7 +46,7 @@ Outlet _$OutletFromJson(Map<String, dynamic> json) => Outlet(
 Map<String, dynamic> _$OutletToJson(Outlet instance) => <String, dynamic>{
       'id': instance.id,
       'available': instance.available,
-      'connectorType': _$ConnectorTypeEnumMap[instance.connectorType],
+      'connector_type': _$ConnectorTypeEnumMap[instance.connectorType],
       'kilowatts': instance.kilowatts,
       'description': instance.description,
     };
@@ -68,11 +69,11 @@ const _$ConnectorTypeEnumMap = {
 };
 
 Amenity _$AmenityFromJson(Map<String, dynamic> json) => Amenity(
-      locationId: json['locationId'] as int,
+      locationId: json['location_id'] as int,
       type: json['type'] as int,
     );
 
 Map<String, dynamic> _$AmenityToJson(Amenity instance) => <String, dynamic>{
-      'locationId': instance.locationId,
+      'location_id': instance.locationId,
       'type': instance.type,
     };
