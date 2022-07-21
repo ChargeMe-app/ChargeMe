@@ -1,0 +1,29 @@
+{
+    "appTitle": "ChargeMe",
+    "addStation": "Add station",
+    "name": "Name",
+    "description": "Description",
+    "phoneNumber": "Phone number",
+    "address": "Address",
+    "location": "Location",
+    "stations": "Stations",
+
+    "changeName": "Change name",
+    "enterName": "Enter name",
+
+    "changeDescription": "Change description",
+    "enterDescription": "Enter description",
+
+    "changePhoneNumber": "Change phone number",
+    "enterPhoneNumber": "Enter phone number",
+
+    "changeAddress": "Change address",
+    "enterAddress": "Enter address",
+
+    "editLocation": "Edit location",
+
+    "editStationTypes": "Edit station types",
+    "noAddedStations": "No added stations",
+    "addStationType": "Add station type",
+    "selectIcon": "Select Icon"
+}
