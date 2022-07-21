@@ -5,7 +5,7 @@ import 'package:chargeme/view/add_station/change_station_address/change_station_
 import 'package:chargeme/view/add_station/change_station_description/change_station_description_view.dart';
 import 'package:chargeme/view/add_station/change_station_phone/change_station_phone_view.dart';
 import 'package:chargeme/view/add_station/change_station_types/change_station_types.dart';
-import 'package:chargeme/view_model/AddStationViewModel.dart';
+import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

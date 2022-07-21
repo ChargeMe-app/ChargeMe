@@ -1,8 +1,6 @@
 import 'package:chargeme/extensions/color_pallete.dart';
-import 'package:chargeme/view_model/AddStationViewModel.dart';
+import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:chargeme/src/locations.dart' as locations;
 import 'package:chargeme/view/map/map.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +19,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -42,7 +41,7 @@ class HomeView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddStationView(),
+                    builder: (context) => const AddStationView(),
                   ),
                 );
               },

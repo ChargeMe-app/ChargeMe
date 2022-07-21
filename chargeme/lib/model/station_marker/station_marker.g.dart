@@ -11,7 +11,7 @@ StationMarker _$StationMarkerFromJson(Map<String, dynamic> json) =>
       access: json['access'] as int,
       address: json['address'] as String,
       icon: json['icon'] as String?,
-      icon_type: json['icon_type'] as String?,
+      iconType: json['icon_type'] as String?,
       id: json['id'] as int,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
@@ -28,7 +28,7 @@ Map<String, dynamic> _$StationMarkerToJson(StationMarker instance) =>
       'access': instance.access,
       'address': instance.address,
       'icon': instance.icon,
-      'icon_type': instance.icon_type,
+      'icon_type': instance.iconType,
       'id': instance.id,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
@@ -53,7 +53,7 @@ Map<String, dynamic> _$MarkerStationsToJson(MarkerStations instance) =>
     };
 
 MarkerOutlet _$MarkerOutletFromJson(Map<String, dynamic> json) => MarkerOutlet(
-      connector: $enumDecode(_$StationTypeEnumMap, json['connector']),
+      connector: $enumDecode(_$ConnectorTypeEnumMap, json['connector']),
       id: json['id'] as int,
       kilowatts: (json['kilowatts'] as num?)?.toDouble(),
       power: json['power'] as int?,
@@ -62,26 +62,26 @@ MarkerOutlet _$MarkerOutletFromJson(Map<String, dynamic> json) => MarkerOutlet(
 
 Map<String, dynamic> _$MarkerOutletToJson(MarkerOutlet instance) =>
     <String, dynamic>{
-      'connector': _$StationTypeEnumMap[instance.connector],
+      'connector': _$ConnectorTypeEnumMap[instance.connector],
       'id': instance.id,
       'kilowatts': instance.kilowatts,
       'power': instance.power,
       'status': instance.status,
     };
 
-const _$StationTypeEnumMap = {
-  StationType.wall: 1,
-  StationType.type1: 2,
-  StationType.chademo: 3,
-  StationType.teslaRoadster: 4,
-  StationType.nema1450: 5,
-  StationType.tesla: 6,
-  StationType.type2: 7,
-  StationType.wallEuro: 10,
-  StationType.commando: 11,
-  StationType.cssCombo: 13,
-  StationType.threePhase: 14,
-  StationType.caravanMainsSocket: 15,
-  StationType.gbt: 16,
-  StationType.type3a: 24,
+const _$ConnectorTypeEnumMap = {
+  ConnectorType.wall: 1,
+  ConnectorType.type1: 2,
+  ConnectorType.chademo: 3,
+  ConnectorType.teslaRoadster: 4,
+  ConnectorType.nema1450: 5,
+  ConnectorType.tesla: 6,
+  ConnectorType.type2: 7,
+  ConnectorType.wallEuro: 10,
+  ConnectorType.commando: 11,
+  ConnectorType.cssCombo: 13,
+  ConnectorType.threePhase: 14,
+  ConnectorType.caravanMainsSocket: 15,
+  ConnectorType.gbt: 16,
+  ConnectorType.type3a: 24,
 };

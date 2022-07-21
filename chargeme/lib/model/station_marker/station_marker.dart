@@ -1,18 +1,17 @@
 import 'dart:convert';
-import 'dart:ffi';
 
-import 'package:chargeme/model/Station.dart';
+import 'package:chargeme/model/charging_place/station.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 part 'station_marker.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class StationMarker {
   int access;
   String address;
   String? icon;
-  String? icon_type;
+  String? iconType;
   int id;
   double latitude;
   double longitude;
@@ -25,7 +24,7 @@ class StationMarker {
       {required this.access,
       required this.address,
       this.icon,
-      this.icon_type,
+      this.iconType,
       required this.id,
       required this.latitude,
       required this.longitude,
@@ -51,7 +50,7 @@ class MarkerStations {
 
 @JsonSerializable()
 class MarkerOutlet {
-  StationType connector;
+  ConnectorType connector;
   int id;
   double? kilowatts;
   int? power;
