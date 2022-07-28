@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -11,7 +14,7 @@ class StationMarker {
   int access;
   String address;
   String? icon;
-  String? iconType;
+  IconType iconType;
   int id;
   double latitude;
   double longitude;
@@ -24,7 +27,7 @@ class StationMarker {
       {required this.access,
       required this.address,
       this.icon,
-      this.iconType,
+      required this.iconType,
       required this.id,
       required this.latitude,
       required this.longitude,
@@ -60,6 +63,49 @@ class MarkerOutlet {
 
   factory MarkerOutlet.fromJson(Map<String, dynamic> json) => _$MarkerOutletFromJson(json);
   Map<String, dynamic> toJson() => _$MarkerOutletToJson(this);
+}
+
+enum IconType {
+  @JsonValue("G")
+  publicStandard,
+  @JsonValue("GR")
+  repairStandard,
+  @JsonValue("Y")
+  publicFast,
+  @JsonValue("YR")
+  repairFast,
+}
+
+extension MarkerIcon on StationMarker {
+  Future<BitmapDescriptor?> getMarkerIcon() async {
+    final String path;
+    switch (this.iconType) {
+      case IconType.publicStandard:
+        path = "assets/icons/markers/publicStandard.png";
+        break;
+      case IconType.repairStandard:
+        path = "assets/icons/markers/inRepair.png";
+        break;
+      case IconType.publicFast:
+        path = "assets/icons/markers/publicFast.png";
+        break;
+      case IconType.repairFast:
+        path = "assets/icons/markers/inRepair.png";
+        break;
+    }
+    final Uint8List? mapMarkerBytes = await getBytesFromAsset(path, 64);
+    if (mapMarkerBytes != null) {
+      return BitmapDescriptor.fromBytes(mapMarkerBytes);
+    }
+    return null;
+  }
+}
+
+Future<Uint8List?> getBytesFromAsset(String path, int width) async {
+  ByteData data = await rootBundle.load(path);
+  ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+  ui.FrameInfo fi = await codec.getNextFrame();
+  return (await fi.image.toByteData(format: ui.ImageByteFormat.png))?.buffer.asUint8List();
 }
 
 Future<List<StationMarker>> getTestStationMarkers() async {
