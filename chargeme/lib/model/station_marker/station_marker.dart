@@ -20,7 +20,7 @@ class StationMarker {
   double longitude;
   String name;
   double? score;
-  List<MarkerStations> stations;
+  List<MarkerStation> stations;
   String? url;
 
   StationMarker(
@@ -41,14 +41,14 @@ class StationMarker {
 }
 
 @JsonSerializable()
-class MarkerStations {
+class MarkerStation {
   int id;
   List<MarkerOutlet> outlets;
 
-  MarkerStations(this.id, this.outlets);
+  MarkerStation(this.id, this.outlets);
 
-  factory MarkerStations.fromJson(Map<String, dynamic> json) => _$MarkerStationsFromJson(json);
-  Map<String, dynamic> toJson() => _$MarkerStationsToJson(this);
+  factory MarkerStation.fromJson(Map<String, dynamic> json) => _$MarkerStationFromJson(json);
+  Map<String, dynamic> toJson() => _$MarkerStationToJson(this);
 }
 
 @JsonSerializable()

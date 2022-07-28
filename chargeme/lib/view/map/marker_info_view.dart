@@ -1,4 +1,6 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/view/charging_place/charging_place_view.dart';
+import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:flutter/material.dart';
 
 class MarkerInfoView extends StatelessWidget {

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -130,6 +132,23 @@ enum Rating {
   neutral,
   @JsonValue(1)
   positive
+}
+
+extension RatingIcon on Rating {
+  Icon get icon {
+    switch (this) {
+      case Rating.positive:
+        return Icon(Icons.check_circle, color: ColorPallete.greenEmerald);
+      case Rating.neutral:
+        return Icon(Icons.info, color: ColorPallete.darkerBlue);
+      case Rating.negative:
+        return Icon(Icons.highlight_remove_rounded, color: ColorPallete.redCinnabar);
+    }
+  }
+}
+
+extension BeautifulScore on double {
+  String get beautifulScore => this.toInt() == this ? this.toInt().toString() : this.toString();
 }
 
 Future<List<ChargingPlace>> getTestStation() async {

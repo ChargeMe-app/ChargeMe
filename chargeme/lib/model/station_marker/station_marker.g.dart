@@ -6,8 +6,7 @@ part of 'station_marker.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-StationMarker _$StationMarkerFromJson(Map<String, dynamic> json) =>
-    StationMarker(
+StationMarker _$StationMarkerFromJson(Map<String, dynamic> json) => StationMarker(
       access: json['access'] as int,
       address: json['address'] as String,
       icon: json['icon'] as String?,
@@ -17,14 +16,12 @@ StationMarker _$StationMarkerFromJson(Map<String, dynamic> json) =>
       longitude: (json['longitude'] as num).toDouble(),
       name: json['name'] as String,
       score: (json['score'] as num?)?.toDouble(),
-      stations: (json['stations'] as List<dynamic>)
-          .map((e) => MarkerStations.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      stations:
+          (json['stations'] as List<dynamic>).map((e) => MarkerStation.fromJson(e as Map<String, dynamic>)).toList(),
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$StationMarkerToJson(StationMarker instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$StationMarkerToJson(StationMarker instance) => <String, dynamic>{
       'access': instance.access,
       'address': instance.address,
       'icon': instance.icon,
@@ -45,16 +42,12 @@ const _$IconTypeEnumMap = {
   IconType.repairFast: 'YR',
 };
 
-MarkerStations _$MarkerStationsFromJson(Map<String, dynamic> json) =>
-    MarkerStations(
+MarkerStation _$MarkerStationsFromJson(Map<String, dynamic> json) => MarkerStation(
       json['id'] as int,
-      (json['outlets'] as List<dynamic>)
-          .map((e) => MarkerOutlet.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['outlets'] as List<dynamic>).map((e) => MarkerOutlet.fromJson(e as Map<String, dynamic>)).toList(),
     );
 
-Map<String, dynamic> _$MarkerStationsToJson(MarkerStations instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MarkerStationToJson(MarkerStation instance) => <String, dynamic>{
       'id': instance.id,
       'outlets': instance.outlets,
     };
@@ -67,8 +60,7 @@ MarkerOutlet _$MarkerOutletFromJson(Map<String, dynamic> json) => MarkerOutlet(
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$MarkerOutletToJson(MarkerOutlet instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MarkerOutletToJson(MarkerOutlet instance) => <String, dynamic>{
       'connector': _$ConnectorTypeEnumMap[instance.connector],
       'id': instance.id,
       'kilowatts': instance.kilowatts,
