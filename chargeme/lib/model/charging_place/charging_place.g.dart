@@ -10,7 +10,7 @@ ChargingPlace _$ChargingPlaceFromJson(Map<String, dynamic> json) =>
     ChargingPlace(
       name: json['name'] as String,
       description: json['description'] as String?,
-      phoneNumber: json['phone_number'] as String?,
+      phoneNumber: json['formatted_phone_number'] as String?,
       address: json['address'] as String?,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
@@ -46,7 +46,7 @@ Map<String, dynamic> _$ChargingPlaceToJson(ChargingPlace instance) =>
     <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
-      'phone_number': instance.phoneNumber,
+      'formatted_phone_number': instance.phoneNumber,
       'address': instance.address,
       'latitude': instance.latitude,
       'longitude': instance.longitude,

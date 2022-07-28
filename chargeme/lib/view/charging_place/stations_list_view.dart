@@ -3,10 +3,12 @@ import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
 
 class BoxWithTitle extends StatelessWidget {
-  BoxWithTitle({required this.title, this.children});
+  BoxWithTitle({required this.title, this.children, this.footer, this.onFooterTap});
 
-  String title;
-  List<Widget>? children;
+  final String title;
+  final List<Widget>? children;
+  final String? footer;
+  final void Function()? onFooterTap;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,17 @@ class BoxWithTitle extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: Column(children: [
               Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: ColorPallete.violetBlue)),
-              Column(children: children ?? [])
+              Column(children: children ?? []),
+              footer == null
+                  ? Container()
+                  : Row(children: [
+                      const Spacer(),
+                      GestureDetector(
+                          onTap: onFooterTap ?? () {},
+                          child: Text(footer!,
+                              style:
+                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: ColorPallete.violetBlue)))
+                    ])
             ])));
   }
 }

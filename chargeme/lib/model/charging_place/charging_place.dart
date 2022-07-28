@@ -12,6 +12,7 @@ part 'charging_place.g.dart';
 class ChargingPlace {
   String name;
   String? description;
+  @JsonKey(name: "formatted_phone_number")
   String? phoneNumber;
   String? address;
   double latitude;

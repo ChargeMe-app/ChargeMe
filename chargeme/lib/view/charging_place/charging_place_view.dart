@@ -1,11 +1,14 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:flutter/material.dart';
-import '../../model/charging_place/charging_place.dart' as chargingPlace;
+import 'package:chargeme/model/charging_place/charging_place.dart' as chargingPlace;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:chargeme/extensions/string_extensions.dart';
 
 class ChargingPlaceView extends StatefulWidget {
   const ChargingPlaceView({Key? key}) : super(key: key);
@@ -46,9 +49,15 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                   padding: EdgeInsets.fromLTRB(8, 8, 8, 24),
                   child: Column(children: [
                     CheckInButton(),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
+                    DetailsView(
+                        latitude: place!.latitude,
+                        longitude: place!.longitude,
+                        address: place?.address,
+                        phoneNumber: place?.phoneNumber),
+                    const SizedBox(height: 10),
                     StationsListView(stations: place!.stations),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     ReviewsView(reviews: place!.reviews)
                   ]))
             ],
@@ -57,10 +66,46 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   }
 }
 
+class DetailsView extends StatelessWidget {
+  DetailsView({required this.latitude, required this.longitude, this.address, this.phoneNumber});
+
+  final double latitude;
+  final double longitude;
+  final String? address;
+  final String? phoneNumber;
+  LatLng get latLng => LatLng(latitude, longitude);
+
+  @override
+  Widget build(BuildContext context) {
+    return BoxWithTitle(title: "Details", footer: "Get directions", children: [
+      address == null ? Container() : row(Icons.location_pin, address!.capitalizeEachWord),
+      const SizedBox(height: 8),
+      phoneNumber == null ? Container() : row(Icons.phone_iphone, phoneNumber!),
+      const SizedBox(height: 8),
+      SizedBox(
+          height: 100,
+          child: GoogleMap(
+            myLocationButtonEnabled: false,
+            markers: [Marker(markerId: MarkerId("123"), position: latLng)].toSet(),
+            initialCameraPosition: CameraPosition(
+              target: latLng,
+              zoom: 13.0,
+            ),
+          )),
+      const SizedBox(height: 8),
+    ]);
+  }
+
+  Widget row(IconData iconData, String text) {
+    return Row(
+        children: [Icon(iconData, size: 36), Flexible(child: Text(text, maxLines: 2, style: TextStyle(fontSize: 16)))]);
+  }
+}
+
 class ChargingPlaceTitleView extends StatelessWidget {
   ChargingPlaceTitleView({required this.place});
 
-  ChargingPlace place;
+  final ChargingPlace place;
 
   @override
   Widget build(BuildContext context) {
@@ -99,67 +144,5 @@ class CheckInButton extends StatelessWidget {
         style: TextStyle(fontSize: 24),
       ),
     );
-  }
-}
-
-class ReviewsView extends StatelessWidget {
-  ReviewsView({required this.reviews});
-
-  List<Review> reviews;
-  bool get hasExpandedReviews => reviews.length > 7;
-
-  @override
-  Widget build(BuildContext context) {
-    return BoxWithTitle(title: "Checkins", children: [
-      Column(
-          children: List.generate(hasExpandedReviews ? 7 : reviews.length, (i) {
-        return checkInView(context, reviews[i]);
-      })),
-      Row(children: [
-        Spacer(),
-        Text("All checkins",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: ColorPallete.violetBlue))
-      ])
-    ]);
-  }
-
-  Widget checkInView(BuildContext context, Review review) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Row(children: [
-        Container(width: 32, child: review.rating.icon),
-        Text(review.user.displayName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        Spacer(),
-        Text(review.vehicleName?.capitalizeEachWord ?? "Unknown vehicle",
-            style: TextStyle(fontSize: 16, color: Colors.grey))
-      ]),
-      review.comment == ""
-          ? Container()
-          : Row(children: [
-              Container(width: 32),
-              Flexible(child: Text(review.comment, maxLines: null, style: TextStyle(fontStyle: FontStyle.italic))),
-            ]),
-      Row(children: [
-        Container(width: 32),
-        Text(review.connectorType?.str ?? "", style: TextStyle(fontSize: 16, color: Colors.grey)),
-        Spacer(),
-        Text(review.createdAt.dateAndTimeFormat, style: TextStyle(fontSize: 14, color: Colors.grey))
-      ]),
-      SizedBox(height: 20)
-    ]);
-    // ]);
-  }
-}
-
-extension CapExtension on String {
-  String get capitalize => '${this[0].toUpperCase()}${this.substring(1)}';
-  String get allInCaps => this.toUpperCase();
-  String get capitalizeEachWord => this.split(" ").map((str) => str.capitalize).join(" ");
-}
-
-extension DateFormatter on DateTime {
-  String get dateAndTimeFormat {
-    final DateFormat formatter = DateFormat('dd.MM.yyyy, H:m');
-    final String formatted = formatter.format(this);
-    return formatted; // something like 2013-04-20
   }
 }
