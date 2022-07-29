@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:chargeme/model/station_marker.dart';
+import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 

@@ -80,7 +80,7 @@ flutter:
     - assets/locations.json
     - assets/test_markers.json
     - assets/test_station.json
-    - assets/icons/
+    - assets/icons/markers/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

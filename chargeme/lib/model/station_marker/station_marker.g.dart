@@ -11,7 +11,7 @@ StationMarker _$StationMarkerFromJson(Map<String, dynamic> json) =>
       access: json['access'] as int,
       address: json['address'] as String,
       icon: json['icon'] as String?,
-      iconType: json['icon_type'] as String?,
+      iconType: $enumDecode(_$IconTypeEnumMap, json['icon_type']),
       id: json['id'] as int,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
@@ -28,7 +28,7 @@ Map<String, dynamic> _$StationMarkerToJson(StationMarker instance) =>
       'access': instance.access,
       'address': instance.address,
       'icon': instance.icon,
-      'icon_type': instance.iconType,
+      'icon_type': _$IconTypeEnumMap[instance.iconType],
       'id': instance.id,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
@@ -37,6 +37,13 @@ Map<String, dynamic> _$StationMarkerToJson(StationMarker instance) =>
       'stations': instance.stations,
       'url': instance.url,
     };
+
+const _$IconTypeEnumMap = {
+  IconType.publicStandard: 'G',
+  IconType.repairStandard: 'GR',
+  IconType.publicFast: 'Y',
+  IconType.repairFast: 'YR',
+};
 
 MarkerStations _$MarkerStationsFromJson(Map<String, dynamic> json) =>
     MarkerStations(
