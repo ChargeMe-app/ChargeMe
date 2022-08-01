@@ -1,4 +1,6 @@
 {
+    "loading": "Loading",
+
     "appTitle": "ChargeMe",
     "addStation": "Add station",
     "name": "Name",
@@ -25,5 +27,11 @@
     "editStationTypes": "Edit station types",
     "noAddedStations": "No added stations",
     "addStationType": "Add station type",
-    "selectIcon": "Select Icon"
+    "selectIcon": "Select Icon",
+
+    "details": "Details",
+    "getDirections": "Get directions",
+    "checkIn": "Check in",
+    "checkins": "Checkins",
+    "allCheckins": "All checkins"
 }

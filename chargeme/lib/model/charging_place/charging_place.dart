@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -10,6 +12,7 @@ part 'charging_place.g.dart';
 class ChargingPlace {
   String name;
   String? description;
+  @JsonKey(name: "formatted_phone_number")
   String? phoneNumber;
   String? address;
   double latitude;
@@ -132,9 +135,26 @@ enum Rating {
   positive
 }
 
+extension RatingIcon on Rating {
+  Icon get icon {
+    switch (this) {
+      case Rating.positive:
+        return Icon(Icons.check_circle, color: ColorPallete.greenEmerald);
+      case Rating.neutral:
+        return Icon(Icons.info, color: ColorPallete.darkerBlue);
+      case Rating.negative:
+        return Icon(Icons.highlight_remove_rounded, color: ColorPallete.redCinnabar);
+    }
+  }
+}
+
+extension BeautifulScore on double {
+  String get beautifulScore => this.toInt() == this ? this.toInt().toString() : this.toString();
+}
+
 Future<List<ChargingPlace>> getTestStation() async {
   List<ChargingPlace> stations;
-  var response = await rootBundle.loadString('assets/test_station.json');
+  var response = await rootBundle.loadString('assets/temporary/test_station.json');
 
   stations = (json.decode(response) as List).map((i) => ChargingPlace.fromJson(i)).toList();
   return stations;
