@@ -1,4 +1,6 @@
 {
+    "loading": "Загрузка",
+
     "appTitle": "ChargeMe",
     "addStation": "Добавить станцию",
     "name": "Название",
@@ -25,5 +27,11 @@
     "editStationTypes": "Изменить станции",
     "noAddedStations": "Нет станций",
     "addStationType": "Добавить станцию",
-    "selectIcon": "Выберите иконку"
+    "selectIcon": "Выберите иконку",
+
+    "details": "О станции",
+    "getDirections": "Построить маршрут",
+    "checkIn": "Чек-ин",
+    "checkins": "Чек-ины",
+    "allCheckins": "Все чек-ины"
 }

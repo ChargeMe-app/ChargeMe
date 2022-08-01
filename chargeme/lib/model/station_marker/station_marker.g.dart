@@ -42,7 +42,7 @@ const _$IconTypeEnumMap = {
   IconType.repairFast: 'YR',
 };
 
-MarkerStation _$MarkerStationsFromJson(Map<String, dynamic> json) => MarkerStation(
+MarkerStation _$MarkerStationFromJson(Map<String, dynamic> json) => MarkerStation(
       json['id'] as int,
       (json['outlets'] as List<dynamic>).map((e) => MarkerOutlet.fromJson(e as Map<String, dynamic>)).toList(),
     );

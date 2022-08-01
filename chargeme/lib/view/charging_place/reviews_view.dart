@@ -5,6 +5,7 @@ import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:chargeme/extensions/datetime_extensions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReviewsView extends StatelessWidget {
   ReviewsView({required this.reviews});
@@ -14,9 +15,10 @@ class ReviewsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var l10n = AppLocalizations.of(context);
     return BoxWithTitle(
-        title: "Checkins",
-        footer: "All checkins",
+        title: l10n.checkins,
+        footer: l10n.allCheckins,
         onFooterTap: () {
           Navigator.push(
             context,
@@ -42,9 +44,9 @@ class CheckInView extends StatelessWidget {
       Row(children: [
         Container(width: 32, child: review.rating.icon),
         Text(review.user.displayName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        Spacer(),
+        const Spacer(),
         Text(review.vehicleName?.capitalizeEachWord ?? "Unknown vehicle",
-            style: TextStyle(fontSize: 16, color: Colors.grey))
+            maxLines: 1, overflow: TextOverflow.fade, style: TextStyle(fontSize: 16, color: Colors.grey))
       ]),
       review.comment == ""
           ? Container()
@@ -55,10 +57,10 @@ class CheckInView extends StatelessWidget {
       Row(children: [
         Container(width: 32),
         Text(review.connectorType?.str ?? "", style: TextStyle(fontSize: 16, color: Colors.grey)),
-        Spacer(),
+        const Spacer(),
         Text(review.createdAt.dateAndTimeFormat, style: TextStyle(fontSize: 14, color: Colors.grey))
       ]),
-      SizedBox(height: 20)
+      const SizedBox(height: 20)
     ]);
   }
 }
@@ -70,8 +72,9 @@ class AllReviewsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var l10n = AppLocalizations.of(context);
     return Scaffold(
-        appBar: AppBar(title: Text("All checkins"), backgroundColor: ColorPallete.violetBlue),
+        appBar: AppBar(title: Text(l10n.allCheckins), backgroundColor: ColorPallete.violetBlue),
         body: SingleChildScrollView(
             child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -76,26 +77,27 @@ enum IconType {
   repairFast,
 }
 
-extension MarkerIcon on StationMarker {
+extension MarkerIcon on IconType {
   Future<BitmapDescriptor?> getMarkerIcon() async {
     final String path;
-    switch (this.iconType) {
+    switch (this) {
       case IconType.publicStandard:
-        path = "assets/icons/markers/publicStandard.png";
+        path = "assets/icons/markers/publicStandard64.png";
         break;
       case IconType.repairStandard:
-        path = "assets/icons/markers/inRepair.png";
+        path = "assets/icons/markers/inRepair64.png";
         break;
       case IconType.publicFast:
-        path = "assets/icons/markers/publicFast.png";
+        path = "assets/icons/markers/publicFast64.png";
         break;
       case IconType.repairFast:
-        path = "assets/icons/markers/inRepair.png";
+        path = "assets/icons/markers/inRepair64.png";
         break;
     }
     final Uint8List? mapMarkerBytes = await getBytesFromAsset(path, 64);
     if (mapMarkerBytes != null) {
-      return BitmapDescriptor.fromBytes(mapMarkerBytes);
+      return BitmapDescriptor.fromBytes(
+          mapMarkerBytes); // BitmapDescriptor.fromAssetImage(const ImageConfiguration(), path);
     }
     return null;
   }
@@ -110,7 +112,7 @@ Future<Uint8List?> getBytesFromAsset(String path, int width) async {
 
 Future<List<StationMarker>> getTestStationMarkers() async {
   List<StationMarker> stations;
-  var response = await rootBundle.loadString('assets/test_markers.json');
+  var response = await rootBundle.loadString('assets/temporary/test_markers.json');
 
   stations = (json.decode(response) as List).map((i) => StationMarker.fromJson(i)).toList();
   return stations;

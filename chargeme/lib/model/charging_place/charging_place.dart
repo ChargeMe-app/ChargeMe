@@ -154,7 +154,7 @@ extension BeautifulScore on double {
 
 Future<List<ChargingPlace>> getTestStation() async {
   List<ChargingPlace> stations;
-  var response = await rootBundle.loadString('assets/test_station.json');
+  var response = await rootBundle.loadString('assets/temporary/test_station.json');
 
   stations = (json.decode(response) as List).map((i) => ChargingPlace.fromJson(i)).toList();
   return stations;

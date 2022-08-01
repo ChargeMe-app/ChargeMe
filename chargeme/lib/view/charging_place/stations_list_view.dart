@@ -1,6 +1,7 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoxWithTitle extends StatelessWidget {
   BoxWithTitle({required this.title, this.children, this.footer, this.onFooterTap});
@@ -41,8 +42,9 @@ class StationsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var l10n = AppLocalizations.of(context);
     return BoxWithTitle(
-        title: "Stations",
+        title: l10n.stations,
         children: List.generate(stations.length, (i) {
           return outletListView(context, stations[i].outlets);
         }));

@@ -39,7 +39,7 @@ class _GMap extends State<GMap> {
       String stationTypes =
           stationMarker.stations.map((e) => e.outlets.map((e) => e.connector.str).join(", ")).join(", ");
       LatLng latLng = LatLng(stationMarker.latitude, stationMarker.longitude);
-      var markerIcon = await stationMarker.getMarkerIcon();
+      var markerIcon = await stationMarker.iconType.getMarkerIcon();
       final marker = Marker(
           consumeTapEvents: true,
           icon: markerIcon ?? BitmapDescriptor.defaultMarker,
@@ -47,7 +47,7 @@ class _GMap extends State<GMap> {
           position: LatLng(stationMarker.latitude, stationMarker.longitude),
           onTap: () {
             _customInfoWindowController.addInfoWindow!(
-                MarkerInfoView(stationMarker.name, stationTypes, stationMarker.score), latLng);
+                MarkerInfoView(stationMarker.name, stationTypes, markerIcon, stationMarker.score), latLng);
           });
       _markers[stationMarker.id.toString()] = marker;
     }
@@ -71,7 +71,8 @@ class _GMap extends State<GMap> {
               markerId: MarkerId("123"),
               position: latLng,
               onTap: () {
-                _customInfoWindowController.addInfoWindow!(MarkerInfoView("Station #1", "Cool station", 8.6), latLng);
+                _customInfoWindowController.addInfoWindow!(
+                    MarkerInfoView("Station #1", "Cool station", null, 8.6), latLng);
               });
           setState(() {});
         },
