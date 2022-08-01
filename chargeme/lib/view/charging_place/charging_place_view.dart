@@ -40,7 +40,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
       return Center(child: Text(l10n.loading));
     } else {
       return Scaffold(
-          appBar: AppBar(title: Text(l10n.name), backgroundColor: ColorPallete.violetBlue),
+          appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue),
           body: NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
                 setState(() {
