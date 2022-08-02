@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 
+import 'package:chargeme/components/helpers/throttler.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/view/map/loading_view.dart';
 import 'package:chargeme/view/map/marker_info_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +13,7 @@ import 'package:custom_info_window/custom_info_window.dart';
 import '../../src/locations.dart' as locations;
 import '../../model/station_marker/station_marker.dart' as stationMarker;
 import '../../model/charging_place/charging_place.dart' as chargingPlace;
+import 'package:chargeme/components/markers_manager/markers_manager.dart' as markers_manager;
 
 class GMap extends StatefulWidget {
   const GMap({Key? key}) : super(key: key);
@@ -25,21 +28,30 @@ class _GMap extends State<GMap> {
 
   final LatLng _center = const LatLng(55.7558, 37.6173);
   final Map<String, Marker> _markers = {};
+  final _manager = markers_manager.MarkersManager();
+  final Throttler _throttler = Throttler();
+  var isLoading = false;
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     // mapController = controller;
     final station = await chargingPlace.getTestStation();
-    final stationMarkers = await stationMarker.getTestStationMarkers();
+    // final stationMarkers =
+    //     await _manager.getStationMarkers(bounds: LatLngBounds(southwest: LatLng(55, 37), northeast: LatLng(56, 38)));
+    // final stationMarkers = await stationMarker.getTestStationMarkers();
     _customInfoWindowController.googleMapController = controller;
     final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     controller.animateCamera(CameraUpdate.newLatLng(LatLng(userLocation.latitude, userLocation.longitude)));
+  }
+
+  Future<void> _updateMarkers(LatLngBounds region) async {
+    final stationMarkers = await _manager.getStationMarkers(bounds: region);
 
     _markers.clear();
     for (final stationMarker in stationMarkers) {
       String stationTypes =
           stationMarker.stations.map((e) => e.outlets.map((e) => e.connector.str).join(", ")).join(", ");
       LatLng latLng = LatLng(stationMarker.latitude, stationMarker.longitude);
-      var markerIcon = await stationMarker.iconType.getMarkerIcon();
+      var markerIcon = await stationMarker.iconType?.getMarkerIcon();
       final marker = Marker(
           consumeTapEvents: true,
           icon: markerIcon ?? BitmapDescriptor.defaultMarker,
@@ -52,9 +64,12 @@ class _GMap extends State<GMap> {
       _markers[stationMarker.id.toString()] = marker;
     }
 
-    setState(() {});
+    setState(() {
+      isLoading = false;
+    });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Stack(children: [
       GoogleMap(
@@ -82,9 +97,16 @@ class _GMap extends State<GMap> {
         onCameraMove: (CameraPosition position) async {
           _customInfoWindowController.onCameraMove!();
 
-          // final LatLngBounds region = await mapController.getVisibleRegion();
-          // print(region.toString());
-          // send region to server to get pins
+          if (_customInfoWindowController.googleMapController != null) {
+            _throttler.throttle(const Duration(milliseconds: 500), () async {
+              final LatLngBounds region = await _customInfoWindowController.googleMapController!.getVisibleRegion();
+              print(region.toString());
+              _updateMarkers(region);
+              setState(() {
+                isLoading = true;
+              });
+            });
+          }
         },
       ),
       CustomInfoWindow(
@@ -92,7 +114,8 @@ class _GMap extends State<GMap> {
         height: 60,
         width: 250,
         offset: 48,
-      )
+      ),
+      isLoading ? LoadingView() : Container()
     ]);
   }
 }

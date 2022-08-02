@@ -70,7 +70,7 @@ class Amenity {
 enum VehicleType { teslaModelS }
 
 enum ConnectorType {
-  @JsonValue(1)
+  @JsonValue(0)
   wall,
   @JsonValue(2)
   type1,

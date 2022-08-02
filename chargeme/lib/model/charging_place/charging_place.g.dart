@@ -113,7 +113,7 @@ Map<String, dynamic> _$ReviewToJson(Review instance) => <String, dynamic>{
     };
 
 const _$ConnectorTypeEnumMap = {
-  ConnectorType.wall: 1,
+  ConnectorType.wall: 0,
   ConnectorType.type1: 2,
   ConnectorType.chademo: 3,
   ConnectorType.teslaRoadster: 4,
