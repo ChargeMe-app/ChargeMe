@@ -100,7 +100,7 @@ enum ConnectorType {
   type3a
 }
 
-extension MyEnumExtension on ConnectorType {
+extension StringConnectorTypeExtension on ConnectorType {
   String get str {
     switch (this) {
       case ConnectorType.wall:
@@ -131,6 +131,41 @@ extension MyEnumExtension on ConnectorType {
         return "GB/T";
       case ConnectorType.type3a:
         return "Type 3A";
+    }
+  }
+}
+
+extension IconConnectorTypeExtension on ConnectorType {
+  String get iconPath {
+    switch (this) {
+      case ConnectorType.wall:
+        return "assets/icons/plugs/wall.png";
+      case ConnectorType.type1:
+        return "assets/icons/plugs/j1772.png";
+      case ConnectorType.chademo:
+        return "assets/icons/plugs/chademo.png";
+      case ConnectorType.teslaRoadster:
+        return "assets/icons/plugs/teslaRoadster.png";
+      case ConnectorType.nema1450:
+        return "assets/icons/plugs/nema1450.png";
+      case ConnectorType.tesla:
+        return "assets/icons/plugs/teslaRoadster.png";
+      case ConnectorType.type2:
+        return "assets/icons/plugs/type2.png";
+      case ConnectorType.wallEuro:
+        return "assets/icons/plugs/wallEuro.png";
+      case ConnectorType.commando:
+        return "assets/icons/plugs/commando3pin.png";
+      case ConnectorType.cssCombo:
+        return "assets/icons/plugs/css.png";
+      case ConnectorType.threePhase:
+        return "assets/icons/plugs/threePhase.png";
+      case ConnectorType.caravanMainsSocket:
+        return "assets/icons/plugs/caravanMainSocket.png";
+      case ConnectorType.gbt:
+        return "assets/icons/plugs/type2.png";
+      case ConnectorType.type3a:
+        return "assets/icons/plugs/type3.png";
     }
   }
 }

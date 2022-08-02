@@ -78,6 +78,7 @@ flutter:
 
   assets:
     - assets/icons/markers/
+    - assets/icons/plugs/
     - assets/temporary/
 
   # To add assets to your application, add an assets section, like this:
