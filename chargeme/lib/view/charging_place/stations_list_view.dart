@@ -66,7 +66,7 @@ class StationsListView extends StatelessWidget {
                           Text(outlet.connectorType.str,
                               style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                           const Spacer(),
-                          const Icon(Icons.outlet, size: 40, color: Colors.white),
+                          Image.asset(outlet.connectorType.iconPath, height: 40, color: Colors.white),
                           const Spacer(),
                           Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
                               style: TextStyle(fontSize: 14, color: Colors.white))
