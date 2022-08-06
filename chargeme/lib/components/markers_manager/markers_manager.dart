@@ -18,20 +18,25 @@ class MarkersManager {
     };
     final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
 
-    final response = await http.get(Uri.http(_baseUrl, _stationsPath, queryParameters), headers: headers);
-    if (response.statusCode == 200) {
-      final body = jsonDecode(utf8.decode(response.bodyBytes));
+    try {
+      final response = await http.get(Uri.http(_baseUrl, _stationsPath, queryParameters), headers: headers);
+      if (response.statusCode == 200) {
+        final body = jsonDecode(utf8.decode(response.bodyBytes));
 
-      var data = body["data"];
-      List<StationMarker> stationMarkers = List<StationMarker>.from(data
-          .map(
-            (dynamic item) => StationMarker.fromJson(item),
-          )
-          .toList());
+        var data = body["data"];
+        List<StationMarker> stationMarkers = List<StationMarker>.from(data
+            .map(
+              (dynamic item) => StationMarker.fromJson(item),
+            )
+            .toList());
 
-      return stationMarkers;
-    } else {
-      throw "Unable to retrieve markers.";
+        return stationMarkers;
+      } else {
+        throw "Unable to retrieve markers.";
+      }
+    } catch (err) {
+      print(err);
+      return [];
     }
   }
 }
