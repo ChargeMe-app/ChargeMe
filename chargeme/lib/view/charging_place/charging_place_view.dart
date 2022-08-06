@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart' as charging_place;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:chargeme/extensions/string_extensions.dart';
 
 class ChargingPlaceView extends StatefulWidget {
   const ChargingPlaceView({Key? key, this.icon}) : super(key: key);
@@ -111,7 +112,9 @@ class ChargingPlaceTitleView extends StatelessWidget {
                           child: Text(place.score!.beautifulScore,
                               style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
               const SizedBox(width: 8),
-              Column(children: [Text(place.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))])
+              Column(children: [
+                Text(place.name.capitalizeEachWord, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+              ])
             ])));
   }
 }

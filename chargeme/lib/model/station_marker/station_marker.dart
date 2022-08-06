@@ -16,7 +16,7 @@ class StationMarker {
   String address;
   String? icon;
   IconType iconType;
-  int id;
+  String id;
   double latitude;
   double longitude;
   String name;
@@ -43,7 +43,7 @@ class StationMarker {
 
 @JsonSerializable()
 class MarkerStation {
-  int id;
+  String id;
   List<MarkerOutlet> outlets;
 
   MarkerStation(this.id, this.outlets);
@@ -55,7 +55,7 @@ class MarkerStation {
 @JsonSerializable()
 class MarkerOutlet {
   ConnectorType connector;
-  int id;
+  String id;
   double? kilowatts;
   int? power;
   String? status;
