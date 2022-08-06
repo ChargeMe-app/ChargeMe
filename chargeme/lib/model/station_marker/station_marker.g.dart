@@ -11,7 +11,7 @@ StationMarker _$StationMarkerFromJson(Map<String, dynamic> json) =>
       access: json['access'] as int,
       address: json['address'] as String,
       icon: json['icon'] as String?,
-      iconType: $enumDecodeNullable(_$IconTypeEnumMap, json['icon_type']),
+      iconType: $enumDecode(_$IconTypeEnumMap, json['icon_type']),
       id: json['id'] as String,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),

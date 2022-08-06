@@ -35,9 +35,6 @@ class _GMap extends State<GMap> {
   Future<void> _onMapCreated(GoogleMapController controller) async {
     // mapController = controller;
     final station = await chargingPlace.getTestStation();
-    // final stationMarkers =
-    //     await _manager.getStationMarkers(bounds: LatLngBounds(southwest: LatLng(55, 37), northeast: LatLng(56, 38)));
-    // final stationMarkers = await stationMarker.getTestStationMarkers();
     _customInfoWindowController.googleMapController = controller;
     final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     controller.animateCamera(CameraUpdate.newLatLng(LatLng(userLocation.latitude, userLocation.longitude)));
@@ -51,7 +48,7 @@ class _GMap extends State<GMap> {
       String stationTypes =
           stationMarker.stations.map((e) => e.outlets.map((e) => e.connector.str).join(", ")).join(", ");
       LatLng latLng = LatLng(stationMarker.latitude, stationMarker.longitude);
-      var markerIcon = await stationMarker.iconType?.getMarkerIcon();
+      var markerIcon = await stationMarker.iconType.getMarkerIcon();
       final marker = Marker(
           consumeTapEvents: true,
           icon: markerIcon ?? BitmapDescriptor.defaultMarker,

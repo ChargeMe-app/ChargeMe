@@ -15,7 +15,7 @@ class StationMarker {
   int access;
   String address;
   String? icon;
-  IconType? iconType = IconType.repairStandard;
+  IconType iconType;
   String id;
   double latitude;
   double longitude;
