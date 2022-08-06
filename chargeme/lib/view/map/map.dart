@@ -1,18 +1,14 @@
-import 'dart:typed_data';
-
 import 'package:chargeme/components/helpers/throttler.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view/map/loading_view.dart';
 import 'package:chargeme/view/map/marker_info_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
-import '../../src/locations.dart' as locations;
-import '../../model/station_marker/station_marker.dart' as stationMarker;
-import '../../model/charging_place/charging_place.dart' as chargingPlace;
+import 'package:chargeme/model/station_marker/station_marker.dart';
+import '../../model/charging_place/charging_place.dart' as charging_place;
 import 'package:chargeme/components/markers_manager/markers_manager.dart' as markers_manager;
 
 class GMap extends StatefulWidget {
@@ -34,7 +30,7 @@ class _GMap extends State<GMap> {
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     // mapController = controller;
-    final station = await chargingPlace.getTestStation();
+    final station = await charging_place.getTestStation();
     _customInfoWindowController.googleMapController = controller;
     final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     controller.animateCamera(CameraUpdate.newLatLng(LatLng(userLocation.latitude, userLocation.longitude)));
