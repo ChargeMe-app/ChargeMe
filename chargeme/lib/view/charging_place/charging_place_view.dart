@@ -1,11 +1,14 @@
+import 'package:chargeme/components/helpers/svg_color_parser.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/view/charging_place/details_view.dart';
 import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
+import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart' as charging_place;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 
@@ -77,15 +80,57 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                     longitude: place!.longitude,
                                     icon: widget.icon,
                                     address: place?.address,
-                                    phoneNumber: place?.phoneNumber),
+                                    phoneNumber: place?.phoneNumber,
+                                    description: place?.description,
+                                    hours: place?.hours,
+                                    isOpen247: place?.open247,
+                                    cost: place?.cost,
+                                    costDescription: place?.costDescription),
                                 const SizedBox(height: 10),
                                 StationsListView(stations: place!.stations),
                                 const SizedBox(height: 10),
-                                ReviewsView(reviews: place!.reviews)
+                                ReviewsView(reviews: place!.reviews),
+                                const SizedBox(height: 10),
+                                ControlButtonsView(),
                               ]))
                         ],
                       )))));
     }
+  }
+}
+
+class ControlButtonsView extends StatelessWidget {
+  // ChargingPlaceTitleView({required this.place});
+
+  // final ChargingPlace place;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 100,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          ControlWithTitle("assets/icons/common/star.svg", "В избранное".toUpperCase()),
+          Container(width: 1, color: ColorPallete.violetBlue),
+          ControlWithTitle("assets/icons/common/addPhoto.svg", "Добавить фото".toUpperCase()),
+          Container(width: 1, color: ColorPallete.violetBlue),
+          ControlWithTitle("assets/icons/common/directionRight.svg", "Маршрут".toUpperCase()),
+          Container(width: 1, color: ColorPallete.violetBlue),
+          ControlWithTitle("assets/icons/common/settings.svg", "Изменить".toUpperCase()),
+        ]));
+  }
+
+  Widget ControlWithTitle(String assetPath, String title) {
+    return Container(
+        width: 96,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SvgColoredIcon(assetPath: assetPath, color: ColorPallete.violetBlue, height: 52),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: ColorPallete.violetBlue, fontSize: 10),
+          )
+        ]));
   }
 }
 
