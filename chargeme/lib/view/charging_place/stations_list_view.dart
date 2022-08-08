@@ -69,21 +69,6 @@ class StationsListView extends StatelessWidget {
                     Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
                         style: TextStyle(fontSize: 12, color: ColorPallete.violetBlue))
                   ]));
-              // return Card(
-              //     color: ColorPallete.violetBlue,
-              //     child: Padding(
-              //         padding: EdgeInsets.all(8),
-              //         child: Column(
-              //           children: [
-              //             Text(outlet.connectorType.str,
-              //                 style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-              //             const Spacer(),
-              //             Image.asset(outlet.connectorType.iconPath, height: 40, color: Colors.white),
-              //             const Spacer(),
-              //             Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
-              //                 style: TextStyle(fontSize: 14, color: Colors.white))
-              //           ],
-              //         )));
             })));
   }
 }
