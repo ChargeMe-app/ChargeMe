@@ -1,6 +1,8 @@
 import 'package:chargeme/components/helpers/svg_color_parser.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
+import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/view/charging_place/amenities_view.dart';
 import 'package:chargeme/view/charging_place/details_view.dart';
 import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
@@ -75,62 +77,19 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                               child: Column(children: [
                                 CheckInButton(),
                                 const SizedBox(height: 10),
-                                DetailsView(
-                                    latitude: place!.latitude,
-                                    longitude: place!.longitude,
-                                    icon: widget.icon,
-                                    address: place?.address,
-                                    phoneNumber: place?.phoneNumber,
-                                    description: place?.description,
-                                    hours: place?.hours,
-                                    isOpen247: place?.open247,
-                                    cost: place?.cost,
-                                    costDescription: place?.costDescription),
+                                DetailsView(place: place!, icon: widget.icon),
                                 const SizedBox(height: 10),
                                 StationsListView(stations: place!.stations),
+                                place!.amenities == null ? Container() : const SizedBox(height: 10),
+                                place!.amenities == null ? Container() : AmenitiesView(amenities: place!.amenities!),
                                 const SizedBox(height: 10),
                                 ReviewsView(reviews: place!.reviews),
-                                const SizedBox(height: 10),
-                                ControlButtonsView(),
+                                // const SizedBox(height: 10),
+                                // ControlButtonsView(),
                               ]))
                         ],
                       )))));
     }
-  }
-}
-
-class ControlButtonsView extends StatelessWidget {
-  // ChargingPlaceTitleView({required this.place});
-
-  // final ChargingPlace place;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: 100,
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          ControlWithTitle("assets/icons/common/star.svg", "В избранное".toUpperCase()),
-          Container(width: 1, color: ColorPallete.violetBlue),
-          ControlWithTitle("assets/icons/common/addPhoto.svg", "Добавить фото".toUpperCase()),
-          Container(width: 1, color: ColorPallete.violetBlue),
-          ControlWithTitle("assets/icons/common/directionRight.svg", "Маршрут".toUpperCase()),
-          Container(width: 1, color: ColorPallete.violetBlue),
-          ControlWithTitle("assets/icons/common/settings.svg", "Изменить".toUpperCase()),
-        ]));
-  }
-
-  Widget ControlWithTitle(String assetPath, String title) {
-    return Container(
-        width: 96,
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SvgColoredIcon(assetPath: assetPath, color: ColorPallete.violetBlue, height: 52),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: ColorPallete.violetBlue, fontSize: 10),
-          )
-        ]));
   }
 }
 
@@ -157,9 +116,9 @@ class ChargingPlaceTitleView extends StatelessWidget {
                           child: Text(place.score!.beautifulScore,
                               style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
               const SizedBox(width: 8),
-              Column(children: [
-                Text(place.name.capitalizeEachWord, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-              ])
+              Flexible(
+                  child: Text(place.name.capitalizeEachWord,
+                      maxLines: 2, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))
             ])));
   }
 }

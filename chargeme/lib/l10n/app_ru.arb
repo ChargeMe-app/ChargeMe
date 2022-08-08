@@ -30,8 +30,25 @@
     "selectIcon": "Выберите иконку",
 
     "details": "О станции",
+    "parking": "Парковка",
+    "workingHours": "Часы работы",
+    "open247": "Круглосуточно",
+    "free": "Бесплатно",
+    "close": "Закрыть",
     "getDirections": "Построить маршрут",
     "checkIn": "Чек-ин",
     "checkins": "Чек-ины",
-    "allCheckins": "Все чек-ины"
+    "allCheckins": "Все чек-ины",
+
+    "lodging": "Ночллег",
+    "dining": "Питание",
+    "restrooms": "Туалеты",
+    "evParking": "Парковка для электромобилей",
+    "valetParking": "Услуги парковщика",
+    "park": "Парк",
+    "wifi": "Wi-Fi",
+    "shopping": "Магазины",
+    "grocery": "Продукты",
+    "hiking": "Место для прогулки",
+    "camping": "Кемпинг"
 }
