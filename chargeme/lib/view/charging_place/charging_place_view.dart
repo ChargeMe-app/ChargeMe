@@ -3,6 +3,7 @@ import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view/charging_place/amenities_view.dart';
+import 'package:chargeme/view/charging_place/check_in/check_in_options_view.dart';
 import 'package:chargeme/view/charging_place/details_view.dart';
 import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
@@ -124,6 +125,10 @@ class ChargingPlaceTitleView extends StatelessWidget {
 }
 
 class CheckInButton extends StatelessWidget {
+  CheckInButton({this.place});
+
+  ChargingPlace? place;
+
   @override
   Widget build(BuildContext context) {
     var l10n = AppLocalizations.of(context);
@@ -132,7 +137,13 @@ class CheckInButton extends StatelessWidget {
         primary: ColorPallete.violetBlue,
         minimumSize: const Size.fromHeight(50),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CheckInOptionsView(),
+            ));
+      },
       child: Text(
         l10n.checkIn,
         style: const TextStyle(fontSize: 24),
