@@ -60,9 +60,9 @@ class Outlet {
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Amenity {
   int locationId;
-  AmenityType type;
+  AmenityType form;
 
-  Amenity({required this.locationId, required this.type});
+  Amenity({required this.locationId, required this.form});
 
   factory Amenity.fromJson(Map<String, dynamic> json) => _$AmenityFromJson(json);
   Map<String, dynamic> toJson() => _$AmenityToJson(this);

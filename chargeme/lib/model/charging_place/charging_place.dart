@@ -33,8 +33,8 @@ class ChargingPlace {
   bool? open247;
 
   List<Amenity>? amenities;
-  List<Photo> photos;
-  List<Review> reviews;
+  List<Photo>? photos;
+  List<Review>? reviews;
   List<Station> stations;
 
   double? score;

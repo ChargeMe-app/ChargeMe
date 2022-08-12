@@ -52,7 +52,8 @@ class _GMap extends State<GMap> {
           position: LatLng(stationMarker.latitude, stationMarker.longitude),
           onTap: () {
             _customInfoWindowController.addInfoWindow!(
-                MarkerInfoView(stationMarker.name, stationTypes, markerIcon, stationMarker.score), latLng);
+                MarkerInfoView(stationMarker.id, stationMarker.name, stationTypes, markerIcon, stationMarker.score),
+                latLng);
           });
       _markers[stationMarker.id.toString()] = marker;
     }
@@ -80,7 +81,7 @@ class _GMap extends State<GMap> {
               position: latLng,
               onTap: () {
                 _customInfoWindowController.addInfoWindow!(
-                    MarkerInfoView("Station #1", "Cool station", null, 8.6), latLng);
+                    MarkerInfoView("213995", "Station #1", "Cool station", null, 8.6), latLng);
               });
           setState(() {});
         },

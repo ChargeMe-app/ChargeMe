@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MarkerInfoView extends StatelessWidget {
+  final String placeId;
   final String title;
   final String subtitle;
   final BitmapDescriptor? icon;
   final double? score;
 
-  MarkerInfoView(this.title, this.subtitle, this.icon, this.score);
+  MarkerInfoView(this.placeId, this.title, this.subtitle, this.icon, this.score);
 
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
@@ -59,7 +60,7 @@ class MarkerInfoView extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ChargingPlaceView(icon: icon),
+                          builder: (context) => ChargingPlaceView(id: placeId, icon: icon),
                         ));
                   },
                 )

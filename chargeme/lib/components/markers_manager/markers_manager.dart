@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class MarkersManager {
   final String _baseUrl = "localhost:8080";
-  final String _stationsPath = "/v1/stations";
+  final String _stationsPath = "/v1/locations";
 
   Future<List<StationMarker>> getStationMarkers({required LatLngBounds bounds}) async {
     final queryParameters = {
@@ -23,7 +23,7 @@ class MarkersManager {
       if (response.statusCode == 200) {
         final body = jsonDecode(utf8.decode(response.bodyBytes));
 
-        var data = body["data"];
+        var data = body["locations"];
         List<StationMarker> stationMarkers = List<StationMarker>.from(data
             .map(
               (dynamic item) => StationMarker.fromJson(item),

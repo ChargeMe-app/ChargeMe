@@ -1,4 +1,5 @@
 import 'package:chargeme/components/helpers/svg_color_parser.dart';
+import 'package:chargeme/components/charging_place_manager/charging_place_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
@@ -16,8 +17,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 
 class ChargingPlaceView extends StatefulWidget {
-  const ChargingPlaceView({Key? key, this.icon}) : super(key: key);
+  const ChargingPlaceView({Key? key, required this.id, this.icon}) : super(key: key);
 
+  final String id;
   final BitmapDescriptor? icon;
 
   @override
@@ -25,6 +27,7 @@ class ChargingPlaceView extends StatefulWidget {
 }
 
 class _ChargingPlaceView extends State<ChargingPlaceView> {
+  ChargingPlaceManager _chargingPlaceManager = ChargingPlaceManager();
   ChargingPlace? place;
   double scrollUpOffset = 0;
   double imageContainerHeight = 200;
@@ -36,7 +39,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   }
 
   void setupChargingPlace() async {
-    place = (await charging_place.getTestStation())[0];
+    place = await _chargingPlaceManager.getStationMarkers(id: widget.id); // (await charging_place.getTestStation())[0];
     setState(() {});
   }
 
@@ -44,7 +47,9 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   Widget build(BuildContext context) {
     var l10n = AppLocalizations.of(context);
     if (place == null) {
-      return Center(child: Text(l10n.loading));
+      return Scaffold(
+          appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue),
+          body: Center(child: Text(l10n.loading)));
     } else {
       return Scaffold(
           appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue),
@@ -84,7 +89,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 place!.amenities == null ? Container() : const SizedBox(height: 10),
                                 place!.amenities == null ? Container() : AmenitiesView(amenities: place!.amenities!),
                                 const SizedBox(height: 10),
-                                ReviewsView(reviews: place!.reviews),
+                                ReviewsView(reviews: place!.reviews ?? []),
                                 // const SizedBox(height: 10),
                                 // ControlButtonsView(),
                               ]))
