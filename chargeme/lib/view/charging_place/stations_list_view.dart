@@ -15,7 +15,8 @@ class BoxWithTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-            border: Border.all(color: ColorPallete.violetBlue), borderRadius: BorderRadius.all(Radius.circular(8))),
+            border: Border.all(color: ColorPallete.violetBlue, width: 5),
+            borderRadius: BorderRadius.all(Radius.circular(8))),
         child: Padding(
             padding: EdgeInsets.all(8),
             child: Column(children: [
@@ -23,14 +24,15 @@ class BoxWithTitle extends StatelessWidget {
               Column(children: children ?? []),
               footer == null
                   ? Container()
-                  : Row(children: [
-                      const Spacer(),
-                      GestureDetector(
-                          onTap: onFooterTap ?? () {},
-                          child: Text(footer!,
-                              style:
-                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: ColorPallete.violetBlue)))
-                    ])
+                  : Container(
+                      decoration: BoxDecoration(
+                          color: ColorPallete.violetBlue, borderRadius: BorderRadius.all(Radius.circular(12))),
+                      child: Padding(
+                          padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
+                          child: GestureDetector(
+                              onTap: onFooterTap ?? () {},
+                              child: Text(footer!,
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)))))
             ])));
   }
 }
@@ -52,26 +54,21 @@ class StationsListView extends StatelessWidget {
 
   Widget outletListView(BuildContext context, List<Outlet> outlets) {
     return Container(
-        height: 110,
+        height: 160,
         child: ListView(
             scrollDirection: Axis.horizontal,
             children: List.generate(outlets.length, (i) {
               var outlet = outlets[i];
-              return Card(
-                  color: ColorPallete.violetBlue,
-                  child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Column(
-                        children: [
-                          Text(outlet.connectorType.str,
-                              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-                          const Spacer(),
-                          Image.asset(outlet.connectorType.iconPath, height: 40, color: Colors.white),
-                          const Spacer(),
-                          Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
-                              style: TextStyle(fontSize: 14, color: Colors.white))
-                        ],
-                      )));
+              return Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Column(children: [
+                    Image.asset(outlet.connectorType.iconPath, height: 90, color: ColorPallete.violetBlue),
+                    SizedBox(height: 12),
+                    Text(outlet.connectorType.str,
+                        style: TextStyle(color: ColorPallete.violetBlue, fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
+                        style: TextStyle(fontSize: 12, color: ColorPallete.violetBlue))
+                  ]));
             })));
   }
 }

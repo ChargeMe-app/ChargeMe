@@ -42,7 +42,7 @@ class CheckInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
-        Container(width: 32, child: review.rating.icon),
+        Padding(padding: EdgeInsets.only(right: 8), child: Container(width: 24, child: review.rating.icon)),
         Text(review.user.displayName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const Spacer(),
         Text(review.vehicleName?.capitalizeEachWord ?? "Unknown vehicle",

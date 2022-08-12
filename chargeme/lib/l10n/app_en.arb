@@ -30,8 +30,25 @@
     "selectIcon": "Select Icon",
 
     "details": "Details",
+    "parking": "Parking",
+    "workingHours": "Working hours",
+    "open247": "Open 24/7",
+    "free": "Free",
+    "close": "Close",
     "getDirections": "Get directions",
     "checkIn": "Check in",
     "checkins": "Checkins",
-    "allCheckins": "All checkins"
+    "allCheckins": "All checkins",
+
+    "lodging": "Lodging",
+    "dining": "Dining",
+    "restrooms": "Restrooms",
+    "evParking": "EV Parking",
+    "valetParking": "Valet parking",
+    "park": "Park",
+    "wifi": "Wi-Fi",
+    "shopping": "Shopping",
+    "grocery": "Grocery",
+    "hiking": "Hiking",
+    "camping": "Camping"
 }

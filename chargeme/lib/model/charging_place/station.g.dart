@@ -70,10 +70,24 @@ const _$ConnectorTypeEnumMap = {
 
 Amenity _$AmenityFromJson(Map<String, dynamic> json) => Amenity(
       locationId: json['location_id'] as int,
-      type: json['type'] as int,
+      type: $enumDecode(_$AmenityTypeEnumMap, json['type']),
     );
 
 Map<String, dynamic> _$AmenityToJson(Amenity instance) => <String, dynamic>{
       'location_id': instance.locationId,
-      'type': instance.type,
+      'type': _$AmenityTypeEnumMap[instance.type],
     };
+
+const _$AmenityTypeEnumMap = {
+  AmenityType.lodging: 0,
+  AmenityType.dining: 1,
+  AmenityType.restrooms: 2,
+  AmenityType.evParking: 3,
+  AmenityType.valetParking: 4,
+  AmenityType.park: 5,
+  AmenityType.wifi: 6,
+  AmenityType.shopping: 7,
+  AmenityType.grocery: 8,
+  AmenityType.hiking: 9,
+  AmenityType.camping: 10,
+};

@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'station.g.dart';
 
@@ -58,8 +60,7 @@ class Outlet {
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Amenity {
   int locationId;
-  // AmenityType type;
-  int type;
+  AmenityType type;
 
   Amenity({required this.locationId, required this.type});
 
@@ -170,6 +171,59 @@ extension IconConnectorTypeExtension on ConnectorType {
   }
 }
 
-enum Access { public, restrictes }
+enum Access { public, restricted }
 
-enum AmenityType { lodging, dining, restrooms, evParking, valetParking, park, wifi, shopping, grocery, hiking, camping }
+enum AmenityType {
+  @JsonValue(0)
+  lodging,
+  @JsonValue(1)
+  dining,
+  @JsonValue(2)
+  restrooms,
+  @JsonValue(3)
+  evParking,
+  @JsonValue(4)
+  valetParking,
+  @JsonValue(5)
+  park,
+  @JsonValue(6)
+  wifi,
+  @JsonValue(7)
+  shopping,
+  @JsonValue(8)
+  grocery,
+  @JsonValue(9)
+  hiking,
+  @JsonValue(10)
+  camping
+}
+
+extension AmenityTitle on AmenityType {
+  String localizedTitle(BuildContext context) {
+    var l10n = AppLocalizations.of(context);
+    switch (this) {
+      case AmenityType.lodging:
+        return l10n.lodging;
+      case AmenityType.dining:
+        return l10n.dining;
+      case AmenityType.restrooms:
+        return l10n.restrooms;
+      case AmenityType.evParking:
+        return l10n.evParking;
+      case AmenityType.valetParking:
+        return l10n.valetParking;
+      case AmenityType.park:
+        return l10n.park;
+      case AmenityType.wifi:
+        return l10n.wifi;
+      case AmenityType.shopping:
+        return l10n.shopping;
+      case AmenityType.grocery:
+        return l10n.grocery;
+      case AmenityType.hiking:
+        return l10n.hiking;
+      case AmenityType.camping:
+        return l10n.camping;
+    }
+  }
+}
