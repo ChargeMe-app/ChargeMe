@@ -7,6 +7,7 @@ extension ColorPallete on Color {
   static Color darkerBlue = ColorPallete.fromHex("#0F7173");
   static Color darkDefaultBg = ColorPallete.fromHex("#20242f");
   static Color greenEmerald = ColorPallete.fromHex("#45CB85");
+  static Color yellow = ColorPallete.fromHex("#F3CA40");
 
   /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
   static Color fromHex(String hexString) {

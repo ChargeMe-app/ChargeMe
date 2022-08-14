@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoxWithTitle extends StatelessWidget {
-  BoxWithTitle({required this.title, this.children, this.footer, this.onFooterTap});
+  BoxWithTitle({required this.title, this.children, this.footer, this.shouldShowFooter = false, this.onFooterTap});
 
   final String title;
   final List<Widget>? children;
   final String? footer;
+  final bool shouldShowFooter;
   final void Function()? onFooterTap;
 
   @override
@@ -22,7 +23,7 @@ class BoxWithTitle extends StatelessWidget {
             child: Column(children: [
               Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: ColorPallete.violetBlue)),
               Column(children: children ?? []),
-              footer == null
+              footer == null || !shouldShowFooter
                   ? Container()
                   : Container(
                       decoration: BoxDecoration(
@@ -45,30 +46,34 @@ class StationsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var l10n = AppLocalizations.of(context);
-    return BoxWithTitle(
-        title: l10n.stations,
-        children: List.generate(stations.length, (i) {
-          return outletListView(context, stations[i].outlets);
-        }));
+    return BoxWithTitle(title: l10n.stations, children: [
+      Container(
+          height: 160,
+          child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: List.generate(stations.length, (i) {
+                return outletListView(context, stations[i].outlets, stations.length - 1 == i);
+              })))
+    ]);
   }
 
-  Widget outletListView(BuildContext context, List<Outlet> outlets) {
-    return Container(
-        height: 160,
-        child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: List.generate(outlets.length, (i) {
-              var outlet = outlets[i];
-              return Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Column(children: [
-                    Image.asset(outlet.connectorType.iconPath, height: 90, color: ColorPallete.violetBlue),
-                    SizedBox(height: 12),
-                    Text(outlet.connectorType.str,
-                        style: TextStyle(color: ColorPallete.violetBlue, fontSize: 16, fontWeight: FontWeight.bold)),
-                    Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
-                        style: TextStyle(fontSize: 12, color: ColorPallete.violetBlue))
-                  ]));
-            })));
+  Widget outletListView(BuildContext context, List<Outlet> outlets, bool isLast) {
+    return Row(children: [
+      Row(
+          children: List.generate(outlets.length, (i) {
+        var outlet = outlets[i];
+        return Padding(
+            padding: EdgeInsets.all(8),
+            child: Column(children: [
+              Image.asset(outlet.connectorType.iconPath, height: 90, color: ColorPallete.violetBlue),
+              SizedBox(height: 12),
+              Text(outlet.connectorType.str,
+                  style: TextStyle(color: ColorPallete.violetBlue, fontSize: 16, fontWeight: FontWeight.bold)),
+              Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
+                  style: TextStyle(fontSize: 12, color: ColorPallete.violetBlue))
+            ]));
+      })),
+      isLast ? Container() : Container(width: 1, color: ColorPallete.violetBlue)
+    ]);
   }
 }

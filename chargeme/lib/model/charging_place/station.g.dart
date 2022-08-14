@@ -7,10 +7,10 @@ part of 'station.dart';
 // **************************************************************************
 
 Station _$StationFromJson(Map<String, dynamic> json) => Station(
-      id: json['id'] as int,
-      locationId: json['location_id'] as int,
-      available: json['available'] as int,
-      cost: json['cost'] as int,
+      id: json['id'] as String,
+      locationId: json['location_id'] as String?,
+      available: json['available'] as int?,
+      cost: json['cost'] as int?,
       outlets: (json['outlets'] as List<dynamic>)
           .map((e) => Outlet.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -35,10 +35,9 @@ Map<String, dynamic> _$StationToJson(Station instance) => <String, dynamic>{
     };
 
 Outlet _$OutletFromJson(Map<String, dynamic> json) => Outlet(
-      id: json['id'] as int,
-      available: json['available'] as int,
-      connectorType:
-          $enumDecode(_$ConnectorTypeEnumMap, json['connector_type']),
+      id: json['id'] as String,
+      available: json['available'] as int?,
+      connectorType: $enumDecode(_$ConnectorTypeEnumMap, json['connector']),
       kilowatts: (json['kilowatts'] as num?)?.toDouble(),
       description: json['description'] as String?,
     );
@@ -46,19 +45,22 @@ Outlet _$OutletFromJson(Map<String, dynamic> json) => Outlet(
 Map<String, dynamic> _$OutletToJson(Outlet instance) => <String, dynamic>{
       'id': instance.id,
       'available': instance.available,
-      'connector_type': _$ConnectorTypeEnumMap[instance.connectorType],
+      'connector': _$ConnectorTypeEnumMap[instance.connectorType],
       'kilowatts': instance.kilowatts,
       'description': instance.description,
     };
 
 const _$ConnectorTypeEnumMap = {
-  ConnectorType.wall: 0,
+  ConnectorType.unknown: 0,
+  ConnectorType.wall: 1,
   ConnectorType.type1: 2,
   ConnectorType.chademo: 3,
   ConnectorType.teslaRoadster: 4,
   ConnectorType.nema1450: 5,
   ConnectorType.tesla: 6,
   ConnectorType.type2: 7,
+  ConnectorType.type3: 8,
+  ConnectorType.wallBS1363: 9,
   ConnectorType.wallEuro: 10,
   ConnectorType.commando: 11,
   ConnectorType.cssCombo: 13,
@@ -69,13 +71,13 @@ const _$ConnectorTypeEnumMap = {
 };
 
 Amenity _$AmenityFromJson(Map<String, dynamic> json) => Amenity(
-      locationId: json['location_id'] as int,
-      type: $enumDecode(_$AmenityTypeEnumMap, json['type']),
+      locationId: json['location_id'] as String,
+      form: $enumDecode(_$AmenityTypeEnumMap, json['form']),
     );
 
 Map<String, dynamic> _$AmenityToJson(Amenity instance) => <String, dynamic>{
       'location_id': instance.locationId,
-      'type': _$AmenityTypeEnumMap[instance.type],
+      'form': _$AmenityTypeEnumMap[instance.form],
     };
 
 const _$AmenityTypeEnumMap = {

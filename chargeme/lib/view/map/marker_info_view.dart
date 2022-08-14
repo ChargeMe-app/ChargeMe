@@ -1,15 +1,17 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/view/charging_place/charging_place_view.dart';
 import 'package:flutter/material.dart';
+import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MarkerInfoView extends StatelessWidget {
+  final String placeId;
   final String title;
   final String subtitle;
   final BitmapDescriptor? icon;
   final double? score;
 
-  MarkerInfoView(this.title, this.subtitle, this.icon, this.score);
+  MarkerInfoView(this.placeId, this.title, this.subtitle, this.icon, this.score);
 
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
@@ -26,7 +28,7 @@ class MarkerInfoView extends StatelessWidget {
               child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
                     decoration:
-                        const BoxDecoration(color: Colors.green, borderRadius: BorderRadius.all(Radius.circular(4))),
+                        BoxDecoration(color: score?.bgColor, borderRadius: BorderRadius.all(Radius.circular(4))),
                     child: score == null
                         ? Container()
                         : Padding(
@@ -59,7 +61,7 @@ class MarkerInfoView extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ChargingPlaceView(icon: icon),
+                          builder: (context) => ChargingPlaceView(id: placeId, icon: icon),
                         ));
                   },
                 )

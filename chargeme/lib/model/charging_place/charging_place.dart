@@ -13,9 +13,9 @@ part 'charging_place.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class ChargingPlace {
+  String id;
   String name;
   String? description;
-  @JsonKey(name: "formatted_phone_number")
   String? phoneNumber;
   String? address;
   double latitude;
@@ -33,17 +33,18 @@ class ChargingPlace {
   bool? open247;
 
   List<Amenity>? amenities;
-  List<Photo> photos;
-  List<Review> reviews;
+  List<Photo>? photos;
+  List<Review>? reviews;
   List<Station> stations;
 
   double? score;
 
-  int totalPhotos;
-  int totalReviews;
+  int? totalPhotos;
+  int? totalReviews;
 
   ChargingPlace(
-      {required this.name,
+      {required this.id,
+      required this.name,
       this.description,
       this.phoneNumber,
       this.address,
@@ -62,8 +63,8 @@ class ChargingPlace {
       required this.reviews,
       required this.stations,
       this.score,
-      required this.totalPhotos,
-      required this.totalReviews});
+      this.totalPhotos,
+      this.totalReviews});
 
   factory ChargingPlace.fromJson(Map<String, dynamic> json) => _$ChargingPlaceFromJson(json);
   Map<String, dynamic> toJson() => _$ChargingPlaceToJson(this);
@@ -73,9 +74,9 @@ class ChargingPlace {
 class Photo {
   String caption;
   DateTime createdAt;
-  int id;
+  String id;
   Uri url;
-  int userId;
+  String userId;
 
   Photo({required this.caption, required this.createdAt, required this.id, required this.url, required this.userId});
 
@@ -88,14 +89,15 @@ class Review {
   String comment;
   ConnectorType? connectorType;
   DateTime createdAt;
-  int id;
-  int? outletId;
-  int? stationId;
+  String id;
+  String? outletId;
+  String? stationId;
   Rating rating;
   String? vehicleName;
   @JsonKey(unknownEnumValue: VehicleType.teslaModelS)
   VehicleType? vehicleType;
-  PlugshareUser user;
+  String? userName;
+  // PlugshareUser? user;
 
   Review(
       {required this.comment,
@@ -107,7 +109,7 @@ class Review {
       required this.rating,
       this.vehicleName,
       this.vehicleType,
-      required this.user});
+      this.userName});
 
   factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
   Map<String, dynamic> toJson() => _$ReviewToJson(this);
@@ -117,7 +119,7 @@ class Review {
 class PlugshareUser {
   String? countryCode;
   String displayName;
-  int id;
+  String id;
   String? vehicleDescription;
   @JsonKey(unknownEnumValue: VehicleType.teslaModelS)
   VehicleType? vehicleType;
@@ -152,7 +154,16 @@ extension RatingIcon on Rating {
 }
 
 extension BeautifulScore on double {
-  String get beautifulScore => this.toInt() == this ? this.toInt().toString() : this.toString();
+  String get beautifulScore => toInt() == this ? toInt().toString() : toString();
+  Color get bgColor {
+    if (this < 4) {
+      return ColorPallete.redCinnabar;
+    } else if (this < 7.5) {
+      return ColorPallete.yellow;
+    } else {
+      return Colors.green;
+    }
+  }
 }
 
 Future<List<ChargingPlace>> getTestStation() async {

@@ -80,6 +80,7 @@ flutter:
 
   assets:
     - assets/icons/common/
+    - assets/icons/amenities/
     - assets/icons/markers/
     - assets/icons/plugs/
     - assets/temporary/

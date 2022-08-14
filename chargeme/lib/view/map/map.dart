@@ -27,10 +27,31 @@ class _GMap extends State<GMap> {
   final _manager = markers_manager.MarkersManager();
   final Throttler _throttler = Throttler();
   var isLoading = false;
+  Map<IconType, BitmapDescriptor> _cachedMarkerIcons = {};
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _setupCachedMarkerIcons();
+  }
+
+  Future<void> _setupCachedMarkerIcons() async {
+    for (var v in IconType.values) {
+      final icon = await v.getMarkerIcon();
+      if (icon != null) {
+        _cachedMarkerIcons[v] = icon;
+      }
+    }
+  }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    // mapController = controller;
-    final station = await charging_place.getTestStation();
     _customInfoWindowController.googleMapController = controller;
     final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     controller.animateCamera(CameraUpdate.newLatLng(LatLng(userLocation.latitude, userLocation.longitude)));
@@ -44,7 +65,7 @@ class _GMap extends State<GMap> {
       String stationTypes =
           stationMarker.stations.map((e) => e.outlets.map((e) => e.connector.str).join(", ")).join(", ");
       LatLng latLng = LatLng(stationMarker.latitude, stationMarker.longitude);
-      var markerIcon = await stationMarker.iconType.getMarkerIcon();
+      var markerIcon = _cachedMarkerIcons[stationMarker.iconType];
       final marker = Marker(
           consumeTapEvents: true,
           icon: markerIcon ?? BitmapDescriptor.defaultMarker,
@@ -52,7 +73,8 @@ class _GMap extends State<GMap> {
           position: LatLng(stationMarker.latitude, stationMarker.longitude),
           onTap: () {
             _customInfoWindowController.addInfoWindow!(
-                MarkerInfoView(stationMarker.name, stationTypes, markerIcon, stationMarker.score), latLng);
+                MarkerInfoView(stationMarker.id, stationMarker.name, stationTypes, markerIcon, stationMarker.score),
+                latLng);
           });
       _markers[stationMarker.id.toString()] = marker;
     }
@@ -80,7 +102,7 @@ class _GMap extends State<GMap> {
               position: latLng,
               onTap: () {
                 _customInfoWindowController.addInfoWindow!(
-                    MarkerInfoView("Station #1", "Cool station", null, 8.6), latLng);
+                    MarkerInfoView("213995", "Station #1", "Cool station", null, 8.6), latLng);
               });
           setState(() {});
         },

@@ -19,6 +19,7 @@ class ReviewsView extends StatelessWidget {
     return BoxWithTitle(
         title: l10n.checkins,
         footer: l10n.allCheckins,
+        shouldShowFooter: reviews.length > 7,
         onFooterTap: () {
           Navigator.push(
             context,
@@ -43,7 +44,7 @@ class CheckInView extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Padding(padding: EdgeInsets.only(right: 8), child: Container(width: 24, child: review.rating.icon)),
-        Text(review.user.displayName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(review.userName ?? "Unknown user", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const Spacer(),
         Text(review.vehicleName?.capitalizeEachWord ?? "Unknown vehicle",
             maxLines: 1, overflow: TextOverflow.fade, style: TextStyle(fontSize: 16, color: Colors.grey))

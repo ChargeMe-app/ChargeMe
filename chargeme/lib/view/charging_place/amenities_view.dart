@@ -12,7 +12,14 @@ class AmenitiesView extends StatelessWidget {
     return BoxWithTitle(
       title: "Amenities",
       children: List.generate(amenities.length, (i) {
-        return Text(amenities[i].type.localizedTitle(context));
+        return Padding(
+            padding: EdgeInsets.all(4),
+            child: Row(children: [
+              Container(width: 32, height: 32, child: Image.asset(amenities[i].form.icon)),
+              const SizedBox(width: 8),
+              Text(amenities[i].form.localizedTitle(context)),
+              Spacer()
+            ]));
       }),
     );
   }

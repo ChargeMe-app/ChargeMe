@@ -1,4 +1,5 @@
 import 'package:chargeme/components/helpers/svg_color_parser.dart';
+import 'package:chargeme/components/charging_place_manager/charging_place_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
@@ -16,8 +17,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 
 class ChargingPlaceView extends StatefulWidget {
-  const ChargingPlaceView({Key? key, this.icon}) : super(key: key);
+  const ChargingPlaceView({Key? key, required this.id, this.icon}) : super(key: key);
 
+  final String id;
   final BitmapDescriptor? icon;
 
   @override
@@ -25,6 +27,7 @@ class ChargingPlaceView extends StatefulWidget {
 }
 
 class _ChargingPlaceView extends State<ChargingPlaceView> {
+  final ChargingPlaceManager _chargingPlaceManager = ChargingPlaceManager();
   ChargingPlace? place;
   double scrollUpOffset = 0;
   double imageContainerHeight = 200;
@@ -36,7 +39,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   }
 
   void setupChargingPlace() async {
-    place = (await charging_place.getTestStation())[0];
+    place = await _chargingPlaceManager.getChargingPlace(id: widget.id);
     setState(() {});
   }
 
@@ -44,7 +47,9 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   Widget build(BuildContext context) {
     var l10n = AppLocalizations.of(context);
     if (place == null) {
-      return Center(child: Text(l10n.loading));
+      return Scaffold(
+          appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue),
+          body: Center(child: Text(l10n.loading)));
     } else {
       return Scaffold(
           appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue),
@@ -81,10 +86,14 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 DetailsView(place: place!, icon: widget.icon),
                                 const SizedBox(height: 10),
                                 StationsListView(stations: place!.stations),
-                                place!.amenities == null ? Container() : const SizedBox(height: 10),
-                                place!.amenities == null ? Container() : AmenitiesView(amenities: place!.amenities!),
-                                const SizedBox(height: 10),
-                                ReviewsView(reviews: place!.reviews),
+                                place!.amenities?.isEmpty ?? true ? Container() : const SizedBox(height: 10),
+                                place!.amenities?.isEmpty ?? true
+                                    ? Container()
+                                    : AmenitiesView(amenities: place!.amenities!),
+                                place!.reviews?.isEmpty ?? true ? Container() : const SizedBox(height: 10),
+                                place!.reviews?.isEmpty ?? true
+                                    ? Container()
+                                    : ReviewsView(reviews: place!.reviews ?? []),
                                 // const SizedBox(height: 10),
                                 // ControlButtonsView(),
                               ]))
@@ -95,13 +104,15 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
 }
 
 class ChargingPlaceTitleView extends StatelessWidget {
-  ChargingPlaceTitleView({required this.place});
+  ChargingPlaceTitleView({this.place});
 
-  final ChargingPlace place;
+  final ChargingPlace? place;
 
   @override
   Widget build(BuildContext context) {
+    final place = this.place!;
     return Container(
+        constraints: BoxConstraints(minHeight: 64),
         color: Colors.black12,
         child: Padding(
             padding: const EdgeInsets.all(8),
@@ -109,10 +120,10 @@ class ChargingPlaceTitleView extends StatelessWidget {
               place.score == null
                   ? Container()
                   : Container(
-                      width: 48,
                       height: 48,
-                      decoration:
-                          const BoxDecoration(color: Colors.green, borderRadius: BorderRadius.all(Radius.circular(4))),
+                      width: 48,
+                      decoration: BoxDecoration(
+                          color: place.score!.bgColor, borderRadius: BorderRadius.all(Radius.circular(4))),
                       child: Center(
                           child: Text(place.score!.beautifulScore,
                               style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
@@ -134,6 +145,7 @@ class CheckInButton extends StatelessWidget {
     var l10n = AppLocalizations.of(context);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         primary: ColorPallete.violetBlue,
         minimumSize: const Size.fromHeight(50),
       ),
@@ -146,7 +158,7 @@ class CheckInButton extends StatelessWidget {
       },
       child: Text(
         l10n.checkIn,
-        style: const TextStyle(fontSize: 24),
+        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );
   }

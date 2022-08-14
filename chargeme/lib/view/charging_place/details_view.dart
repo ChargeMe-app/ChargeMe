@@ -20,31 +20,26 @@ class DetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Column(children: [
-      Container(height: 1, color: ColorPallete.violetBlue),
       place.address == null
           ? Container()
-          : row(context, "assets/icons/common/pin.svg", l10n.address, place.address!.capitalizeEachWord),
-      Container(height: 1, color: ColorPallete.violetBlue),
-      place.phoneNumber == null ? Container() : rowPng("assets/icons/common/phone.png", place.phoneNumber!),
-      Container(height: 1, color: ColorPallete.violetBlue),
+          : row(context, "assets/icons/common/pin.svg", l10n.address, place.address!.capitalizeEachWord,
+              withSeparator: false),
+      place.phoneNumber?.isEmpty ?? true ? Container() : rowPng("assets/icons/common/phone.png", place.phoneNumber!),
       place.cost == null
           ? Container()
-          : row(context, "assets/icons/common/Parking.svg", l10n.parking, "${l10n.parking}: ${l10n.free}"),
-      Container(height: 1, color: ColorPallete.violetBlue),
+          : row(context, "assets/icons/common/Parking.svg", l10n.parking, costText(context)),
       !shouldShowHours()
           ? Container()
           : row(context, "assets/icons/common/clock.svg", l10n.workingHours,
               place.open247! ? l10n.open247 : place.hours!),
-      Container(height: 1, color: ColorPallete.violetBlue),
-      place.description == null
+      place.description?.isEmpty ?? true
           ? Container()
           : row(context, "assets/icons/common/info.svg", l10n.description, place.description!),
-      Container(height: 1, color: ColorPallete.violetBlue),
-      Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+      ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
           child: Stack(alignment: AlignmentDirectional.bottomEnd, children: [
             SizedBox(
-                height: 100,
+                height: 120,
                 child: GoogleMap(
                   myLocationButtonEnabled: false,
                   markers: {
@@ -56,55 +51,69 @@ class DetailsView extends StatelessWidget {
                     zoom: 13.0,
                   ),
                 )),
-            MaterialButton(
-                color: ColorPallete.violetBlue,
-                onPressed: () => openMapsSheet(context),
-                child: Text(l10n.getDirections, style: const TextStyle(color: Colors.white))),
+            Container(
+                height: 120,
+                decoration: BoxDecoration(
+                    border: Border.all(color: ColorPallete.violetBlue, width: 5),
+                    borderRadius: BorderRadius.all(Radius.circular(15)))),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 8, 4),
+                child: MaterialButton(
+                    color: ColorPallete.violetBlue,
+                    onPressed: () => openMapsSheet(context),
+                    child: Text(l10n.getDirections, style: const TextStyle(color: Colors.white)))),
           ])),
-      Container(height: 1, color: ColorPallete.violetBlue),
     ]);
   }
 
-  Widget row(BuildContext context, String assetPath, String title, String text) {
+  Widget row(BuildContext context, String assetPath, String title, String text, {bool withSeparator = true}) {
     final l10n = AppLocalizations.of(context);
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: GestureDetector(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return SimpleDialog(
-                        title: Text(title),
-                        titleTextStyle:
-                            TextStyle(color: ColorPallete.violetBlue, fontSize: 24, fontWeight: FontWeight.bold),
-                        children: [
-                          Padding(padding: const EdgeInsets.fromLTRB(24, 0, 24, 8), child: Text(text)),
-                          SimpleDialogOption(
-                            child: Row(children: [Spacer(), Text(l10n.close, style: TextStyle(fontSize: 14))]),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ]);
-                  });
-            },
-            child: Row(children: [
-              const SizedBox(width: 8),
-              SvgColoredIcon(assetPath: assetPath, color: ColorPallete.violetBlue),
-              const SizedBox(width: 8),
-              Flexible(
-                child: Text(text, maxLines: 2, style: TextStyle(overflow: TextOverflow.ellipsis, fontSize: 16)),
-              )
-            ])));
+    return Column(children: [
+      withSeparator ? Container(height: 1, color: ColorPallete.violetBlue) : Container(),
+      Container(
+          height: 55,
+          child: GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return SimpleDialog(
+                          title: Text(title),
+                          titleTextStyle:
+                              TextStyle(color: ColorPallete.violetBlue, fontSize: 24, fontWeight: FontWeight.bold),
+                          children: [
+                            Padding(padding: const EdgeInsets.fromLTRB(24, 0, 24, 8), child: Text(text)),
+                            SimpleDialogOption(
+                              child: Row(children: [Spacer(), Text(l10n.close, style: TextStyle(fontSize: 14))]),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ]);
+                    });
+              },
+              child: Row(children: [
+                const SizedBox(width: 8),
+                Container(width: 32, child: SvgColoredIcon(assetPath: assetPath, color: ColorPallete.violetBlue)),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Text(text, maxLines: 2, style: TextStyle(overflow: TextOverflow.ellipsis, fontSize: 16)),
+                )
+              ])))
+    ]);
   }
 
   Widget rowPng(String assetPath, String text) {
-    return Row(children: [
-      const SizedBox(width: 8),
-      Image.asset(assetPath, width: 30),
-      const SizedBox(width: 8),
-      Flexible(child: Text(text, maxLines: 2, style: const TextStyle(fontSize: 16)))
+    return Column(children: [
+      Container(height: 1, color: ColorPallete.violetBlue),
+      Container(
+          height: 55,
+          child: Row(children: [
+            const SizedBox(width: 8),
+            Image.asset(assetPath, width: 30),
+            const SizedBox(width: 8),
+            Flexible(child: Text(text, maxLines: 2, style: const TextStyle(fontSize: 16)))
+          ]))
     ]);
   }
 
@@ -112,10 +121,21 @@ class DetailsView extends StatelessWidget {
     if (place.open247 == null) {
       return false;
     }
-    if (!place.open247! && place.hours == null) {
+    if (!place.open247! && (place.hours?.isEmpty ?? true)) {
       return false;
     }
     return true;
+  }
+
+  String costText(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    if (!place.cost!) {
+      return l10n.free;
+    }
+    if (!(place.costDescription?.isEmpty ?? true)) {
+      return place.costDescription!;
+    }
+    return l10n.requiresFee;
   }
 
   openMapsSheet(context) async {
