@@ -101,7 +101,7 @@ extension MarkerIcon on IconType {
         path = "assets/icons/markers/home64.png";
         break;
       case IconType.restricted:
-        path = "assets/icons/markers/home64.png";
+        path = "assets/icons/markers/publicGrey64.png";
         break;
     }
     final Uint8List? mapMarkerBytes = await getBytesFromAsset(path, 64);

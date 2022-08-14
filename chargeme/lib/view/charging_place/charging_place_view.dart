@@ -27,7 +27,7 @@ class ChargingPlaceView extends StatefulWidget {
 }
 
 class _ChargingPlaceView extends State<ChargingPlaceView> {
-  ChargingPlaceManager _chargingPlaceManager = ChargingPlaceManager();
+  final ChargingPlaceManager _chargingPlaceManager = ChargingPlaceManager();
   ChargingPlace? place;
   double scrollUpOffset = 0;
   double imageContainerHeight = 200;
@@ -77,7 +77,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 width: double.infinity,
                                 fit: BoxFit.fitWidth,
                               )),
-                          ChargingPlaceTitleView(place: place),
+                          ChargingPlaceTitleView(place: place!),
                           Padding(
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
                               child: Column(children: [
@@ -103,54 +103,6 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   }
 }
 
-class LoadingBox extends StatefulWidget {
-  LoadingBox({required this.height});
-
-  final double height;
-
-  @override
-  _LoadingBox createState() => _LoadingBox();
-}
-
-class _LoadingBox extends State<LoadingBox> {
-  double xPos = 0;
-
-  @override
-  void setState(fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration(milliseconds: 700), () {
-      setState(() {
-        xPos = 100;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(alignment: Alignment.center, children: [
-      Container(height: widget.height, color: Colors.grey),
-      AnimatedPositioned(
-          left: xPos,
-          duration: Duration(milliseconds: 500),
-          child: Container(
-              width: 5,
-              height: widget.height,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Colors.white10, Colors.white54]))))
-    ]);
-  }
-}
-
 class ChargingPlaceTitleView extends StatelessWidget {
   ChargingPlaceTitleView({this.place});
 
@@ -158,33 +110,28 @@ class ChargingPlaceTitleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final place = this.place;
-    if (place != null) {
-      return Container(
-          constraints: BoxConstraints(minHeight: 64),
-          color: Colors.black12,
-          child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Row(children: [
-                place.score == null
-                    ? Container()
-                    : Container(
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                            color: place.score!.bgColor, borderRadius: BorderRadius.all(Radius.circular(4))),
-                        child: Center(
-                            child: Text(place.score!.beautifulScore,
-                                style:
-                                    const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
-                const SizedBox(width: 8),
-                Flexible(
-                    child: Text(place.name.capitalizeEachWord,
-                        maxLines: 2, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))
-              ])));
-    } else {
-      return LoadingBox(height: 64);
-    }
+    final place = this.place!;
+    return Container(
+        constraints: BoxConstraints(minHeight: 64),
+        color: Colors.black12,
+        child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(children: [
+              place.score == null
+                  ? Container()
+                  : Container(
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                          color: place.score!.bgColor, borderRadius: BorderRadius.all(Radius.circular(4))),
+                      child: Center(
+                          child: Text(place.score!.beautifulScore,
+                              style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
+              const SizedBox(width: 8),
+              Flexible(
+                  child: Text(place.name.capitalizeEachWord,
+                      maxLines: 2, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))
+            ])));
   }
 }
 

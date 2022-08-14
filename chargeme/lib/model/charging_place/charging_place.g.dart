@@ -11,7 +11,7 @@ ChargingPlace _$ChargingPlaceFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       name: json['name'] as String,
       description: json['description'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
+      phoneNumber: json['phone_number'] as String?,
       address: json['address'] as String?,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
@@ -23,7 +23,7 @@ ChargingPlace _$ChargingPlaceFromJson(Map<String, dynamic> json) =>
           ?.map((e) => e as String)
           .toList(),
       cost: json['cost'] as bool?,
-      costDescription: json['costDescription'] as String?,
+      costDescription: json['cost_description'] as String?,
       hours: json['hours'] as String?,
       open247: json['open247'] as bool?,
       amenities: (json['amenities'] as List<dynamic>?)
@@ -48,7 +48,7 @@ Map<String, dynamic> _$ChargingPlaceToJson(ChargingPlace instance) =>
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
-      'phoneNumber': instance.phoneNumber,
+      'phone_number': instance.phoneNumber,
       'address': instance.address,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
@@ -57,7 +57,7 @@ Map<String, dynamic> _$ChargingPlaceToJson(ChargingPlace instance) =>
       'access_restriction_description': instance.accessRestrictionDescription,
       'access_restrictions': instance.accessRestrictions,
       'cost': instance.cost,
-      'costDescription': instance.costDescription,
+      'cost_description': instance.costDescription,
       'hours': instance.hours,
       'open247': instance.open247,
       'amenities': instance.amenities,
@@ -89,9 +89,7 @@ Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
       comment: json['comment'] as String,
       connectorType:
           $enumDecodeNullable(_$ConnectorTypeEnumMap, json['connector_type']),
-      createdAt: json['created_at'] == null
-          ? null
-          : DateTime.parse(json['created_at'] as String),
+      createdAt: DateTime.parse(json['created_at'] as String),
       id: json['id'] as String,
       outletId: json['outlet_id'] as String?,
       stationId: json['station_id'] as String?,
@@ -106,7 +104,7 @@ Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
 Map<String, dynamic> _$ReviewToJson(Review instance) => <String, dynamic>{
       'comment': instance.comment,
       'connector_type': _$ConnectorTypeEnumMap[instance.connectorType],
-      'created_at': instance.createdAt?.toIso8601String(),
+      'created_at': instance.createdAt.toIso8601String(),
       'id': instance.id,
       'outlet_id': instance.outletId,
       'station_id': instance.stationId,

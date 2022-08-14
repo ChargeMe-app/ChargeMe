@@ -16,7 +16,6 @@ class ChargingPlace {
   String id;
   String name;
   String? description;
-  @JsonKey(name: "phoneNumber")
   String? phoneNumber;
   String? address;
   double latitude;
@@ -28,7 +27,6 @@ class ChargingPlace {
   List<String>? accessRestrictions;
 
   bool? cost;
-  @JsonKey(name: "costDescription")
   String? costDescription;
 
   String? hours;
@@ -90,7 +88,7 @@ class Photo {
 class Review {
   String comment;
   ConnectorType? connectorType;
-  DateTime? createdAt;
+  DateTime createdAt;
   String id;
   String? outletId;
   String? stationId;

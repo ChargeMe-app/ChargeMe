@@ -52,8 +52,6 @@ class _GMap extends State<GMap> {
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    // mapController = controller;
-    // final station = await charging_place.getTestStation();
     _customInfoWindowController.googleMapController = controller;
     final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     controller.animateCamera(CameraUpdate.newLatLng(LatLng(userLocation.latitude, userLocation.longitude)));
@@ -67,7 +65,7 @@ class _GMap extends State<GMap> {
       String stationTypes =
           stationMarker.stations.map((e) => e.outlets.map((e) => e.connector.str).join(", ")).join(", ");
       LatLng latLng = LatLng(stationMarker.latitude, stationMarker.longitude);
-      var markerIcon = _cachedMarkerIcons[stationMarker.iconType]; // await stationMarker.iconType.getMarkerIcon();
+      var markerIcon = _cachedMarkerIcons[stationMarker.iconType];
       final marker = Marker(
           consumeTapEvents: true,
           icon: markerIcon ?? BitmapDescriptor.defaultMarker,

@@ -169,7 +169,7 @@ extension IconConnectorTypeExtension on ConnectorType {
       case ConnectorType.type2:
         return "assets/icons/plugs/type2.png";
       case ConnectorType.type3:
-        return "assets/icons/plugs/type2.png";
+        return "assets/icons/plugs/type3.png";
       case ConnectorType.wallBS1363:
         return "assets/icons/plugs/wall.png";
       case ConnectorType.wallEuro:

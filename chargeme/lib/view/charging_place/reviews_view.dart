@@ -59,7 +59,7 @@ class CheckInView extends StatelessWidget {
         Container(width: 32),
         Text(review.connectorType?.str ?? "", style: TextStyle(fontSize: 16, color: Colors.grey)),
         const Spacer(),
-        Text(review.createdAt?.dateAndTimeFormat ?? "", style: TextStyle(fontSize: 14, color: Colors.grey))
+        Text(review.createdAt.dateAndTimeFormat, style: TextStyle(fontSize: 14, color: Colors.grey))
       ]),
       const SizedBox(height: 20)
     ]);
