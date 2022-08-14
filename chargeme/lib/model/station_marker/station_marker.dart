@@ -75,6 +75,10 @@ enum IconType {
   publicFast,
   @JsonValue("YR")
   repairFast,
+  @JsonValue("H")
+  home,
+  @JsonValue("B")
+  restricted,
 }
 
 extension MarkerIcon on IconType {
@@ -92,6 +96,12 @@ extension MarkerIcon on IconType {
         break;
       case IconType.repairFast:
         path = "assets/icons/markers/inRepair64.png";
+        break;
+      case IconType.home:
+        path = "assets/icons/markers/home64.png";
+        break;
+      case IconType.restricted:
+        path = "assets/icons/markers/home64.png";
         break;
     }
     final Uint8List? mapMarkerBytes = await getBytesFromAsset(path, 64);

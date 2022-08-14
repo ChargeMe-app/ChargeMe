@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class MarkersManager {
-  final String _baseUrl = "localhost:8080";
+  final String _baseUrl = "46.37.150.125:8080";
   final String _stationsPath = "/v1/locations";
 
   Future<List<StationMarker>> getStationMarkers({required LatLngBounds bounds}) async {

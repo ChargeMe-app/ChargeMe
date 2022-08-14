@@ -6,10 +6,10 @@ import 'package:chargeme/model/charging_place/station.dart';
 import 'package:http/http.dart' as http;
 
 class ChargingPlaceManager {
-  final String _baseUrl = "localhost:8080";
+  final String _baseUrl = "46.37.150.125:8080";
   final String _stationsPath = "/v1/locations/stations";
 
-  Future<ChargingPlace?> getStationMarkers({required String id}) async {
+  Future<ChargingPlace?> getChargingPlace({required String id}) async {
     final queryParameters = {'locationId': id};
     final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
 
@@ -18,9 +18,9 @@ class ChargingPlaceManager {
       if (response.statusCode == 200) {
         final body = jsonDecode(utf8.decode(response.bodyBytes));
 
-        final amenitiesData = body["amenities"];
-        final reviewsData = body["reviews"];
-        final locationData = body["locations"];
+        final amenitiesData = body["amenities"] ?? [];
+        final reviewsData = body["reviews"] ?? [];
+        final locationData = body["location"];
         List<Amenity> amenities =
             List<Amenity>.from(amenitiesData.map((dynamic item) => Amenity.fromJson(item)).toList());
         List<Review> reviews = List<Review>.from(reviewsData.map((dynamic item) => Review.fromJson(item)).toList());

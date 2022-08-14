@@ -6,10 +6,10 @@ part 'station.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Station {
-  int id;
-  int locationId;
-  int available;
-  int cost;
+  String id;
+  String? locationId;
+  int? available;
+  int? cost;
   List<Outlet> outlets;
   String? name;
   String? manufacturer;
@@ -45,8 +45,9 @@ class Location {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Outlet {
-  int id;
-  int available;
+  String id;
+  int? available;
+  @JsonKey(name: "connector")
   ConnectorType connectorType;
   double? kilowatts;
   String? description;
@@ -59,7 +60,7 @@ class Outlet {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Amenity {
-  int locationId;
+  String locationId;
   AmenityType form;
 
   Amenity({required this.locationId, required this.form});
@@ -72,6 +73,8 @@ enum VehicleType { teslaModelS }
 
 enum ConnectorType {
   @JsonValue(0)
+  unknown,
+  @JsonValue(1)
   wall,
   @JsonValue(2)
   type1,
@@ -85,6 +88,10 @@ enum ConnectorType {
   tesla,
   @JsonValue(7)
   type2,
+  @JsonValue(8)
+  type3,
+  @JsonValue(9)
+  wallBS1363,
   @JsonValue(10)
   wallEuro,
   @JsonValue(11)
@@ -104,6 +111,8 @@ enum ConnectorType {
 extension StringConnectorTypeExtension on ConnectorType {
   String get str {
     switch (this) {
+      case ConnectorType.unknown:
+        return "Unknown";
       case ConnectorType.wall:
         return "Wall";
       case ConnectorType.type1:
@@ -118,6 +127,10 @@ extension StringConnectorTypeExtension on ConnectorType {
         return "Tesla";
       case ConnectorType.type2:
         return "Type 2";
+      case ConnectorType.type3:
+        return "Type 3";
+      case ConnectorType.wallBS1363:
+        return "Wall (BS1363)";
       case ConnectorType.wallEuro:
         return "Wall (euro)";
       case ConnectorType.commando:
@@ -139,6 +152,8 @@ extension StringConnectorTypeExtension on ConnectorType {
 extension IconConnectorTypeExtension on ConnectorType {
   String get iconPath {
     switch (this) {
+      case ConnectorType.unknown:
+        return "assets/icons/plugs/commando3pin.png";
       case ConnectorType.wall:
         return "assets/icons/plugs/wall.png";
       case ConnectorType.type1:
@@ -153,6 +168,10 @@ extension IconConnectorTypeExtension on ConnectorType {
         return "assets/icons/plugs/teslaRoadster.png";
       case ConnectorType.type2:
         return "assets/icons/plugs/type2.png";
+      case ConnectorType.type3:
+        return "assets/icons/plugs/type2.png";
+      case ConnectorType.wallBS1363:
+        return "assets/icons/plugs/wall.png";
       case ConnectorType.wallEuro:
         return "assets/icons/plugs/wallEuro.png";
       case ConnectorType.commando:
@@ -224,6 +243,35 @@ extension AmenityTitle on AmenityType {
         return l10n.hiking;
       case AmenityType.camping:
         return l10n.camping;
+    }
+  }
+}
+
+extension AmenityIcon on AmenityType {
+  String get icon {
+    switch (this) {
+      case AmenityType.lodging:
+        return "assets/icons/amenities/lodging.png";
+      case AmenityType.dining:
+        return "assets/icons/amenities/dining.png";
+      case AmenityType.restrooms:
+        return "assets/icons/amenities/WC.png";
+      case AmenityType.evParking:
+        return "assets/icons/amenities/evParking.png";
+      case AmenityType.valetParking:
+        return "assets/icons/amenities/valetParking.png";
+      case AmenityType.park:
+        return "assets/icons/amenities/park.png";
+      case AmenityType.wifi:
+        return "assets/icons/amenities/wifi.png";
+      case AmenityType.shopping:
+        return "assets/icons/amenities/shopping.png";
+      case AmenityType.grocery:
+        return "assets/icons/amenities/grocery.png";
+      case AmenityType.hiking:
+        return "assets/icons/amenities/hiking.png";
+      case AmenityType.camping:
+        return "assets/icons/amenities/camping.png";
     }
   }
 }

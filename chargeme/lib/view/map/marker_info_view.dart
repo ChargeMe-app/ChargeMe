@@ -1,6 +1,7 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/view/charging_place/charging_place_view.dart';
 import 'package:flutter/material.dart';
+import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MarkerInfoView extends StatelessWidget {
@@ -27,7 +28,7 @@ class MarkerInfoView extends StatelessWidget {
               child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Container(
                     decoration:
-                        const BoxDecoration(color: Colors.green, borderRadius: BorderRadius.all(Radius.circular(4))),
+                        BoxDecoration(color: score?.bgColor, borderRadius: BorderRadius.all(Radius.circular(4))),
                     child: score == null
                         ? Container()
                         : Padding(

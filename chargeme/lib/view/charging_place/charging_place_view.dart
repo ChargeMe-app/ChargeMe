@@ -39,7 +39,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   }
 
   void setupChargingPlace() async {
-    place = await _chargingPlaceManager.getStationMarkers(id: widget.id); // (await charging_place.getTestStation())[0];
+    place = await _chargingPlaceManager.getChargingPlace(id: widget.id);
     setState(() {});
   }
 
@@ -77,7 +77,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 width: double.infinity,
                                 fit: BoxFit.fitWidth,
                               )),
-                          ChargingPlaceTitleView(place: place!),
+                          ChargingPlaceTitleView(place: place),
                           Padding(
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
                               child: Column(children: [
@@ -86,10 +86,14 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 DetailsView(place: place!, icon: widget.icon),
                                 const SizedBox(height: 10),
                                 StationsListView(stations: place!.stations),
-                                place!.amenities == null ? Container() : const SizedBox(height: 10),
-                                place!.amenities == null ? Container() : AmenitiesView(amenities: place!.amenities!),
-                                const SizedBox(height: 10),
-                                ReviewsView(reviews: place!.reviews ?? []),
+                                place!.amenities?.isEmpty ?? true ? Container() : const SizedBox(height: 10),
+                                place!.amenities?.isEmpty ?? true
+                                    ? Container()
+                                    : AmenitiesView(amenities: place!.amenities!),
+                                place!.reviews?.isEmpty ?? true ? Container() : const SizedBox(height: 10),
+                                place!.reviews?.isEmpty ?? true
+                                    ? Container()
+                                    : ReviewsView(reviews: place!.reviews ?? []),
                                 // const SizedBox(height: 10),
                                 // ControlButtonsView(),
                               ]))
@@ -99,33 +103,88 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   }
 }
 
-class ChargingPlaceTitleView extends StatelessWidget {
-  ChargingPlaceTitleView({required this.place});
+class LoadingBox extends StatefulWidget {
+  LoadingBox({required this.height});
 
-  final ChargingPlace place;
+  final double height;
+
+  @override
+  _LoadingBox createState() => _LoadingBox();
+}
+
+class _LoadingBox extends State<LoadingBox> {
+  double xPos = 0;
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(milliseconds: 700), () {
+      setState(() {
+        xPos = 100;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.black12,
-        child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Row(children: [
-              place.score == null
-                  ? Container()
-                  : Container(
-                      width: 48,
-                      height: 48,
-                      decoration:
-                          const BoxDecoration(color: Colors.green, borderRadius: BorderRadius.all(Radius.circular(4))),
-                      child: Center(
-                          child: Text(place.score!.beautifulScore,
-                              style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
-              const SizedBox(width: 8),
-              Flexible(
-                  child: Text(place.name.capitalizeEachWord,
-                      maxLines: 2, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))
-            ])));
+    return Stack(alignment: Alignment.center, children: [
+      Container(height: widget.height, color: Colors.grey),
+      AnimatedPositioned(
+          left: xPos,
+          duration: Duration(milliseconds: 500),
+          child: Container(
+              width: 5,
+              height: widget.height,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [Colors.white10, Colors.white54]))))
+    ]);
+  }
+}
+
+class ChargingPlaceTitleView extends StatelessWidget {
+  ChargingPlaceTitleView({this.place});
+
+  final ChargingPlace? place;
+
+  @override
+  Widget build(BuildContext context) {
+    final place = this.place;
+    if (place != null) {
+      return Container(
+          constraints: BoxConstraints(minHeight: 64),
+          color: Colors.black12,
+          child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(children: [
+                place.score == null
+                    ? Container()
+                    : Container(
+                        height: 48,
+                        width: 48,
+                        decoration: BoxDecoration(
+                            color: place.score!.bgColor, borderRadius: BorderRadius.all(Radius.circular(4))),
+                        child: Center(
+                            child: Text(place.score!.beautifulScore,
+                                style:
+                                    const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
+                const SizedBox(width: 8),
+                Flexible(
+                    child: Text(place.name.capitalizeEachWord,
+                        maxLines: 2, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))
+              ])));
+    } else {
+      return LoadingBox(height: 64);
+    }
   }
 }
 
@@ -139,6 +198,7 @@ class CheckInButton extends StatelessWidget {
     var l10n = AppLocalizations.of(context);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         primary: ColorPallete.violetBlue,
         minimumSize: const Size.fromHeight(50),
       ),
@@ -151,7 +211,7 @@ class CheckInButton extends StatelessWidget {
       },
       child: Text(
         l10n.checkIn,
-        style: const TextStyle(fontSize: 24),
+        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );
   }

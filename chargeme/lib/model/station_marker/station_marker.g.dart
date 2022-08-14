@@ -43,6 +43,8 @@ const _$IconTypeEnumMap = {
   IconType.repairStandard: 'GR',
   IconType.publicFast: 'Y',
   IconType.repairFast: 'YR',
+  IconType.home: 'H',
+  IconType.restricted: 'B',
 };
 
 MarkerStation _$MarkerStationFromJson(Map<String, dynamic> json) =>
@@ -77,13 +79,16 @@ Map<String, dynamic> _$MarkerOutletToJson(MarkerOutlet instance) =>
     };
 
 const _$ConnectorTypeEnumMap = {
-  ConnectorType.wall: 0,
+  ConnectorType.unknown: 0,
+  ConnectorType.wall: 1,
   ConnectorType.type1: 2,
   ConnectorType.chademo: 3,
   ConnectorType.teslaRoadster: 4,
   ConnectorType.nema1450: 5,
   ConnectorType.tesla: 6,
   ConnectorType.type2: 7,
+  ConnectorType.type3: 8,
+  ConnectorType.wallBS1363: 9,
   ConnectorType.wallEuro: 10,
   ConnectorType.commando: 11,
   ConnectorType.cssCombo: 13,
