@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,32 +29,80 @@ class ChangeStationTypesView extends StatelessWidget {
                         l10n.stations,
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       ),
-                      addStationVM.stationTypes.isEmpty ? Text(l10n.noAddedStations) : const Text("")
+                      addStationVM.stations.isEmpty
+                          ? Text(l10n.noAddedStations)
+                          : Column(
+                              children: List.generate(addStationVM.stations.length, (i) {
+                              return Column(children: [
+                                BoxWithTitle(title: "Station ${i + 1}", children: [
+                                  Wrap(direction: Axis.horizontal, children: [
+                                    Text("Plugs:"),
+                                    const SizedBox(width: 8),
+                                    Container(
+                                        height: 120,
+                                        child: ListView(scrollDirection: Axis.horizontal, children: [
+                                          Row(
+                                              children: List.generate(addStationVM.stations[i].outlets.length, (j) {
+                                            final outlet = addStationVM.stations[i].outlets[j];
+                                            return Row(children: [
+                                              Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                                Container(
+                                                    width: 64,
+                                                    height: 64,
+                                                    child: Image.asset(outlet.connectorType.iconPath,
+                                                        color: ColorPallete.violetBlue)),
+                                                Text(outlet.connectorType.str)
+                                              ]),
+                                              SizedBox(width: 4)
+                                            ]);
+                                          })),
+                                          Container(
+                                              height: 10,
+                                              child: ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(primary: ColorPallete.violetBlue),
+                                                  child: Text("Add plug"),
+                                                  onPressed: () => showPickerArray(context, i)))
+                                        ]))
+                                  ])
+                                ]),
+                                const SizedBox(height: 8)
+                              ]);
+                            }))
                     ],
                   ))),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          showPickerArray(context);
+          var viewModel = Provider.of<AddStationViewModel>(context, listen: false);
+          viewModel.addEmptyStation();
         },
         icon: const Icon(Icons.add),
-        label: Text(l10n.addStationType),
+        label: Text(l10n.addStation),
       ),
     );
   }
 
-  showPickerArray(BuildContext context) {
+  showPickerArray(BuildContext context, int i) {
     var l10n = AppLocalizations.of(context);
     List<PickerItem> pickerItems = [];
-    for (var stationType in ConnectorType.values) {
+    for (var connectorType in ConnectorType.values) {
+      if (connectorType == ConnectorType.unknown) continue;
       pickerItems.add(PickerItem(
-          text: Center(child: Text(stationType.toString(), style: TextStyle(fontSize: 18, color: Colors.black)))));
+          value: connectorType,
+          text: Row(children: [
+            Spacer(),
+            Padding(padding: EdgeInsets.all(8), child: Image.asset(connectorType.iconPath)),
+            Text(connectorType.str, style: TextStyle(fontSize: 18, color: Colors.black)),
+            Spacer()
+          ])));
     }
     Picker(
       adapter: PickerDataAdapter(data: pickerItems),
-      itemExtent: 40,
-      title: Text(l10n.selectIcon),
+      itemExtent: 52,
+      title: Text("Select plug"),
       selectedTextStyle: TextStyle(color: Colors.blue, fontSize: 12),
       onConfirm: (Picker picker, List value) {
+        var viewModel = Provider.of<AddStationViewModel>(context, listen: false);
+        viewModel.addEmptyOutlet(i, picker.getSelectedValues()[0]);
         print(value.toString());
         print(picker.getSelectedValues());
       },

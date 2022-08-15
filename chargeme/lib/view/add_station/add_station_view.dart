@@ -32,11 +32,8 @@ class _AddStationViewState extends State<AddStationView> {
                     CardEntry(l10n.address, viewModel.address, false, (_) => ChangeStationAddressView()),
                     CardEntry(l10n.location, viewModel.location == null ? "" : "Successfully set", true,
                         (_) => ChangeStationLocationView()),
-                    CardEntry(
-                        l10n.stations,
-                        viewModel.stationTypes.isEmpty ? "" : viewModel.stationTypes.length.toString(),
-                        true,
-                        (_) => ChangeStationTypesView())
+                    CardEntry(l10n.stations, viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(),
+                        true, (_) => ChangeStationTypesView())
                   ],
                 )));
   }

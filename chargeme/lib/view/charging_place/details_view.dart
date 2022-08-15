@@ -135,7 +135,7 @@ class DetailsView extends StatelessWidget {
     if (!(place.costDescription?.isEmpty ?? true)) {
       return place.costDescription!;
     }
-    return l10n.requiresFee;
+    return "l10n.requiresFee";
   }
 
   openMapsSheet(context) async {
