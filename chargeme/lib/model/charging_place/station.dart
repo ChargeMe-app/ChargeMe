@@ -15,7 +15,7 @@ class Station {
   String? manufacturer;
   String? costDescription;
   String? hours;
-  double? kilowawtts;
+  double? kilowatts;
 
   Station(
       {required this.id,
@@ -27,7 +27,7 @@ class Station {
       this.manufacturer,
       this.costDescription,
       this.hours,
-      this.kilowawtts});
+      this.kilowatts});
 
   factory Station.fromJson(Map<String, dynamic> json) => _$StationFromJson(json);
   Map<String, dynamic> toJson() => _$StationToJson(this);
@@ -52,7 +52,7 @@ class Outlet {
   double? kilowatts;
   String? description;
 
-  Outlet({required this.id, required this.available, required this.connectorType, this.kilowatts, this.description});
+  Outlet({required this.id, this.available, required this.connectorType, this.kilowatts, this.description});
 
   factory Outlet.fromJson(Map<String, dynamic> json) => _$OutletFromJson(json);
   Map<String, dynamic> toJson() => _$OutletToJson(this);

@@ -1,4 +1,5 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/view/login/register_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/view/map/map.dart';
@@ -45,6 +46,18 @@ class HomeView extends StatelessWidget {
                 );
               },
               child: const Icon(Icons.location_pin)),
+          actions: [
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisterView(),
+                    ),
+                  );
+                },
+                child: const Padding(padding: EdgeInsets.only(right: 12), child: Icon(Icons.account_circle_rounded)))
+          ],
         ),
         body: const GMap());
   }
