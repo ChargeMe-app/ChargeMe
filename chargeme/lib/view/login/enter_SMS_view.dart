@@ -1,7 +1,7 @@
 import 'package:chargeme/extensions/color_pallete.dart';
-import 'package:chargeme/view/login/edit_profile_view.dart';
+import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view/login/grouped_text_field.dart';
-import 'package:chargeme/view/login/register_view.dart';
+import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:flutter/material.dart';
 
 class EnterSMSView extends StatefulWidget {
@@ -35,12 +35,12 @@ class _EnterSMSView extends State<EnterSMSView> {
                   text: "Go to profile",
                   onPressed: () {
                     if (validate(manager.getText())) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditProfileView(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => ProfileView(),
+                      //   ),
+                      // );
                     }
                   }))
         ]));

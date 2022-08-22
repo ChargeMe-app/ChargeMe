@@ -4,7 +4,6 @@ import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/parser.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/services.dart' show rootBundle;

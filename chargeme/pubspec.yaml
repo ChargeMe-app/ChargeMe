@@ -45,6 +45,9 @@ dependencies:
   provider: ^6.0.0
   flutter_svg: ^1.1.3
   map_launcher: ^2.2.3
+  google_sign_in: ^5.4.1
+  sign_in_with_apple: ^4.1.0
+  path_provider: ^2.0.11
   flutter_picker:
     git: https://github.com/yangyxd/flutter_picker.git
 
@@ -79,6 +82,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/app_icon/
+    - assets/icons/other/
     - assets/icons/common/
     - assets/icons/amenities/
     - assets/icons/markers/
