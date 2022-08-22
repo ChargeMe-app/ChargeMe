@@ -18,7 +18,7 @@ Station _$StationFromJson(Map<String, dynamic> json) => Station(
       manufacturer: json['manufacturer'] as String?,
       costDescription: json['cost_description'] as String?,
       hours: json['hours'] as String?,
-      kilowawtts: (json['kilowawtts'] as num?)?.toDouble(),
+      kilowatts: (json['kilowatts'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$StationToJson(Station instance) => <String, dynamic>{
@@ -31,7 +31,7 @@ Map<String, dynamic> _$StationToJson(Station instance) => <String, dynamic>{
       'manufacturer': instance.manufacturer,
       'cost_description': instance.costDescription,
       'hours': instance.hours,
-      'kilowawtts': instance.kilowawtts,
+      'kilowatts': instance.kilowatts,
     };
 
 Outlet _$OutletFromJson(Map<String, dynamic> json) => Outlet(
