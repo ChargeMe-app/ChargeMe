@@ -24,7 +24,7 @@ class _ProfileView extends State<ProfileView> {
       return Scaffold(
           appBar: AppBar(title: const Text("Your profile"), backgroundColor: ColorPallete.violetBlue),
           body: Padding(
-              padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
               child: Center(
                   child: Column(children: [
                 SizedBox(
@@ -45,12 +45,11 @@ class _ProfileView extends State<ProfileView> {
                     color: ColorPallete.violetBlue,
                     text: "Log out",
                     onPressed: () async {
-                      final success = await widget.accountManager.signOut();
-                      if (success) {
-                        Navigator.pop(context);
-                      }
+                      await widget.accountManager.signOut();
                       setState(() {});
-                    })
+                    }),
+                const SizedBox(height: 12),
+                SimpleButton(color: ColorPallete.redCinnabar, text: "Delete account", onPressed: () {})
               ]))));
     } else {
       return signInView();
@@ -61,7 +60,7 @@ class _ProfileView extends State<ProfileView> {
     return Scaffold(
         appBar: AppBar(title: const Text("Sign in"), backgroundColor: ColorPallete.violetBlue),
         body: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(children: [
               titleText("Join ChargeMe cummunity for free"),
               const SizedBox(height: 24),
@@ -89,8 +88,8 @@ class _ProfileView extends State<ProfileView> {
                           errorText = success ? "" : "Unsuccessfull sign in";
                         });
                       })),
-              SizedBox(height: 8),
-              Container(
+              const SizedBox(height: 8),
+              SizedBox(
                   height: 50,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
@@ -100,6 +99,7 @@ class _ProfileView extends State<ProfileView> {
                           errorText = success ? "" : "Unsuccessfull sign in";
                         });
                       }))),
+              const SizedBox(height: 12),
               Text(errorText, style: TextStyle(color: ColorPallete.redCinnabar))
             ])));
   }
@@ -115,7 +115,8 @@ class _ProfileView extends State<ProfileView> {
         decoration: InputDecoration(
             fillColor: ColorPallete.violetBlue,
             disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue))),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue)),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue))),
         enabled: enabled);
   }
 }
