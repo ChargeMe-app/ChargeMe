@@ -19,9 +19,9 @@ class Station {
 
   Station(
       {required this.id,
-      required this.locationId,
-      required this.available,
-      required this.cost,
+      this.locationId,
+      this.available,
+      this.cost,
       required this.outlets,
       this.name,
       this.manufacturer,
