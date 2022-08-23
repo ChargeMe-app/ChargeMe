@@ -1,3 +1,4 @@
+import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -121,5 +122,28 @@ class AddStationViewModel extends ChangeNotifier {
   bool isAbleToCreate() {
     if (name.isNotEmpty && location != null && stations.isNotEmpty) return true;
     return false;
+  }
+
+  void createLocation() {
+    if (!isAbleToCreate()) return;
+    final place = ChargingPlace(
+      id: id,
+      name: name,
+      description: description,
+      phoneNumber: phoneNumber,
+      address: address,
+      latitude: location!.lat,
+      longitude: location!.lng,
+      photos: [],
+      reviews: [],
+      stations: stations,
+      access: access == Access.restricted ? 1 : 0,
+      cost: requiresFee,
+      costDescription: costDescription,
+      open247: isOpen247,
+      hours: hours,
+      amenities: _amenities,
+      comingSoon: !isOpenOrActive,
+    );
   }
 }

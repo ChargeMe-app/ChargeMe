@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,6 +20,7 @@ class ChargingPlace {
   String? address;
   double latitude;
   double longitude;
+  IconType? iconType; // make non-optional
 
   int? access;
   String? accessRestriction;
@@ -30,6 +32,7 @@ class ChargingPlace {
 
   String? hours;
   bool? open247;
+  bool? comingSoon; // make non-optional
 
   List<Amenity>? amenities;
   List<Photo>? photos;
@@ -49,6 +52,7 @@ class ChargingPlace {
       this.address,
       required this.latitude,
       required this.longitude,
+      this.iconType,
       this.access,
       this.accessRestriction,
       this.accessRestrictionDescription,
@@ -57,6 +61,7 @@ class ChargingPlace {
       this.costDescription,
       this.hours,
       this.open247,
+      this.comingSoon,
       this.amenities,
       required this.photos,
       required this.reviews,

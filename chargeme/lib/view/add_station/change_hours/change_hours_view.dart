@@ -13,7 +13,7 @@ class ChangeHoursView extends StatelessWidget {
     var l10n = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text("Change access"),
+          title: Text("Change working hours"),
           backgroundColor: ColorPallete.violetBlue,
         ),
         body: Padding(

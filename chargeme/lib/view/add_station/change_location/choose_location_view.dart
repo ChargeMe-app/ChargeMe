@@ -6,8 +6,9 @@ import 'package:geocoding/geocoding.dart';
 
 class ChooseLocationView extends StatefulWidget {
   final Function(String?, LatLng) onLocationChosen;
+  final LatLng? initialMarkerPosition;
 
-  const ChooseLocationView({required this.onLocationChosen, Key? key}) : super(key: key);
+  const ChooseLocationView({required this.onLocationChosen, this.initialMarkerPosition, Key? key}) : super(key: key);
 
   @override
   _ChooseLocationView createState() => _ChooseLocationView();
@@ -15,8 +16,19 @@ class ChooseLocationView extends StatefulWidget {
 
 class _ChooseLocationView extends State<ChooseLocationView> {
   final LatLng _center = const LatLng(55.7558, 37.6173);
+  String _hintText = "Long tap on map to place a marker";
   Marker? _marker;
   String? fullAddress;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialMarkerPosition != null) {
+      setState(() {
+        _marker = Marker(markerId: const MarkerId("targetLocation"), position: widget.initialMarkerPosition!);
+      });
+    }
+  }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -41,7 +53,7 @@ class _ChooseLocationView extends State<ChooseLocationView> {
               markers: _marker != null ? [_marker!].toSet() : Set(),
               onLongPress: (LatLng latLng) async {
                 fullAddress = null;
-                _marker = Marker(markerId: MarkerId("targetLocation"), position: latLng);
+                _marker = Marker(markerId: const MarkerId("targetLocation"), position: latLng);
                 setState(() {});
                 try {
                   List<Placemark> placemarks =
@@ -55,13 +67,14 @@ class _ChooseLocationView extends State<ChooseLocationView> {
                   print(error);
                 }
                 widget.onLocationChosen(fullAddress, latLng);
+                setState(() {
+                  _hintText = "Location is successfully set";
+                });
               }),
           Container(
               color: Colors.black45,
-              child: Row(children: const [
-                Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Text("Long tap on map to place a marker", style: TextStyle(color: Colors.white))),
+              child: Row(children: [
+                Padding(padding: EdgeInsets.all(8), child: Text(_hintText, style: TextStyle(color: Colors.white))),
                 Spacer()
               ]))
         ]));

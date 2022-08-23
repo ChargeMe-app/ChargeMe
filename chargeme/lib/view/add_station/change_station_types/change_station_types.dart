@@ -17,7 +17,7 @@ class ChangeStationTypesView extends StatelessWidget {
     var l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.editStationTypes),
+        title: Text("Edit stations"),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(

@@ -14,9 +14,11 @@ import 'package:chargeme/view/add_station/change_station_types/change_station_ty
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
+import 'package:chargeme/extensions/location_extensions.dart';
 
 class AddStationView extends StatefulWidget {
   const AddStationView({Key? key}) : super(key: key);
@@ -49,7 +51,8 @@ class _AddStationViewState extends State<AddStationView> {
                     viewModel.location == null ? "" : "Successfully set",
                     true,
                     (_) => ChooseLocationView(
-                        onLocationChosen: (address, latlng) => viewModel.setLocation(address, latlng))),
+                        onLocationChosen: (address, latlng) => viewModel.setLocation(address, latlng),
+                        initialMarkerPosition: viewModel.location?.latLng)),
                 CardEntry(l10n.address, viewModel.address, false, (_) => ChangeStationAddressView()),
                 CardEntry(l10n.stations, viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(), true,
                     (_) => ChangeStationTypesView()),

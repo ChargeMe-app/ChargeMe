@@ -2,7 +2,6 @@ import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
-import 'package:chargeme/view/login/sign_in_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/view/map/map.dart';
