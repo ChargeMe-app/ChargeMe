@@ -1,7 +1,6 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
-import 'package:chargeme/view/login/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 

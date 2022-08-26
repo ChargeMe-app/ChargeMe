@@ -26,6 +26,7 @@ ChargingPlace _$ChargingPlaceFromJson(Map<String, dynamic> json) =>
       costDescription: json['cost_description'] as String?,
       hours: json['hours'] as String?,
       open247: json['open247'] as bool?,
+      comingSoon: json['coming_soon'] as bool?,
       amenities: (json['amenities'] as List<dynamic>?)
           ?.map((e) => Amenity.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -60,6 +61,7 @@ Map<String, dynamic> _$ChargingPlaceToJson(ChargingPlace instance) =>
       'cost_description': instance.costDescription,
       'hours': instance.hours,
       'open247': instance.open247,
+      'coming_soon': instance.comingSoon,
       'amenities': instance.amenities,
       'photos': instance.photos,
       'reviews': instance.reviews,
@@ -108,7 +110,7 @@ Map<String, dynamic> _$ReviewToJson(Review instance) => <String, dynamic>{
       'id': instance.id,
       'outlet_id': instance.outletId,
       'station_id': instance.stationId,
-      'rating': _$RatingEnumMap[instance.rating],
+      'rating': _$RatingEnumMap[instance.rating]!,
       'vehicle_name': instance.vehicleName,
       'vehicle_type': _$VehicleTypeEnumMap[instance.vehicleType],
       'user_name': instance.userName,

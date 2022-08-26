@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoxWithTitle extends StatelessWidget {
-  BoxWithTitle({required this.title, this.children, this.footer, this.shouldShowFooter = false, this.onFooterTap});
+  BoxWithTitle(
+      {required this.title, this.children, this.toolbar, this.footer, this.shouldShowFooter = false, this.onFooterTap});
 
   final String title;
   final List<Widget>? children;
+  final Widget? toolbar;
   final String? footer;
   final bool shouldShowFooter;
   final void Function()? onFooterTap;
@@ -21,7 +23,13 @@ class BoxWithTitle extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.all(8),
             child: Column(children: [
-              Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: ColorPallete.violetBlue)),
+              Row(children: [
+                Spacer(),
+                Text(title,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: ColorPallete.violetBlue)),
+                Spacer(),
+                toolbar == null ? Container() : toolbar!
+              ]),
               Column(children: children ?? []),
               footer == null || !shouldShowFooter
                   ? Container()

@@ -31,7 +31,7 @@ Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
       'phone_number': instance.phoneNumber,
       'email': instance.email,
       'photo_url': instance.photoUrl,
-      'sign_in_service': _$SignInServiceEnumMap[instance.signInService],
+      'sign_in_service': _$SignInServiceEnumMap[instance.signInService]!,
       'vehicle_type': _$VehicleTypeEnumMap[instance.vehicleType],
       'vehicle_name': instance.vehicleName,
       'reviews': instance.reviews,
