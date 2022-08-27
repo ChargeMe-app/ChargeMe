@@ -34,12 +34,16 @@ class _AddStationViewState extends State<AddStationView> {
     return Consumer<AddStationViewModel>(
         builder: (context, viewModel, child) => Scaffold(
             appBar: AppBar(title: Text("Add new location"), backgroundColor: ColorPallete.violetBlue, actions: [
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Center(
-                      child: Text("Create",
-                          style:
-                              TextStyle(color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16))))
+              GestureDetector(
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Center(
+                          child: Text("Create",
+                              style: TextStyle(
+                                  color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16)))),
+                  onTap: () {
+                    viewModel.createLocation();
+                  })
             ]),
             body: ListView(
               children: [

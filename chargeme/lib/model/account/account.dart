@@ -1,5 +1,6 @@
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/model/charging_place/vehicle_type.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';

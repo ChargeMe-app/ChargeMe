@@ -68,28 +68,11 @@ class HomeView extends StatelessWidget {
             GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                            create: (context) => CheckInViewModel(),
-                            child: CheckInOptionsView(
-                                place: ChargingPlace(
-                                    id: "123",
-                                    name: "Плющиха",
-                                    description: "hello world",
-                                    latitude: 55.7558,
-                                    longitude: 37.6173,
-                                    photos: [],
-                                    reviews: [],
-                                    stations: [
-                                  Station(id: "111", locationId: "123", available: 1, cost: 0, outlets: [
-                                    Outlet(id: "111", connectorType: ConnectorType.chademo),
-                                    Outlet(id: "222", connectorType: ConnectorType.cssCombo),
-                                    Outlet(id: "333", connectorType: ConnectorType.type2)
-                                  ])
-                                ])) // ProfileView(accountManager: accountManager),
-                            ),
-                      ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileView(accountManager: accountManager),
+                    ),
+                  );
                 },
                 child: const Padding(padding: EdgeInsets.only(right: 12), child: Icon(Icons.account_circle_rounded)))
           ],

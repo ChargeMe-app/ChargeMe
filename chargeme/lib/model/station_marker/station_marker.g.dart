@@ -28,7 +28,7 @@ Map<String, dynamic> _$StationMarkerToJson(StationMarker instance) =>
       'access': instance.access,
       'address': instance.address,
       'icon': instance.icon,
-      'icon_type': _$IconTypeEnumMap[instance.iconType]!,
+      'icon_type': _$IconTypeEnumMap[instance.iconType],
       'id': instance.id,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
@@ -71,7 +71,7 @@ MarkerOutlet _$MarkerOutletFromJson(Map<String, dynamic> json) => MarkerOutlet(
 
 Map<String, dynamic> _$MarkerOutletToJson(MarkerOutlet instance) =>
     <String, dynamic>{
-      'connector': _$ConnectorTypeEnumMap[instance.connector]!,
+      'connector': _$ConnectorTypeEnumMap[instance.connector],
       'id': instance.id,
       'kilowatts': instance.kilowatts,
       'power': instance.power,

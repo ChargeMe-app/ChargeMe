@@ -69,8 +69,6 @@ class Amenity {
   Map<String, dynamic> toJson() => _$AmenityToJson(this);
 }
 
-enum VehicleType { teslaModelS }
-
 enum ConnectorType {
   @JsonValue(0)
   unknown,
