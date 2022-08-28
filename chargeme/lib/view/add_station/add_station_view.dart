@@ -13,6 +13,7 @@ import 'package:chargeme/view/add_station/change_station_phone/change_station_ph
 import 'package:chargeme/view/add_station/change_station_types/change_station_types.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -34,14 +35,14 @@ class _AddStationViewState extends State<AddStationView> {
     return Consumer<AddStationViewModel>(
         builder: (context, viewModel, child) => Scaffold(
             appBar: AppBar(title: Text("Add new location"), backgroundColor: ColorPallete.violetBlue, actions: [
-              GestureDetector(
+              CupertinoButton(
                   child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      padding: EdgeInsets.symmetric(horizontal: 0),
                       child: Center(
                           child: Text("Create",
                               style: TextStyle(
                                   color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16)))),
-                  onTap: () {
+                  onPressed: () {
                     viewModel.createLocation();
                   })
             ]),

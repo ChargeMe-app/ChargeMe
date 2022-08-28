@@ -12,20 +12,17 @@ import 'package:provider/provider.dart';
 import 'package:duration_picker/duration_picker.dart';
 
 class CheckInOptionsView extends StatefulWidget {
-  ChargingPlace? place;
+  ChargingPlace place;
 
-  CheckInOptionsView({this.place, Key? key}) : super(key: key);
+  CheckInOptionsView({required this.place, Key? key}) : super(key: key);
 
   @override
   _CheckInOptionsView createState() => _CheckInOptionsView();
 }
 
 class _CheckInOptionsView extends State<CheckInOptionsView> {
-  int selectedStation = 0;
-  int selectedOutlet = 0;
   FocusNode commentFocusNode = FocusNode();
   FocusNode kilowattsFocusNode = FocusNode();
-  Duration _duration = Duration(minutes: 30);
   CheckInViewModel get checkInVM {
     return Provider.of<CheckInViewModel>(context, listen: false);
   }
@@ -69,7 +66,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
         ? Row(children: [
             SizedBox(height: 48, child: Image.asset("assets/icons/markers/publicFast64.png")),
             const SizedBox(width: 8),
-            Text(widget.place!.name),
+            Text(widget.place.name),
             const Spacer()
           ])
         : checkInRowByOption(screenOption);
@@ -137,7 +134,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   }
 
   Widget choosingOutlet() {
-    final stations = widget.place!.stations;
+    final stations = widget.place.stations;
     return Container(
         height: 130,
         child: ListView(
@@ -149,7 +146,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
                 Row(
                     children: List.generate(outlets.length, (j) {
                   var outlet = outlets[j];
-                  final isChosen = selectedStation == i && selectedOutlet == j;
+                  final isChosen = checkInVM.selectedStation == i && checkInVM.selectedOutlet == j;
                   return Container(
                       decoration: isChosen
                           ? BoxDecoration(border: Border.all(color: ColorPallete.violetBlue, width: 1))
@@ -158,10 +155,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
                           padding: const EdgeInsets.all(8),
                           child: GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  selectedStation = i;
-                                  selectedOutlet = j;
-                                });
+                                checkInVM.setOutlet(i, j);
                               },
                               child: Column(children: [
                                 Image.asset(outlet.connectorType.iconPath, height: 60, color: ColorPallete.violetBlue),
@@ -221,14 +215,16 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   }
 
   Widget timeInput() {
-    return DurationPicker(
-        duration: _duration,
-        snapToMins: 15.0,
-        onChange: (value) {
-          setState(() {
-            _duration = value;
-          });
-        });
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        child: Column(children: [
+          Row(children: [titleText("Duration"), const Spacer()]),
+          DurationPicker(
+              duration: checkInVM.duration!,
+              onChange: (value) {
+                checkInVM.setRoundedDuration(value);
+              })
+        ]));
     // return SimpleButton(
     //     color: ColorPallete.violetBlue,
     //     text: "Duration",
@@ -293,7 +289,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   }
 
   Widget couldNotChargeFullView() {
-    return Column(children: [fullViewCommon()]);
+    return Column(children: [fullViewCommon(), const SizedBox(height: 12), publishReviewButton()]);
   }
 
   Widget commentFullView() {
@@ -301,10 +297,26 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   }
 
   Widget chargingFullView() {
-    return Column(children: [fullViewCommon(), timeInput()]);
+    return Column(children: [
+      fullViewCommon(),
+      const SizedBox(height: 12),
+      timeInput(),
+      const SizedBox(height: 12),
+      kilowattsInput(),
+      const SizedBox(height: 12),
+      publishReviewButton(),
+      const SizedBox(height: 18)
+    ]);
   }
 
   Widget waitingFullView() {
-    return Column(children: [fullViewCommon()]);
+    return Column(children: [
+      fullViewCommon(),
+      const SizedBox(height: 12),
+      timeInput(),
+      const SizedBox(height: 12),
+      publishReviewButton(),
+      const SizedBox(height: 18)
+    ]);
   }
 }

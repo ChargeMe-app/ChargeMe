@@ -99,6 +99,7 @@ class Review {
   String? stationId;
   Rating rating;
   String? vehicleName;
+  @JsonKey(unknownEnumValue: VehicleType.unknown)
   VehicleType? vehicleType;
   String? userName;
   // PlugshareUser? user;

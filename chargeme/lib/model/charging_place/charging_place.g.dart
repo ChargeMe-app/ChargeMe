@@ -108,8 +108,9 @@ Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
       stationId: json['station_id'] as String?,
       rating: $enumDecode(_$RatingEnumMap, json['rating']),
       vehicleName: json['vehicle_name'] as String?,
-      vehicleType:
-          $enumDecodeNullable(_$VehicleTypeEnumMap, json['vehicle_type']),
+      vehicleType: $enumDecodeNullable(
+          _$VehicleTypeEnumMap, json['vehicle_type'],
+          unknownValue: VehicleType.unknown),
       userName: json['user_name'] as String?,
     );
 
@@ -153,6 +154,7 @@ const _$RatingEnumMap = {
 };
 
 const _$VehicleTypeEnumMap = {
+  VehicleType.unknown: 0,
   VehicleType.nissanLeaf: 1,
   VehicleType.chevroletVolt: 2,
   VehicleType.teslaModelS: 4,

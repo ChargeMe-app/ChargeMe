@@ -23,7 +23,7 @@ class ChangeStationPhoneView extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: context.read<AddStationViewModel>().phoneNumber,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.phone,
                 maxLines: 1,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),

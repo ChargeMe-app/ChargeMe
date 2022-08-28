@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
 enum VehicleType {
+  @JsonValue(0)
+  unknown,
   @JsonValue(1)
   nissanLeaf,
   @JsonValue(2)
@@ -336,6 +338,8 @@ enum VehicleType {
 extension Namings on VehicleType {
   String get fullName {
     switch (this) {
+      case VehicleType.unknown:
+        return "Unknown";
       case VehicleType.nissanLeaf:
         return "Nissan LEAF";
       case VehicleType.chevroletVolt:

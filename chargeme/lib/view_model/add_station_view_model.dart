@@ -153,10 +153,14 @@ class AddStationViewModel extends ChangeNotifier {
 
   void sendLocation(ChargingPlace place) {
     String encodedJson = jsonEncode(place);
-    http.post(Uri.parse("46.39.245.245:8080/v1/locations"),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: encodedJson);
+    try {
+      http.post(Uri.parse("http://46.39.245.245:8080/v1/locations"),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: encodedJson);
+    } catch (error) {
+      print(error);
+    }
   }
 }
