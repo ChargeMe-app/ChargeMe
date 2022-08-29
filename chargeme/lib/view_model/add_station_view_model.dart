@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 class AddStationViewModel extends ChangeNotifier {
-  String id = const Uuid().v1();
+  String id = "0";
   String _name = "";
   String _description = "";
   String _phoneNumber = "";
@@ -145,5 +148,15 @@ class AddStationViewModel extends ChangeNotifier {
       amenities: _amenities,
       comingSoon: !isOpenOrActive,
     );
+    sendLocation(place);
+  }
+
+  void sendLocation(ChargingPlace place) {
+    String encodedJson = jsonEncode(place);
+    try {
+      http.post(Uri.parse("http://46.39.245.245:8080/v1/locations"), body: encodedJson);
+    } catch (error) {
+      print(error);
+    }
   }
 }

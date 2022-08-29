@@ -9,12 +9,14 @@ import 'package:chargeme/view/charging_place/details_view.dart';
 import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
+import 'package:chargeme/view_model/check_in_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart' as charging_place;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
+import 'package:provider/provider.dart';
 
 class ChargingPlaceView extends StatefulWidget {
   const ChargingPlaceView({Key? key, required this.id, this.icon}) : super(key: key);
@@ -31,6 +33,13 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
   ChargingPlace? place;
   double scrollUpOffset = 0;
   double imageContainerHeight = 200;
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   void initState() {
@@ -81,7 +90,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                           Padding(
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
                               child: Column(children: [
-                                CheckInButton(),
+                                CheckInButton(place: place),
                                 const SizedBox(height: 10),
                                 DetailsView(place: place!, icon: widget.icon),
                                 const SizedBox(height: 10),
@@ -150,11 +159,13 @@ class CheckInButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(50),
       ),
       onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CheckInOptionsView(),
-            ));
+        if (place != null) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider(
+                      create: (context) => CheckInViewModel(), child: CheckInOptionsView(place: place!))));
+        }
       },
       child: Text(
         l10n.checkIn,

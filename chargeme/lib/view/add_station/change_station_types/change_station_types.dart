@@ -23,7 +23,8 @@ class ChangeStationTypesView extends StatelessWidget {
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
           child: Consumer<AddStationViewModel>(
-              builder: (context, addStationVM, child) => Column(
+              builder: (context, addStationVM, child) => SingleChildScrollView(
+                      child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(children: [
@@ -89,7 +90,7 @@ class ChangeStationTypesView extends StatelessWidget {
                               ]);
                             }))
                     ],
-                  ))),
+                  )))),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           var viewModel = Provider.of<AddStationViewModel>(context, listen: false);

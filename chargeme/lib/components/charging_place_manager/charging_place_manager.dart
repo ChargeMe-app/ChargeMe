@@ -6,7 +6,7 @@ import 'package:chargeme/model/charging_place/station.dart';
 import 'package:http/http.dart' as http;
 
 class ChargingPlaceManager {
-  final String _baseUrl = "46.37.150.125:8080";
+  final String _baseUrl = "89.208.220.240:8080";
   final String _stationsPath = "/v1/locations/stations";
 
   Future<ChargingPlace?> getChargingPlace({required String id}) async {

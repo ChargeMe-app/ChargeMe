@@ -28,17 +28,26 @@ class ChangeAmenitiesView extends StatelessWidget {
                         decoration: BoxDecoration(
                             border: Border(bottom: BorderSide(width: 0.5, color: ColorPallete.violetBlue))),
                         child: ListTile(
-                            title: Text(amenityType.localizedTitle(context)),
+                            title: Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
+                              SizedBox(
+                                  width: 32,
+                                  height: 32,
+                                  child: Image.asset(amenityType.icon,
+                                      color: isSelected ? ColorPallete.violetBlue : null)),
+                              const SizedBox(width: 8),
+                              Text(amenityType.localizedTitle(context))
+                            ]),
                             trailing: isSelected
                                 ? SizedBox(width: 24, child: Icon(CupertinoIcons.check_mark))
                                 : Container(width: 24),
                             selected: isSelected,
                             selectedColor: ColorPallete.violetBlue,
                             onTap: () {
-                              if (isSelected)
+                              if (isSelected) {
                                 addStationVM.removeAmenity(amenityType);
-                              else
+                              } else {
                                 addStationVM.addAmenity(amenityType);
+                              }
                             }));
                   })))
         ]));

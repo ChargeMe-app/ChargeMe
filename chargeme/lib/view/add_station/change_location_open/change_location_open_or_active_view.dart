@@ -19,7 +19,7 @@ class ChangeIsOpenOrActiveView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
           child: Row(children: [
             Text(
-              "Is this location open or it is coming soon?",
+              "Is this location open/active?",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Spacer(),
