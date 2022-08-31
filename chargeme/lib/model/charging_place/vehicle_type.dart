@@ -1,5 +1,28 @@
 import 'package:json_annotation/json_annotation.dart';
 
+enum Manufacturer {
+  nissan,
+  tesla,
+  chevrolet,
+  mitsubishi,
+  ford,
+  toyota,
+  honda,
+  smart,
+  bmw,
+  audi,
+  mercedes,
+  kia,
+  volkswagen,
+  porsche,
+  volvo,
+  hyundai,
+  byd,
+  opel,
+  jac,
+  other
+}
+
 enum VehicleType {
   @JsonValue(0)
   unknown,
@@ -670,6 +693,345 @@ extension Namings on VehicleType {
         return "Porsche Taycan 2022";
       case VehicleType.hozonNezhaU:
         return "Hozon Nezha U";
+    }
+  }
+}
+
+extension ManufacturerByType on VehicleType {
+  Manufacturer get manufacturer {
+    switch (this) {
+      case VehicleType.nissanLeaf:
+        return Manufacturer.nissan;
+      case VehicleType.chevroletVolt:
+        return Manufacturer.chevrolet;
+      case VehicleType.teslaModelS:
+        return Manufacturer.tesla;
+      case VehicleType.mitsubishiIMiev:
+        return Manufacturer.mitsubishi;
+      case VehicleType.fordFocusElectric:
+        return Manufacturer.ford;
+      case VehicleType.priusPlugInhybrid:
+        return Manufacturer.toyota;
+      case VehicleType.fordFusionEnergi:
+        return Manufacturer.ford;
+      case VehicleType.toyotaRav4Ev:
+        return Manufacturer.toyota;
+      case VehicleType.hondaAccordPlugIn:
+        return Manufacturer.honda;
+      case VehicleType.smartFortwoEd:
+        return Manufacturer.smart;
+      case VehicleType.chevroletSparkEv:
+        return Manufacturer.chevrolet;
+      case VehicleType.bmwI3:
+        return Manufacturer.bmw;
+      case VehicleType.fiat500e:
+        return Manufacturer.other;
+      case VehicleType.cadillacElr:
+        return Manufacturer.other;
+      case VehicleType.eGolf:
+        return Manufacturer.volkswagen;
+      case VehicleType.audiA3ETron:
+        return Manufacturer.audi;
+      case VehicleType.mercedesB250e:
+        return Manufacturer.mercedes;
+      case VehicleType.kiaSoulEv:
+        return Manufacturer.kia;
+      case VehicleType.opelAmpera:
+        return Manufacturer.opel;
+      case VehicleType.zoe:
+        return Manufacturer.other;
+      case VehicleType.kangooZE:
+        return Manufacturer.other;
+      case VehicleType.twizy:
+        return Manufacturer.other;
+      case VehicleType.bydE6:
+        return Manufacturer.byd;
+      case VehicleType.outlanderPlugInhybrid:
+        return Manufacturer.mitsubishi;
+      case VehicleType.porscheCayenneSEHybrid:
+        return Manufacturer.porsche;
+      case VehicleType.x5Xdrive40ePlugInhybrid:
+        return Manufacturer.other;
+      case VehicleType.a3SportbackETron:
+        return Manufacturer.other;
+      case VehicleType.xc90RechargePlugInhybrid:
+        return Manufacturer.volvo;
+      case VehicleType.teslaModelX:
+        return Manufacturer.tesla;
+      case VehicleType.nissanENv200:
+        return Manufacturer.nissan;
+      case VehicleType.chevroletVoltGen2:
+        return Manufacturer.chevrolet;
+      case VehicleType.nissanLeaf2016:
+        return Manufacturer.nissan;
+      case VehicleType.bmw330ePlugInhybrid:
+        return Manufacturer.bmw;
+      case VehicleType.mercedesC350ePlugInhybrid:
+        return Manufacturer.mercedes;
+      case VehicleType.chevroletBoltEv:
+        return Manufacturer.chevrolet;
+      case VehicleType.toyotaPriusPrime:
+        return Manufacturer.toyota;
+      case VehicleType.volvoV60RechargePlugInhybrid:
+        return Manufacturer.volvo;
+      case VehicleType.hyundaiIoniqElectric:
+        return Manufacturer.hyundai;
+      case VehicleType.hondaClarityPlugInhybrid:
+        return Manufacturer.honda;
+      case VehicleType.teslaModel3:
+        return Manufacturer.tesla;
+      case VehicleType.eGolf2017:
+        return Manufacturer.volkswagen;
+      case VehicleType.soulEv2018:
+        return Manufacturer.kia;
+      case VehicleType.nissanLeaf2017:
+        return Manufacturer.nissan;
+      case VehicleType.nissanLeaf2018:
+        return Manufacturer.nissan;
+      case VehicleType.bmw225xePlugInhybrid:
+        return Manufacturer.bmw;
+      case VehicleType.bmwI32018:
+        return Manufacturer.bmw;
+      case VehicleType.jaguarIPace:
+        return Manufacturer.other;
+      case VehicleType.hyundaiKonaElectric2019:
+        return Manufacturer.hyundai;
+      case VehicleType.volvoV90PlugInhybrid:
+        return Manufacturer.volvo;
+      case VehicleType.nissanLeaf2019:
+        return Manufacturer.nissan;
+      case VehicleType.other:
+        return Manufacturer.other;
+      case VehicleType.xiaopengXpengG3:
+        return Manufacturer.other;
+      case VehicleType.lifan330:
+        return Manufacturer.other;
+      case VehicleType.bydYuan:
+        return Manufacturer.byd;
+      case VehicleType.geelyLynkAndCo01:
+        return Manufacturer.other;
+      case VehicleType.changanBenniEStar:
+        return Manufacturer.other;
+      case VehicleType.mercedesE350e:
+        return Manufacturer.mercedes;
+      case VehicleType.opelAmperaE:
+        return Manufacturer.opel;
+      case VehicleType.mercedesSls:
+        return Manufacturer.mercedes;
+      case VehicleType.bydTang:
+        return Manufacturer.byd;
+      case VehicleType.mercedesBClass:
+        return Manufacturer.mercedes;
+      case VehicleType.bydDenza:
+        return Manufacturer.byd;
+      case VehicleType.mclarenP1:
+        return Manufacturer.other;
+      case VehicleType.smartEqForfour:
+        return Manufacturer.smart;
+      case VehicleType.bjevEuSeries:
+        return Manufacturer.other;
+      case VehicleType.mercedesAECell:
+        return Manufacturer.mercedes;
+      case VehicleType.jacIev7s:
+        return Manufacturer.jac;
+      case VehicleType.mitsubishiMinicabMiev:
+        return Manufacturer.mitsubishi;
+      case VehicleType.bydQin:
+        return Manufacturer.byd;
+      case VehicleType.bydQinPro:
+        return Manufacturer.byd;
+      case VehicleType.smartFortwoEdW453:
+        return Manufacturer.smart;
+      case VehicleType.songPro:
+        return Manufacturer.other;
+      case VehicleType.nissanSylphy:
+        return Manufacturer.nissan;
+      case VehicleType.lrRangeRover:
+        return Manufacturer.other;
+      case VehicleType.jacIev7s2:
+        return Manufacturer.jac;
+      case VehicleType.mercedesC300e:
+        return Manufacturer.mercedes;
+      case VehicleType.ladaElKalina:
+        return Manufacturer.other;
+      case VehicleType.cheryEq:
+        return Manufacturer.other;
+      case VehicleType.kiaNiroEv2019:
+        return Manufacturer.kia;
+      case VehicleType.audiETron2019:
+        return Manufacturer.audi;
+      case VehicleType.harleyDavidsonLivewire:
+        return Manufacturer.other;
+      case VehicleType.volkswagenEGolf2018:
+        return Manufacturer.volkswagen;
+      case VehicleType.volkswagenEGolf2019:
+        return Manufacturer.volkswagen;
+      case VehicleType.porscheTaycan2020:
+        return Manufacturer.porsche;
+      case VehicleType.kiaSoulEv2019:
+        return Manufacturer.kia;
+      case VehicleType.zeroDsr:
+        return Manufacturer.other;
+      case VehicleType.hondaE2020:
+        return Manufacturer.honda;
+      case VehicleType.mercedesEqc400:
+        return Manufacturer.mercedes;
+      case VehicleType.kiaSoulEv2020:
+        return Manufacturer.kia;
+      case VehicleType.teslaModelY:
+        return Manufacturer.tesla;
+      case VehicleType.peugeotE2008:
+        return Manufacturer.other;
+      case VehicleType.volvoS60RechargePlugInhybrid2019:
+        return Manufacturer.volvo;
+      case VehicleType.landRoverRangeRoverSportPlugInhybrid2020:
+        return Manufacturer.other;
+      case VehicleType.toyotaPriusPrime2020:
+        return Manufacturer.toyota;
+      case VehicleType.miniCooperSe2020:
+        return Manufacturer.other;
+      case VehicleType.miniCountrymanPlugInhybrid2020:
+        return Manufacturer.other;
+      case VehicleType.bmwI32019:
+        return Manufacturer.bmw;
+      case VehicleType.bmwI32020:
+        return Manufacturer.bmw;
+      case VehicleType.polestar2:
+        return Manufacturer.other;
+      case VehicleType.chevroletBoltEv2020:
+        return Manufacturer.chevrolet;
+      case VehicleType.kiaNiroEv2020:
+        return Manufacturer.kia;
+      case VehicleType.hyundaiKonaElectric2020:
+        return Manufacturer.hyundai;
+      case VehicleType.hyundaiIoniqElectric2020:
+        return Manufacturer.hyundai;
+      case VehicleType.hyundaiIoniqElectric2019:
+        return Manufacturer.hyundai;
+      case VehicleType.audiETronsportback:
+        return Manufacturer.audi;
+      case VehicleType.eGoLife:
+        return Manufacturer.other;
+      case VehicleType.fordMustangMachE2021:
+        return Manufacturer.ford;
+      case VehicleType.toyotaRav4Prime2021:
+        return Manufacturer.toyota;
+      case VehicleType.nissanLeaf2020:
+        return Manufacturer.nissan;
+      case VehicleType.bmwCEvolution:
+        return Manufacturer.bmw;
+      case VehicleType.skodaSuperbIv:
+        return Manufacturer.other;
+      case VehicleType.audiA7PlugInhybrid:
+        return Manufacturer.audi;
+      case VehicleType.miniCooperSe2021:
+        return Manufacturer.other;
+      case VehicleType.volkswagenId3:
+        return Manufacturer.volkswagen;
+      case VehicleType.volkswagenEGolf2020:
+        return Manufacturer.volkswagen;
+      case VehicleType.mercedesGlc300e:
+        return Manufacturer.mercedes;
+      case VehicleType.hyundaiKonaElectric2021:
+        return Manufacturer.hyundai;
+      case VehicleType.mazdaMx30:
+        return Manufacturer.other;
+      case VehicleType.volvoV60RechargePlugInhybrid2020:
+        return Manufacturer.volvo;
+      case VehicleType.mercedesEqv:
+        return Manufacturer.mercedes;
+      case VehicleType.bmw330ePlugInhybrid2020:
+        return Manufacturer.bmw;
+      case VehicleType.smartEqFortwo:
+        return Manufacturer.smart;
+      case VehicleType.bentleyBentaygaHybrid:
+        return Manufacturer.other;
+      case VehicleType.volkswagenELavida:
+        return Manufacturer.volkswagen;
+      case VehicleType.volkswagenId4:
+        return Manufacturer.volkswagen;
+      case VehicleType.mercedesGle350PlugInhybrid:
+        return Manufacturer.mercedes;
+      case VehicleType.volkswagenPassatSportscombiGtePlugInhybrid:
+        return Manufacturer.volkswagen;
+      case VehicleType.porscheTaycan2021:
+        return Manufacturer.porsche;
+      case VehicleType.avtovazLadaEllada:
+        return Manufacturer.other;
+      case VehicleType.mercedesGla250e:
+        return Manufacturer.mercedes;
+      case VehicleType.nissanLeaf2021:
+        return Manufacturer.nissan;
+      case VehicleType.audiETron2020:
+        return Manufacturer.audi;
+      case VehicleType.audiETron2021:
+        return Manufacturer.audi;
+      case VehicleType.bydEv360:
+        return Manufacturer.byd;
+      case VehicleType.audiETrongt2021:
+        return Manufacturer.audi;
+      case VehicleType.aiwaysU52021:
+        return Manufacturer.other;
+      case VehicleType.landRoverRangeRoverPlugInhybrid2021:
+        return Manufacturer.other;
+      case VehicleType.renaultMeganeETechplugInhybrid:
+        return Manufacturer.other;
+      case VehicleType.audiETrongt2022:
+        return Manufacturer.audi;
+      case VehicleType.audiQ4ETron2021:
+        return Manufacturer.audi;
+      case VehicleType.audiETronsportback2021:
+        return Manufacturer.audi;
+      case VehicleType.cupraFormentorPlugInhybrid:
+        return Manufacturer.other;
+      case VehicleType.kiaNiroEv2021:
+        return Manufacturer.kia;
+      case VehicleType.bmwI32021:
+        return Manufacturer.bmw;
+      case VehicleType.bmwIx2021:
+        return Manufacturer.bmw;
+      case VehicleType.bmwI4Edrive402022:
+        return Manufacturer.bmw;
+      case VehicleType.hondaE2021:
+        return Manufacturer.honda;
+      case VehicleType.gacAionS:
+        return Manufacturer.other;
+      case VehicleType.jeepRenegade4xePlugInhybrid2021:
+        return Manufacturer.other;
+      case VehicleType.nissanLeaf2022:
+        return Manufacturer.nissan;
+      case VehicleType.lucidMotorsLucidAir:
+        return Manufacturer.other;
+      case VehicleType.citroenEJumpy:
+        return Manufacturer.other;
+      case VehicleType.volvoXc40Recharge2021:
+        return Manufacturer.volvo;
+      case VehicleType.volvoXc90RechargePlugInhybrid2021:
+        return Manufacturer.volvo;
+      case VehicleType.volvoXc90RechargePlugInhybrid2022:
+        return Manufacturer.volvo;
+      case VehicleType.volvoXc60RechargePlugInhybrid2021:
+        return Manufacturer.volvo;
+      case VehicleType.volvoS90RechargePlugInhybrid2021:
+        return Manufacturer.volvo;
+      case VehicleType.volvoS90RechargePlugInhybrid2022:
+        return Manufacturer.volvo;
+      case VehicleType.bydHan:
+        return Manufacturer.byd;
+      case VehicleType.mercedesEqa300:
+        return Manufacturer.mercedes;
+      case VehicleType.mercedesEqs450Plus:
+        return Manufacturer.mercedes;
+      case VehicleType.geelyGeometryC:
+        return Manufacturer.other;
+      case VehicleType.skywellEt5:
+        return Manufacturer.other;
+      case VehicleType.porscheTaycan2022:
+        return Manufacturer.porsche;
+      case VehicleType.hozonNezhaU:
+        return Manufacturer.other;
+      case VehicleType.unknown:
+        return Manufacturer.other;
     }
   }
 }

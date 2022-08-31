@@ -45,7 +45,7 @@ Outlet _$OutletFromJson(Map<String, dynamic> json) => Outlet(
 Map<String, dynamic> _$OutletToJson(Outlet instance) => <String, dynamic>{
       'id': instance.id,
       'available': instance.available,
-      'connector': _$ConnectorTypeEnumMap[instance.connectorType],
+      'connector': _$ConnectorTypeEnumMap[instance.connectorType]!,
       'kilowatts': instance.kilowatts,
       'description': instance.description,
     };
@@ -77,7 +77,7 @@ Amenity _$AmenityFromJson(Map<String, dynamic> json) => Amenity(
 
 Map<String, dynamic> _$AmenityToJson(Amenity instance) => <String, dynamic>{
       'location_id': instance.locationId,
-      'form': _$AmenityTypeEnumMap[instance.form],
+      'form': _$AmenityTypeEnumMap[instance.form]!,
     };
 
 const _$AmenityTypeEnumMap = {

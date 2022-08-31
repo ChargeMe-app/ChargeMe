@@ -1,4 +1,5 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
@@ -22,19 +23,15 @@ class DetailsView extends StatelessWidget {
     return Column(children: [
       place.address == null
           ? Container()
-          : row(context, "assets/icons/common/pin.svg", l10n.address, place.address!.capitalizeEachWord,
-              withSeparator: false),
-      place.phoneNumber?.isEmpty ?? true ? Container() : rowPng("assets/icons/common/phone.png", place.phoneNumber!),
-      place.cost == null
-          ? Container()
-          : row(context, "assets/icons/common/Parking.svg", l10n.parking, costText(context)),
+          : row(context, Asset.pin.path, l10n.address, place.address!.capitalizeEachWord, withSeparator: false),
+      place.phoneNumber?.isEmpty ?? true ? Container() : rowPng(Asset.phone.path, place.phoneNumber!),
+      place.cost == null ? Container() : row(context, Asset.Parking.path, l10n.parking, costText(context)),
       !shouldShowHours()
           ? Container()
-          : row(context, "assets/icons/common/clock.svg", l10n.workingHours,
-              place.open247! ? l10n.open247 : place.hours!),
+          : row(context, Asset.clock.path, l10n.workingHours, place.open247! ? l10n.open247 : place.hours!),
       place.description?.isEmpty ?? true
           ? Container()
-          : row(context, "assets/icons/common/info.svg", l10n.description, place.description!),
+          : row(context, Asset.info.path, l10n.description, place.description!),
       ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(15)),
           child: Stack(alignment: AlignmentDirectional.bottomEnd, children: [
@@ -135,7 +132,7 @@ class DetailsView extends StatelessWidget {
     if (!(place.costDescription?.isEmpty ?? true)) {
       return place.costDescription!;
     }
-    return "l10n.requiresFee";
+    return l10n.requiresFee;
   }
 
   openMapsSheet(context) async {

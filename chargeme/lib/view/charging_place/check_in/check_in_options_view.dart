@@ -1,4 +1,5 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
@@ -75,17 +76,15 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   Widget checkInRowByOption(ScreenOption option) {
     switch (option) {
       case ScreenOption.success:
-        return checkInRow("assets/icons/common/checkmarkRounded.svg", "Successfullty charged", () {},
-            shouldShowClose: true);
+        return checkInRow(Asset.checkmarkRounded.path, "Successfullty charged", () {}, shouldShowClose: true);
       case ScreenOption.couldNotCharge:
-        return checkInRow("assets/icons/common/xmarkRounded.svg", "Could not charge", () {}, shouldShowClose: true);
+        return checkInRow(Asset.xmarkRounded.path, "Could not charge", () {}, shouldShowClose: true);
       case ScreenOption.comment:
-        return checkInRow("assets/icons/common/infoRounded.svg", "Comment only", () {}, shouldShowClose: true);
+        return checkInRow(Asset.infoRounded.path, "Comment only", () {}, shouldShowClose: true);
       case ScreenOption.charging:
-        return checkInRow("assets/icons/common/charging.svg", "Charging now", () {}, shouldShowClose: true);
+        return checkInRow(Asset.charging.path, "Charging now", () {}, shouldShowClose: true);
       case ScreenOption.waiting:
-        return checkInRow("assets/icons/common/waitingForCharge.svg", "Waiting for charge", () {},
-            shouldShowClose: true);
+        return checkInRow(Asset.waitingForCharge.path, "Waiting for charge", () {}, shouldShowClose: true);
     }
   }
 
@@ -254,19 +253,19 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
       Text("--", style: TextStyle(fontSize: 24)),
       GestureDetector(onTap: () {}, child: Text("Update", style: TextStyle(color: ColorPallete.violetBlue))),
       const SizedBox(height: 12),
-      checkInRow("assets/icons/common/checkmarkRounded.svg", "Successfullty charged", () {
+      checkInRow(Asset.checkmarkRounded.path, "Successfullty charged", () {
         checkInVM.screenOption = ScreenOption.success;
       }),
-      checkInRow("assets/icons/common/xmarkRounded.svg", "Could not charge", () {
+      checkInRow(Asset.xmarkRounded.path, "Could not charge", () {
         checkInVM.screenOption = ScreenOption.couldNotCharge;
       }),
-      checkInRow("assets/icons/common/infoRounded.svg", "Comment only", () {
+      checkInRow(Asset.infoRounded.path, "Comment only", () {
         checkInVM.screenOption = ScreenOption.comment;
       }),
-      checkInRow("assets/icons/common/charging.svg", "Charging now", () {
+      checkInRow(Asset.charging.path, "Charging now", () {
         checkInVM.screenOption = ScreenOption.charging;
       }),
-      checkInRow("assets/icons/common/waitingForCharge.svg", "Waiting for charge", () {
+      checkInRow(Asset.waitingForCharge.path, "Waiting for charge", () {
         checkInVM.screenOption = ScreenOption.waiting;
       })
     ]);
