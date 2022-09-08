@@ -34,11 +34,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: HomeView(accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
-    );
+    return ChangeNotifierProvider(
+        create: (context) => AddStationViewModel(analyticsManager: widget.analyticsManager),
+        child: MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: HomeView(accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
+        ));
   }
 }
 
@@ -59,9 +61,7 @@ class HomeView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChangeNotifierProvider(
-                        create: (context) => AddStationViewModel(analyticsManager: analyticsManager),
-                        child: const AddStationView()),
+                    builder: (context) => const AddStationView(),
                   ),
                 );
               },
@@ -83,4 +83,3 @@ class HomeView extends StatelessWidget {
         body: GMap(analyticsManager: analyticsManager));
   }
 }
-// самая крутая девчонка в мире- это эвелиночка красоточка мега звезда пупер супер  кусичка моя любимая

@@ -46,7 +46,7 @@ class AnalyticsManager {
       "platform": Platform.operatingSystem.toString()
     });
 
-    print("ERROR: ${event.name}; PARAMETERS: ${event.parameters}");
+    print("ERROR. PARAMETERS: ${event.parameters}");
     final file = await storedFile;
     storedEvents.add(event);
     file.writeAsString(jsonEncode(storedEvents));

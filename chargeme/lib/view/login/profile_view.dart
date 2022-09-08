@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
@@ -12,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:chargeme/model/charging_place/vehicle_type.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileView extends StatefulWidget {
   AccountManager accountManager;
@@ -28,10 +31,11 @@ class _ProfileView extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    var l10n = AppLocalizations.of(context);
     if (widget.accountManager.currentAccount != null) {
       final account = widget.accountManager.currentAccount!;
       return Scaffold(
-          appBar: AppBar(title: const Text("Your profile"), backgroundColor: ColorPallete.violetBlue),
+          appBar: AppBar(title: Text(l10n.yourProfile), backgroundColor: ColorPallete.violetBlue),
           body: Padding(
               padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
               child: SingleChildScrollView(
@@ -43,7 +47,7 @@ class _ProfileView extends State<ProfileView> {
                           borderRadius: BorderRadius.circular(64),
                           child: account.photoUrl == null
                               ? Image.asset(Asset.commando3pin.path)
-                              : Image.asset(Asset.commando3pin.path))), // Image.network(account.photoUrl!))),
+                              : Image.network(account.photoUrl!))),
                   const SizedBox(width: 12),
                   account.displayName == null
                       ? Container()
@@ -56,7 +60,7 @@ class _ProfileView extends State<ProfileView> {
                   Text("Vehicle:", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   const Spacer(),
                   CupertinoButton(
-                      child: Text(account.vehicleType == null ? "Choose" : account.vehicleType!.fullName,
+                      child: Text(account.vehicleType == null ? l10n.choose : account.vehicleType!.fullName,
                           style: TextStyle(color: ColorPallete.violetBlue, fontSize: 20)),
                       onPressed: () {
                         Navigator.push(
@@ -70,31 +74,31 @@ class _ProfileView extends State<ProfileView> {
                       })
                 ]),
                 const SizedBox(height: 4),
-                profileBox(title: "Your stuff", children: [
-                  profileCell(title: "Favourites", iconPath: Asset.star.path),
+                profileBox(title: l10n.yourStuff, children: [
+                  profileCell(title: l10n.favourites, iconPath: Asset.star.path),
                   separator(),
-                  profileCell(title: "Add home charger", iconPath: Asset.homeIcon.path)
+                  profileCell(title: l10n.addHomeCharger, iconPath: Asset.homeIcon.path)
                 ]),
                 const SizedBox(height: 12),
-                profileBox(title: "Your statistics", children: [
+                profileBox(title: l10n.yourStatistics, children: [
                   profileCell(title: "Total check-ins", count: 0),
                   separator(),
-                  profileCell(title: "Photos added", count: 0),
+                  profileCell(title: l10n.photosAdded, count: 0),
                   separator(),
-                  profileCell(title: "Places added", count: 0)
+                  profileCell(title: l10n.placesAdded, count: 0)
                 ]),
                 // titleText("Email"),
                 // account.contacts?.email == null ? Container() : textField(account.contacts!.email!, false),
                 const SizedBox(height: 12),
                 SimpleButton(
                     color: ColorPallete.violetBlue,
-                    text: "Log out",
+                    text: l10n.logOut,
                     onPressed: () async {
                       await widget.accountManager.signOut();
                       setState(() {});
                     }),
                 const SizedBox(height: 12),
-                SimpleButton(color: ColorPallete.redCinnabar, text: "Delete account", onPressed: () {})
+                SimpleButton(color: ColorPallete.redCinnabar, text: l10n.deleteAccount, onPressed: () {})
               ]))));
     } else {
       return signInView();
@@ -102,12 +106,13 @@ class _ProfileView extends State<ProfileView> {
   }
 
   Widget signInView() {
+    var l10n = AppLocalizations.of(context);
     return Scaffold(
-        appBar: AppBar(title: const Text("Sign in"), backgroundColor: ColorPallete.violetBlue),
+        appBar: AppBar(title: Text(l10n.signIn), backgroundColor: ColorPallete.violetBlue),
         body: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(children: [
-              titleText("Join ChargeMe cummunity for free"),
+              titleText(l10n.joinChargemeCummunityForFree),
               const SizedBox(height: 24),
               SizedBox(
                   height: 64,
@@ -124,12 +129,12 @@ class _ProfileView extends State<ProfileView> {
                       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                         Container(height: 24, child: Image.asset(Asset.gLogo.path)),
                         SizedBox(width: 4),
-                        Text("Sign in with Google", style: TextStyle(color: Colors.grey, fontSize: 18))
+                        Text(l10n.signInWithGoogle, style: TextStyle(color: Colors.grey, fontSize: 18))
                       ]),
                       onPressed: () async {
                         final success = await widget.accountManager.googleSingIn();
                         setState(() {
-                          errorText = success ? "" : "Unsuccessfull sign in";
+                          errorText = success ? "" : l10n.unsuccessfullSignIn;
                         });
                       })),
               const SizedBox(height: 8),
@@ -140,7 +145,7 @@ class _ProfileView extends State<ProfileView> {
                       child: SignInWithAppleButton(onPressed: () async {
                         final success = await widget.accountManager.appleSignIn();
                         setState(() {
-                          errorText = success ? "" : "Unsuccessfull sign in";
+                          errorText = success ? "" : l10n.unsuccessfullSignIn;
                         });
                       }))),
               const SizedBox(height: 12),

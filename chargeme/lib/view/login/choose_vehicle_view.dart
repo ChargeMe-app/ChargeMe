@@ -57,7 +57,7 @@ class ChooseVehicleViewModel extends ChangeNotifier {
         print("123");
       }
     } catch (error) {
-      print(error);
+      analyticsManager.logErrorEvent(error.toString());
     }
   }
 }
@@ -85,11 +85,8 @@ class ChooseVehicleView extends StatelessWidget {
                       return Column(children: [
                         InkWell(
                             onTap: () {
-                              if (chooseVehicleVM.shownManufacturerIndex == i) {
-                                chooseVehicleVM.shownManufacturerIndex = null;
-                              } else {
-                                chooseVehicleVM.shownManufacturerIndex = i;
-                              }
+                              chooseVehicleVM.shownManufacturerIndex =
+                                  chooseVehicleVM.shownManufacturerIndex == i ? null : i;
                             },
                             child: Padding(
                                 padding: EdgeInsets.all(14),

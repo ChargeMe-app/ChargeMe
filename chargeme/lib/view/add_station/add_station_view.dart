@@ -60,22 +60,22 @@ class _AddStationViewState extends State<AddStationView> {
                 CardEntry(l10n.address, viewModel.address, false, (_) => ChangeStationAddressView()),
                 CardEntry(l10n.stations, viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(), true,
                     (_) => ChangeStationTypesView()),
-                CardEntry("Access", viewModel.access.name.capitalize, false, (_) => ChangeAccessView()),
+                CardEntry(l10n.access, viewModel.access.name.capitalize, false, (_) => ChangeAccessView()),
                 CardEntry(
-                    "Cost and Pricing",
-                    viewModel.requiresFee ? "Requires fee: ${viewModel.costDescription}" : "Free",
+                    l10n.costAndPricing,
+                    viewModel.requiresFee ? "${l10n.requiresFee}: ${viewModel.costDescription}" : l10n.free,
                     false,
                     (_) => ChangeCostAndPricingView()),
                 CardEntry(
-                    "Hours",
-                    viewModel.isOpen247 ? "Open 24/7" : (viewModel.hours.isEmpty ? "Empty" : viewModel.hours),
+                    l10n.hours,
+                    viewModel.isOpen247 ? l10n.open247 : (viewModel.hours.isEmpty ? l10n.empty : viewModel.hours),
                     false,
                     (_) => ChangeHoursView()),
-                CardEntry("Amenities", viewModel.amenities.map((e) => e.localizedTitle(context)).join(", "), false,
+                CardEntry(l10n.amenities, viewModel.amenities.map((e) => e.localizedTitle(context)).join(", "), false,
                     (_) => ChangeAmenitiesView()),
                 CardEntry(
                     "Location Open or Active?",
-                    viewModel.isOpenOrActive ? "Location is Active" : "Location coming soon",
+                    viewModel.isOpenOrActive ? l10n.locationIsActive : l10n.locationComingSoon,
                     true,
                     (_) => ChangeIsOpenOrActiveView()),
               ],
@@ -93,25 +93,26 @@ class CardEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(title,
-              style: isFieldRequired
-                  ? TextStyle(color: subtitle.isEmpty ? ColorPallete.redCinnabar : Colors.black)
-                  : const TextStyle()),
-          subtitle.isEmpty ? Container() : Text(subtitle, maxLines: 1, style: const TextStyle(fontSize: 12))
-        ]),
-        trailing: const Icon(Icons.keyboard_arrow_right_sharp),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => nextViewBuilder(context),
-            ),
-          );
-        },
-      ),
-    );
+    return Consumer<AddStationViewModel>(
+        builder: (context, viewModel, child) => Card(
+              child: ListTile(
+                title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(title,
+                      style: isFieldRequired
+                          ? TextStyle(color: subtitle.isEmpty ? ColorPallete.redCinnabar : Colors.black)
+                          : const TextStyle()),
+                  subtitle.isEmpty ? Container() : Text(subtitle, maxLines: 1, style: const TextStyle(fontSize: 12))
+                ]),
+                trailing: const Icon(Icons.keyboard_arrow_right_sharp),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => nextViewBuilder(context),
+                    ),
+                  );
+                },
+              ),
+            ));
   }
 }
