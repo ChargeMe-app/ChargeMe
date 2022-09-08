@@ -7,6 +7,7 @@ enum Asset {
   chademo,
   charging,
   checkmarkRounded,
+  chevronDown,
   chevronRight,
   clock,
   commando3pin,
@@ -70,6 +71,8 @@ extension AssetPath on Asset {
         return "assets/icons/common/charging.svg";
       case Asset.checkmarkRounded:
         return "assets/icons/common/checkmarkRounded.svg";
+      case Asset.chevronDown:
+        return "assets/icons/common/chevronDown.svg";
       case Asset.chevronRight:
         return "assets/icons/common/chevronRight.svg";
       case Asset.clock:

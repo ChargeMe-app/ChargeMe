@@ -40,9 +40,8 @@ class Account {
       this.photos,
       this.stats});
 
-  Account.fromGoogle(GoogleSignInAccount googleAccount)
-      : id = googleAccount.id,
-        displayName = googleAccount.displayName,
+  Account.fromGoogle(GoogleSignInAccount googleAccount, this.id)
+      : displayName = googleAccount.displayName,
         contacts = UserContacts(email: googleAccount.email),
         photoUrl = googleAccount.photoUrl,
         signInService = SignInService.google;

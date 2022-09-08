@@ -1,13 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/components/helpers/ip.dart';
 import 'package:http/http.dart' as http;
 
 class ChargingPlaceManager {
-  final String _baseUrl = "89.208.220.240:8080";
+  final String _baseUrl = "${IP.current}:8080";
   final String _stationsPath = "/v1/locations/stations";
+  AnalyticsManager analyticsManager;
+
+  ChargingPlaceManager({required this.analyticsManager});
 
   Future<ChargingPlace?> getChargingPlace({required String id}) async {
     final queryParameters = {'locationId': id};
@@ -33,7 +38,7 @@ class ChargingPlaceManager {
         throw "Unable to get charging place";
       }
     } catch (err) {
-      print(err);
+      analyticsManager.logErrorEvent(err.toString());
       return null;
     }
   }

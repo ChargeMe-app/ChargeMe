@@ -1,13 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:chargeme/components/helpers/ip.dart';
 import 'package:http/http.dart' as http;
 
 class MarkersManager {
-  final String _baseUrl = "89.208.220.240:8080";
+  final String _baseUrl = "${IP.current}:8080";
   final String _stationsPath = "/v1/locations";
+  final AnalyticsManager analyticsManager;
+
+  MarkersManager({required this.analyticsManager});
 
   Future<List<StationMarker>> getStationMarkers({required LatLngBounds bounds}) async {
     final queryParameters = {
@@ -17,6 +22,7 @@ class MarkersManager {
       'longitudeMax': bounds.northeast.longitude.toString()
     };
     final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
+    analyticsManager.logEvent("get_markers", params: queryParameters);
 
     try {
       final response = await http.get(Uri.http(_baseUrl, _stationsPath, queryParameters), headers: headers);
@@ -35,7 +41,7 @@ class MarkersManager {
         throw "Unable to retrieve markers.";
       }
     } catch (err) {
-      print(err);
+      analyticsManager.logErrorEvent(err.toString());
       return [];
     }
   }

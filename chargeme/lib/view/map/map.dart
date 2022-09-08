@@ -1,3 +1,4 @@
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/throttler.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
@@ -12,7 +13,9 @@ import '../../model/charging_place/charging_place.dart' as charging_place;
 import 'package:chargeme/components/markers_manager/markers_manager.dart' as markers_manager;
 
 class GMap extends StatefulWidget {
-  const GMap({Key? key}) : super(key: key);
+  const GMap({Key? key, required this.analyticsManager}) : super(key: key);
+
+  final AnalyticsManager analyticsManager;
 
   @override
   _GMap createState() => _GMap();
@@ -24,7 +27,7 @@ class _GMap extends State<GMap> {
 
   final LatLng _center = const LatLng(55.7558, 37.6173);
   final Map<String, Marker> _markers = {};
-  final _manager = markers_manager.MarkersManager();
+  late final _manager = markers_manager.MarkersManager(analyticsManager: widget.analyticsManager);
   final Throttler _throttler = Throttler();
   var isLoading = false;
   Map<IconType, BitmapDescriptor> _cachedMarkerIcons = {};
@@ -73,7 +76,14 @@ class _GMap extends State<GMap> {
           position: LatLng(stationMarker.latitude, stationMarker.longitude),
           onTap: () {
             _customInfoWindowController.addInfoWindow!(
-                MarkerInfoView(stationMarker.id, stationMarker.name, stationTypes, markerIcon, stationMarker.score),
+                MarkerInfoView(
+                  stationMarker.id,
+                  stationMarker.name,
+                  stationTypes,
+                  markerIcon,
+                  stationMarker.score,
+                  analyticsManager: widget.analyticsManager,
+                ),
                 latLng);
           });
       _markers[stationMarker.id.toString()] = marker;
@@ -102,7 +112,9 @@ class _GMap extends State<GMap> {
               position: latLng,
               onTap: () {
                 _customInfoWindowController.addInfoWindow!(
-                    MarkerInfoView("213995", "Station #1", "Cool station", null, 8.6), latLng);
+                    MarkerInfoView("213995", "Station #1", "Cool station", null, 8.6,
+                        analyticsManager: widget.analyticsManager),
+                    latLng);
               });
           setState(() {});
         },
@@ -115,7 +127,6 @@ class _GMap extends State<GMap> {
           if (_customInfoWindowController.googleMapController != null) {
             _throttler.throttle(const Duration(milliseconds: 500), () async {
               final LatLngBounds region = await _customInfoWindowController.googleMapController!.getVisibleRegion();
-              print(region.toString());
               _updateMarkers(region);
               setState(() {
                 isLoading = true;

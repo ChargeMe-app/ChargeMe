@@ -1,18 +1,23 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
+import 'package:chargeme/view/login/choose_vehicle_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
+import 'package:chargeme/view/login/user_vehicles_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:chargeme/model/charging_place/vehicle_type.dart';
 import 'package:chargeme/gen/assets.dart';
 
 class ProfileView extends StatefulWidget {
   AccountManager accountManager;
+  AnalyticsManager analyticsManager;
 
-  ProfileView({required this.accountManager});
+  ProfileView({required this.accountManager, required this.analyticsManager});
 
   @override
   State<ProfileView> createState() => _ProfileView();
@@ -38,7 +43,7 @@ class _ProfileView extends State<ProfileView> {
                           borderRadius: BorderRadius.circular(64),
                           child: account.photoUrl == null
                               ? Image.asset(Asset.commando3pin.path)
-                              : Image.network(account.photoUrl!))),
+                              : Image.asset(Asset.commando3pin.path))), // Image.network(account.photoUrl!))),
                   const SizedBox(width: 12),
                   account.displayName == null
                       ? Container()
@@ -53,7 +58,16 @@ class _ProfileView extends State<ProfileView> {
                   CupertinoButton(
                       child: Text(account.vehicleType == null ? "Choose" : account.vehicleType!.fullName,
                           style: TextStyle(color: ColorPallete.violetBlue, fontSize: 20)),
-                      onPressed: () {})
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChangeNotifierProvider(
+                                  create: (context) => ChooseVehicleViewModel(
+                                      accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
+                                  child: ChooseVehicleView())),
+                        );
+                      })
                 ]),
                 const SizedBox(height: 4),
                 profileBox(title: "Your stuff", children: [

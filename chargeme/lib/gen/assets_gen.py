@@ -47,3 +47,5 @@ for key in sortedKeys:
 f.write("    }\n")
 f.write("  }\n")
 f.write("}\n")
+
+f.close()

@@ -1,3 +1,4 @@
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/svg_color_parser.dart';
 import 'package:chargeme/components/charging_place_manager/charging_place_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
@@ -19,17 +20,19 @@ import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:provider/provider.dart';
 
 class ChargingPlaceView extends StatefulWidget {
-  const ChargingPlaceView({Key? key, required this.id, this.icon}) : super(key: key);
+  const ChargingPlaceView({Key? key, required this.id, required this.analyticsManager, this.icon}) : super(key: key);
 
   final String id;
   final BitmapDescriptor? icon;
+  final AnalyticsManager analyticsManager;
 
   @override
   _ChargingPlaceView createState() => _ChargingPlaceView();
 }
 
 class _ChargingPlaceView extends State<ChargingPlaceView> {
-  final ChargingPlaceManager _chargingPlaceManager = ChargingPlaceManager();
+  late final ChargingPlaceManager _chargingPlaceManager =
+      ChargingPlaceManager(analyticsManager: widget.analyticsManager);
   ChargingPlace? place;
   double scrollUpOffset = 0;
   double imageContainerHeight = 200;

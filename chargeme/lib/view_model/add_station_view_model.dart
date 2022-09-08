@@ -1,13 +1,17 @@
 import 'dart:convert';
 
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/components/helpers/ip.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
 
 class AddStationViewModel extends ChangeNotifier {
+  final AnalyticsManager analyticsManager;
+
   String id = "0";
   String _name = "";
   String _description = "";
@@ -22,6 +26,8 @@ class AddStationViewModel extends ChangeNotifier {
   String _hours = "";
   List<Amenity> _amenities = [];
   bool _isOpenOrActive = true;
+
+  AddStationViewModel({required this.analyticsManager});
 
   String get name => _name;
   set name(String value) {
@@ -154,7 +160,7 @@ class AddStationViewModel extends ChangeNotifier {
   void sendLocation(ChargingPlace place) {
     String encodedJson = jsonEncode(place);
     try {
-      http.post(Uri.parse("http://46.39.245.245:8080/v1/locations"), body: encodedJson);
+      http.post(Uri.parse("http://${IP.current}:8080/v1/locations"), body: encodedJson);
     } catch (error) {
       print(error);
     }

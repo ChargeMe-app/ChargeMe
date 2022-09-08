@@ -5,7 +5,6 @@ import 'package:chargeme/view/add_station/change_cost_and_pricing/change_cost_an
 import 'package:chargeme/view/add_station/change_hours/change_hours_view.dart';
 import 'package:chargeme/view/add_station/change_location/choose_location_view.dart';
 import 'package:chargeme/view/add_station/change_location_open/change_location_open_or_active_view.dart';
-import 'package:chargeme/view/add_station/change_station_location/change_station_location_view.dart';
 import 'package:chargeme/view/add_station/change_station_name/change_station_name_view.dart';
 import 'package:chargeme/view/add_station/change_station_address/change_station_address_view.dart';
 import 'package:chargeme/view/add_station/change_station_description/change_station_description_view.dart';
