@@ -1,14 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
+import 'package:chargeme/components/helpers/ip.dart';
 import 'package:chargeme/model/account/account.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:http/http.dart' as http;
 
 class AccountManager {
   Account? currentAccount;
-  String? token;
+  AnalyticsManager analytics;
+
+  AccountManager({required this.analytics});
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
     'email',
@@ -25,14 +30,28 @@ class AccountManager {
       final account = await _googleSignIn.signIn();
       if (account != null) {
         final auth = await account.authentication;
-        print(auth.idToken); // send to backend
-        final user = Account.fromGoogle(account);
-        storeAccount(user);
-        return true;
+        Map<String, dynamic> postBody = {
+          "sign_type": "google",
+          "photo_url": account.photoUrl,
+          "display_name": account.displayName,
+          "email": account.email,
+          "user_identifier": account.id,
+          "google_credentials": {"id_token": auth.idToken, "access_token": auth.accessToken}
+        };
+        final response = await http.post(Uri.parse("http://${IP.current}:8080/v1/auth"), body: jsonEncode(postBody));
+        if (response.statusCode == 200) {
+          final body = jsonDecode(response.body);
+          final userId = body["user_id"];
+          // get user data
+          final user = Account.fromGoogle(account, userId);
+          storeAccount(user);
+          analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": userId});
+          return true;
+        }
       }
       return false;
     } catch (error) {
-      print(error);
+      analytics.logErrorEvent(error.toString());
       return false;
     }
   }
@@ -45,6 +64,10 @@ class AccountManager {
       ]);
 
       // Send to backend, store user info on first sign in because it will not be available in future
+      String? displayName;
+      if (credential.givenName != null && credential.familyName != null) {
+        displayName = credential.givenName! + " " + credential.familyName!;
+      }
       print(credential.authorizationCode);
       print(credential.email);
       print(credential.familyName);
@@ -57,7 +80,7 @@ class AccountManager {
 
       return true;
     } catch (error) {
-      print(error);
+      analytics.logErrorEvent(error.toString());
       return false;
     }
   }
@@ -92,7 +115,7 @@ class AccountManager {
       final json = jsonDecode(fileString);
       currentAccount = Account.fromJson(json);
     } catch (err) {
-      print(err);
+      analytics.logErrorEvent(err.toString());
     }
   }
 
@@ -101,7 +124,7 @@ class AccountManager {
       final file = await storedFile;
       file.delete();
     } catch (err) {
-      print(err);
+      analytics.logErrorEvent(err.toString());
     }
   }
 }

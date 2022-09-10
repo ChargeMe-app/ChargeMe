@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:chargeme/model/charging_place/vehicle_type.dart';
@@ -149,11 +150,11 @@ extension RatingIcon on Rating {
   Widget get icon {
     switch (this) {
       case Rating.positive:
-        return SvgPicture.asset("assets/icons/common/checkmarkRounded.svg");
+        return SvgPicture.asset(Asset.checkmarkRounded.path);
       case Rating.neutral:
-        return SvgColoredIcon(assetPath: "assets/icons/common/info.svg", color: ColorPallete.darkerBlue);
+        return SvgColoredIcon(assetPath: Asset.info.path, color: ColorPallete.darkerBlue);
       case Rating.negative:
-        return SvgPicture.asset("assets/icons/common/xmarkRounded.svg");
+        return SvgPicture.asset(Asset.xmarkRounded.path);
     }
   }
 }

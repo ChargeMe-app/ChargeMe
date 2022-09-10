@@ -121,7 +121,7 @@ Map<String, dynamic> _$ReviewToJson(Review instance) => <String, dynamic>{
       'id': instance.id,
       'outlet_id': instance.outletId,
       'station_id': instance.stationId,
-      'rating': _$RatingEnumMap[instance.rating],
+      'rating': _$RatingEnumMap[instance.rating]!,
       'vehicle_name': instance.vehicleName,
       'vehicle_type': _$VehicleTypeEnumMap[instance.vehicleType],
       'user_name': instance.userName,

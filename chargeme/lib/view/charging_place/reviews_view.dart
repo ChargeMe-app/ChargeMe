@@ -41,12 +41,13 @@ class CheckInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var l10n = AppLocalizations.of(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Padding(padding: EdgeInsets.only(right: 8), child: Container(width: 24, child: review.rating.icon)),
-        Text(review.userName ?? "Unknown user", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(review.userName ?? l10n.unknownUser, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const Spacer(),
-        Text(review.vehicleName?.capitalizeEachWord ?? "Unknown vehicle",
+        Text(review.vehicleName?.capitalizeEachWord ?? l10n.unknownVehicle,
             maxLines: 1, overflow: TextOverflow.fade, style: TextStyle(fontSize: 16, color: Colors.grey))
       ]),
       review.comment == ""

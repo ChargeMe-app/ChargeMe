@@ -36,7 +36,7 @@ class ChangeCostAndPricingView extends StatelessWidget {
                     TextFormField(
                       enabled: addStationVM.requiresFee,
                       minLines: 3,
-                      initialValue: addStationVM.description,
+                      initialValue: addStationVM.costDescription,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       decoration: InputDecoration(

@@ -11,44 +11,73 @@ part 'account.g.dart';
 class Account {
   String id;
   String? displayName;
-  String? phoneNumber;
-  String? email;
   String? photoUrl; // URL
   SignInService signInService;
 
   VehicleType? vehicleType;
   String? vehicleName;
 
+  List<ChargingPlace>? favourites;
+  List<ChargingPlace>? recentPlaces;
+
   List<Review>? reviews;
   List<Photo>? photos;
+
+  UserContacts? contacts;
+  UserStats? stats;
 
   Account(
       {required this.id,
       this.displayName,
-      this.phoneNumber,
-      this.email,
+      this.contacts,
       this.photoUrl,
       required this.signInService,
       this.vehicleType,
       this.vehicleName,
+      this.favourites,
+      this.recentPlaces,
       this.reviews,
-      this.photos});
+      this.photos,
+      this.stats});
 
-  Account.fromGoogle(GoogleSignInAccount googleAccount)
-      : id = googleAccount.id,
-        displayName = googleAccount.displayName,
-        email = googleAccount.email,
+  Account.fromGoogle(GoogleSignInAccount googleAccount, this.id)
+      : displayName = googleAccount.displayName,
+        contacts = UserContacts(email: googleAccount.email),
         photoUrl = googleAccount.photoUrl,
         signInService = SignInService.google;
 
   Account.fromApple(AuthorizationCredentialAppleID appleAccount)
       : id = appleAccount.userIdentifier!,
         displayName = appleAccount.givenName,
-        email = appleAccount.email,
+        contacts = UserContacts(email: appleAccount.email),
         signInService = SignInService.apple;
 
   factory Account.fromJson(Map<String, dynamic> json) => _$AccountFromJson(json);
   Map<String, dynamic> toJson() => _$AccountToJson(this);
+}
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class UserStats {
+  int totalCheckIns;
+  int photosAdded;
+  int placesAdded;
+
+  UserStats({required this.totalCheckIns, required this.photosAdded, required this.placesAdded});
+
+  factory UserStats.fromJson(Map<String, dynamic> json) => _$UserStatsFromJson(json);
+  Map<String, dynamic> toJson() => _$UserStatsToJson(this);
+}
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class UserContacts {
+  String? email;
+  String? phoneNumber;
+  String? telegram;
+
+  UserContacts({this.email, this.phoneNumber, this.telegram});
+
+  factory UserContacts.fromJson(Map<String, dynamic> json) => _$UserContactsFromJson(json);
+  Map<String, dynamic> toJson() => _$UserContactsToJson(this);
 }
 
 enum SignInService { email, google, apple }

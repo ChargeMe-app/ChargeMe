@@ -1,12 +1,9 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
-import 'package:chargeme/model/charging_place/charging_place.dart';
-import 'package:chargeme/model/charging_place/station.dart';
-import 'package:chargeme/view/charging_place/check_in/check_in_options_view.dart';
+import 'package:chargeme/model/event/event.dart';
 import 'package:chargeme/view/login/profile_view.dart';
-import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
-import 'package:chargeme/view_model/check_in_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/view/map/map.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
@@ -14,13 +11,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (context) => AddStationViewModel(), child: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  final AccountManager accountManager = AccountManager();
+  final AnalyticsManager analyticsManager = AnalyticsManager();
+  late AccountManager accountManager = AccountManager(analytics: analyticsManager);
 
-  MyApp({Key? key}) : super(key: key);
+  MyApp({super.key});
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -31,22 +29,26 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     widget.accountManager.tryLoadStoredAccount();
+    widget.analyticsManager.initialSetup();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: HomeView(accountManager: widget.accountManager),
-    );
+    return ChangeNotifierProvider(
+        create: (context) => AddStationViewModel(analyticsManager: widget.analyticsManager),
+        child: MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: HomeView(accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
+        ));
   }
 }
 
 class HomeView extends StatelessWidget {
   final AccountManager accountManager;
+  final AnalyticsManager analyticsManager;
 
-  HomeView({required this.accountManager});
+  HomeView({required this.accountManager, required this.analyticsManager});
 
   @override
   Widget build(BuildContext context) {
@@ -70,13 +72,14 @@ class HomeView extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProfileView(accountManager: accountManager),
+                      builder: (context) =>
+                          ProfileView(accountManager: accountManager, analyticsManager: analyticsManager),
                     ),
                   );
                 },
                 child: const Padding(padding: EdgeInsets.only(right: 12), child: Icon(Icons.account_circle_rounded)))
           ],
         ),
-        body: const GMap());
+        body: GMap(analyticsManager: analyticsManager));
   }
 }
