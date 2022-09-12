@@ -1,7 +1,7 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
-import 'package:chargeme/model/event/event.dart';
+import 'package:chargeme/view/about/about_view.dart';
 import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +66,18 @@ class HomeView extends StatelessWidget {
                 );
               },
               child: const Icon(Icons.location_pin)),
+          centerTitle: true,
           actions: [
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AboutView(),
+                    ),
+                  );
+                },
+                child: const Padding(padding: EdgeInsets.only(right: 12), child: Icon(Icons.info))),
             GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -80,6 +91,6 @@ class HomeView extends StatelessWidget {
                 child: const Padding(padding: EdgeInsets.only(right: 12), child: Icon(Icons.account_circle_rounded)))
           ],
         ),
-        body: GMap(analyticsManager: analyticsManager));
+        body: GMap(accountManager: accountManager, analyticsManager: analyticsManager));
   }
 }

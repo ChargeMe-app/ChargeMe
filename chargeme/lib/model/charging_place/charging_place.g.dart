@@ -15,7 +15,7 @@ ChargingPlace _$ChargingPlaceFromJson(Map<String, dynamic> json) =>
       address: json['address'] as String?,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
-      iconType: $enumDecodeNullable(_$IconTypeEnumMap, json['icon_type']),
+      iconType: $enumDecode(_$IconTypeEnumMap, json['icon_type']),
       access: json['access'] as int?,
       accessRestriction: json['access_restriction'] as String?,
       accessRestrictionDescription:
@@ -54,7 +54,7 @@ Map<String, dynamic> _$ChargingPlaceToJson(ChargingPlace instance) =>
       'address': instance.address,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
-      'icon_type': _$IconTypeEnumMap[instance.iconType],
+      'icon_type': _$IconTypeEnumMap[instance.iconType]!,
       'access': instance.access,
       'access_restriction': instance.accessRestriction,
       'access_restriction_description': instance.accessRestrictionDescription,

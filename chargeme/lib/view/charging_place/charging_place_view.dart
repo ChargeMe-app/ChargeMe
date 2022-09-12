@@ -1,9 +1,11 @@
+import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/svg_color_parser.dart';
 import 'package:chargeme/components/charging_place_manager/charging_place_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:chargeme/view/charging_place/amenities_view.dart';
 import 'package:chargeme/view/charging_place/check_in/check_in_options_view.dart';
 import 'package:chargeme/view/charging_place/details_view.dart';
@@ -20,11 +22,14 @@ import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:provider/provider.dart';
 
 class ChargingPlaceView extends StatefulWidget {
-  const ChargingPlaceView({Key? key, required this.id, required this.analyticsManager, this.icon}) : super(key: key);
+  const ChargingPlaceView(
+      {Key? key, required this.id, required this.analyticsManager, required this.accountManager, this.icon})
+      : super(key: key);
 
   final String id;
   final BitmapDescriptor? icon;
   final AnalyticsManager analyticsManager;
+  final AccountManager accountManager;
 
   @override
   _ChargingPlaceView createState() => _ChargingPlaceView();
@@ -93,7 +98,10 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                           Padding(
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
                               child: Column(children: [
-                                CheckInButton(place: place),
+                                CheckInButton(
+                                    place: place,
+                                    analyticsManager: widget.analyticsManager,
+                                    accountManager: widget.accountManager),
                                 const SizedBox(height: 10),
                                 DetailsView(place: place!, icon: widget.icon),
                                 const SizedBox(height: 10),
@@ -141,16 +149,18 @@ class ChargingPlaceTitleView extends StatelessWidget {
                               style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
               const SizedBox(width: 8),
               Flexible(
-                  child: Text(place.name.capitalizeEachWord,
+                  child: Text(place.isHomeCharger ? "Home charger" : place.name.capitalizeEachWord,
                       maxLines: 2, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))
             ])));
   }
 }
 
 class CheckInButton extends StatelessWidget {
-  CheckInButton({this.place});
+  CheckInButton({this.place, required this.analyticsManager, required this.accountManager});
 
   ChargingPlace? place;
+  AnalyticsManager analyticsManager;
+  AccountManager accountManager;
 
   @override
   Widget build(BuildContext context) {
@@ -162,12 +172,14 @@ class CheckInButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(50),
       ),
       onPressed: () {
-        if (place != null) {
+        if (place != null && accountManager.currentAccount != null) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider(
-                      create: (context) => CheckInViewModel(), child: CheckInOptionsView(place: place!))));
+                      create: (context) => CheckInViewModel(
+                          place: place!, analyticsManager: analyticsManager, accountManager: accountManager),
+                      child: CheckInOptionsView())));
         }
       },
       child: Text(

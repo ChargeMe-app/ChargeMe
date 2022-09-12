@@ -1,3 +1,4 @@
+import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/view/charging_place/charging_place_view.dart';
@@ -12,8 +13,10 @@ class MarkerInfoView extends StatelessWidget {
   final BitmapDescriptor? icon;
   final double? score;
   final AnalyticsManager analyticsManager;
+  final AccountManager accountManager;
 
-  MarkerInfoView(this.placeId, this.title, this.subtitle, this.icon, this.score, {required this.analyticsManager});
+  MarkerInfoView(this.placeId, this.title, this.subtitle, this.icon, this.score,
+      {required this.analyticsManager, required this.accountManager});
 
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
@@ -63,8 +66,11 @@ class MarkerInfoView extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              ChargingPlaceView(id: placeId, icon: icon, analyticsManager: analyticsManager),
+                          builder: (context) => ChargingPlaceView(
+                              id: placeId,
+                              icon: icon,
+                              analyticsManager: analyticsManager,
+                              accountManager: accountManager),
                         ));
                   },
                 )

@@ -52,9 +52,9 @@ class ChooseVehicleViewModel extends ChangeNotifier {
     };
     try {
       final response =
-          await http.post(Uri.parse("http://${IP.current}:8080/v1/user/vehicle"), body: jsonEncode(postBody));
+          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/user/vehicle"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
-        print("123");
+        analyticsManager.logEvent("successful vehicle type chosen");
       }
     } catch (error) {
       analyticsManager.logErrorEvent(error.toString());

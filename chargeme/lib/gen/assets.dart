@@ -2,6 +2,7 @@ enum Asset {
   Parking,
   WC,
   addPhoto,
+  appleMail,
   camping,
   caravanMainSocket,
   chademo,
@@ -38,6 +39,7 @@ enum Asset {
   shopping,
   star,
   starRounded,
+  telegramLogo,
   teslaRoadster,
   test_photo,
   threePhase,
@@ -61,6 +63,8 @@ extension AssetPath on Asset {
         return "assets/icons/amenities/WC.png";
       case Asset.addPhoto:
         return "assets/icons/common/addPhoto.svg";
+      case Asset.appleMail:
+        return "assets/icons/other/appleMail.png";
       case Asset.camping:
         return "assets/icons/amenities/camping.png";
       case Asset.caravanMainSocket:
@@ -133,6 +137,8 @@ extension AssetPath on Asset {
         return "assets/icons/common/star.svg";
       case Asset.starRounded:
         return "assets/icons/common/starRounded.svg";
+      case Asset.telegramLogo:
+        return "assets/icons/other/telegramLogo.png";
       case Asset.teslaRoadster:
         return "assets/icons/plugs/teslaRoadster.png";
       case Asset.test_photo:

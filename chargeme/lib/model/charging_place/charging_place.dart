@@ -22,7 +22,7 @@ class ChargingPlace {
   String? address;
   double latitude;
   double longitude;
-  IconType? iconType; // make non-optional
+  IconType iconType; // make non-optional
 
   int? access;
   String? accessRestriction;
@@ -46,6 +46,10 @@ class ChargingPlace {
   int? totalPhotos;
   int? totalReviews;
 
+  bool get isHomeCharger {
+    return iconType == IconType.home;
+  }
+
   ChargingPlace(
       {required this.id,
       required this.name,
@@ -54,7 +58,7 @@ class ChargingPlace {
       this.address,
       required this.latitude,
       required this.longitude,
-      this.iconType,
+      required this.iconType,
       this.access,
       this.accessRestriction,
       this.accessRestrictionDescription,

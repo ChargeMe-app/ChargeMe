@@ -1,5 +1,12 @@
+import 'dart:convert';
+
+import 'package:chargeme/components/account_manager/account_manager.dart';
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
+import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/vehicle_type.dart';
+import 'package:chargeme/components/helpers/ip.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 enum ScreenOption { success, couldNotCharge, comment, charging, waiting }
 
@@ -9,8 +16,23 @@ class CheckInViewModel extends ChangeNotifier {
   String _comment = "";
   double? _kilowatts;
   Duration? _duration;
+
   int _selectedStation = 0;
   int _selectedOutlet = 0;
+
+  String get selectedStationId {
+    return place.stations[_selectedStation].id;
+  }
+
+  String get selectedOutletId {
+    return place.stations[_selectedOutlet].outlets[_selectedOutlet].id;
+  }
+
+  ChargingPlace place;
+  AnalyticsManager analyticsManager;
+  AccountManager accountManager;
+
+  CheckInViewModel({required this.place, required this.analyticsManager, required this.accountManager});
 
   VehicleType? get vehicleType => _vehicleType;
   set vehicleType(VehicleType? value) {
@@ -72,5 +94,27 @@ class CheckInViewModel extends ChangeNotifier {
     _selectedStation = station;
     _selectedOutlet = outlet;
     notifyListeners();
+  }
+
+  Future<void> sendCheckIn() async {
+    if (accountManager.currentAccount == null) {
+      return;
+    }
+    Map<String, dynamic> postBody = {
+      "user_id": accountManager.currentAccount!.id,
+      "vehicle_type": vehicleType,
+      "comment": comment,
+      "kilowatts": kilowatts,
+      "duration": duration,
+      "station_id": selectedStationId,
+      "outlet_id": selectedOutletId
+    };
+    try {
+      final response =
+          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
+      if (response.statusCode == 200) {}
+    } catch (error) {
+      analyticsManager.logErrorEvent(error.toString());
+    }
   }
 }

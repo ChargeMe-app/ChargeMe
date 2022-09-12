@@ -1,3 +1,4 @@
+import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/throttler.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
@@ -13,9 +14,10 @@ import '../../model/charging_place/charging_place.dart' as charging_place;
 import 'package:chargeme/components/markers_manager/markers_manager.dart' as markers_manager;
 
 class GMap extends StatefulWidget {
-  const GMap({Key? key, required this.analyticsManager}) : super(key: key);
+  const GMap({Key? key, required this.analyticsManager, required this.accountManager}) : super(key: key);
 
   final AnalyticsManager analyticsManager;
+  final AccountManager accountManager;
 
   @override
   _GMap createState() => _GMap();
@@ -56,8 +58,12 @@ class _GMap extends State<GMap> {
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     _customInfoWindowController.googleMapController = controller;
-    final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    controller.animateCamera(CameraUpdate.newLatLng(LatLng(userLocation.latitude, userLocation.longitude)));
+    try {
+      final Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      controller.animateCamera(CameraUpdate.newLatLng(LatLng(userLocation.latitude, userLocation.longitude)));
+    } catch (error) {
+      widget.analyticsManager.logErrorEvent(error.toString());
+    }
   }
 
   Future<void> _updateMarkers(LatLngBounds region) async {
@@ -77,13 +83,13 @@ class _GMap extends State<GMap> {
           onTap: () {
             _customInfoWindowController.addInfoWindow!(
                 MarkerInfoView(
-                  stationMarker.id,
-                  stationMarker.name,
-                  stationTypes,
-                  markerIcon,
-                  stationMarker.score,
-                  analyticsManager: widget.analyticsManager,
-                ),
+                    stationMarker.id,
+                    stationMarker.iconType == IconType.home ? "Home charger" : stationMarker.name,
+                    stationTypes,
+                    markerIcon,
+                    stationMarker.score,
+                    analyticsManager: widget.analyticsManager,
+                    accountManager: widget.accountManager),
                 latLng);
           });
       _markers[stationMarker.id.toString()] = marker;
@@ -113,7 +119,7 @@ class _GMap extends State<GMap> {
               onTap: () {
                 _customInfoWindowController.addInfoWindow!(
                     MarkerInfoView("213995", "Station #1", "Cool station", null, 8.6,
-                        analyticsManager: widget.analyticsManager),
+                        analyticsManager: widget.analyticsManager, accountManager: widget.accountManager),
                     latLng);
               });
           setState(() {});

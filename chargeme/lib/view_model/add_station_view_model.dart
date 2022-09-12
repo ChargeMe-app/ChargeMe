@@ -4,6 +4,7 @@ import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/components/helpers/ip.dart';
+import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -138,6 +139,7 @@ class AddStationViewModel extends ChangeNotifier {
     final place = ChargingPlace(
       id: id,
       name: name,
+      iconType: IconType.publicStandard,
       description: description,
       phoneNumber: phoneNumber,
       address: address,
@@ -160,7 +162,7 @@ class AddStationViewModel extends ChangeNotifier {
   void sendLocation(ChargingPlace place) {
     String encodedJson = jsonEncode(place);
     try {
-      http.post(Uri.parse("http://${IP.current}:8080/v1/locations"), body: encodedJson);
+      http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/locations"), body: encodedJson);
     } catch (error) {
       print(error);
     }
