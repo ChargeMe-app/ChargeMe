@@ -105,7 +105,7 @@ class CheckInViewModel extends ChangeNotifier {
       "vehicle_type": vehicleType,
       "comment": comment,
       "kilowatts": kilowatts,
-      "duration": duration,
+      "duration": duration?.inMinutes,
       "station_id": selectedStationId,
       "outlet_id": selectedOutletId
     };
