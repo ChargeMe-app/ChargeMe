@@ -38,7 +38,8 @@ class AccountManager {
           "user_identifier": account.id,
           "google_credentials": {"id_token": auth.idToken, "access_token": auth.accessToken}
         };
-        final response = await http.post(Uri.parse("http://${IP.current}:8080/v1/auth"), body: jsonEncode(postBody));
+        final response =
+            await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
         if (response.statusCode == 200) {
           final body = jsonDecode(response.body);
           final userId = body["user_id"];
@@ -75,10 +76,28 @@ class AccountManager {
       print(credential.userIdentifier);
       print(Platform.isAndroid);
 
-      final user = Account.fromApple(credential);
-      storeAccount(user);
-
-      return true;
+      Map<String, dynamic> postBody = {
+        "sign_type": "apple",
+        "display_name": displayName,
+        "email": credential.email,
+        "user_identifier": credential.userIdentifier,
+        "apple_credentials": {
+          "identity_token": credential.identityToken,
+          "authorization_code": credential.authorizationCode
+        }
+      };
+      final response =
+          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
+      if (response.statusCode == 200) {
+        final body = jsonDecode(response.body);
+        final userId = body["user_id"];
+        // get user data
+        final user = Account.fromApple(credential);
+        storeAccount(user);
+        analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": userId});
+        return true;
+      }
+      return false;
     } catch (error) {
       analytics.logErrorEvent(error.toString());
       return false;

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "489922779691",
+    "project_id": "chargeme-350716",
+    "storage_bucket": "chargeme-350716.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489922779691:android:c00d82ff4515da1196e86e",
+        "android_client_info": {
+          "package_name": "com.chargeme.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489922779691-jbkgb66ab4o6nuindd8s58joaouhv1ca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chargeme.android",
+            "certificate_hash": "c3c2b6dbd7db9382774534ef28f43594082e1e4d"
+          }
+        },
+        {
+          "client_id": "489922779691-9ra31autakbgtafk4cqjkjubhea28god.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiqpSzon_sKnLoJOq-iZs7gBiu1sbPV54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489922779691-9ra31autakbgtafk4cqjkjubhea28god.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "489922779691-5dkspcebbqkjlrerglrfkpii38ao32cs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.chargeme"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

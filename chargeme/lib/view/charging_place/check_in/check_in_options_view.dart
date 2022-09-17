@@ -13,9 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:duration_picker/duration_picker.dart';
 
 class CheckInOptionsView extends StatefulWidget {
-  ChargingPlace place;
-
-  CheckInOptionsView({required this.place, Key? key}) : super(key: key);
+  CheckInOptionsView({Key? key}) : super(key: key);
 
   @override
   _CheckInOptionsView createState() => _CheckInOptionsView();
@@ -67,7 +65,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
         ? Row(children: [
             SizedBox(height: 48, child: Image.asset("assets/icons/markers/publicFast64.png")),
             const SizedBox(width: 8),
-            Text(widget.place.name),
+            Text(checkInVM.place.name),
             const Spacer()
           ])
         : checkInRowByOption(screenOption);
@@ -133,7 +131,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   }
 
   Widget choosingOutlet() {
-    final stations = widget.place.stations;
+    final stations = checkInVM.place.stations;
     return Container(
         height: 130,
         child: ListView(
