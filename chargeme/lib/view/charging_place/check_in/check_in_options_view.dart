@@ -1,11 +1,14 @@
+import 'dart:ui';
+
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
-import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
-import 'package:chargeme/view/charging_place/stations_list_view.dart';
-import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
+import 'package:chargeme/model/vehicle/vehicle_type.dart';
+import 'package:chargeme/view/login/choose_vehicle_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
+import 'package:chargeme/view/login/user_vehicles_view.dart';
 import 'package:chargeme/view_model/check_in_view_model.dart';
+import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -219,15 +222,10 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
           DurationPicker(
               duration: checkInVM.duration!,
               onChange: (value) {
+                value = value.inMinutes > 20 * 60 ? const Duration(hours: 20) : value;
                 checkInVM.setRoundedDuration(value);
               })
         ]));
-    // return SimpleButton(
-    //     color: ColorPallete.violetBlue,
-    //     text: "Duration",
-    //     onPressed: () {
-    //       showDurationPicker(context: context, snapToMins: 5, initialTime: Duration(minutes: 30));
-    //     });
   }
 
   Widget fullViewByOption(ScreenOption option) {
@@ -248,8 +246,16 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   Widget nullFullView() {
     return Column(children: [
       Text("My vehicle", style: TextStyle(fontSize: 16)),
-      Text("--", style: TextStyle(fontSize: 24)),
-      GestureDetector(onTap: () {}, child: Text("Update", style: TextStyle(color: ColorPallete.violetBlue))),
+      checkInVM.vehicleType == null
+          ? Text("--", style: TextStyle(fontSize: 24))
+          : Text(checkInVM.vehicleType!.fullName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      Consumer<ChooseVehicleViewModel>(
+          builder: (context, chooseVehicleVM, child) => GestureDetector(
+              onTap: () {
+                chooseVehicleVM.onlyChoosing = true;
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView()));
+              },
+              child: Text("Update", style: TextStyle(color: ColorPallete.violetBlue)))),
       const SizedBox(height: 12),
       checkInRow(Asset.checkmarkRounded.path, "Successfullty charged", () {
         checkInVM.screenOption = ScreenOption.success;
@@ -272,7 +278,12 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   Widget publishReviewButton() {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),
-        child: SimpleButton(color: ColorPallete.violetBlue, text: "Publish", onPressed: () {}));
+        child: SimpleButton(
+            color: ColorPallete.violetBlue,
+            text: "Publish",
+            onPressed: () {
+              checkInVM.sendCheckIn();
+            }));
   }
 
   Widget successFullView() {

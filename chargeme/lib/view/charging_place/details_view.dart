@@ -9,6 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:map_launcher/map_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailsView extends StatelessWidget {
   DetailsView({required this.place, this.icon});
@@ -24,7 +25,7 @@ class DetailsView extends StatelessWidget {
       place.address == null
           ? Container()
           : row(context, Asset.pin.path, l10n.address, place.address!.capitalizeEachWord, withSeparator: false),
-      place.phoneNumber?.isEmpty ?? true ? Container() : rowPng(Asset.phone.path, place.phoneNumber!),
+      place.phoneNumber?.isEmpty ?? true ? Container() : phoneRow(Asset.phone.path, place.phoneNumber!),
       place.cost == null ? Container() : row(context, Asset.Parking.path, l10n.parking, costText(context)),
       !shouldShowHours()
           ? Container()
@@ -79,7 +80,7 @@ class DetailsView extends StatelessWidget {
                           titleTextStyle:
                               TextStyle(color: ColorPallete.violetBlue, fontSize: 24, fontWeight: FontWeight.bold),
                           children: [
-                            Padding(padding: const EdgeInsets.fromLTRB(24, 0, 24, 8), child: Text(text)),
+                            Padding(padding: const EdgeInsets.fromLTRB(24, 0, 24, 8), child: SelectableText(text)),
                             SimpleDialogOption(
                               child: Row(children: [Spacer(), Text(l10n.close, style: TextStyle(fontSize: 14))]),
                               onPressed: () {
@@ -100,7 +101,7 @@ class DetailsView extends StatelessWidget {
     ]);
   }
 
-  Widget rowPng(String assetPath, String text) {
+  Widget phoneRow(String assetPath, String phone) {
     return Column(children: [
       Container(height: 1, color: ColorPallete.violetBlue),
       Container(
@@ -109,7 +110,13 @@ class DetailsView extends StatelessWidget {
             const SizedBox(width: 8),
             Image.asset(assetPath, width: 30),
             const SizedBox(width: 8),
-            Flexible(child: Text(text, maxLines: 2, style: const TextStyle(fontSize: 16)))
+            Flexible(
+                child: GestureDetector(
+              child: Text(phone, maxLines: 2, style: const TextStyle(fontSize: 16)),
+              onTap: () {
+                launchUrl(Uri(scheme: "tel", path: phone));
+              },
+            ))
           ]))
     ]);
   }

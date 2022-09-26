@@ -24,7 +24,8 @@ class ChangeStationNameView extends StatelessWidget {
               TextFormField(
                 initialValue: context.read<AddStationViewModel>().name,
                 keyboardType: TextInputType.multiline,
-                maxLines: null,
+                maxLines: 1,
+                maxLength: 48,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   labelText: l10n.name,

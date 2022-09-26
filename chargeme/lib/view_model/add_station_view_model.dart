@@ -13,6 +13,9 @@ import 'package:http/http.dart' as http;
 class AddStationViewModel extends ChangeNotifier {
   final AnalyticsManager analyticsManager;
 
+  bool isEditingLocationMode = false;
+  bool isHomeCharger = false;
+
   String id = "0";
   String _name = "";
   String _description = "";
@@ -29,6 +32,44 @@ class AddStationViewModel extends ChangeNotifier {
   bool _isOpenOrActive = true;
 
   AddStationViewModel({required this.analyticsManager});
+
+  void setupForEditing(ChargingPlace place) {
+    id = place.id;
+    _name = place.name;
+    _description = place.description ?? "";
+    _phoneNumber = place.phoneNumber ?? "";
+    _address = place.address ?? "";
+    location = Location(lat: place.latitude, lng: place.longitude);
+    _stations = place.stations;
+    // _access = place.access ?? Access.public;
+    _requiresFee = place.cost ?? false;
+    _costDescription = place.costDescription ?? "";
+    _isOpen247 = place.open247 ?? true;
+    _hours = place.hours ?? "";
+    _amenities = place.amenities ?? [];
+    _isOpenOrActive = !(place.comingSoon ?? false);
+
+    isEditingLocationMode = true;
+  }
+
+  void clearAfterEditing() {
+    id = "0";
+    _name = "";
+    _description = "";
+    _phoneNumber = "";
+    _address = "";
+    location = null;
+    _stations = [];
+    _access = Access.public;
+    _requiresFee = false;
+    _costDescription = "";
+    _isOpen247 = true;
+    _hours = "";
+    _amenities = [];
+    _isOpenOrActive = true;
+
+    isEditingLocationMode = false;
+  }
 
   String get name => _name;
   set name(String value) {
@@ -160,11 +201,12 @@ class AddStationViewModel extends ChangeNotifier {
   }
 
   void sendLocation(ChargingPlace place) {
+    // TODO: ADD IF EDITING CASE
     String encodedJson = jsonEncode(place);
     try {
       http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/locations"), body: encodedJson);
     } catch (error) {
-      print(error);
+      analyticsManager.logErrorEvent(error.toString());
     }
   }
 }

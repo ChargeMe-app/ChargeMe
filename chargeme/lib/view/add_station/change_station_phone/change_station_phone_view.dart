@@ -4,7 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ChangeStationPhoneView extends StatelessWidget {
+class ChangeStationPhoneView extends StatefulWidget {
+  @override
+  _ChangeStationPhoneView createState() => _ChangeStationPhoneView();
+}
+
+class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
+  bool isGoodFormat = false;
+
+  void validate(String str) {
+    RegExp regExp = RegExp(r"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$");
+    RegExpMatch? match = regExp.firstMatch(str);
+    setState(() {
+      isGoodFormat = match != null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var l10n = AppLocalizations.of(context);
@@ -25,15 +40,25 @@ class ChangeStationPhoneView extends StatelessWidget {
                 initialValue: context.read<AddStationViewModel>().phoneNumber,
                 keyboardType: TextInputType.phone,
                 maxLines: 1,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: '+7 (9XX) XXX-XX-XX',
+                  labelText: 'Phone number',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      context.read<AddStationViewModel>().phoneNumber == "";
+                    },
+                    icon: Icon(Icons.clear),
+                  ),
                 ),
                 onChanged: (text) {
+                  validate(text);
+
                   var model = Provider.of<AddStationViewModel>(context, listen: false);
                   model.phoneNumber = text;
                 },
-              )
+              ),
+              Text(isGoodFormat ? "The format is OK" : "Bad format",
+                  style: TextStyle(color: isGoodFormat ? ColorPallete.greenEmerald : Colors.grey, fontSize: 16))
             ]
                 .map((e) => Padding(
                       padding: const EdgeInsets.only(bottom: 8),

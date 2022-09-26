@@ -3,16 +3,19 @@ import 'dart:math';
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
 import 'package:chargeme/view/login/choose_vehicle_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:chargeme/view/login/user_vehicles_view.dart';
+import 'package:chargeme/view_model/add_station_view_model.dart';
+import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:chargeme/model/charging_place/vehicle_type.dart';
+import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,6 +31,17 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileView extends State<ProfileView> {
   String errorText = "";
+
+  @override
+  void initState() {
+    super.initState();
+    updateAccount();
+  }
+
+  Future<void> updateAccount() async {
+    await widget.accountManager.updateAccountInfo();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +61,9 @@ class _ProfileView extends State<ProfileView> {
                           borderRadius: BorderRadius.circular(64),
                           child: account.photoUrl == null
                               ? Image.asset(Asset.commando3pin.path)
-                              : Image.network(account.photoUrl!))),
+                              : Image.network(account.photoUrl!, errorBuilder: (context, error, stackTrace) {
+                                  return Container(color: Colors.grey);
+                                }))),
                   const SizedBox(width: 12),
                   account.displayName == null
                       ? Container()
@@ -59,25 +75,33 @@ class _ProfileView extends State<ProfileView> {
                 Row(children: [
                   Text("Vehicle:", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   const Spacer(),
-                  CupertinoButton(
-                      child: Text(account.vehicleType == null ? l10n.choose : account.vehicleType!.fullName,
-                          style: TextStyle(color: ColorPallete.violetBlue, fontSize: 20)),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ChangeNotifierProvider(
-                                  create: (context) => ChooseVehicleViewModel(
-                                      accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
-                                  child: ChooseVehicleView())),
-                        );
-                      })
+                  Consumer<ChooseVehicleViewModel>(
+                      builder: (context, chooseVehicleVM, child) => CupertinoButton(
+                          child: Text(
+                              chooseVehicleVM.chosenVehicle == null
+                                  ? l10n.choose
+                                  : chooseVehicleVM.chosenVehicle!.type.fullName,
+                              style: TextStyle(color: ColorPallete.violetBlue, fontSize: 20)),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView())
+                                //  ChangeNotifierProvider(
+                                //     create: (context) => ChooseVehicleViewModel(
+                                //         accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
+                                //     child: ChooseVehicleView())),
+                                );
+                          }))
                 ]),
                 const SizedBox(height: 4),
                 profileBox(title: l10n.yourStuff, children: [
                   profileCell(title: l10n.favourites, iconPath: Asset.star.path),
                   separator(),
-                  profileCell(title: l10n.addHomeCharger, iconPath: Asset.homeIcon.path)
+                  profileCell(
+                      title: l10n.addHomeCharger,
+                      iconPath: Asset.homeIcon.path,
+                      onTap: () {
+                        context.read<AddStationViewModel>().isHomeCharger = true;
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AddStationView()));
+                      })
                 ]),
                 const SizedBox(height: 12),
                 profileBox(title: l10n.yourStatistics, children: [
@@ -98,14 +122,102 @@ class _ProfileView extends State<ProfileView> {
                       setState(() {});
                     }),
                 const SizedBox(height: 12),
-                SimpleButton(color: ColorPallete.redCinnabar, text: l10n.deleteAccount, onPressed: () {})
+                SimpleButton(color: ColorPallete.redCinnabar, text: l10n.deleteAccount, onPressed: () {}),
+                const SizedBox(height: 24)
               ]))));
     } else {
-      return signInView();
+      return SignInView(
+          accountManager: widget.accountManager,
+          onSuccess: () {
+            setState(() {});
+          });
     }
   }
 
-  Widget signInView() {
+  Widget separator() {
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8), child: Container(height: 1, color: ColorPallete.violetBlue));
+  }
+
+  Widget profileBox({String? title, required List<Widget> children}) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      title == null
+          ? Container()
+          : Text(title, style: TextStyle(color: ColorPallete.violetBlue, fontSize: 20, fontWeight: FontWeight.bold)),
+      Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: ColorPallete.violetBlue, width: 5),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
+          child: Column(children: children))
+    ]);
+  }
+
+  Widget profileCell({required String title, int? count, Function? onTap, String? iconPath}) {
+    final screenWidthWithPadding = MediaQuery.of(context).size.width - 10;
+    return InkWell(
+        onTap: () {
+          if (onTap != null) {
+            onTap();
+          }
+        },
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(children: [
+              iconPath == null
+                  ? Container()
+                  : SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: SvgColoredIcon(assetPath: iconPath, color: ColorPallete.violetBlue)),
+              iconPath == null ? Container() : SizedBox(width: 8),
+              SizedBox(
+                  width: screenWidthWithPadding - (iconPath == null ? 0 : 40) - 66,
+                  child: Text(title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+              const Spacer(),
+              count == null
+                  ? SvgPicture.asset(Asset.chevronRight.path, height: 30, width: 30)
+                  : Padding(
+                      padding: EdgeInsets.only(right: 8),
+                      child: Text(count.toString(),
+                          style: TextStyle(color: Colors.grey, fontSize: 20, fontWeight: FontWeight.bold)))
+            ])));
+  }
+
+  Widget titleText(String str) {
+    return Text(str, style: TextStyle(color: ColorPallete.violetBlue, fontSize: 18, fontWeight: FontWeight.bold));
+  }
+
+  Widget textField(String value, bool enabled) {
+    return TextFormField(
+        initialValue: value,
+        style: enabled ? TextStyle(color: Colors.black) : TextStyle(color: Colors.grey),
+        decoration: InputDecoration(
+            fillColor: ColorPallete.violetBlue,
+            disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue)),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue)),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue))),
+        enabled: enabled);
+  }
+}
+
+class SignInView extends StatefulWidget {
+  AccountManager accountManager;
+  Function? onSuccess;
+
+  SignInView({required this.accountManager, this.onSuccess});
+
+  @override
+  State<SignInView> createState() => _SignInView();
+}
+
+class _SignInView extends State<SignInView> {
+  String errorText = "";
+
+  @override
+  Widget build(BuildContext context) {
     var l10n = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(title: Text(l10n.signIn), backgroundColor: ColorPallete.violetBlue),
@@ -133,9 +245,13 @@ class _ProfileView extends State<ProfileView> {
                       ]),
                       onPressed: () async {
                         final success = await widget.accountManager.googleSingIn();
-                        setState(() {
-                          errorText = success ? "" : l10n.unsuccessfullSignIn;
-                        });
+                        if (success && widget.onSuccess != null) {
+                          widget.onSuccess!();
+                        } else {
+                          setState(() {
+                            errorText = success ? "" : l10n.unsuccessfullSignIn;
+                          });
+                        }
                       })),
               const SizedBox(height: 8),
               SizedBox(
@@ -144,66 +260,20 @@ class _ProfileView extends State<ProfileView> {
                       borderRadius: BorderRadius.circular(15),
                       child: SignInWithAppleButton(onPressed: () async {
                         final success = await widget.accountManager.appleSignIn();
-                        setState(() {
-                          errorText = success ? "" : l10n.unsuccessfullSignIn;
-                        });
+                        if (success && widget.onSuccess != null) {
+                          widget.onSuccess!();
+                        } else {
+                          setState(() {
+                            errorText = success ? "" : l10n.unsuccessfullSignIn;
+                          });
+                        }
                       }))),
               const SizedBox(height: 12),
               Text(errorText, style: TextStyle(color: ColorPallete.redCinnabar))
             ])));
   }
 
-  Widget separator() {
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8), child: Container(height: 1, color: ColorPallete.violetBlue));
-  }
-
-  Widget profileBox({String? title, required List<Widget> children}) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      title == null
-          ? Container()
-          : Text(title, style: TextStyle(color: ColorPallete.violetBlue, fontSize: 20, fontWeight: FontWeight.bold)),
-      Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: ColorPallete.violetBlue, width: 5),
-              borderRadius: BorderRadius.all(Radius.circular(8))),
-          child: Column(children: children))
-    ]);
-  }
-
-  Widget profileCell({required String title, int? count, Function? onTap, String? iconPath}) {
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        child: Row(children: [
-          iconPath == null
-              ? Container()
-              : SizedBox(
-                  width: 40, height: 40, child: SvgColoredIcon(assetPath: iconPath, color: ColorPallete.violetBlue)),
-          iconPath == null ? Container() : SizedBox(width: 8),
-          Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          const Spacer(),
-          count == null
-              ? SvgPicture.asset(Asset.chevronRight.path, height: 30, width: 30)
-              : Padding(
-                  padding: EdgeInsets.only(right: 8),
-                  child: Text(count.toString(),
-                      style: TextStyle(color: Colors.grey, fontSize: 20, fontWeight: FontWeight.bold)))
-        ]));
-  }
-
   Widget titleText(String str) {
     return Text(str, style: TextStyle(color: ColorPallete.violetBlue, fontSize: 18, fontWeight: FontWeight.bold));
-  }
-
-  Widget textField(String value, bool enabled) {
-    return TextFormField(
-        initialValue: value,
-        style: enabled ? TextStyle(color: Colors.black) : TextStyle(color: Colors.grey),
-        decoration: InputDecoration(
-            fillColor: ColorPallete.violetBlue,
-            disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue))),
-        enabled: enabled);
   }
 }

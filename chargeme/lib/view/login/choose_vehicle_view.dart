@@ -1,66 +1,12 @@
-import 'dart:convert';
-
-import 'package:chargeme/components/account_manager/account_manager.dart';
-import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
-import 'package:chargeme/model/charging_place/vehicle_type.dart';
+import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:chargeme/view/helper_views/app_bar_with_events.dart';
+import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
-import 'package:chargeme/components/helpers/ip.dart';
-
-class ChooseVehicleViewModel extends ChangeNotifier {
-  final AccountManager accountManager;
-  final AnalyticsManager analyticsManager;
-
-  bool _hasVehicles = true;
-  List<VehicleType> userVehicles = [VehicleType.nissanLeaf, VehicleType.teslaModel3];
-
-  int? _shownManufacturerIndex;
-  VehicleType? _chosenVehicleType;
-
-  double rotation = 0.0;
-
-  ChooseVehicleViewModel({required this.accountManager, required this.analyticsManager});
-
-  int? get shownManufacturerIndex => _shownManufacturerIndex;
-  set shownManufacturerIndex(int? value) {
-    _shownManufacturerIndex = value;
-    if (value == null) {
-      rotation = 0.0;
-    } else {
-      rotation = 4.0 / 8.0;
-    }
-    notifyListeners();
-  }
-
-  VehicleType? get chosenVehicleType => _chosenVehicleType;
-  set chosenVehicleType(VehicleType? value) {
-    _chosenVehicleType = value;
-    notifyListeners();
-  }
-
-  Future<void> setChosenVehicleType() async {
-    if (accountManager.currentAccount == null || chosenVehicleType == null) return;
-    Map<String, dynamic> postBody = {
-      "user_id": accountManager.currentAccount!.id,
-      "vehicle_type": chosenVehicleType?.value,
-    };
-    try {
-      final response =
-          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/user/vehicle"), body: jsonEncode(postBody));
-      if (response.statusCode == 200) {
-        analyticsManager.logEvent("successful vehicle type chosen");
-      }
-    } catch (error) {
-      analyticsManager.logErrorEvent(error.toString());
-    }
-  }
-}
 
 class ChooseVehicleView extends StatelessWidget {
   final Duration animationDuration = const Duration(milliseconds: 400);
@@ -108,14 +54,14 @@ class ChooseVehicleView extends StatelessWidget {
                                 child: Column(
                                     children: List.generate(VehicleType.values.length, (i) {
                                   final VehicleType vehicleType = VehicleType.values[i];
-                                  bool isVehicleChosen = vehicleType == chooseVehicleVM.chosenVehicleType;
+                                  bool isVehicleChosen = vehicleType == chooseVehicleVM.vehicleTypeToChoose;
                                   if (vehicleType.manufacturer == manufacturer) {
                                     return Padding(
                                         padding: EdgeInsets.fromLTRB(32, 8, 8, 8),
                                         child: GestureDetector(
                                             behavior: HitTestBehavior.opaque,
                                             onTap: () {
-                                              chooseVehicleVM.chosenVehicleType = vehicleType;
+                                              chooseVehicleVM.vehicleTypeToChoose = vehicleType;
                                             },
                                             child: Row(children: [
                                               ConstrainedBox(

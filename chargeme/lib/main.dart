@@ -1,9 +1,11 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/view/about/about_view.dart';
 import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
+import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/view/map/map.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
@@ -34,8 +36,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => AddStationViewModel(analyticsManager: widget.analyticsManager),
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => AddStationViewModel(analyticsManager: widget.analyticsManager)),
+          ChangeNotifierProvider(
+              create: (context) => ChooseVehicleViewModel(widget.accountManager, widget.analyticsManager)),
+        ],
         child: MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -65,7 +71,7 @@ class HomeView extends StatelessWidget {
                   ),
                 );
               },
-              child: const Icon(Icons.location_pin)),
+              child: SizedBox(width: 16, child: Image.asset(scale: 1.9, color: Colors.white, Asset.pinWithPlus.path))),
           centerTitle: true,
           actions: [
             GestureDetector(

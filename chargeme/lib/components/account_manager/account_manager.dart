@@ -42,9 +42,14 @@ class AccountManager {
             await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
         if (response.statusCode == 200) {
           final body = jsonDecode(response.body);
-          final userId = body["user_id"];
-          // get user data
-          final user = Account.fromGoogle(account, userId);
+          final userId = body["user_id"]["user_id"];
+          final Map<String, dynamic>? userData = body["user"];
+          final Account user;
+          if (userData != null) {
+            user = Account.fromUserData(userData, userId);
+          } else {
+            user = Account.fromGoogle(account, userId);
+          }
           storeAccount(user);
           analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": userId});
           return true;
@@ -69,12 +74,6 @@ class AccountManager {
       if (credential.givenName != null && credential.familyName != null) {
         displayName = credential.givenName! + " " + credential.familyName!;
       }
-      print(credential.authorizationCode);
-      print(credential.email);
-      print(credential.familyName);
-      print(credential.givenName);
-      print(credential.userIdentifier);
-      print(Platform.isAndroid);
 
       Map<String, dynamic> postBody = {
         "sign_type": "apple",
@@ -90,11 +89,36 @@ class AccountManager {
           await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
-        final userId = body["user_id"];
-        // get user data
-        final user = Account.fromApple(credential);
+        final userId = body["user_id"]["user_id"];
+        final Map<String, dynamic>? userData = body["user"];
+        final Account user;
+        if (userData != null) {
+          user = Account.fromUserData(userData, userId);
+        } else {
+          user = Account.fromApple(credential);
+        }
         storeAccount(user);
         analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": userId});
+        return true;
+      }
+      return false;
+    } catch (error) {
+      analytics.logErrorEvent(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateAccountInfo() async {
+    if (currentAccount == null) {
+      return false;
+    }
+    try {
+      final response = await http.get(Uri.parse("http://${IP.current}:${IP.port}/v1/user/${currentAccount!.id}"));
+      if (response.statusCode == 200) {
+        final userData = jsonDecode(utf8.decode(response.bodyBytes));
+        currentAccount = Account.fromUserData(userData, currentAccount!.id);
+        // currentAccount = Account.fromJson(userData);
+        storeAccount(currentAccount!);
         return true;
       }
       return false;

@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
-import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/components/helpers/ip.dart';
 import 'package:http/http.dart' as http;
 
