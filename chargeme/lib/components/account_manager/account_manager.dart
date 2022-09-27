@@ -117,7 +117,6 @@ class AccountManager {
       if (response.statusCode == 200) {
         final userData = jsonDecode(utf8.decode(response.bodyBytes));
         currentAccount = Account.fromUserData(userData, currentAccount!.id);
-        // currentAccount = Account.fromJson(userData);
         storeAccount(currentAccount!);
         return true;
       }

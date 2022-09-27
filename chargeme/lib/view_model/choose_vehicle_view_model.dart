@@ -43,7 +43,7 @@ class ChooseVehicleViewModel extends ChangeNotifier {
       VehicleType vehicleType = VehicleType.values.firstWhere((e) => e.value == _prefs?.getInt(preferredVehiceTypeKey));
 
       if (id != null && vehicleType != VehicleType.unknown) {
-        _chosenVehicle = Vehicle(id: id, type: vehicleType);
+        chosenVehicle = Vehicle(id: id, type: vehicleType);
       }
     } catch (error) {
       _analyticsManager.logErrorEvent(error.toString());

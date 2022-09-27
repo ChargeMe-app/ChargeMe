@@ -27,6 +27,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // initialize on app start in order to load user preferred vehicles
+  late ChooseVehicleViewModel chooseVehicleVM = ChooseVehicleViewModel(widget.accountManager, widget.analyticsManager);
+
   @override
   void initState() {
     super.initState();
@@ -39,8 +42,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => AddStationViewModel(analyticsManager: widget.analyticsManager)),
-          ChangeNotifierProvider(
-              create: (context) => ChooseVehicleViewModel(widget.accountManager, widget.analyticsManager)),
+          ChangeNotifierProvider.value(value: chooseVehicleVM)
         ],
         child: MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,

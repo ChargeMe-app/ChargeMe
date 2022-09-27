@@ -14,6 +14,7 @@ import 'package:chargeme/view/helper_views/title_text.dart';
 import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/view_model/check_in_view_model.dart';
+import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart' as charging_place;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -223,7 +224,10 @@ class CheckInButton extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => ChangeNotifierProvider(
                         create: (context) => CheckInViewModel(
-                            place: place!, analyticsManager: analyticsManager, accountManager: accountManager),
+                            place: place!,
+                            analyticsManager: analyticsManager,
+                            accountManager: accountManager,
+                            chooseVehicleVM: context.read<ChooseVehicleViewModel>()),
                         child: CheckInOptionsView())));
           } else {
             Navigator.push(
@@ -240,7 +244,8 @@ class CheckInButton extends StatelessWidget {
                                       create: (context) => CheckInViewModel(
                                           place: place!,
                                           analyticsManager: analyticsManager,
-                                          accountManager: accountManager),
+                                          accountManager: accountManager,
+                                          chooseVehicleVM: context.read<ChooseVehicleViewModel>()),
                                       child: CheckInOptionsView())));
                         })));
           }

@@ -6,6 +6,7 @@ import 'package:chargeme/components/constants/constants.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/components/helpers/ip.dart';
+import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,14 +51,29 @@ class CheckInViewModel extends ChangeNotifier {
   ChargingPlace place;
   AnalyticsManager analyticsManager;
   AccountManager accountManager;
+  ChooseVehicleViewModel chooseVehicleVM;
 
-  CheckInViewModel({required this.place, required this.analyticsManager, required this.accountManager}) {
+  CheckInViewModel(
+      {required this.place,
+      required this.analyticsManager,
+      required this.accountManager,
+      required this.chooseVehicleVM}) {
     initialSetup();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    chooseVehicleVM.removeListener(updateVehicleType);
+  }
+
   Future<void> initialSetup() async {
-    final prefs = await SharedPreferences.getInstance();
-    vehicleType = VehicleType.values.firstWhere((e) => e.value == prefs.getInt(preferredVehiceTypeKey));
+    vehicleType = chooseVehicleVM.chosenVehicle?.type;
+    chooseVehicleVM.addListener(updateVehicleType);
+  }
+
+  void updateVehicleType() {
+    vehicleType = chooseVehicleVM.chosenVehicle?.type;
   }
 
   VehicleType? get vehicleType => _vehicleType;
