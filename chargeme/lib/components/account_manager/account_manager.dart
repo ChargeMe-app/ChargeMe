@@ -41,7 +41,7 @@ class AccountManager {
         final response =
             await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
         if (response.statusCode == 200) {
-          final body = jsonDecode(response.body);
+          final body = jsonDecode(utf8.decode(response.bodyBytes));
           final userId = body["user_id"]["user_id"];
           final Map<String, dynamic>? userData = body["user"];
           final Account user;
@@ -88,7 +88,7 @@ class AccountManager {
       final response =
           await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
-        final body = jsonDecode(response.body);
+        final body = jsonDecode(utf8.decode(response.bodyBytes));
         final userId = body["user_id"]["user_id"];
         final Map<String, dynamic>? userData = body["user"];
         final Account user;

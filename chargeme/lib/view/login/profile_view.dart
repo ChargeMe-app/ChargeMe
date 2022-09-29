@@ -83,12 +83,7 @@ class _ProfileView extends State<ProfileView> {
                                   : chooseVehicleVM.chosenVehicle!.type.fullName,
                               style: TextStyle(color: ColorPallete.violetBlue, fontSize: 20)),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView())
-                                //  ChangeNotifierProvider(
-                                //     create: (context) => ChooseVehicleViewModel(
-                                //         accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
-                                //     child: ChooseVehicleView())),
-                                );
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView()));
                           }))
                 ]),
                 const SizedBox(height: 4),

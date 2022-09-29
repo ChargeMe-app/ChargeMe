@@ -10,6 +10,7 @@ import 'package:chargeme/view/add_station/change_station_address/change_station_
 import 'package:chargeme/view/add_station/change_station_description/change_station_description_view.dart';
 import 'package:chargeme/view/add_station/change_station_phone/change_station_phone_view.dart';
 import 'package:chargeme/view/add_station/change_station_types/change_station_types.dart';
+import 'package:chargeme/view/helper_views/app_bar_with_events.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,21 +34,24 @@ class _AddStationViewState extends State<AddStationView> {
     var l10n = AppLocalizations.of(context);
     return Consumer<AddStationViewModel>(
         builder: (context, viewModel, child) => Scaffold(
-            appBar: AppBar(
-                title: viewModel.isEditingLocationMode ? Text("Edit location") : Text("Add new location"),
-                backgroundColor: ColorPallete.violetBlue,
-                actions: [
-                  CupertinoButton(
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 0),
-                          child: Center(
-                              child: Text(viewModel.isEditingLocationMode ? "Save" : "Create",
-                                  style: TextStyle(
-                                      color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16)))),
-                      onPressed: () {
-                        viewModel.createLocation();
-                      })
-                ]),
+            appBar: AppBarWithEvents.create(
+              context: context,
+              title: viewModel.isEditingLocationMode ? Text("Edit location") : Text("Add new location"),
+              onBackButtonPressed: () {
+                viewModel.clearAfterEditing();
+              },
+              // actions: [
+              //   CupertinoButton(
+              //       child: Padding(
+              //           padding: EdgeInsets.symmetric(horizontal: 0),
+              //           child: Center(
+              //               child: Text(viewModel.isEditingLocationMode ? "Save" : "Create",
+              //                   style: TextStyle(
+              //                       color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16)))),
+              //       onPressed: () {
+              //         viewModel.createLocation();
+              //       })
+            ),
             body: ListView(
               children: viewModel.isHomeCharger
                   ? [

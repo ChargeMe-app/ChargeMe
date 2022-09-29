@@ -10,6 +10,7 @@ class ChangeStationPhoneView extends StatefulWidget {
 }
 
 class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
+  final _controller = TextEditingController();
   bool isGoodFormat = false;
 
   void validate(String str) {
@@ -18,6 +19,16 @@ class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
     setState(() {
       isGoodFormat = match != null;
     });
+  }
+
+  AddStationViewModel get addStationVM {
+    return Provider.of<AddStationViewModel>(context, listen: false);
+  }
+
+  @override
+  void initState() {
+    _controller.text = addStationVM.phoneNumber;
+    validate(_controller.text);
   }
 
   @override
@@ -37,7 +48,7 @@ class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               TextFormField(
-                initialValue: context.read<AddStationViewModel>().phoneNumber,
+                controller: _controller,
                 keyboardType: TextInputType.phone,
                 maxLines: 1,
                 decoration: InputDecoration(
@@ -45,16 +56,18 @@ class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
                   labelText: 'Phone number',
                   suffixIcon: IconButton(
                     onPressed: () {
-                      context.read<AddStationViewModel>().phoneNumber == "";
+                      setState(() {
+                        _controller.clear();
+                        addStationVM.phoneNumber = "";
+                      });
                     },
-                    icon: Icon(Icons.clear),
+                    icon: const Icon(Icons.clear),
                   ),
                 ),
                 onChanged: (text) {
                   validate(text);
 
-                  var model = Provider.of<AddStationViewModel>(context, listen: false);
-                  model.phoneNumber = text;
+                  addStationVM.phoneNumber = text;
                 },
               ),
               Text(isGoodFormat ? "The format is OK" : "Bad format",

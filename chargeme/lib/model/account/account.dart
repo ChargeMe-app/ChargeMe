@@ -64,12 +64,14 @@ class Account {
 
   static List<Vehicle> getVehicleTypesFromJson(Map<String, dynamic> data) {
     List<Vehicle> result = [];
-    final List<dynamic> vehiclesList = data["vehicle_type"];
-    vehiclesList.forEach((e) {
-      String id = e["id"] ?? "123123";
-      VehicleType vehicleType = VehicleType.values.firstWhere((el) => e["vehicle_type"] == el.value);
-      result.add(Vehicle(id: id, type: vehicleType));
-    });
+    final List<dynamic>? vehiclesList = data["vehicle_type"];
+    if (vehiclesList != null) {
+      vehiclesList.forEach((e) {
+        String id = e["id"] ?? "123123";
+        VehicleType vehicleType = VehicleType.values.firstWhere((el) => e["vehicle_type"] == el.value);
+        result.add(Vehicle(id: id, type: vehicleType));
+      });
+    }
     return result;
   }
 }
