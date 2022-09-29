@@ -1,6 +1,6 @@
 import 'package:chargeme/model/charging_place/charging_place.dart';
-import 'package:chargeme/model/charging_place/station.dart';
-import 'package:chargeme/model/charging_place/vehicle_type.dart';
+import 'package:chargeme/model/vehicle/vehicle.dart';
+import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -14,7 +14,7 @@ class Account {
   String? photoUrl; // URL
   SignInService signInService;
 
-  VehicleType? vehicleType;
+  List<Vehicle>? vehicles;
   String? vehicleName;
 
   List<ChargingPlace>? favourites;
@@ -32,7 +32,7 @@ class Account {
       this.contacts,
       this.photoUrl,
       required this.signInService,
-      this.vehicleType,
+      this.vehicles,
       this.vehicleName,
       this.favourites,
       this.recentPlaces,
@@ -52,8 +52,28 @@ class Account {
         contacts = UserContacts(email: appleAccount.email),
         signInService = SignInService.apple;
 
+  Account.fromUserData(Map<String, dynamic> data, this.id)
+      : displayName = data["display_name"],
+        photoUrl = data["photo_url"],
+        signInService = SignInService.apple, // data["sign_in_service"],
+        stats = UserStats(totalCheckIns: data["total_reviews"], photosAdded: 0, placesAdded: 0),
+        vehicles = getVehicleTypesFromJson(data);
+
   factory Account.fromJson(Map<String, dynamic> json) => _$AccountFromJson(json);
   Map<String, dynamic> toJson() => _$AccountToJson(this);
+
+  static List<Vehicle> getVehicleTypesFromJson(Map<String, dynamic> data) {
+    List<Vehicle> result = [];
+    final List<dynamic>? vehiclesList = data["vehicle_type"];
+    if (vehiclesList != null) {
+      vehiclesList.forEach((e) {
+        String id = e["id"] ?? "123123";
+        VehicleType vehicleType = VehicleType.values.firstWhere((el) => e["vehicle_type"] == el.value);
+        result.add(Vehicle(id: id, type: vehicleType));
+      });
+    }
+    return result;
+  }
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)

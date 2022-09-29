@@ -1,4 +1,5 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/model/charging_place/station.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:chargeme/extensions/datetime_extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ReviewsView extends StatelessWidget {
   ReviewsView({required this.reviews});
@@ -44,7 +46,7 @@ class CheckInView extends StatelessWidget {
     var l10n = AppLocalizations.of(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
-        Padding(padding: EdgeInsets.only(right: 8), child: Container(width: 24, child: review.rating.icon)),
+        Padding(padding: EdgeInsets.only(right: 8), child: Container(width: 24, height: 24, child: review.rating.icon)),
         Text(review.userName ?? l10n.unknownUser, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const Spacer(),
         Text(review.vehicleName?.capitalizeEachWord ?? l10n.unknownVehicle,

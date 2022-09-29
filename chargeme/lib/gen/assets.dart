@@ -32,6 +32,7 @@ enum Asset {
   park,
   phone,
   pin,
+  pinWithPlus,
   publicFast64,
   publicGrey64,
   publicStandard64,
@@ -42,6 +43,7 @@ enum Asset {
   telegramLogo,
   teslaRoadster,
   test_photo,
+  threeDots,
   threePhase,
   type2,
   type3,
@@ -123,6 +125,8 @@ extension AssetPath on Asset {
         return "assets/icons/common/phone.png";
       case Asset.pin:
         return "assets/icons/common/pin.svg";
+      case Asset.pinWithPlus:
+        return "assets/icons/common/pinWithPlus.png";
       case Asset.publicFast64:
         return "assets/icons/markers/publicFast64.png";
       case Asset.publicGrey64:
@@ -143,6 +147,8 @@ extension AssetPath on Asset {
         return "assets/icons/plugs/teslaRoadster.png";
       case Asset.test_photo:
         return "assets/temporary/test_photo.jpeg";
+      case Asset.threeDots:
+        return "assets/icons/common/threeDots.png";
       case Asset.threePhase:
         return "assets/icons/plugs/threePhase.png";
       case Asset.type2:

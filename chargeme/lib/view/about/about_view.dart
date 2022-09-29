@@ -15,9 +15,12 @@ class AboutView extends StatefulWidget {
 }
 
 class _AboutView extends State<AboutView> {
+  final String supportEmail = "chargemesup@gmail.com";
+  final String tgLink = "https://t.me/+kL8UiiPz0pY0MGVi";
+
   String version = "";
   double spacing = 12.0;
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   PackageInfo? packageInfo;
   DeviceInfoPlugin? deviceInfo;
 
@@ -63,13 +66,17 @@ class _AboutView extends State<AboutView> {
 
   @override
   Widget build(BuildContext context) {
+    const double padding = 16;
+    const double logoWidth = 32;
+    const double serviceTextWidth = 72;
+    final screenWidthWithPadding = MediaQuery.of(context).size.width - 16;
     return Scaffold(
         appBar: AppBar(title: Text("About"), backgroundColor: ColorPallete.violetBlue),
         body: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Center(
                 child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.all(padding),
                     child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                       title("ChargeMe"),
                       SizedBox(height: spacing),
@@ -79,7 +86,7 @@ class _AboutView extends State<AboutView> {
                       Text(version, style: TextStyle(color: Colors.grey, fontSize: 14)),
                       SizedBox(height: spacing),
                       title("Report a bug"),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       TextFormField(
                         controller: _controller,
                         minLines: 3,
@@ -96,46 +103,47 @@ class _AboutView extends State<AboutView> {
                           setState(() {});
                         },
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       SimpleButton(
                           color: _controller.text.isEmpty ? Colors.grey : ColorPallete.violetBlue,
                           text: "Send",
                           onPressed: () {}),
                       SizedBox(height: spacing),
                       title("Contact us"),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(children: [
-                        Image.asset(Asset.telegramLogo.path, height: 32),
-                        SizedBox(width: 8),
-                        Flexible(child: Text("Telegram:")),
-                        SizedBox(width: 4),
+                        Image.asset(Asset.telegramLogo.path, height: logoWidth),
+                        const SizedBox(width: 8),
+                        SizedBox(width: serviceTextWidth, child: Text("Telegram:")),
+                        const SizedBox(width: 4),
                         GestureDetector(
                             onTap: () async {
-                              launchUrl(Uri.parse("https://t.me/+kL8UiiPz0pY0MGVi"));
+                              launchUrl(Uri.parse(tgLink));
                             },
-                            child: Flexible(
-                                child: Text("https://t.me/+kL8UiiPz0pY0MGVi",
-                                    overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.blue))))
+                            child: Container(
+                                width: screenWidthWithPadding - serviceTextWidth - logoWidth - 8 - 4 - 16,
+                                child: Text(tgLink, overflow: TextOverflow.fade, style: TextStyle(color: Colors.blue))))
                       ]),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       Row(children: [
-                        Image.asset(Asset.appleMail.path, height: 32),
-                        SizedBox(width: 8),
-                        Flexible(child: Text("Email:")),
-                        SizedBox(width: 4),
+                        Image.asset(Asset.appleMail.path, height: logoWidth),
+                        const SizedBox(width: 8),
+                        SizedBox(width: serviceTextWidth, child: Text("Email:")),
+                        const SizedBox(width: 4),
                         GestureDetector(
                             onLongPress: () async {
-                              Clipboard.setData(ClipboardData(text: "chargemesup@gmail.com"));
+                              Clipboard.setData(ClipboardData(text: supportEmail));
                               final snackBar = SnackBar(
-                                content: const Text("Copied to clipboard"),
+                                content: Text("Copied to clipboard"),
                               );
                               ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             },
-                            child: Flexible(
-                                child: Text("chargemesup@gmail.com",
+                            child: SizedBox(
+                                width: screenWidthWithPadding - serviceTextWidth - logoWidth - 8 - 4 - 16,
+                                child: Text(supportEmail,
                                     overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.blue))))
                       ]),
-                      SizedBox(height: 24)
+                      const SizedBox(height: 24)
                     ])))));
   }
 

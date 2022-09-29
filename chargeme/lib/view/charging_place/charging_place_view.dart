@@ -1,18 +1,20 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
-import 'package:chargeme/components/helpers/svg_color_parser.dart';
 import 'package:chargeme/components/charging_place_manager/charging_place_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
-import 'package:chargeme/model/charging_place/station.dart';
-import 'package:chargeme/model/station_marker/station_marker.dart';
+import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:chargeme/view/charging_place/amenities_view.dart';
 import 'package:chargeme/view/charging_place/check_in/check_in_options_view.dart';
 import 'package:chargeme/view/charging_place/details_view.dart';
 import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
-import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
+import 'package:chargeme/view/helper_views/title_text.dart';
+import 'package:chargeme/view/login/profile_view.dart';
+import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/view_model/check_in_view_model.dart';
+import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart' as charging_place;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -69,7 +71,15 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
           body: Center(child: Text(l10n.loading)));
     } else {
       return Scaffold(
-          appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue),
+          appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue, actions: [
+            GestureDetector(
+                onTap: () {
+                  showActions();
+                },
+                child: Padding(
+                    padding: EdgeInsets.only(right: 12),
+                    child: SizedBox(width: 32, child: Image.asset(Asset.threeDots.path))))
+          ]),
           body: NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
                 setState(() {
@@ -120,6 +130,41 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                         ],
                       )))));
     }
+  }
+
+  void showActions() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+              color: Color(0xFF737373),
+              height: 180,
+              child: Container(
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                  child: Column(children: [
+                    Padding(padding: const EdgeInsets.all(8), child: TitleText("Actions")),
+                    ListTile(
+                        leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.star.path)),
+                        title:
+                            Text("Add to favourites", style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
+                        onTap: () {}),
+                    ListTile(
+                        leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.info.path)),
+                        title: Text("Edit", style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
+                        onTap: () {
+                          context.read<AddStationViewModel>().setupForEditing(place!);
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AddStationView(),
+                            ),
+                          );
+                        })
+                  ])));
+        });
   }
 }
 
@@ -172,14 +217,38 @@ class CheckInButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(50),
       ),
       onPressed: () {
-        if (place != null && accountManager.currentAccount != null) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider(
-                      create: (context) => CheckInViewModel(
-                          place: place!, analyticsManager: analyticsManager, accountManager: accountManager),
-                      child: CheckInOptionsView())));
+        if (place != null) {
+          if (accountManager.currentAccount != null) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider(
+                        create: (context) => CheckInViewModel(
+                            place: place!,
+                            analyticsManager: analyticsManager,
+                            accountManager: accountManager,
+                            chooseVehicleVM: context.read<ChooseVehicleViewModel>()),
+                        child: CheckInOptionsView())));
+          } else {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SignInView(
+                        accountManager: accountManager,
+                        onSuccess: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChangeNotifierProvider(
+                                      create: (context) => CheckInViewModel(
+                                          place: place!,
+                                          analyticsManager: analyticsManager,
+                                          accountManager: accountManager,
+                                          chooseVehicleVM: context.read<ChooseVehicleViewModel>()),
+                                      child: CheckInOptionsView())));
+                        })));
+          }
         }
       },
       child: Text(
