@@ -268,10 +268,10 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
       }),
       checkInRow(Asset.charging.path, "Charging now", () {
         checkInVM.screenOption = ScreenOption.charging;
-      }),
-      checkInRow(Asset.waitingForCharge.path, "Waiting for charge", () {
-        checkInVM.screenOption = ScreenOption.waiting;
       })
+      // checkInRow(Asset.waitingForCharge.path, "Waiting for charge", () {
+      //   checkInVM.screenOption = ScreenOption.waiting;
+      // })
     ]);
   }
 
@@ -283,6 +283,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
             text: "Publish",
             onPressed: () {
               checkInVM.sendCheckIn();
+              Navigator.pop(context);
             }));
   }
 
