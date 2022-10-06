@@ -10,6 +10,7 @@ import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:chargeme/model/vehicle/vehicle_type.dart';
 
 enum ScreenOption { success, couldNotCharge, comment, charging, waiting }
 
@@ -86,6 +87,7 @@ class CheckInViewModel extends ChangeNotifier {
   set screenOption(ScreenOption? value) {
     _screenOption = value;
     if (value == ScreenOption.charging || value == ScreenOption.waiting) _duration = Duration(minutes: 30);
+    if (value == null) _duration = null;
     notifyListeners();
   }
 
@@ -144,7 +146,8 @@ class CheckInViewModel extends ChangeNotifier {
     }
     Map<String, dynamic> postBody = {
       "user_id": accountManager.currentAccount!.id,
-      "vehicle_type": vehicleType,
+      "user_name": accountManager.currentAccount!.displayName,
+      "vehicle_type": vehicleType?.value,
       "comment": comment,
       "kilowatts": kilowatts,
       "duration": duration?.inMinutes,
