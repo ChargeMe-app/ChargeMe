@@ -22,7 +22,7 @@ class ChargingPlace {
   String? address;
   double latitude;
   double longitude;
-  IconType iconType; // make non-optional
+  IconType iconType;
 
   int? access;
   String? accessRestriction;

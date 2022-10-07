@@ -2,15 +2,12 @@ import 'dart:convert';
 
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
-import 'package:chargeme/components/constants/constants.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/components/helpers/ip.dart';
 import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:chargeme/model/vehicle/vehicle_type.dart';
 
 enum ScreenOption { success, couldNotCharge, comment, charging, waiting }
 

@@ -1,7 +1,6 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/throttler.dart';
-import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view/map/loading_view.dart';
 import 'package:chargeme/view/map/marker_info_view.dart';
@@ -10,7 +9,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:chargeme/model/station_marker/station_marker.dart';
-import '../../model/charging_place/charging_place.dart' as charging_place;
 import 'package:chargeme/components/markers_manager/markers_manager.dart' as markers_manager;
 
 class GMap extends StatefulWidget {

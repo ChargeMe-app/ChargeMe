@@ -5,6 +5,7 @@ import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/view/about/about_view.dart';
 import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
+import 'package:chargeme/view_model/charging_place_view_model.dart';
 import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/view/map/map.dart';
@@ -42,7 +43,10 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => AddStationViewModel(analyticsManager: widget.analyticsManager)),
-          ChangeNotifierProvider.value(value: chooseVehicleVM)
+          ChangeNotifierProvider(
+              create: (context) => ChargingPlaceViewModel(
+                  accountManager: widget.accountManager, analyticsManager: widget.analyticsManager)),
+          ChangeNotifierProvider.value(value: chooseVehicleVM),
         ],
         child: MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,

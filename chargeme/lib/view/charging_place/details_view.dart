@@ -26,7 +26,7 @@ class DetailsView extends StatelessWidget {
           ? Container()
           : row(context, Asset.pin.path, l10n.address, place.address!.capitalizeEachWord, withSeparator: false),
       place.phoneNumber?.isEmpty ?? true ? Container() : phoneRow(Asset.phone.path, place.phoneNumber!),
-      place.cost == null ? Container() : row(context, Asset.Parking.path, l10n.parking, costText(context)),
+      place.cost == null ? Container() : row(context, Asset.ruble.path, l10n.parking, costText(context)),
       !shouldShowHours()
           ? Container()
           : row(context, Asset.clock.path, l10n.workingHours, place.open247! ? l10n.open247 : place.hours!),
