@@ -6,6 +6,7 @@ import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
 import 'package:chargeme/view/login/choose_vehicle_view.dart';
+import 'package:chargeme/view/login/favourite_places_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:chargeme/view/login/user_vehicles_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
@@ -88,7 +89,12 @@ class _ProfileView extends State<ProfileView> {
                 ]),
                 const SizedBox(height: 4),
                 profileBox(title: l10n.yourStuff, children: [
-                  profileCell(title: l10n.favourites, iconPath: Asset.star.path),
+                  profileCell(
+                      title: l10n.favourites,
+                      iconPath: Asset.star.path,
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => FavouritePlacesView()));
+                      }),
                   separator(),
                   profileCell(
                       title: l10n.addHomeCharger,

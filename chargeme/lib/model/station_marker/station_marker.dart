@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -82,32 +83,27 @@ enum IconType {
 }
 
 extension MarkerIcon on IconType {
-  Future<BitmapDescriptor?> getMarkerIcon() async {
-    final String path;
+  String get assetPath {
     switch (this) {
       case IconType.publicStandard:
-        path = "assets/icons/markers/publicStandard64.png";
-        break;
+        return Asset.publicStandard64.path;
       case IconType.repairStandard:
-        path = "assets/icons/markers/inRepair64.png";
-        break;
+        return Asset.inRepair64.path;
       case IconType.publicFast:
-        path = "assets/icons/markers/publicFast64.png";
-        break;
+        return Asset.publicFast64.path;
       case IconType.repairFast:
-        path = "assets/icons/markers/inRepair64.png";
-        break;
+        return Asset.inRepair64.path;
       case IconType.home:
-        path = "assets/icons/markers/home64.png";
-        break;
+        return Asset.home64.path;
       case IconType.restricted:
-        path = "assets/icons/markers/publicGrey64.png";
-        break;
+        return Asset.publicGrey64.path;
     }
-    final Uint8List? mapMarkerBytes = await getBytesFromAsset(path, 64);
+  }
+
+  Future<BitmapDescriptor?> getMarkerIcon() async {
+    final Uint8List? mapMarkerBytes = await getBytesFromAsset(assetPath, 86);
     if (mapMarkerBytes != null) {
-      return BitmapDescriptor.fromBytes(
-          mapMarkerBytes); // BitmapDescriptor.fromAssetImage(const ImageConfiguration(), path);
+      return BitmapDescriptor.fromBytes(mapMarkerBytes);
     }
     return null;
   }

@@ -1,5 +1,4 @@
 enum Asset {
-  Parking,
   WC,
   addPhoto,
   appleMail,
@@ -36,6 +35,7 @@ enum Asset {
   publicFast64,
   publicGrey64,
   publicStandard64,
+  ruble,
   settings,
   shopping,
   star,
@@ -59,8 +59,6 @@ enum Asset {
 extension AssetPath on Asset {
   String get path {
     switch (this) {
-      case Asset.Parking:
-        return "assets/icons/common/Parking.svg";
       case Asset.WC:
         return "assets/icons/amenities/WC.png";
       case Asset.addPhoto:
@@ -133,6 +131,8 @@ extension AssetPath on Asset {
         return "assets/icons/markers/publicGrey64.png";
       case Asset.publicStandard64:
         return "assets/icons/markers/publicStandard64.png";
+      case Asset.ruble:
+        return "assets/icons/common/ruble.svg";
       case Asset.settings:
         return "assets/icons/common/settings.svg";
       case Asset.shopping:
