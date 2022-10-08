@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/view/login/choose_vehicle_view.dart';
@@ -32,7 +33,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Check in"), backgroundColor: ColorPallete.violetBlue),
+        appBar: AppBar(title: Text(L10n.checkIn.str), backgroundColor: ColorPallete.violetBlue),
         body: Consumer<CheckInViewModel>(
             builder: (context, checkInVM, child) => SingleChildScrollView(
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -77,15 +78,15 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
   Widget checkInRowByOption(ScreenOption option) {
     switch (option) {
       case ScreenOption.success:
-        return checkInRow(Asset.checkmarkRounded.path, "Successfullty charged", () {}, shouldShowClose: true);
+        return checkInRow(Asset.checkmarkRounded.path, L10n.successfulltyCharged.str, () {}, shouldShowClose: true);
       case ScreenOption.couldNotCharge:
-        return checkInRow(Asset.xmarkRounded.path, "Could not charge", () {}, shouldShowClose: true);
+        return checkInRow(Asset.xmarkRounded.path, L10n.couldNotCharge.str, () {}, shouldShowClose: true);
       case ScreenOption.comment:
-        return checkInRow(Asset.infoRounded.path, "Comment only", () {}, shouldShowClose: true);
+        return checkInRow(Asset.infoRounded.path, L10n.commentOnly.str, () {}, shouldShowClose: true);
       case ScreenOption.charging:
-        return checkInRow(Asset.charging.path, "Charging now", () {}, shouldShowClose: true);
+        return checkInRow(Asset.charging.path, L10n.chargingNow.str, () {}, shouldShowClose: true);
       case ScreenOption.waiting:
-        return checkInRow(Asset.waitingForCharge.path, "Waiting for charge", () {}, shouldShowClose: true);
+        return checkInRow(Asset.waitingForCharge.path, L10n.waitingForCharge.str, () {}, shouldShowClose: true);
     }
   }
 
@@ -98,11 +99,11 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
-            titleText("Comment"),
+            titleText(L10n.comment.str),
             Spacer(),
             CupertinoButton(
                 padding: EdgeInsets.all(4),
-                child: Text("Done"),
+                child: Text(L10n.done.str),
                 onPressed: commentFocusNode.hasFocus
                     ? () {
                         setState(() {
@@ -127,7 +128,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
             },
           ),
           SizedBox(height: 12),
-          titleText("Outlet"),
+          titleText(L10n.outlet.str),
           SizedBox(height: 12),
           choosingOutlet()
         ]));
@@ -178,9 +179,9 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          titleText("Power"),
+          titleText(L10n.power.str),
           Row(children: [
-            Text("Max kWh/h"),
+            Text(L10n.maxKwhh.str),
             SizedBox(width: 12),
             SizedBox(
                 height: 32,
@@ -202,7 +203,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
             const Spacer(),
             CupertinoButton(
                 padding: EdgeInsets.all(4),
-                child: Text("Done"),
+                child: Text(L10n.done.str),
                 onPressed: kilowattsFocusNode.hasFocus
                     ? () {
                         setState(() {
@@ -218,7 +219,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: Column(children: [
-          Row(children: [titleText("Duration"), const Spacer()]),
+          Row(children: [titleText(L10n.duration.str), const Spacer()]),
           DurationPicker(
               duration: checkInVM.duration!,
               onChange: (value) {
@@ -245,7 +246,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
 
   Widget nullFullView() {
     return Column(children: [
-      Text("My vehicle", style: TextStyle(fontSize: 16)),
+      Text(L10n.myVehicle.str, style: TextStyle(fontSize: 16)),
       checkInVM.vehicleType == null
           ? Text("--", style: TextStyle(fontSize: 24))
           : Text(checkInVM.vehicleType!.fullName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
@@ -255,21 +256,21 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
                 chooseVehicleVM.onlyChoosing = true;
                 Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView()));
               },
-              child: Text("Update", style: TextStyle(color: ColorPallete.violetBlue)))),
+              child: Text(L10n.update.str, style: TextStyle(color: ColorPallete.violetBlue)))),
       const SizedBox(height: 12),
-      checkInRow(Asset.checkmarkRounded.path, "Successfullty charged", () {
+      checkInRow(Asset.checkmarkRounded.path, L10n.successfulltyCharged.str, () {
         checkInVM.screenOption = ScreenOption.success;
       }),
-      checkInRow(Asset.xmarkRounded.path, "Could not charge", () {
+      checkInRow(Asset.xmarkRounded.path, L10n.couldNotCharge.str, () {
         checkInVM.screenOption = ScreenOption.couldNotCharge;
       }),
-      checkInRow(Asset.infoRounded.path, "Comment only", () {
+      checkInRow(Asset.infoRounded.path, L10n.commentOnly.str, () {
         checkInVM.screenOption = ScreenOption.comment;
       }),
-      checkInRow(Asset.charging.path, "Charging now", () {
+      checkInRow(Asset.charging.path, L10n.chargingNow.str, () {
         checkInVM.screenOption = ScreenOption.charging;
       })
-      // checkInRow(Asset.waitingForCharge.path, "Waiting for charge", () {
+      // checkInRow(Asset.waitingForCharge.path, L10n.waitingForCharge.str, () {
       //   checkInVM.screenOption = ScreenOption.waiting;
       // })
     ]);
@@ -280,7 +281,7 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: SimpleButton(
             color: ColorPallete.violetBlue,
-            text: "Publish",
+            text: L10n.publish.str,
             onPressed: () {
               checkInVM.sendCheckIn();
               Navigator.pop(context);

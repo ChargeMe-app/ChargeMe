@@ -49,7 +49,7 @@ class MarkerInfoView extends StatelessWidget {
                             : Padding(
                                 padding: const EdgeInsets.all(6),
                                 child: Text(
-                                  score!.toInt() == score ? score!.toInt().toString() : score.toString(),
+                                  score!.beautifulScore,
                                   style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                 ))),
                     score == null ? Container() : const SizedBox(width: 8),

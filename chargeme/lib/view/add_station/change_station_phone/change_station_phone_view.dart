@@ -1,8 +1,8 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangeStationPhoneView extends StatefulWidget {
   @override
@@ -33,10 +33,9 @@ class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
 
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.changePhoneNumber),
+        title: Text(L10n.changePhoneNumber.str),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(
@@ -44,7 +43,7 @@ class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
           child: Column(
             children: [
               Text(
-                l10n.enterPhoneNumber,
+                L10n.enterPhoneNumber.str,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               TextFormField(
@@ -53,7 +52,7 @@ class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
                 maxLines: 1,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Phone number',
+                  labelText: L10n.phoneNumber.str,
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -70,7 +69,7 @@ class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
                   addStationVM.phoneNumber = text;
                 },
               ),
-              Text(isGoodFormat ? "The format is OK" : "Bad format",
+              Text(isGoodFormat ? L10n.theFormatIsOk.str : L10n.badFormat.str,
                   style: TextStyle(color: isGoodFormat ? ColorPallete.greenEmerald : Colors.grey, fontSize: 16))
             ]
                 .map((e) => Padding(

@@ -1,5 +1,6 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/view/charging_place/charging_place_view.dart';
 import 'package:chargeme/view_model/charging_place_view_model.dart';
 import 'package:chargeme/model/station_marker/station_marker.dart';
@@ -12,10 +13,10 @@ class FavouritePlacesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ChargingPlaceViewModel>(builder: (context, chargingPlaceVM, child) {
       return Scaffold(
-          appBar: AppBar(title: Text("Favourites"), backgroundColor: ColorPallete.violetBlue),
+          appBar: AppBar(title: Text(L10n.favourites.str), backgroundColor: ColorPallete.violetBlue),
           body: chargingPlaceVM.favouritePlaces.isEmpty
-              ? const Center(
-                  child: Text("The list is empty.\nBrowse map to find places and add them to favourites",
+              ? Center(
+                  child: Text("${L10n.emptyFavouritesTitle.str}\n${L10n.emptyFavouritesSubtitle.str}",
                       textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)))
               : SingleChildScrollView(
                   child: Column(

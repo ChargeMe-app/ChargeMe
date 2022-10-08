@@ -1,23 +1,19 @@
-import 'dart:io';
-
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
-import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_picker/flutter_picker.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangeStationTypesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit stations"),
+        title: Text(L10n.editStations.str),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(
@@ -30,18 +26,18 @@ class ChangeStationTypesView extends StatelessWidget {
                       Row(children: [
                         Spacer(),
                         Text(
-                          l10n.stations,
+                          L10n.stations.str,
                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         Spacer()
                       ]),
                       addStationVM.stations.isEmpty
-                          ? Text(l10n.noAddedStations)
+                          ? Text(L10n.noAddedStations.str)
                           : Column(
                               children: List.generate(addStationVM.stations.length, (i) {
                               return Column(children: [
                                 BoxWithTitle(
-                                    title: "Station ${i + 1}",
+                                    title: "${L10n.station.str} ${i + 1}",
                                     toolbar: GestureDetector(
                                         onTap: () {
                                           var viewModel = Provider.of<AddStationViewModel>(context, listen: false);
@@ -49,7 +45,7 @@ class ChangeStationTypesView extends StatelessWidget {
                                         },
                                         child: Icon(CupertinoIcons.minus_circle_fill, color: ColorPallete.redCinnabar)),
                                     children: [
-                                      Row(children: [Text("Plugs:"), Spacer()]),
+                                      Row(children: [Text("${L10n.plugs.str}:"), Spacer()]),
                                       const SizedBox(width: 8),
                                       Container(
                                           height: 120,
@@ -81,7 +77,7 @@ class ChangeStationTypesView extends StatelessWidget {
                                                 height: 10,
                                                 child: ElevatedButton(
                                                     style: ElevatedButton.styleFrom(primary: ColorPallete.violetBlue),
-                                                    child: Text("Add plug"),
+                                                    child: Text(L10n.addPlug.str),
                                                     onPressed: () => showPickerArray(context, i)))
                                           ])),
                                       const SizedBox(height: 8)
@@ -97,13 +93,12 @@ class ChangeStationTypesView extends StatelessWidget {
           viewModel.addEmptyStation();
         },
         icon: const Icon(Icons.add),
-        label: Text(l10n.addStation),
+        label: Text(L10n.addStation.str),
       ),
     );
   }
 
   showPickerArray(BuildContext context, int i) {
-    var l10n = AppLocalizations.of(context);
     List<PickerItem> pickerItems = [];
     for (var connectorType in ConnectorType.values) {
       if (connectorType == ConnectorType.unknown) continue;
@@ -119,7 +114,7 @@ class ChangeStationTypesView extends StatelessWidget {
     Picker(
       adapter: PickerDataAdapter(data: pickerItems),
       itemExtent: 52,
-      title: Text("Select plug"),
+      title: Text(L10n.selectPlug.str),
       selectedTextStyle: TextStyle(color: Colors.blue, fontSize: 12),
       onConfirm: (Picker picker, List value) {
         var viewModel = Provider.of<AddStationViewModel>(context, listen: false);

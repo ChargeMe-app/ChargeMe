@@ -1,19 +1,16 @@
 import 'package:chargeme/extensions/color_pallete.dart';
-import 'package:chargeme/model/charging_place/station.dart';
-import 'package:chargeme/view/add_station/add_station_view.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangeCostAndPricingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text("Change cost and pricing"),
+          title: Text(L10n.changeCostAndPricing.str),
           backgroundColor: ColorPallete.violetBlue,
         ),
         body: Padding(
@@ -22,7 +19,7 @@ class ChangeCostAndPricingView extends StatelessWidget {
               builder: (context, addStationVM, child) => Column(children: [
                     Row(children: [
                       Text(
-                        "Requires fee?",
+                        "${L10n.requiresFee.str}?",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Spacer(),
@@ -41,7 +38,7 @@ class ChangeCostAndPricingView extends StatelessWidget {
                       maxLines: null,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        labelText: "Cost description",
+                        labelText: L10n.costAndPricing.str,
                       ),
                       onChanged: (text) {
                         addStationVM.costDescription = text;

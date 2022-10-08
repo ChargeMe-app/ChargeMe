@@ -2,6 +2,7 @@ import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:chargeme/view/charging_place/amenities_view.dart';
@@ -17,7 +18,6 @@ import 'package:chargeme/view_model/check_in_view_model.dart';
 import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart' as charging_place;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:provider/provider.dart';
@@ -42,16 +42,15 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
 
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return Consumer<ChargingPlaceViewModel>(builder: (context, chargingPlaceVM, child) {
       final place = chargingPlaceVM.place;
       if (place == null) {
         return Scaffold(
-            appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue),
-            body: Center(child: Text(l10n.loading)));
+            appBar: AppBar(title: Text(L10n.appTitle.str), backgroundColor: ColorPallete.violetBlue),
+            body: Center(child: Text(L10n.loading.str)));
       } else {
         return Scaffold(
-            appBar: AppBar(title: Text(l10n.appTitle), backgroundColor: ColorPallete.violetBlue, actions: [
+            appBar: AppBar(title: Text(L10n.appTitle.str), backgroundColor: ColorPallete.violetBlue, actions: [
               GestureDetector(
                   onTap: () {
                     showActions();
@@ -126,10 +125,11 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                         color: Colors.white,
                         borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
                     child: Column(children: [
-                      Padding(padding: const EdgeInsets.all(8), child: TitleText("Actions")),
+                      Padding(padding: const EdgeInsets.all(8), child: TitleText(L10n.actions.str)),
                       ListTile(
                           leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.star.path)),
-                          title: Text(chargingPlaceVM.isInFavourites ? "Remove from favourites" : "Add to favourites",
+                          title: Text(
+                              chargingPlaceVM.isInFavourites ? L10n.removeFromFavourites.str : L10n.addToFavourites.str,
                               style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
                           onTap: () {
                             chargingPlaceVM.isInFavourites
@@ -138,7 +138,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                           }),
                       ListTile(
                           leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.info.path)),
-                          title: Text("Edit", style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
+                          title: Text(L10n.edit.str, style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
                           onTap: () {
                             if (chargingPlaceVM.place != null) {
                               context.read<AddStationViewModel>().setupForEditing(chargingPlaceVM.place!);
@@ -185,7 +185,7 @@ class ChargingPlaceTitleView extends StatelessWidget {
                                     const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)))),
                 const SizedBox(width: 8),
                 Flexible(
-                    child: Text(place.isHomeCharger ? "Home charger" : place.name.capitalizeEachWord,
+                    child: Text(place.isHomeCharger ? L10n.homeCharger.str : place.name.capitalizeEachWord,
                         maxLines: 2, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))
               ])));
     });
@@ -201,7 +201,6 @@ class CheckInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
@@ -244,7 +243,7 @@ class CheckInButton extends StatelessWidget {
         }
       },
       child: Text(
-        l10n.checkIn,
+        L10n.checkIn.str,
         style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );

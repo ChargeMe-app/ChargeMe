@@ -1,16 +1,15 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangeStationNameView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.changeName),
+        title: Text(L10n.changeName.str),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(
@@ -18,7 +17,7 @@ class ChangeStationNameView extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                l10n.enterName,
+                L10n.enterName.str,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               TextFormField(
@@ -28,7 +27,7 @@ class ChangeStationNameView extends StatelessWidget {
                 maxLength: 48,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
-                  labelText: l10n.name,
+                  labelText: L10n.name.str,
                 ),
                 onChanged: (text) {
                   var model = Provider.of<AddStationViewModel>(context, listen: false);

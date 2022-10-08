@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -71,21 +72,21 @@ class _AboutView extends State<AboutView> {
     const double serviceTextWidth = 72;
     final screenWidthWithPadding = MediaQuery.of(context).size.width - 16;
     return Scaffold(
-        appBar: AppBar(title: Text("About"), backgroundColor: ColorPallete.violetBlue),
+        appBar: AppBar(title: Text(L10n.about.str), backgroundColor: ColorPallete.violetBlue),
         body: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Center(
                 child: Padding(
                     padding: EdgeInsets.all(padding),
                     child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                      title("ChargeMe"),
+                      title(L10n.chargeme.str),
                       SizedBox(height: spacing),
                       ClipRRect(
                           borderRadius: BorderRadius.circular(12), child: Image.asset(Asset.icon.path, height: 100)),
                       SizedBox(height: spacing),
                       Text(version, style: TextStyle(color: Colors.grey, fontSize: 14)),
                       SizedBox(height: spacing),
-                      title("Report a bug"),
+                      title(L10n.reportABug.str),
                       const SizedBox(height: 8),
                       TextFormField(
                         controller: _controller,
@@ -93,7 +94,7 @@ class _AboutView extends State<AboutView> {
                         keyboardType: TextInputType.multiline,
                         maxLines: 10,
                         decoration: InputDecoration(
-                            hintText: "Write any comments or suggestions directly to developers",
+                            hintText: L10n.writeAnyCommentsOrSuggestionsDirectlyToDevelopers.str,
                             hintMaxLines: 2,
                             fillColor: ColorPallete.violetBlue,
                             disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: ColorPallete.violetBlue)),
@@ -106,10 +107,10 @@ class _AboutView extends State<AboutView> {
                       const SizedBox(height: 8),
                       SimpleButton(
                           color: _controller.text.isEmpty ? Colors.grey : ColorPallete.violetBlue,
-                          text: "Send",
+                          text: L10n.send.str,
                           onPressed: () {}),
                       SizedBox(height: spacing),
-                      title("Contact us"),
+                      title(L10n.contactUs.str),
                       const SizedBox(height: 8),
                       Row(children: [
                         Image.asset(Asset.telegramLogo.path, height: logoWidth),
@@ -134,7 +135,7 @@ class _AboutView extends State<AboutView> {
                             onLongPress: () async {
                               Clipboard.setData(ClipboardData(text: supportEmail));
                               final snackBar = SnackBar(
-                                content: Text("Copied to clipboard"),
+                                content: Text(L10n.copiedToClipboard.str),
                               );
                               ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             },

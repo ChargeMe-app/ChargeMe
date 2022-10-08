@@ -48,8 +48,8 @@ platform :ios do
       api_key: api_key,
       beta_app_description: "ChargeMe beta",
       distribute_external: true,
-      changelog: changelog
-      skip_waiting_for_build_processing: true
+      changelog: changelog,
+      skip_waiting_for_build_processing: true,
       groups: ["External testers"]
     )
   end

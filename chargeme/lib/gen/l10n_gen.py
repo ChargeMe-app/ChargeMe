@@ -1,32 +1,60 @@
 import json
-import os
-import re
 
+l10n_file = open('l10n.dart', mode="w")
+en_file = open('../l10n/app_en.arb', mode="r")
+ru_file = open('../l10n/app_ru.arb', mode="r")
 
-result = {}
-empty = {}
+json_en = json.loads(en_file.read())
+json_ru = json.loads(ru_file.read())
 
-output = open('app_en.arb', mode="w")
-output_ru = open('app_ru.arb', mode="w")
+assert json_en.keys() == json_ru.keys(), "The keys are inconsistent"
 
-currentDir = os.getcwd()
-viewsDir = "/".join(currentDir.split("/")[:-1]) + "/view"
-os.chdir(viewsDir)
+l10n_file.write('''import 'package:get/get.dart';
 
-for roots, dirs, files in os.walk(viewsDir):
-    for filename in files:
-        with open(roots + "/" + filename, mode="r", encoding="ISO-8859-1") as f:
-            content = f.read()
-            matches = re.findall(r'"[a-zA-Z\s]+"', content)
-            for match in matches:
-                string = match[1:-1]
-                key = string[0].lower() + "".join(string.title().split())[1:]
-                result[key] = string
-                empty[key] = ""
+enum L10n {\n''')
 
-output.write(json.dumps(result, indent=4))
-output_ru.write(json.dumps(empty, indent=4))
+sorted_keys = sorted(json_en.keys())
+for key in sorted_keys:
+    l10n_file.write(f"  {key},\n")
 
-output.close()
-output_ru.close()
+l10n_file.write("}\n\n")
 
+l10n_file.write('''extension GetString on L10n {
+  String get str {
+    if (Get.deviceLocale?.languageCode == "ru") {
+      switch (this) {\n''')
+
+for key in sorted_keys:
+    l10n_file.write(f"        case L10n.{key}:\n")
+    l10n_file.write(f"          return \"{json_ru[key]}\";\n")
+
+l10n_file.write('''      }
+    } else {
+      switch (this) {\n''')
+
+for key in sorted_keys:
+    l10n_file.write(f"        case L10n.{key}:\n")
+    l10n_file.write(f"          return \"{json_en[key]}\";\n")
+
+l10n_file.write('''      }
+    }
+  }
+}''')
+
+en_file.close()
+ru_file.close()
+l10n_file.close()
+
+# extension GetString on L10n {
+#   String get str {
+#     if (Intl.getCurrentLocale().startsWith("ru")) {
+#       switch (this) {
+
+    #   }
+    # } else {
+    #   switch (this) {
+
+#       }
+#     }
+#   }
+# }
