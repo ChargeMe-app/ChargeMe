@@ -27,6 +27,9 @@ Flutter/flutter_export_environment.sh
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
 Runner/Secrets.swift
+*.ipa
+*.zip
+*.p8
 
 # Exceptions to above rules.
 !default.mode1v3

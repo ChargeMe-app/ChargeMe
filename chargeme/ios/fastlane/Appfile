@@ -1,0 +1,8 @@
+app_identifier("com.chargeme") # The bundle identifier of your app
+apple_id("nikitarat@mail.ru") # Your Apple email address
+
+itc_team_id("122718532") # App Store Connect Team ID
+team_id("WPVJY5G9UM") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
