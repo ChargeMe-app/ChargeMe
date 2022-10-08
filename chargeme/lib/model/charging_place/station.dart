@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'station.g.dart';
 
@@ -190,6 +189,17 @@ extension IconConnectorTypeExtension on ConnectorType {
 
 enum Access { public, restricted }
 
+extension LocalizedAccess on Access {
+  String get localizedTitle {
+    switch (this) {
+      case Access.public:
+        return L10n.public.str;
+      case Access.restricted:
+        return L10n.private.str;
+    }
+  }
+}
+
 enum AmenityType {
   @JsonValue(0)
   lodging,
@@ -216,31 +226,30 @@ enum AmenityType {
 }
 
 extension AmenityTitle on AmenityType {
-  String localizedTitle(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
+  String get localizedTitle {
     switch (this) {
       case AmenityType.lodging:
-        return l10n.lodging;
+        return L10n.lodging.str;
       case AmenityType.dining:
-        return l10n.dining;
+        return L10n.dining.str;
       case AmenityType.restrooms:
-        return l10n.restrooms;
+        return L10n.restrooms.str;
       case AmenityType.evParking:
-        return l10n.evParking;
+        return L10n.evParking.str;
       case AmenityType.valetParking:
-        return l10n.valetParking;
+        return L10n.valetParking.str;
       case AmenityType.park:
-        return l10n.park;
+        return L10n.park.str;
       case AmenityType.wifi:
-        return l10n.wifi;
+        return L10n.wifi.str;
       case AmenityType.shopping:
-        return l10n.shopping;
+        return L10n.shopping.str;
       case AmenityType.grocery:
-        return l10n.grocery;
+        return L10n.grocery.str;
       case AmenityType.hiking:
-        return l10n.hiking;
+        return L10n.hiking.str;
       case AmenityType.camping:
-        return l10n.camping;
+        return L10n.camping.str;
     }
   }
 }

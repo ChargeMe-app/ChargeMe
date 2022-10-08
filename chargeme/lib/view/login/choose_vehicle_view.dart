@@ -1,5 +1,6 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:chargeme/view/helper_views/app_bar_with_events.dart';
@@ -17,7 +18,7 @@ class ChooseVehicleView extends StatelessWidget {
         builder: (context, chooseVehicleVM, child) => Scaffold(
             appBar: AppBarWithEvents.create(
                 context: context,
-                title: const Text("Choose vehicle"),
+                title: Text(L10n.chooseVehicle.str),
                 onBackButtonPressed: () {
                   chooseVehicleVM.setChosenVehicleType();
                 }),

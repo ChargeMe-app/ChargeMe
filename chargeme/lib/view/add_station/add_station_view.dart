@@ -1,4 +1,5 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/view/add_station/change_access/change_access_view.dart';
 import 'package:chargeme/view/add_station/change_amenities/change_amenities_view.dart';
 import 'package:chargeme/view/add_station/change_cost_and_pricing/change_cost_and_pricing_view.dart';
@@ -15,9 +16,7 @@ import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:chargeme/extensions/location_extensions.dart';
 
@@ -31,79 +30,93 @@ class AddStationView extends StatefulWidget {
 class _AddStationViewState extends State<AddStationView> {
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return Consumer<AddStationViewModel>(
         builder: (context, viewModel, child) => Scaffold(
             appBar: AppBarWithEvents.create(
-              context: context,
-              title: viewModel.isEditingLocationMode ? Text("Edit location") : Text("Add new location"),
-              onBackButtonPressed: () {
-                viewModel.clearAfterEditing();
-              },
-              // actions: [
-              //   CupertinoButton(
-              //       child: Padding(
-              //           padding: EdgeInsets.symmetric(horizontal: 0),
-              //           child: Center(
-              //               child: Text(viewModel.isEditingLocationMode ? "Save" : "Create",
-              //                   style: TextStyle(
-              //                       color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16)))),
-              //       onPressed: () {
-              //         viewModel.createLocation();
-              //       })
-            ),
+                context: context,
+                title: viewModel.isEditingLocationMode ? Text(L10n.editLocation.str) : Text(L10n.addNewLocation.str),
+                onBackButtonPressed: () {
+                  viewModel.clearAfterEditing();
+                },
+                actions: [
+                  CupertinoButton(
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 0),
+                          child: Center(
+                              child: Text(viewModel.isEditingLocationMode ? L10n.save.str : L10n.create.str,
+                                  style: TextStyle(
+                                      color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16)))),
+                      onPressed: () {
+                        viewModel.createLocation();
+                      })
+                ]),
             body: ListView(
               children: viewModel.isHomeCharger
                   ? [
-                      CardEntry(l10n.description, viewModel.description, false, (_) => ChangeStationDescriptionView()),
                       CardEntry(
-                          l10n.location,
-                          viewModel.location == null ? "" : "Successfully set",
+                          L10n.description.str, viewModel.description, false, (_) => ChangeStationDescriptionView()),
+                      CardEntry(
+                          L10n.location.str,
+                          viewModel.location == null ? "" : L10n.successfullySet.str,
                           true,
                           (_) => ChooseLocationView(
                               onLocationChosen: (address, latlng) => viewModel.setLocation(address, latlng),
                               initialMarkerPosition: viewModel.location?.latLng)),
-                      CardEntry(l10n.address, viewModel.address, false, (_) => ChangeStationAddressView()),
-                      CardEntry(l10n.stations, viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(),
-                          true, (_) => ChangeStationTypesView()),
+                      CardEntry(L10n.address.str, viewModel.address, false, (_) => ChangeStationAddressView()),
                       CardEntry(
-                          l10n.hours,
-                          viewModel.isOpen247 ? l10n.open247 : (viewModel.hours.isEmpty ? l10n.empty : viewModel.hours),
+                          L10n.stations.str,
+                          viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(),
+                          true,
+                          (_) => ChangeStationTypesView()),
+                      CardEntry(
+                          L10n.hours.str,
+                          viewModel.isOpen247
+                              ? L10n.open247.str
+                              : (viewModel.hours.isEmpty ? L10n.empty.str : viewModel.hours),
                           false,
                           (_) => ChangeHoursView()),
-                      CardEntry(l10n.amenities, viewModel.amenities.map((e) => e.localizedTitle(context)).join(", "),
-                          false, (_) => ChangeAmenitiesView()),
+                      CardEntry(L10n.amenities.str, viewModel.amenities.map((e) => e.localizedTitle).join(", "), false,
+                          (_) => ChangeAmenitiesView()),
                     ]
                   : [
-                      CardEntry(l10n.name, viewModel.name, true, (_) => ChangeStationNameView()),
-                      CardEntry(l10n.description, viewModel.description, false, (_) => ChangeStationDescriptionView()),
-                      CardEntry(l10n.phoneNumber, viewModel.phoneNumber, false, (_) => ChangeStationPhoneView()),
+                      CardEntry(L10n.name.str, viewModel.name, true, (_) => ChangeStationNameView()),
                       CardEntry(
-                          l10n.location,
-                          viewModel.location == null ? "" : "Successfully set",
+                          L10n.description.str, viewModel.description, false, (_) => ChangeStationDescriptionView()),
+                      CardEntry(L10n.phoneNumber.str, viewModel.phoneNumber, false, (_) => ChangeStationPhoneView()),
+                      CardEntry(
+                          L10n.location.str,
+                          viewModel.location == null ? "" : L10n.successfullySet.str,
                           true,
                           (_) => ChooseLocationView(
                               onLocationChosen: (address, latlng) => viewModel.setLocation(address, latlng),
                               initialMarkerPosition: viewModel.location?.latLng)),
-                      CardEntry(l10n.address, viewModel.address, false, (_) => ChangeStationAddressView()),
-                      CardEntry(l10n.stations, viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(),
-                          true, (_) => ChangeStationTypesView()),
-                      CardEntry(l10n.access, viewModel.access.name.capitalize, false, (_) => ChangeAccessView()),
+                      CardEntry(L10n.address.str, viewModel.address, false, (_) => ChangeStationAddressView()),
                       CardEntry(
-                          l10n.costAndPricing,
-                          viewModel.requiresFee ? "${l10n.requiresFee}: ${viewModel.costDescription}" : l10n.free,
+                          L10n.stations.str,
+                          viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(),
+                          true,
+                          (_) => ChangeStationTypesView()),
+                      CardEntry(L10n.access.str, viewModel.access.localizedTitle.capitalize, false,
+                          (_) => ChangeAccessView()),
+                      CardEntry(
+                          L10n.costAndPricing.str,
+                          viewModel.requiresFee
+                              ? "${L10n.requiresFee.str}: ${viewModel.costDescription}"
+                              : L10n.free.str,
                           false,
                           (_) => ChangeCostAndPricingView()),
                       CardEntry(
-                          l10n.hours,
-                          viewModel.isOpen247 ? l10n.open247 : (viewModel.hours.isEmpty ? l10n.empty : viewModel.hours),
+                          L10n.hours.str,
+                          viewModel.isOpen247
+                              ? L10n.open247.str
+                              : (viewModel.hours.isEmpty ? L10n.empty.str : viewModel.hours),
                           false,
                           (_) => ChangeHoursView()),
-                      CardEntry(l10n.amenities, viewModel.amenities.map((e) => e.localizedTitle(context)).join(", "),
-                          false, (_) => ChangeAmenitiesView()),
+                      CardEntry(L10n.amenities.str, viewModel.amenities.map((e) => e.localizedTitle).join(", "), false,
+                          (_) => ChangeAmenitiesView()),
                       CardEntry(
-                          "Location Open or Active?",
-                          viewModel.isOpenOrActive ? l10n.locationIsActive : l10n.locationComingSoon,
+                          "${L10n.locationOpenOrActive.str}?",
+                          viewModel.isOpenOrActive ? L10n.locationIsActive.str : L10n.locationComingSoon.str,
                           true,
                           (_) => ChangeIsOpenOrActiveView()),
                     ],

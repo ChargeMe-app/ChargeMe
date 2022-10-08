@@ -1,6 +1,7 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/view/login/choose_vehicle_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
@@ -15,7 +16,7 @@ class UserVehiclesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: const Text("Choose vehicle"),
+            title: Text(L10n.chooseVehicle.str),
             actions: [
               context.read<ChooseVehicleViewModel>().onlyChoosing
                   ? Container()
@@ -63,7 +64,7 @@ class UserVehiclesView extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
                           child: SimpleButton(
                               color: ColorPallete.violetBlue,
-                              text: "Add vehicle",
+                              text: L10n.addVehicle.str,
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => ChooseVehicleView()));
                               }))

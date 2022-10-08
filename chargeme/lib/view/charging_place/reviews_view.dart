@@ -1,13 +1,12 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:chargeme/extensions/datetime_extensions.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ReviewsView extends StatelessWidget {
   ReviewsView({required this.reviews});
@@ -17,10 +16,9 @@ class ReviewsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return BoxWithTitle(
-        title: l10n.checkins,
-        footer: l10n.allCheckins,
+        title: L10n.checkins.str,
+        footer: L10n.allCheckins.str,
         shouldShowFooter: reviews.length > 7,
         onFooterTap: () {
           Navigator.push(
@@ -43,13 +41,12 @@ class CheckInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Padding(padding: EdgeInsets.only(right: 8), child: Container(width: 24, height: 24, child: review.rating.icon)),
-        Text(review.userName ?? l10n.unknownUser, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(review.userName ?? L10n.unknownUser.str, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const Spacer(),
-        Text(review.vehicleName?.capitalizeEachWord ?? l10n.unknownVehicle,
+        Text(review.vehicleName?.capitalizeEachWord ?? L10n.unknownVehicle.str,
             maxLines: 1, overflow: TextOverflow.fade, style: TextStyle(fontSize: 16, color: Colors.grey))
       ]),
       review.comment == ""
@@ -76,9 +73,8 @@ class AllReviewsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return Scaffold(
-        appBar: AppBar(title: Text(l10n.allCheckins), backgroundColor: ColorPallete.violetBlue),
+        appBar: AppBar(title: Text(L10n.allCheckins.str), backgroundColor: ColorPallete.violetBlue),
         body: SingleChildScrollView(
             child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),

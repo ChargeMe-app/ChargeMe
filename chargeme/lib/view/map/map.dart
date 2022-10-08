@@ -1,6 +1,7 @@
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/throttler.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/view/map/loading_view.dart';
 import 'package:chargeme/view/map/marker_info_view.dart';
@@ -82,7 +83,7 @@ class _GMap extends State<GMap> {
             _customInfoWindowController.addInfoWindow!(
                 MarkerInfoView(
                     stationMarker.id,
-                    stationMarker.iconType == IconType.home ? "Home charger" : stationMarker.name,
+                    stationMarker.iconType == IconType.home ? L10n.homeCharger.str : stationMarker.name,
                     stationTypes,
                     markerIcon,
                     stationMarker.score,

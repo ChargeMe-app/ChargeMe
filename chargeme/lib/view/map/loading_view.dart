@@ -1,10 +1,9 @@
+import 'package:chargeme/gen/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var l10n = AppLocalizations.of(context);
     return TweenAnimationBuilder<double>(
         tween: Tween<double>(begin: 0.0, end: 1.0),
         curve: Curves.ease,
@@ -16,8 +15,9 @@ class LoadingView extends StatelessWidget {
             color: Colors.black38,
             child: Row(children: [
               Padding(
-                  padding: EdgeInsets.all(8), child: Text("${l10n.loading}...", style: TextStyle(color: Colors.white))),
-              Spacer(),
+                  padding: EdgeInsets.all(8),
+                  child: Text("${L10n.loading.str}...", style: TextStyle(color: Colors.white))),
+              const Spacer(),
               Padding(
                   padding: EdgeInsets.all(8), child: CircularProgressIndicator.adaptive(backgroundColor: Colors.white))
             ])));

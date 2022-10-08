@@ -1,4 +1,5 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,7 +17,7 @@ class ChooseLocationView extends StatefulWidget {
 
 class _ChooseLocationView extends State<ChooseLocationView> {
   final LatLng _center = const LatLng(55.7558, 37.6173);
-  String _hintText = "Long tap on map to place a marker";
+  String _hintText = L10n.longTapOnMapToPlaceAMarker.str;
   Marker? _marker;
   String? fullAddress;
 
@@ -39,7 +40,7 @@ class _ChooseLocationView extends State<ChooseLocationView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Choose location"),
+          title: Text(L10n.chooseLocation.str),
           backgroundColor: ColorPallete.violetBlue,
         ),
         body: Stack(children: [
@@ -68,14 +69,17 @@ class _ChooseLocationView extends State<ChooseLocationView> {
                 }
                 widget.onLocationChosen(fullAddress, latLng);
                 setState(() {
-                  _hintText = "Location is successfully set";
+                  _hintText = L10n.locationIsSuccessfullySet.str;
                 });
               }),
           Container(
               color: Colors.black45,
               child: Row(children: [
-                Padding(padding: EdgeInsets.all(8), child: Text(_hintText, style: TextStyle(color: Colors.white))),
-                Spacer()
+                Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Text(_hintText,
+                        maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white))),
+                const Spacer()
               ]))
         ]));
   }

@@ -1,13 +1,12 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
-import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,19 +19,18 @@ class DetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
     return Column(children: [
       place.address == null
           ? Container()
-          : row(context, Asset.pin.path, l10n.address, place.address!.capitalizeEachWord, withSeparator: false),
+          : row(context, Asset.pin.path, L10n.address.str, place.address!.capitalizeEachWord, withSeparator: false),
       place.phoneNumber?.isEmpty ?? true ? Container() : phoneRow(Asset.phone.path, place.phoneNumber!),
-      place.cost == null ? Container() : row(context, Asset.ruble.path, l10n.parking, costText(context)),
+      place.cost == null ? Container() : row(context, Asset.ruble.path, L10n.parking.str, costText(context)),
       !shouldShowHours()
           ? Container()
-          : row(context, Asset.clock.path, l10n.workingHours, place.open247! ? l10n.open247 : place.hours!),
+          : row(context, Asset.clock.path, L10n.workingHours.str, place.open247! ? L10n.open247.str : place.hours!),
       place.description?.isEmpty ?? true
           ? Container()
-          : row(context, Asset.info.path, l10n.description, place.description!),
+          : row(context, Asset.info.path, L10n.description.str, place.description!),
       ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(15)),
           child: Stack(alignment: AlignmentDirectional.bottomEnd, children: [
@@ -59,13 +57,12 @@ class DetailsView extends StatelessWidget {
                 child: MaterialButton(
                     color: ColorPallete.violetBlue,
                     onPressed: () => openMapsSheet(context),
-                    child: Text(l10n.getDirections, style: const TextStyle(color: Colors.white)))),
+                    child: Text(L10n.getDirections.str, style: const TextStyle(color: Colors.white)))),
           ])),
     ]);
   }
 
   Widget row(BuildContext context, String assetPath, String title, String text, {bool withSeparator = true}) {
-    final l10n = AppLocalizations.of(context);
     return Column(children: [
       withSeparator ? Container(height: 1, color: ColorPallete.violetBlue) : Container(),
       Container(
@@ -82,7 +79,7 @@ class DetailsView extends StatelessWidget {
                           children: [
                             Padding(padding: const EdgeInsets.fromLTRB(24, 0, 24, 8), child: SelectableText(text)),
                             SimpleDialogOption(
-                              child: Row(children: [Spacer(), Text(l10n.close, style: TextStyle(fontSize: 14))]),
+                              child: Row(children: [Spacer(), Text(L10n.close.str, style: TextStyle(fontSize: 14))]),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
@@ -132,14 +129,13 @@ class DetailsView extends StatelessWidget {
   }
 
   String costText(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
     if (!place.cost!) {
-      return l10n.free;
+      return L10n.free.str;
     }
     if (!(place.costDescription?.isEmpty ?? true)) {
       return place.costDescription!;
     }
-    return l10n.requiresFee;
+    return L10n.requiresFee.str;
   }
 
   openMapsSheet(context) async {
@@ -147,7 +143,6 @@ class DetailsView extends StatelessWidget {
       final coords = Coords(place.latitude, place.longitude);
       final title = place.name;
       final availableMaps = await MapLauncher.installedMaps;
-      final l10n = AppLocalizations.of(context);
 
       showModalBottomSheet(
         context: context,
@@ -160,7 +155,7 @@ class DetailsView extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       child: Row(children: [
                         const Spacer(),
-                        Text(l10n.getDirections,
+                        Text(L10n.getDirections.str,
                             style:
                                 TextStyle(color: ColorPallete.violetBlue, fontSize: 18, fontWeight: FontWeight.bold)),
                         const Spacer()
