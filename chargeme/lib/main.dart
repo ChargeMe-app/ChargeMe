@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     widget.accountManager.tryLoadStoredAccount();
     widget.analyticsManager.initialSetup();
-    print(Get.deviceLocale?.languageCode);
+    widget.analyticsManager.logEvent("session_started", params: {"device_locale": Get.deviceLocale?.languageCode});
   }
 
   @override
