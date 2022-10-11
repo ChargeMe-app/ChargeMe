@@ -145,5 +145,6 @@
     "totalCheckins": "Количество чек-инов",
     "maxKwhh": "Макс Квт/ч",
     "emptyFavouritesTitle": "Список пуст.",
-    "emptyFavouritesSubtitle": "Просматривайте карту, чтобы найти места и добавить их в избранное"
+    "emptyFavouritesSubtitle": "Просматривайте карту, чтобы найти места и добавить их в избранное",
+    "vehicle": "Автомобиль"
 }

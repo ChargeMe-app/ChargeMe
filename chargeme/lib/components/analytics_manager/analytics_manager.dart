@@ -10,20 +10,18 @@ import 'package:http/http.dart' as http;
 class AnalyticsManager {
   String? deviceModel;
   List<Event> storedEvents = [];
+  String filename;
+
+  AnalyticsManager() : filename = "events_${DateTime.now().toIso8601String()}";
 
   Future<File> get storedFile async {
-    // TODO: separate files by session
     final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/analytics_logs.json");
+    return File("${directory.path}/analytics/$filename.json");
   }
 
   Future<void> initialSetup() async {
+    (await storedFile).create(recursive: true);
     deviceModel = await _getId();
-    final file = await storedFile;
-    try {
-      final content = await file.readAsString();
-      storedEvents = jsonDecode(content);
-    } catch (error) {}
   }
 
   Future<void> logEvent(String name, {Map<String, dynamic>? params}) async {

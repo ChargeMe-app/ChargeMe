@@ -130,6 +130,7 @@ enum L10n {
   unsuccessfullSignIn,
   update,
   valetParking,
+  vehicle,
   waitingForCharge,
   wifi,
   workingHours,
@@ -401,6 +402,8 @@ extension GetString on L10n {
           return "Обновить";
         case L10n.valetParking:
           return "Услуги парковщика";
+        case L10n.vehicle:
+          return "Автомобиль";
         case L10n.waitingForCharge:
           return "Жду зарядки";
         case L10n.wifi:
@@ -676,6 +679,8 @@ extension GetString on L10n {
           return "Update";
         case L10n.valetParking:
           return "Valet parking";
+        case L10n.vehicle:
+          return "Vehicle";
         case L10n.waitingForCharge:
           return "Waiting for charge";
         case L10n.wifi:

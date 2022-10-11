@@ -13,6 +13,8 @@ class AccountManager {
   Account? currentAccount;
   AnalyticsManager analytics;
 
+  List<AccountManagerObserver> observers = [];
+
   AccountManager({required this.analytics});
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
@@ -42,17 +44,15 @@ class AccountManager {
             await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
         if (response.statusCode == 200) {
           final body = jsonDecode(utf8.decode(response.bodyBytes));
-          final userId = body["user_id"]["user_id"];
-          final Map<String, dynamic>? userData = body["user"];
-          final Account user;
-          if (userData != null) {
-            user = Account.fromUserData(userData, userId);
-          } else {
-            user = Account.fromGoogle(account, userId);
+          final userId = body["user_id"];
+          final result = await updateAccountInfo(id: userId);
+          if (result) {
+            final user = currentAccount!;
+            storeAccount(user);
+            analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": user.id});
+            return true;
           }
-          storeAccount(user);
-          analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": userId});
-          return true;
+          return false;
         }
       }
       return false;
@@ -89,17 +89,15 @@ class AccountManager {
           await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
         final body = jsonDecode(utf8.decode(response.bodyBytes));
-        final userId = body["user_id"]["user_id"];
-        final Map<String, dynamic>? userData = body["user"];
-        final Account user;
-        if (userData != null) {
-          user = Account.fromUserData(userData, userId);
-        } else {
-          user = Account.fromApple(credential);
+        final userId = body["user_id"];
+        final result = await updateAccountInfo(id: userId);
+        if (result) {
+          final user = currentAccount!;
+          storeAccount(user);
+          analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": userId});
+          return true;
         }
-        storeAccount(user);
-        analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": userId});
-        return true;
+        return false;
       }
       return false;
     } catch (error) {
@@ -108,16 +106,20 @@ class AccountManager {
     }
   }
 
-  Future<bool> updateAccountInfo() async {
-    if (currentAccount == null) {
+  Future<bool> updateAccountInfo({String? id = null}) async {
+    if (currentAccount == null && id == null) {
       return false;
     }
+    final userId = id ?? currentAccount!.id;
     try {
-      final response = await http.get(Uri.parse("http://${IP.current}:${IP.port}/v1/user/${currentAccount!.id}"));
+      final response = await http.get(Uri.parse("http://${IP.current}:${IP.port}/v1/user/${userId}"));
       if (response.statusCode == 200) {
         final userData = jsonDecode(utf8.decode(response.bodyBytes));
-        currentAccount = Account.fromUserData(userData, currentAccount!.id);
+        currentAccount = Account.fromUserData(userData, userId);
         storeAccount(currentAccount!);
+        observers.forEach((e) {
+          e.currentAccountUpdated(currentAccount!);
+        });
         return true;
       }
       return false;
@@ -169,4 +171,19 @@ class AccountManager {
       analytics.logErrorEvent(err.toString());
     }
   }
+
+  // Observers
+  void addObserver(AccountManagerObserver observer) {
+    observers.add(observer);
+  }
+
+  void removeObserver(AccountManagerObserver observer) {
+    if (observers.contains(observer)) {
+      observers.remove(observer);
+    }
+  }
+}
+
+abstract class AccountManagerObserver {
+  void currentAccountUpdated(Account account);
 }

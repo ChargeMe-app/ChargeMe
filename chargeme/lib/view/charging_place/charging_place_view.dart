@@ -218,7 +218,8 @@ class CheckInButton extends StatelessWidget {
                             place: place!,
                             analyticsManager: analyticsManager,
                             accountManager: accountManager,
-                            chooseVehicleVM: context.read<ChooseVehicleViewModel>()),
+                            chooseVehicleVM: context.read<ChooseVehicleViewModel>(),
+                            chargingPlaceVM: context.read<ChargingPlaceViewModel>()),
                         child: CheckInOptionsView())));
           } else {
             Navigator.push(
@@ -236,7 +237,8 @@ class CheckInButton extends StatelessWidget {
                                           place: place!,
                                           analyticsManager: analyticsManager,
                                           accountManager: accountManager,
-                                          chooseVehicleVM: context.read<ChooseVehicleViewModel>()),
+                                          chooseVehicleVM: context.read<ChooseVehicleViewModel>(),
+                                          chargingPlaceVM: context.read<ChargingPlaceViewModel>()),
                                       child: CheckInOptionsView())));
                         })));
           }

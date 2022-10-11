@@ -1,6 +1,7 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/main.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:chargeme/view/helper_views/app_bar_with_events.dart';
@@ -9,19 +10,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class ChooseVehicleView extends StatelessWidget {
+class ChooseVehicleView extends StatefulWidget {
+  bool shouldSelectOnPop;
+
+  ChooseVehicleView({super.key, this.shouldSelectOnPop = false});
+
+  @override
+  _ChooseVehicleView createState() => _ChooseVehicleView();
+}
+
+class _ChooseVehicleView extends State<ChooseVehicleView> with RouteAware {
   final Duration animationDuration = const Duration(milliseconds: 400);
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
+    super.initState();
+  }
+
+  @override
+  void didPop() {
+    final chooseVehicleVM = Provider.of<ChooseVehicleViewModel>(context, listen: false);
+    chooseVehicleVM.setChosenVehicleType(shouldSelect: widget.shouldSelectOnPop);
+    super.didPop();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<ChooseVehicleViewModel>(
         builder: (context, chooseVehicleVM, child) => Scaffold(
-            appBar: AppBarWithEvents.create(
-                context: context,
-                title: Text(L10n.chooseVehicle.str),
-                onBackButtonPressed: () {
-                  chooseVehicleVM.setChosenVehicleType();
-                }),
+            appBar: AppBar(title: Text(L10n.chooseVehicle.str), backgroundColor: ColorPallete.violetBlue),
             body: SingleChildScrollView(
                 child: Padding(
                     padding: EdgeInsets.only(bottom: 20),

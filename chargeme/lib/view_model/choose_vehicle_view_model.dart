@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/constants/constants.dart';
+import 'package:chargeme/model/account/account.dart';
 import 'package:chargeme/model/vehicle/vehicle.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ extension PreferredVehicleKey on String {
   static const preferredVehiceTypeKey = "preferredVehiceType";
 }
 
-class ChooseVehicleViewModel extends ChangeNotifier {
+class ChooseVehicleViewModel extends ChangeNotifier with AccountManagerObserver {
   final AccountManager _accountManager;
   final AnalyticsManager _analyticsManager;
   late SharedPreferences? _prefs;
@@ -45,8 +46,23 @@ class ChooseVehicleViewModel extends ChangeNotifier {
       if (id != null && vehicleType != VehicleType.unknown) {
         chosenVehicle = Vehicle(id: id, type: vehicleType);
       }
+
+      _accountManager.addObserver(this);
     } catch (error) {
       _analyticsManager.logErrorEvent(error.toString());
+    }
+  }
+
+  @override
+  void dispose() {
+    _accountManager.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void currentAccountUpdated(Account account) {
+    if ((account.vehicles ?? []).isEmpty) {
+      removePreferredVehicle();
     }
   }
 
@@ -85,7 +101,7 @@ class ChooseVehicleViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setChosenVehicleType() async {
+  Future<void> setChosenVehicleType({bool shouldSelect = false}) async {
     if (_accountManager.currentAccount == null || vehicleTypeToChoose == null) return;
     Map<String, dynamic> postBody = {
       "user_id": _accountManager.currentAccount!.id,
@@ -97,6 +113,9 @@ class ChooseVehicleViewModel extends ChangeNotifier {
       if (response.statusCode == 200) {
         _analyticsManager.logEvent("successful vehicle type chosen");
         await _accountManager.updateAccountInfo();
+        if (shouldSelect && vehicles.isNotEmpty) {
+          savePreferredVehicle(vehicles[0]);
+        }
         notifyListeners();
       }
     } catch (error) {
@@ -104,10 +123,18 @@ class ChooseVehicleViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> savePreferredVehicleType(Vehicle vehicle) async {
+  Future<void> savePreferredVehicle(Vehicle vehicle) async {
     chosenVehicle = vehicle;
     await _prefs?.setInt(preferredVehiceTypeKey, vehicle.type.value);
     await _prefs?.setString(preferredVehicleIdKey, vehicle.id);
+    notifyListeners();
+  }
+
+  Future<void> removePreferredVehicle() async {
+    chosenVehicle = null;
+    await _prefs?.remove(preferredVehiceTypeKey);
+    await _prefs?.remove(preferredVehicleIdKey);
+    notifyListeners();
   }
 
   Future<void> removeVehicle(Vehicle vehicle) async {
