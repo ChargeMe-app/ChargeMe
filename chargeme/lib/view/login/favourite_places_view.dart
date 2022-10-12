@@ -27,7 +27,7 @@ class FavouritePlacesView extends StatelessWidget {
                       favPlace.iconType.assetPath,
                       height: 42,
                     ),
-                    title: Text(favPlace.name,
+                    title: Text(favPlace.iconType == IconType.home ? L10n.homeCharger.str : favPlace.name,
                         maxLines: 1,
                         overflow: TextOverflow.clip,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),

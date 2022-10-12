@@ -253,8 +253,13 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
       Consumer<ChooseVehicleViewModel>(
           builder: (context, chooseVehicleVM, child) => GestureDetector(
               onTap: () {
-                chooseVehicleVM.onlyChoosing = true;
-                Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView()));
+                if (chooseVehicleVM.vehicles.isEmpty) {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => ChooseVehicleView(shouldSelectOnPop: true)));
+                } else {
+                  chooseVehicleVM.onlyChoosing = true;
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView()));
+                }
               },
               child: Text(L10n.update.str, style: TextStyle(color: ColorPallete.violetBlue)))),
       const SizedBox(height: 12),

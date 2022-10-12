@@ -20,6 +20,8 @@ void main() {
   runApp(MyApp());
 }
 
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
+
 class MyApp extends StatefulWidget {
   final AnalyticsManager analyticsManager = AnalyticsManager();
   late AccountManager accountManager = AccountManager(analytics: analyticsManager);
@@ -39,7 +41,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     widget.accountManager.tryLoadStoredAccount();
     widget.analyticsManager.initialSetup();
-    print(Get.deviceLocale?.languageCode);
+    widget.analyticsManager.logEvent("session_started", params: {"device_locale": Get.deviceLocale?.languageCode});
   }
 
   @override
@@ -53,6 +55,8 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider.value(value: chooseVehicleVM),
         ],
         child: MaterialApp(
+          navigatorObservers: [routeObserver],
+          // routes: {"profile":(context) => RouteAware()},
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: HomeView(accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
