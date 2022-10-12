@@ -61,7 +61,7 @@ class ChooseVehicleViewModel extends ChangeNotifier with AccountManagerObserver 
 
   @override
   void currentAccountUpdated(Account account) {
-    if ((account.vehicles ?? []).isEmpty) {
+    if ((account.vehicles ?? []).contains(chosenVehicle)) {
       removePreferredVehicle();
     }
   }
