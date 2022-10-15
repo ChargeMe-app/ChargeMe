@@ -44,17 +44,3 @@ l10n_file.write('''      }
 en_file.close()
 ru_file.close()
 l10n_file.close()
-
-# extension GetString on L10n {
-#   String get str {
-#     if (Intl.getCurrentLocale().startsWith("ru")) {
-#       switch (this) {
-
-    #   }
-    # } else {
-    #   switch (this) {
-
-#       }
-#     }
-#   }
-# }

@@ -36,7 +36,7 @@ class UserVehiclesView extends StatelessWidget {
                     final vehicle = chooseVehicleVM.vehicles[i];
                     return InkWell(
                         onTap: () async {
-                          await chooseVehicleVM.savePreferredVehicleType(vehicle);
+                          await chooseVehicleVM.savePreferredVehicle(vehicle);
                           if (chooseVehicleVM.onlyChoosing) {
                             chooseVehicleVM.onlyChoosing = false;
                             Navigator.pop(context);

@@ -2,8 +2,10 @@ import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/main.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:chargeme/view/helper_views/svg_colored_icon.dart';
+import 'package:chargeme/view/login/choose_vehicle_view.dart';
 import 'package:chargeme/view/login/favourite_places_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:chargeme/view/login/user_vehicles_view.dart';
@@ -27,7 +29,7 @@ class ProfileView extends StatefulWidget {
   State<ProfileView> createState() => _ProfileView();
 }
 
-class _ProfileView extends State<ProfileView> {
+class _ProfileView extends State<ProfileView> with RouteAware {
   String errorText = "";
 
   @override
@@ -70,7 +72,7 @@ class _ProfileView extends State<ProfileView> {
                 ]),
                 const SizedBox(height: 12),
                 Row(children: [
-                  Text("Vehicle:", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text("${L10n.vehicle.str}:", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   const Spacer(),
                   Consumer<ChooseVehicleViewModel>(
                       builder: (context, chooseVehicleVM, child) => CupertinoButton(
@@ -80,7 +82,13 @@ class _ProfileView extends State<ProfileView> {
                                   : chooseVehicleVM.chosenVehicle!.type.fullName,
                               style: TextStyle(color: ColorPallete.violetBlue, fontSize: 20)),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView()));
+                            if (chooseVehicleVM.vehicles.isEmpty) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => ChooseVehicleView(shouldSelectOnPop: true)));
+                            } else {
+                              chooseVehicleVM.onlyChoosing = false;
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => UserVehiclesView()));
+                            }
                           }))
                 ]),
                 const SizedBox(height: 4),
@@ -102,7 +110,7 @@ class _ProfileView extends State<ProfileView> {
                 ]),
                 const SizedBox(height: 12),
                 profileBox(title: L10n.yourStatistics.str, children: [
-                  profileCell(title: "Total check-ins", count: 0),
+                  profileCell(title: L10n.totalCheckins.str, count: 0),
                   separator(),
                   profileCell(title: L10n.photosAdded.str, count: 0),
                   separator(),

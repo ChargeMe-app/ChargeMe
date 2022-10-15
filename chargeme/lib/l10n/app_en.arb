@@ -145,5 +145,6 @@
     "totalCheckins": "Total check-ins",
     "maxKwhh": "Max kWh/h",
     "emptyFavouritesTitle": "The list is empty.",
-    "emptyFavouritesSubtitle": "Browse map to find places and add them to favourites"
+    "emptyFavouritesSubtitle": "Browse map to find places and add them to favourites",
+    "vehicle": "Vehicle"
 }

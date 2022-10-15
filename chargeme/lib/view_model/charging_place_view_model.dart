@@ -53,6 +53,7 @@ class ChargingPlaceViewModel extends ChangeNotifier {
 
   Future<void> loadPlace(String id) async {
     place = await _chargingPlaceManager.getChargingPlace(id: id);
+    place?.reviews?.sort(((a, b) => b.createdAt.compareTo(a.createdAt))); // DO SORTING ON BACKEND
     if (place != null) {
       icon = await place!.iconType.getMarkerIcon();
     }
@@ -67,6 +68,7 @@ class ChargingPlaceViewModel extends ChangeNotifier {
         FavouritePlace(id: place!.id, name: place!.name, address: place!.address ?? "", iconType: place!.iconType);
     favouritePlaces.add(favPlace);
     notifyListeners();
+    analyticsManager.logEvent("saved_to_favs", params: {"place_id": place!.id});
     final file = await favouritesFile;
     file.writeAsString(jsonEncode(favouritePlaces));
   }
@@ -77,6 +79,7 @@ class ChargingPlaceViewModel extends ChangeNotifier {
     }
     favouritePlaces.removeWhere((e) => e.id == place!.id);
     notifyListeners();
+    analyticsManager.logEvent("removed_from_favs", params: {"place_id": place!.id});
     final file = await favouritesFile;
     file.writeAsString(jsonEncode(favouritePlaces));
   }

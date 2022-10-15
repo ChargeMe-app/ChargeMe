@@ -105,6 +105,47 @@ enum ConnectorType {
   type3a
 }
 
+extension ConnectorTypeInt on ConnectorType {
+  int get intValue {
+    switch (this) {
+      case ConnectorType.unknown:
+        return 0;
+      case ConnectorType.wall:
+        return 1;
+      case ConnectorType.type1:
+        return 2;
+      case ConnectorType.chademo:
+        return 3;
+      case ConnectorType.teslaRoadster:
+        return 4;
+      case ConnectorType.nema1450:
+        return 5;
+      case ConnectorType.tesla:
+        return 6;
+      case ConnectorType.type2:
+        return 7;
+      case ConnectorType.type3:
+        return 8;
+      case ConnectorType.wallBS1363:
+        return 9;
+      case ConnectorType.wallEuro:
+        return 10;
+      case ConnectorType.commando:
+        return 11;
+      case ConnectorType.cssCombo:
+        return 13;
+      case ConnectorType.threePhase:
+        return 14;
+      case ConnectorType.caravanMainsSocket:
+        return 15;
+      case ConnectorType.gbt:
+        return 16;
+      case ConnectorType.type3a:
+        return 24;
+    }
+  }
+}
+
 extension StringConnectorTypeExtension on ConnectorType {
   String get str {
     switch (this) {

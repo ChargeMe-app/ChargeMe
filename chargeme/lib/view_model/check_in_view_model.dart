@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
+import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/components/helpers/ip.dart';
+import 'package:chargeme/view_model/charging_place_view_model.dart';
 import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -43,19 +45,25 @@ class CheckInViewModel extends ChangeNotifier {
   }
 
   String get selectedOutletId {
-    return place.stations[_selectedOutlet].outlets[_selectedOutlet].id;
+    return place.stations[_selectedStation].outlets[_selectedOutlet].id;
+  }
+
+  int get selectedConnectorType {
+    return place.stations[_selectedStation].outlets[_selectedOutlet].connectorType.intValue;
   }
 
   ChargingPlace place;
   AnalyticsManager analyticsManager;
   AccountManager accountManager;
   ChooseVehicleViewModel chooseVehicleVM;
+  ChargingPlaceViewModel? chargingPlaceVM;
 
   CheckInViewModel(
       {required this.place,
       required this.analyticsManager,
       required this.accountManager,
-      required this.chooseVehicleVM}) {
+      required this.chooseVehicleVM,
+      required this.chargingPlaceVM}) {
     initialSetup();
   }
 
@@ -138,26 +146,57 @@ class CheckInViewModel extends ChangeNotifier {
   }
 
   Future<void> sendCheckIn() async {
+    if (duration == null) {
+      sendAsReview();
+      return;
+    }
     if (accountManager.currentAccount == null) {
       return;
     }
-    Map<String, dynamic> postBody = {
+    Map<String, dynamic> postBody = generatePostBody();
+    postBody["duration"] = duration?.inMinutes;
+
+    try {
+      final response =
+          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/checkin"), body: jsonEncode(postBody));
+      if (response.statusCode == 200) {
+        analyticsManager.logEvent("checkin_submitted");
+        chargingPlaceVM?.loadPlace(place.id);
+      }
+    } catch (error) {
+      analyticsManager.logErrorEvent(error.toString());
+    }
+  }
+
+  void sendAsReview() async {
+    if (accountManager.currentAccount == null) {
+      return;
+    }
+    Map<String, dynamic> postBody = generatePostBody();
+
+    try {
+      final response =
+          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/review"), body: jsonEncode(postBody));
+      if (response.statusCode == 200) {
+        analyticsManager.logEvent("review_submitted");
+        chargingPlaceVM?.loadPlace(place.id);
+      }
+    } catch (error) {
+      analyticsManager.logErrorEvent(error.toString());
+    }
+  }
+
+  Map<String, dynamic> generatePostBody() {
+    return {
       "user_id": accountManager.currentAccount!.id,
       "user_name": accountManager.currentAccount!.displayName,
       "vehicle_type": vehicleType?.value,
       "comment": comment,
       "kilowatts": kilowatts,
-      "duration": duration?.inMinutes,
       "station_id": selectedStationId,
       "outlet_id": selectedOutletId,
-      "rating": rating
+      "rating": rating,
+      "connector_type": selectedConnectorType
     };
-    try {
-      final response =
-          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/checkin"), body: jsonEncode(postBody));
-      if (response.statusCode == 200) {}
-    } catch (error) {
-      analyticsManager.logErrorEvent(error.toString());
-    }
   }
 }
