@@ -12,6 +12,7 @@ import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/view/helper_views/title_text.dart';
 import 'package:chargeme/view/login/profile_view.dart';
+import 'package:chargeme/view/photo/photo_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/view_model/charging_place_view_model.dart';
 import 'package:chargeme/view_model/check_in_view_model.dart';
@@ -75,14 +76,25 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                                height: imageContainerHeight + scrollUpOffset,
-                                color: Colors.grey,
-                                child: const Image(
-                                  image: AssetImage("assets/temporary/test_photo.jpeg"),
-                                  width: double.infinity,
-                                  fit: BoxFit.fitWidth,
-                                )),
+                            GestureDetector(
+                              child: Container(
+                                  height: imageContainerHeight + scrollUpOffset,
+                                  color: Colors.grey,
+                                  child: const Image(
+                                    image: AssetImage("assets/temporary/test_photo.jpeg"),
+                                    width: double.infinity,
+                                    fit: BoxFit.fitWidth,
+                                  )),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) => PhotoView(),
+                                      transitionDuration: Duration(milliseconds: 200),
+                                      transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
+                                    ));
+                              },
+                            ),
                             ChargingPlaceTitleView(place: place),
                             Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),

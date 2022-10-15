@@ -7,6 +7,7 @@ import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,6 +25,7 @@ class _AboutView extends State<AboutView> {
   final TextEditingController _controller = TextEditingController();
   PackageInfo? packageInfo;
   DeviceInfoPlugin? deviceInfo;
+  List<XFile> imagesToUpload = [];
 
   @override
   void initState() {
@@ -104,6 +106,36 @@ class _AboutView extends State<AboutView> {
                           setState(() {});
                         },
                       ),
+                      const SizedBox(height: 8),
+                      SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                              children: List.generate(imagesToUpload.length, (i) {
+                            XFile image = imagesToUpload[i];
+                            return Row(children: [
+                              Container(
+                                  width: 64,
+                                  height: 64,
+                                  decoration: BoxDecoration(border: Border.all(color: ColorPallete.violetBlue)),
+                                  child: Image.asset(image.path)),
+                              const SizedBox(width: 8)
+                            ]);
+                          }))),
+                      const SizedBox(height: 8),
+                      SimpleButton(
+                          color: imagesToUpload.length >= 5 ? Colors.grey : ColorPallete.violetBlue,
+                          text: imagesToUpload.length >= 5 ? "Limit of photos reached" : "Add photo",
+                          onPressed: () async {
+                            if (imagesToUpload.length >= 5) {
+                              return;
+                            }
+                            final ImagePicker _picker = ImagePicker();
+                            final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                            if (image != null) {
+                              imagesToUpload.add(image);
+                            }
+                            setState(() {});
+                          }),
                       const SizedBox(height: 8),
                       SimpleButton(
                           color: _controller.text.isEmpty ? Colors.grey : ColorPallete.violetBlue,
