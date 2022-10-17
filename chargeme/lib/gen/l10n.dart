@@ -7,6 +7,7 @@ enum L10n {
   addHomeCharger,
   addNewLocation,
   addPlug,
+  addScreenshot,
   addStation,
   addStationType,
   addToFavourites,
@@ -68,6 +69,7 @@ enum L10n {
   enterYourPhoneNumber,
   evParking,
   favourites,
+  forNext,
   free,
   getDirections,
   getSmsCode,
@@ -77,9 +79,12 @@ enum L10n {
   hiking,
   homeCharger,
   hours,
+  hoursLowercased,
+  isCheckedInHere,
   isThisLocationOpenOrActive,
   isThisLocationRestricted,
   joinChargemeCummunityForFree,
+  limitOfPhotosReached,
   loading,
   location,
   locationComingSoon,
@@ -90,6 +95,7 @@ enum L10n {
   logOut,
   longTapOnMapToPlaceAMarker,
   maxKwhh,
+  minutes,
   myVehicle,
   name,
   nice,
@@ -133,6 +139,7 @@ enum L10n {
   vehicle,
   waitingForCharge,
   wifi,
+  withWord,
   workingHours,
   writeAnyCommentsOrSuggestionsDirectlyToDevelopers,
   yourProfile,
@@ -156,6 +163,8 @@ extension GetString on L10n {
           return "Добавить новую локацию";
         case L10n.addPlug:
           return "Добавить разъем";
+        case L10n.addScreenshot:
+          return "Добавить скриншот";
         case L10n.addStation:
           return "Добавить станцию";
         case L10n.addStationType:
@@ -278,6 +287,8 @@ extension GetString on L10n {
           return "Парковка для электромобилей";
         case L10n.favourites:
           return "Избранное";
+        case L10n.forNext:
+          return "в течение следующих";
         case L10n.free:
           return "Бесплатно";
         case L10n.getDirections:
@@ -296,12 +307,18 @@ extension GetString on L10n {
           return "Домашняя зарядка";
         case L10n.hours:
           return "Часы работы";
+        case L10n.hoursLowercased:
+          return "часов";
+        case L10n.isCheckedInHere:
+          return "зачек-инен здесь";
         case L10n.isThisLocationOpenOrActive:
           return "Эта локация открыта/доступна";
         case L10n.isThisLocationRestricted:
           return "Эта локация приватная";
         case L10n.joinChargemeCummunityForFree:
           return "Присоединиться к ChargeMe бесплатно";
+        case L10n.limitOfPhotosReached:
+          return "Достигнут лимит фотографий";
         case L10n.loading:
           return "Загрузка";
         case L10n.location:
@@ -322,6 +339,8 @@ extension GetString on L10n {
           return "Зажмите место на карте, чтобы поставить пин";
         case L10n.maxKwhh:
           return "Макс Квт/ч";
+        case L10n.minutes:
+          return "минут";
         case L10n.myVehicle:
           return "Мой автомобиль";
         case L10n.name:
@@ -408,6 +427,8 @@ extension GetString on L10n {
           return "Жду зарядки";
         case L10n.wifi:
           return "Wi-Fi";
+        case L10n.withWord:
+          return "с";
         case L10n.workingHours:
           return "Часы работы";
         case L10n.writeAnyCommentsOrSuggestionsDirectlyToDevelopers:
@@ -433,6 +454,8 @@ extension GetString on L10n {
           return "Add new location";
         case L10n.addPlug:
           return "Add plug";
+        case L10n.addScreenshot:
+          return "Add photo";
         case L10n.addStation:
           return "Add station";
         case L10n.addStationType:
@@ -555,6 +578,8 @@ extension GetString on L10n {
           return "EV Parking";
         case L10n.favourites:
           return "Favourites";
+        case L10n.forNext:
+          return "for next";
         case L10n.free:
           return "Free";
         case L10n.getDirections:
@@ -573,12 +598,18 @@ extension GetString on L10n {
           return "Home charger";
         case L10n.hours:
           return "Hours";
+        case L10n.hoursLowercased:
+          return "hours";
+        case L10n.isCheckedInHere:
+          return "is checked in here";
         case L10n.isThisLocationOpenOrActive:
           return "Is this location open/active";
         case L10n.isThisLocationRestricted:
           return "Is this location restricted";
         case L10n.joinChargemeCummunityForFree:
           return "Join ChargeMe cummunity for free";
+        case L10n.limitOfPhotosReached:
+          return "Limit of photos reached";
         case L10n.loading:
           return "Loading";
         case L10n.location:
@@ -599,6 +630,8 @@ extension GetString on L10n {
           return "Long tap on map to place a marker";
         case L10n.maxKwhh:
           return "Max kWh/h";
+        case L10n.minutes:
+          return "minutes";
         case L10n.myVehicle:
           return "My vehicle";
         case L10n.name:
@@ -685,6 +718,8 @@ extension GetString on L10n {
           return "Waiting for charge";
         case L10n.wifi:
           return "Wi-Fi";
+        case L10n.withWord:
+          return "with";
         case L10n.workingHours:
           return "Working hours";
         case L10n.writeAnyCommentsOrSuggestionsDirectlyToDevelopers:

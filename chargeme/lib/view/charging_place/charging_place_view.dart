@@ -4,9 +4,11 @@ import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
+import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:chargeme/view/charging_place/amenities_view.dart';
 import 'package:chargeme/view/charging_place/check_in/check_in_options_view.dart';
+import 'package:chargeme/view/charging_place/check_in/current_check_in_view.dart';
 import 'package:chargeme/view/charging_place/details_view.dart';
 import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
@@ -99,6 +101,11 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                             Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
                                 child: Column(children: [
+                                  Column(
+                                      children: List.generate(chargingPlaceVM.currentCheckins.length, (i) {
+                                    final checkin = chargingPlaceVM.currentCheckins[i];
+                                    return CurrentCheckInView(checkIn: checkin);
+                                  })),
                                   CheckInButton(
                                       place: place,
                                       analyticsManager: chargingPlaceVM.analyticsManager,

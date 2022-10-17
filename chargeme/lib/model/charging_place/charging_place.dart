@@ -126,6 +126,34 @@ class Review {
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)
+class CheckIn {
+  String userId;
+  String stationId;
+  String outletId;
+  Rating rating;
+  DateTime finishesAt;
+  String userName;
+
+  VehicleType? vehicleType;
+  String comment;
+  double? kilowatts;
+
+  CheckIn(
+      {required this.userId,
+      required this.stationId,
+      required this.outletId,
+      required this.rating,
+      required this.finishesAt,
+      required this.userName,
+      this.vehicleType,
+      this.comment = "",
+      this.kilowatts});
+
+  factory CheckIn.fromJson(Map<String, dynamic> json) => _$CheckInFromJson(json);
+  Map<String, dynamic> toJson() => _$CheckInToJson(this);
+}
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PlugshareUser {
   String? countryCode;
   String displayName;
