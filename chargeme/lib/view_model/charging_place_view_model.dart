@@ -28,6 +28,16 @@ class ChargingPlaceViewModel extends ChangeNotifier {
     return false;
   }
 
+  List<CheckIn> get currentCheckins {
+    List<CheckIn> result = [];
+    place?.stations.forEach((e) {
+      if (e.checkin != null) {
+        result.add(e.checkin!);
+      }
+    });
+    return result;
+  }
+
   ChargingPlaceViewModel({required this.analyticsManager, required this.accountManager}) {
     _initialSetup();
   }

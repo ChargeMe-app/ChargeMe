@@ -146,5 +146,13 @@
     "maxKwhh": "Макс Квт/ч",
     "emptyFavouritesTitle": "Список пуст.",
     "emptyFavouritesSubtitle": "Просматривайте карту, чтобы найти места и добавить их в избранное",
-    "vehicle": "Автомобиль"
+    "vehicle": "Автомобиль",
+
+    "limitOfPhotosReached": "Достигнут лимит фотографий",
+    "addScreenshot": "Добавить скриншот",
+    "isCheckedInHere": "зачек-инен здесь",
+    "withWord": "с",
+    "forNext": "в течение следующих",
+    "hoursLowercased": "часов",
+    "minutes": "минут"
 }

@@ -146,5 +146,13 @@
     "maxKwhh": "Max kWh/h",
     "emptyFavouritesTitle": "The list is empty.",
     "emptyFavouritesSubtitle": "Browse map to find places and add them to favourites",
-    "vehicle": "Vehicle"
+    "vehicle": "Vehicle",
+
+    "limitOfPhotosReached": "Limit of photos reached",
+    "addScreenshot": "Add photo",
+    "isCheckedInHere": "is checked in here",
+    "withWord": "with",
+    "forNext": "for next",
+    "hoursLowercased": "hours",
+    "minutes": "minutes"
 }

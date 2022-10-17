@@ -1,4 +1,5 @@
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'station.g.dart';
@@ -15,6 +16,7 @@ class Station {
   String? costDescription;
   String? hours;
   double? kilowatts;
+  CheckIn? checkin;
 
   Station(
       {required this.id,
@@ -26,7 +28,8 @@ class Station {
       this.manufacturer,
       this.costDescription,
       this.hours,
-      this.kilowatts});
+      this.kilowatts,
+      this.checkin});
 
   factory Station.fromJson(Map<String, dynamic> json) => _$StationFromJson(json);
   Map<String, dynamic> toJson() => _$StationToJson(this);

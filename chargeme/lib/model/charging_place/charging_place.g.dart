@@ -322,6 +322,31 @@ const _$VehicleTypeEnumMap = {
   VehicleType.hozonNezhaU: 671,
 };
 
+CheckIn _$CheckInFromJson(Map<String, dynamic> json) => CheckIn(
+      userId: json['user_id'] as String,
+      stationId: json['station_id'] as String,
+      outletId: json['outlet_id'] as String,
+      rating: $enumDecode(_$RatingEnumMap, json['rating']),
+      finishesAt: DateTime.parse(json['finishes_at'] as String),
+      userName: json['user_name'] as String,
+      vehicleType:
+          $enumDecodeNullable(_$VehicleTypeEnumMap, json['vehicle_type']),
+      comment: json['comment'] as String? ?? "",
+      kilowatts: (json['kilowatts'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$CheckInToJson(CheckIn instance) => <String, dynamic>{
+      'user_id': instance.userId,
+      'station_id': instance.stationId,
+      'outlet_id': instance.outletId,
+      'rating': _$RatingEnumMap[instance.rating]!,
+      'finishes_at': instance.finishesAt.toIso8601String(),
+      'user_name': instance.userName,
+      'vehicle_type': _$VehicleTypeEnumMap[instance.vehicleType],
+      'comment': instance.comment,
+      'kilowatts': instance.kilowatts,
+    };
+
 PlugshareUser _$PlugshareUserFromJson(Map<String, dynamic> json) =>
     PlugshareUser(
       countryCode: json['country_code'] as String?,
