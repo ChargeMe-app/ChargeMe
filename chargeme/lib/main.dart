@@ -56,7 +56,6 @@ class _MyAppState extends State<MyApp> {
         ],
         child: MaterialApp(
           navigatorObservers: [routeObserver],
-          // routes: {"profile":(context) => RouteAware()},
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: HomeView(accountManager: widget.accountManager, analyticsManager: widget.analyticsManager),
