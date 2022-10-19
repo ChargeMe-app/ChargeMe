@@ -6,8 +6,9 @@ class IP {
 
   static void changeToDebugIPIfNeeded() async {
     final prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool("useDebugServer") ?? false) {
-      current = "176.119.158.240";
+    final debugServerIP = prefs.getString("debugServerIP");
+    if (debugServerIP != null) {
+      current = debugServerIP;
     }
   }
 }

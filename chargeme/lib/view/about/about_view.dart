@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/telegram_bot/telegram_bot.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
-import 'package:chargeme/view/about/debug_settings_view.dart';
+import 'package:chargeme/view/about/debug_settings/debug_settings_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,10 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutView extends StatefulWidget {
+  AnalyticsManager analyticsManager;
+
+  AboutView({required this.analyticsManager});
+
   @override
   _AboutView createState() => _AboutView();
 }
@@ -90,7 +95,11 @@ class _AboutView extends State<AboutView> {
                           onTap: () {
                             debugScreenCounter++;
                             if (debugScreenCounter == 5) {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => DebugSettingsView()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DebugSettingsView(analyticsManager: widget.analyticsManager)));
                               debugScreenCounter = 0;
                             }
                           },
