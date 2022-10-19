@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:chargeme/components/telegram_bot/telegram_bot.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/view/about/debug_settings_view.dart';
 import 'package:chargeme/view/login/phone_register_view.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,7 @@ class _AboutView extends State<AboutView> {
   PackageInfo? packageInfo;
   DeviceInfoPlugin? deviceInfo;
   List<XFile> imagesToUpload = [];
+  int debugScreenCounter = 0;
 
   @override
   void initState() {
@@ -83,8 +86,17 @@ class _AboutView extends State<AboutView> {
                     child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                       title(L10n.chargeme.str),
                       SizedBox(height: spacing),
-                      ClipRRect(
-                          borderRadius: BorderRadius.circular(12), child: Image.asset(Asset.icon.path, height: 100)),
+                      GestureDetector(
+                          onTap: () {
+                            debugScreenCounter++;
+                            if (debugScreenCounter == 5) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DebugSettingsView()));
+                              debugScreenCounter = 0;
+                            }
+                          },
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(Asset.icon.path, height: 100))),
                       SizedBox(height: spacing),
                       Text(version, style: TextStyle(color: Colors.grey, fontSize: 14)),
                       SizedBox(height: spacing),
@@ -140,7 +152,9 @@ class _AboutView extends State<AboutView> {
                       SimpleButton(
                           color: _controller.text.isEmpty ? Colors.grey : ColorPallete.violetBlue,
                           text: L10n.send.str,
-                          onPressed: () {}),
+                          onPressed: () {
+                            TelegramBot.shared.sendFeedback(_controller.text, imagesToUpload);
+                          }),
                       SizedBox(height: spacing),
                       title(L10n.contactUs.str),
                       const SizedBox(height: 8),
