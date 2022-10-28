@@ -3,6 +3,7 @@ import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/main.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
@@ -14,7 +15,8 @@ import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/view/helper_views/title_text.dart';
 import 'package:chargeme/view/login/profile_view.dart';
-import 'package:chargeme/view/photo/photo_view.dart';
+import 'package:chargeme/view/photo/photo_gallery_view.dart';
+// import 'package:chargeme/view/photo/photo_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/view_model/charging_place_view_model.dart';
 import 'package:chargeme/view_model/check_in_view_model.dart';
@@ -23,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart' as charging_place;
 import 'package:flutter_svg/svg.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 
 class ChargingPlaceView extends StatefulWidget {
@@ -82,17 +85,20 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                               child: Container(
                                   height: imageContainerHeight + scrollUpOffset,
                                   color: Colors.grey,
-                                  child: const Image(
-                                    image: AssetImage("assets/temporary/test_photo.jpeg"),
-                                    width: double.infinity,
-                                    fit: BoxFit.fitWidth,
-                                  )),
+                                  child: const Hero(
+                                      tag: "123",
+                                      child: Image(
+                                        image: AssetImage("assets/temporary/test_photo.jpeg"),
+                                        width: double.infinity,
+                                        fit: BoxFit.fitWidth,
+                                      ))),
                               onTap: () {
                                 Navigator.push(
                                     context,
                                     PageRouteBuilder(
-                                      pageBuilder: (_, __, ___) => PhotoView(),
-                                      transitionDuration: Duration(milliseconds: 200),
+                                      fullscreenDialog: true,
+                                      pageBuilder: (_, __, ___) => PhotoGalleryView(),
+                                      transitionDuration: Duration(milliseconds: 300),
                                       transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
                                     ));
                               },
