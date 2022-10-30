@@ -62,11 +62,20 @@ class ChargingPlaceViewModel extends ChangeNotifier {
   }
 
   Future<void> loadPlace(String id) async {
+    if (place?.id != id) {
+      place = null;
+      notifyListeners();
+    }
     place = await _chargingPlaceManager.getChargingPlace(id: id);
     place?.reviews?.sort(((a, b) => b.createdAt.compareTo(a.createdAt))); // DO SORTING ON BACKEND
     if (place != null) {
       icon = await place!.iconType.getMarkerIcon();
     }
+    notifyListeners();
+  }
+
+  void resetCurrentPlace() {
+    place = null;
     notifyListeners();
   }
 

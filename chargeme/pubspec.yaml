@@ -54,6 +54,7 @@ dependencies:
   get: ^4.6.5
   image_picker: ^0.8.6
   teledart: ^0.3.4
+  photo_view: ^0.14.0
   flutter_picker:
     git: https://github.com/yangyxd/flutter_picker.git
 
