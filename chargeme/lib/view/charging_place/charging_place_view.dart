@@ -3,9 +3,7 @@ import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
-import 'package:chargeme/main.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
-import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:chargeme/view/charging_place/amenities_view.dart';
 import 'package:chargeme/view/charging_place/check_in/check_in_options_view.dart';
@@ -16,7 +14,6 @@ import 'package:chargeme/view/charging_place/stations_list_view.dart';
 import 'package:chargeme/view/helper_views/title_text.dart';
 import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view/photo/photo_gallery_view.dart';
-// import 'package:chargeme/view/photo/photo_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/view_model/charging_place_view_model.dart';
 import 'package:chargeme/view_model/check_in_view_model.dart';
@@ -25,7 +22,6 @@ import 'package:flutter/material.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart' as charging_place;
 import 'package:flutter_svg/svg.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 
 class ChargingPlaceView extends StatefulWidget {
