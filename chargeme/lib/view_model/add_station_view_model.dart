@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
+import 'package:chargeme/components/helpers/limitator.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/components/helpers/ip.dart';
@@ -12,6 +13,7 @@ import 'package:http/http.dart' as http;
 
 class AddStationViewModel extends ChangeNotifier {
   final AnalyticsManager analyticsManager;
+  final Limitator limitator = LimitatorCooldown();
 
   bool isEditingLocationMode = false;
   bool isHomeCharger = false;
@@ -197,7 +199,9 @@ class AddStationViewModel extends ChangeNotifier {
       amenities: _amenities,
       comingSoon: !isOpenOrActive,
     );
-    sendLocation(place);
+    limitator.tryExec(() {
+      sendLocation(place);
+    });
   }
 
   void sendLocation(ChargingPlace place) {

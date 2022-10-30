@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
+import 'package:chargeme/components/helpers/limitator.dart';
 import 'package:chargeme/components/telegram_bot/telegram_bot.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
@@ -34,6 +35,7 @@ class _AboutView extends State<AboutView> {
   DeviceInfoPlugin? deviceInfo;
   List<XFile> imagesToUpload = [];
   int debugScreenCounter = 0;
+  Limitator limitator = LimitatorCooldown();
 
   @override
   void initState() {
@@ -162,7 +164,13 @@ class _AboutView extends State<AboutView> {
                           color: _controller.text.isEmpty ? Colors.grey : ColorPallete.violetBlue,
                           text: L10n.send.str,
                           onPressed: () {
-                            TelegramBot.shared.sendFeedback(_controller.text, imagesToUpload);
+                            final success = limitator.tryExec(() {
+                              TelegramBot.shared.sendFeedback(_controller.text, imagesToUpload);
+                            });
+                            setState(() {
+                              _controller.text = "";
+                              imagesToUpload = [];
+                            });
                           }),
                       SizedBox(height: spacing),
                       title(L10n.contactUs.str),
