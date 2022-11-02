@@ -22,6 +22,7 @@ class ChangeStationDescriptionView extends StatelessWidget {
               ),
               TextFormField(
                 minLines: 3,
+                maxLength: 5000,
                 initialValue: context.read<AddStationViewModel>().description,
                 keyboardType: TextInputType.multiline,
                 maxLines: null,

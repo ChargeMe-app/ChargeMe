@@ -1,22 +1,18 @@
-import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/view/map/loading_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:chargeme/extensions/datetime_extensions.dart';
 
-class PhotoWithID {
-  String id;
-  String path;
-
-  PhotoWithID(this.id, this.path);
-}
+const Color controlsColor = Colors.white10;
 
 class PhotoGalleryView extends StatefulWidget {
-  final PageController pageController;
+  final List<Photo> photos;
 
-  PhotoGalleryView() : pageController = PageController(initialPage: 0);
+  PhotoGalleryView({required this.photos});
 
   @override
   State<StatefulWidget> createState() {
@@ -25,13 +21,8 @@ class PhotoGalleryView extends StatefulWidget {
 }
 
 class _PhotoGalleryView extends State<PhotoGalleryView> {
-  final items = [
-    PhotoWithID("123", Asset.test_photo.path),
-    PhotoWithID("321", Asset.icon.path),
-    PhotoWithID("111", Asset.home64.path)
-  ];
   int currentItem = 0;
-  final double dismissThreshold = 100;
+  final double dismissThreshold = 50;
   double yOffset = 0;
   bool showsControls = false;
 
@@ -69,17 +60,21 @@ class _PhotoGalleryView extends State<PhotoGalleryView> {
                       child: PhotoViewGallery.builder(
                         scrollPhysics: const BouncingScrollPhysics(),
                         builder: (BuildContext context, int i) {
+                          final photo = widget.photos[i];
                           return PhotoViewGalleryPageOptions(
-                            imageProvider: AssetImage(items[i].path),
+                            imageProvider: NetworkImage(photo.url),
                             initialScale: PhotoViewComputedScale.contained * 0.98,
                             minScale: PhotoViewComputedScale.contained * 0.98,
                             maxScale: PhotoViewComputedScale.contained * 4,
-                            heroAttributes: PhotoViewHeroAttributes(tag: items[i].id),
+                            heroAttributes: PhotoViewHeroAttributes(tag: photo.id),
                           );
                         },
-                        itemCount: items.length,
+                        itemCount: widget.photos.length,
                         loadingBuilder: (context, event) => Center(
-                          child: Container(width: 20.0, height: 20.0, child: LoadingView()),
+                          child: Container(
+                              width: 20.0,
+                              height: 20.0,
+                              child: CircularProgressIndicator.adaptive(backgroundColor: Colors.white)),
                         ),
                         backgroundDecoration: null,
                         pageController: null,
@@ -89,13 +84,20 @@ class _PhotoGalleryView extends State<PhotoGalleryView> {
                           });
                         },
                       )))),
-          showsControls
-              ? Column(children: [
-                  Container(height: MediaQuery.of(context).padding.top, color: Colors.white10),
-                  GalleryTopBar(
-                      totalItems: items.length, currentItem: currentItem + 1, onCloseTap: () => Navigator.pop(context))
-                ])
-              : Container()
+          AnimatedOpacity(
+              opacity: showsControls ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.easeInOut,
+              child: Column(children: [
+                Container(height: MediaQuery.of(context).padding.top, color: controlsColor),
+                GalleryTopBar(
+                    totalItems: widget.photos.length,
+                    currentItem: currentItem + 1,
+                    onCloseTap: () => Navigator.pop(context)),
+                const Spacer(),
+                GalleryBottomBar(photo: widget.photos[currentItem]),
+                Container(height: MediaQuery.of(context).padding.bottom, color: controlsColor),
+              ]))
         ]));
   }
 }
@@ -110,7 +112,7 @@ class GalleryTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.white10,
+        color: controlsColor,
         child: Container(
             height: 48,
             child: Row(children: [
@@ -121,5 +123,38 @@ class GalleryTopBar extends StatelessWidget {
               const Spacer(),
               Padding(padding: EdgeInsets.all(8), child: SizedBox(width: 26))
             ])));
+  }
+}
+
+class GalleryBottomBar extends StatelessWidget {
+  Photo photo;
+  bool get hasCaption {
+    return !(photo.caption == null || photo.caption == "");
+  }
+
+  GalleryBottomBar({required this.photo});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+        color: controlsColor,
+        child: Container(
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Flexible(
+              child: Column(children: [
+            hasCaption
+                ? Padding(
+                    padding: EdgeInsets.all(4),
+                    child: Text(photo.caption!,
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 16)))
+                : Container(),
+            Padding(
+                padding: EdgeInsets.only(top: hasCaption ? 0 : 8),
+                child: Text(photo.createdAt.dateAndTimeFormat,
+                    textAlign: TextAlign.center,
+                    maxLines: 3,
+                    style: TextStyle(color: Colors.grey, fontSize: hasCaption ? 12 : 14)))
+          ]))
+        ])));
   }
 }

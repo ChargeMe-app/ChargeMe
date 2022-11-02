@@ -41,10 +41,18 @@ class CheckInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle vehicleTextStyle = TextStyle(fontSize: 16, color: Colors.grey);
+    final Size vehicleTextSize =
+        _textSize(review.vehicleName?.capitalizeEachWord ?? L10n.unknownVehicle.str, vehicleTextStyle);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Padding(padding: EdgeInsets.only(right: 8), child: Container(width: 24, height: 24, child: review.rating.icon)),
-        Text(review.userName ?? L10n.unknownUser.str, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Container(
+            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - vehicleTextSize.width - 84),
+            child: Text(review.userName ?? L10n.unknownUser.str,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
         const Spacer(),
         Text(review.vehicleName?.capitalizeEachWord ?? L10n.unknownVehicle.str,
             maxLines: 1, overflow: TextOverflow.fade, style: TextStyle(fontSize: 16, color: Colors.grey))
@@ -63,6 +71,13 @@ class CheckInView extends StatelessWidget {
       ]),
       const SizedBox(height: 20)
     ]);
+  }
+
+  Size _textSize(String text, TextStyle style) {
+    final TextPainter textPainter =
+        TextPainter(text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)
+          ..layout(minWidth: 0, maxWidth: double.infinity);
+    return textPainter.size;
   }
 }
 

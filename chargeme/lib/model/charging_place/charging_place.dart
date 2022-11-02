@@ -82,10 +82,10 @@ class ChargingPlace {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Photo {
-  String caption;
+  String? caption;
   DateTime createdAt;
   String id;
-  Uri url;
+  String url;
   String userId;
 
   Photo({required this.caption, required this.createdAt, required this.id, required this.url, required this.userId});

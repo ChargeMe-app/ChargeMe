@@ -48,6 +48,8 @@ class _AddStationViewState extends State<AddStationView> {
                                       color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16)))),
                       onPressed: () {
                         viewModel.createLocation();
+                        viewModel.clearAfterEditing();
+                        Navigator.pop(context);
                       })
                 ]),
             body: ListView(

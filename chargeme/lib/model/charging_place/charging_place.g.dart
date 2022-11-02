@@ -83,10 +83,10 @@ const _$IconTypeEnumMap = {
 };
 
 Photo _$PhotoFromJson(Map<String, dynamic> json) => Photo(
-      caption: json['caption'] as String,
+      caption: json['caption'] as String?,
       createdAt: DateTime.parse(json['created_at'] as String),
       id: json['id'] as String,
-      url: Uri.parse(json['url'] as String),
+      url: json['url'] as String,
       userId: json['user_id'] as String,
     );
 
@@ -94,7 +94,7 @@ Map<String, dynamic> _$PhotoToJson(Photo instance) => <String, dynamic>{
       'caption': instance.caption,
       'created_at': instance.createdAt.toIso8601String(),
       'id': instance.id,
-      'url': instance.url.toString(),
+      'url': instance.url,
       'user_id': instance.userId,
     };
 
