@@ -11,6 +11,7 @@ import 'package:chargeme/view/charging_place/check_in/current_check_in_view.dart
 import 'package:chargeme/view/charging_place/details_view.dart';
 import 'package:chargeme/view/charging_place/reviews_view.dart';
 import 'package:chargeme/view/charging_place/stations_list_view.dart';
+import 'package:chargeme/view/helper_views/error_snack_bar.dart';
 import 'package:chargeme/view/helper_views/title_text.dart';
 import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view/photo/photo_gallery_view.dart';
@@ -77,28 +78,10 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            GestureDetector(
-                              child: Container(
-                                  height: imageContainerHeight + scrollUpOffset,
-                                  color: Colors.grey,
-                                  child: const Hero(
-                                      tag: "123",
-                                      child: Image(
-                                        image: AssetImage("assets/temporary/test_photo.jpeg"),
-                                        width: double.infinity,
-                                        fit: BoxFit.fitWidth,
-                                      ))),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      fullscreenDialog: true,
-                                      pageBuilder: (_, __, ___) => PhotoGalleryView(),
-                                      transitionDuration: Duration(milliseconds: 300),
-                                      transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
-                                    ));
-                              },
-                            ),
+                            PhotosPreviewView(
+                                photos: place.photos,
+                                scrollUpOffset: scrollUpOffset,
+                                imageContainerHeight: imageContainerHeight),
                             ChargingPlaceTitleView(place: place),
                             Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
@@ -175,6 +158,60 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                     ])));
           });
         });
+  }
+}
+
+class PhotosPreviewView extends StatelessWidget {
+  final List<Photo>? photos;
+  final double scrollUpOffset;
+  final double imageContainerHeight;
+  bool get hasPhotos {
+    return !(photos?.isEmpty ?? true);
+  }
+
+  PhotosPreviewView({required this.photos, this.scrollUpOffset = 0, this.imageContainerHeight = 200});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Stack(alignment: Alignment.bottomRight, children: [
+        Container(
+            height: imageContainerHeight + scrollUpOffset,
+            color: Colors.grey,
+            child: hasPhotos
+                ? Hero(
+                    tag: photos!.first.id,
+                    child: Image.network(
+                      photos!.first.url,
+                      width: double.infinity,
+                      fit: BoxFit.fitWidth,
+                    ))
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Text("No added photos yet", style: TextStyle(color: Colors.white, fontSize: 16))])),
+        hasPhotos
+            ? Padding(
+                padding: EdgeInsets.only(bottom: 12),
+                child: Container(
+                    color: Colors.black54,
+                    child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 8, 8, 8),
+                        child: Text("${photos!.length} photos", style: TextStyle(color: Colors.white, fontSize: 14)))))
+            : Container()
+      ]),
+      onTap: () {
+        if (photos?.isNotEmpty ?? false) {
+          Navigator.push(
+              context,
+              PageRouteBuilder(
+                fullscreenDialog: true,
+                pageBuilder: (_, __, ___) => PhotoGalleryView(photos: photos!),
+                transitionDuration: const Duration(milliseconds: 300),
+                transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
+              ));
+        }
+      },
+    );
   }
 }
 

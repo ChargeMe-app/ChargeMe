@@ -59,12 +59,14 @@ class StationsListView extends StatelessWidget {
           child: ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(stations.length, (i) {
-                return outletListView(context, stations[i].outlets, stations.length - 1 == i);
+                return outletListView(
+                    context, stations[i].outlets, stations.length - 1 == i, stations[i].checkin != null);
               })))
     ]);
   }
 
-  Widget outletListView(BuildContext context, List<Outlet> outlets, bool isLast) {
+  Widget outletListView(BuildContext context, List<Outlet> outlets, bool isLast, bool isOccupied) {
+    final outletColor = isOccupied ? Colors.grey : ColorPallete.violetBlue;
     return Row(children: [
       Row(
           children: List.generate(outlets.length, (i) {
@@ -72,12 +74,12 @@ class StationsListView extends StatelessWidget {
         return Padding(
             padding: EdgeInsets.all(8),
             child: Column(children: [
-              Image.asset(outlet.connectorType.iconPath, height: 90, color: ColorPallete.violetBlue),
+              Image.asset(outlet.connectorType.iconPath, height: 90, color: outletColor),
               SizedBox(height: 12),
               Text(outlet.connectorType.str,
-                  style: TextStyle(color: ColorPallete.violetBlue, fontSize: 16, fontWeight: FontWeight.bold)),
+                  style: TextStyle(color: outletColor, fontSize: 16, fontWeight: FontWeight.bold)),
               Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
-                  style: TextStyle(fontSize: 12, color: ColorPallete.violetBlue))
+                  style: TextStyle(fontSize: 12, color: outletColor))
             ]));
       })),
       isLast ? Container() : Container(width: 1, color: ColorPallete.violetBlue)

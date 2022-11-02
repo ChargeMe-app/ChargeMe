@@ -71,6 +71,7 @@ class AddStationViewModel extends ChangeNotifier {
     _isOpenOrActive = true;
 
     isEditingLocationMode = false;
+    notifyListeners();
   }
 
   String get name => _name;
@@ -204,11 +205,11 @@ class AddStationViewModel extends ChangeNotifier {
     });
   }
 
-  void sendLocation(ChargingPlace place) {
+  void sendLocation(ChargingPlace place) async {
     // TODO: ADD IF EDITING CASE
     String encodedJson = jsonEncode(place);
     try {
-      http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/locations"), body: encodedJson);
+      final response = await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/locations"), body: encodedJson);
     } catch (error) {
       analyticsManager.logErrorEvent(error.toString());
     }
