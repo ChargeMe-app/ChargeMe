@@ -157,8 +157,7 @@ class CheckInViewModel extends ChangeNotifier {
     postBody["duration"] = duration?.inMinutes;
 
     try {
-      final response =
-          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/checkin"), body: jsonEncode(postBody));
+      final response = await http.post(Uri.parse("http://${IP.current}/v1/checkin"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
         analyticsManager.logEvent("checkin_submitted");
         chargingPlaceVM?.loadPlace(place.id);
@@ -175,8 +174,7 @@ class CheckInViewModel extends ChangeNotifier {
     Map<String, dynamic> postBody = generatePostBody();
 
     try {
-      final response =
-          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/review"), body: jsonEncode(postBody));
+      final response = await http.post(Uri.parse("http://${IP.current}/v1/review"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
         analyticsManager.logEvent("review_submitted");
         chargingPlaceVM?.loadPlace(place.id);

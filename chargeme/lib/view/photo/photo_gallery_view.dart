@@ -144,16 +144,14 @@ class GalleryBottomBar extends StatelessWidget {
               child: Column(children: [
             hasCaption
                 ? Padding(
-                    padding: EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(4),
                     child: Text(photo.caption!,
-                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 16)))
+                        textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 16)))
                 : Container(),
             Padding(
                 padding: EdgeInsets.only(top: hasCaption ? 0 : 8),
                 child: Text(photo.createdAt.dateAndTimeFormat,
-                    textAlign: TextAlign.center,
-                    maxLines: 3,
-                    style: TextStyle(color: Colors.grey, fontSize: hasCaption ? 12 : 14)))
+                    textAlign: TextAlign.center, maxLines: 3, style: const TextStyle(color: Colors.grey, fontSize: 14)))
           ]))
         ])));
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:chargeme/extensions/placemark_extensions.dart';
 
 class ChooseLocationView extends StatefulWidget {
   final Function(String?, LatLng) onLocationChosen;
@@ -62,7 +63,7 @@ class _ChooseLocationView extends State<ChooseLocationView> {
                   print(placemarks);
                   if (placemarks.isNotEmpty) {
                     final place = placemarks.first;
-                    fullAddress = "${place.street} ${place.locality} ${place.subLocality}, ${place.country}";
+                    fullAddress = place.fullAddress;
                   }
                 } catch (error) {
                   print(error);
