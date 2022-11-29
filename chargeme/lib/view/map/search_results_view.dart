@@ -13,22 +13,26 @@ class SearchResultsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<SearchViewModel>(builder: (context, searchVM, child) {
-      return Container(
-          color: Colors.white,
-          child: Column(
-              children: List.generate(searchVM.results.length, (i) {
-            final searchEntry = searchVM.results[i];
-            return ListTile(
-              leading: searchEntry.type == SearchResultType.address
-                  ? SvgPicture.asset(Asset.pin.path, height: 40)
-                  : Image.asset(searchEntry.iconType!.assetPath, height: 40),
-              title: Text(searchEntry.title),
-              subtitle: Text(searchEntry.subtitle ?? "", style: TextStyle(color: Colors.grey, fontSize: 14)),
-              onTap: () {
-                onResultTap(searchEntry);
-              },
-            );
-          })));
+      return GestureDetector(
+          onVerticalDragStart: (details) => searchVM.focusNode.unfocus(),
+          child: Container(
+              color: Colors.white,
+              child: SingleChildScrollView(
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                  child: Column(
+                      children: List.generate(searchVM.results.length, (i) {
+                    final searchEntry = searchVM.results[i];
+                    return ListTile(
+                      leading: searchEntry.type == SearchResultType.address
+                          ? SvgPicture.asset(Asset.pin.path, height: 40)
+                          : Image.asset(searchEntry.iconType!.assetPath, height: 40),
+                      title: Text(searchEntry.title),
+                      subtitle: Text(searchEntry.subtitle ?? "", style: TextStyle(color: Colors.grey, fontSize: 14)),
+                      onTap: () {
+                        onResultTap(searchEntry);
+                      },
+                    );
+                  })))));
     });
   }
 }

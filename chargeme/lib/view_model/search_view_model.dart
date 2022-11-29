@@ -1,6 +1,7 @@
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/throttler.dart';
 import 'package:chargeme/components/markers_manager/markers_manager.dart';
+import 'package:chargeme/components/place_searcher/place_searcher.dart';
 import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -29,6 +30,7 @@ class SearchViewModel extends ChangeNotifier {
   final AnalyticsManager analyticsManager;
   List<CancelableOperation> _cancelables = [];
 
+  late PlaceSearcher _placeSearcher = PlaceSearcher();
   TextEditingController controller = TextEditingController();
   FocusNode focusNode = FocusNode();
   Throttler throttler = Throttler();
@@ -38,8 +40,9 @@ class SearchViewModel extends ChangeNotifier {
   Future<void> fetchResults(String query) async {
     resetResults();
     try {
+      final List<String> res = await _placeSearcher.getOrganizations(text: query);
       final List<Location> result = await locationFromAddress(query);
-      print(result);
+      print(res);
 
       for (final entry in result) {
         final operation = CancelableOperation.fromFuture(markersManager.getStationMarkers(
