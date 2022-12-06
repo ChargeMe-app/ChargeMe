@@ -44,6 +44,7 @@ class _GMap extends State<GMap> {
           onMapCreated: (controller) => mapVM.onMapCreated(controller),
           myLocationButtonEnabled: false,
           zoomControlsEnabled: false,
+          myLocationEnabled: true,
           initialCameraPosition: _initialCameraPosition,
           markers: mapVM.markers.values.toSet(),
           onLongPress: mapVM.processLongPress,
