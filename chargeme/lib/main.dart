@@ -100,14 +100,16 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+          // FloatingActionButton(
+          //     heroTag: "search",
+          //     backgroundColor: Colors.grey,
+          //     child: const Icon(Icons.search),
+          //     onPressed: () {
+          //       // mapVM.isSearchEnabled = !mapVM.isSearchEnabled;
+          //     }),
+          // const SizedBox(height: 8),
           FloatingActionButton(
-              backgroundColor: ColorPallete.violetBlue,
-              child: const Icon(Icons.search),
-              onPressed: () {
-                mapVM.isSearchEnabled = !mapVM.isSearchEnabled;
-              }),
-          const SizedBox(height: 8),
-          FloatingActionButton(
+              heroTag: "myLocation",
               backgroundColor: ColorPallete.violetBlue,
               child: const Icon(Icons.my_location),
               onPressed: () {
