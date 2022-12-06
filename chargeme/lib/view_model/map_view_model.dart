@@ -29,7 +29,6 @@ class MapViewModel extends ChangeNotifier {
 
   bool _isSearchEnabled = false;
   bool isLoading = false;
-  final LatLng center = const LatLng(55.7558, 37.6173);
   Map<String, Marker> get markers => _markers;
   CustomInfoWindowController get customInfoWindowController => _customInfoWindowController;
 
@@ -150,3 +149,5 @@ class MapViewModel extends ChangeNotifier {
         .moveCamera(CameraUpdate.newCameraPosition(CameraPosition(target: searchResult.location, zoom: 14.0)));
   }
 }
+
+const LatLng center = LatLng(55.7558, 37.6173);

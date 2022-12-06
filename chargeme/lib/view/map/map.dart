@@ -3,8 +3,10 @@ import 'package:chargeme/view/map/search_bar_view.dart';
 import 'package:chargeme/view/map/search_results_view.dart';
 import 'package:chargeme/view_model/map_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class GMap extends StatefulWidget {
@@ -23,16 +25,26 @@ class _GMap extends State<GMap> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    initialSetup();
+  }
+
+  void initialSetup() async {
+    if (!await Permission.location.status.isGranted) {
+      Map<Permission, PermissionStatus> status = await [Permission.location].request();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<MapViewModel>(builder: (context, mapVM, child) {
       return Stack(children: [
         GoogleMap(
           onMapCreated: (controller) => mapVM.onMapCreated(controller),
           myLocationButtonEnabled: false,
-          initialCameraPosition: CameraPosition(
-            target: mapVM.center,
-            zoom: 11.0,
-          ),
+          zoomControlsEnabled: false,
+          initialCameraPosition: _initialCameraPosition,
           markers: mapVM.markers.values.toSet(),
           onLongPress: mapVM.processLongPress,
           onTap: mapVM.processTap,
@@ -57,3 +69,5 @@ class _GMap extends State<GMap> {
     });
   }
 }
+
+const CameraPosition _initialCameraPosition = CameraPosition(target: center, zoom: 11.0);
