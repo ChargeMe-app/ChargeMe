@@ -54,7 +54,7 @@ class AnalyticsManager {
     // TODO: Implement this method
     final encodedJson = jsonEncode(storedEvents);
     try {
-      http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/"), body: encodedJson);
+      http.post(Uri.parse("http://${IP.current}/v1/"), body: encodedJson);
     } catch (error) {
       print(error);
     }

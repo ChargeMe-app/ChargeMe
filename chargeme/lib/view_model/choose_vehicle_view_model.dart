@@ -108,8 +108,7 @@ class ChooseVehicleViewModel extends ChangeNotifier with AccountManagerObserver 
       "vehicle_type": vehicleTypeToChoose?.value,
     };
     try {
-      final response =
-          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/user/vehicle"), body: jsonEncode(postBody));
+      final response = await http.post(Uri.parse("http://${IP.current}/v1/user/vehicle"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
         _analyticsManager.logEvent("successful vehicle type chosen");
         await _accountManager.updateAccountInfo();
@@ -144,8 +143,7 @@ class ChooseVehicleViewModel extends ChangeNotifier with AccountManagerObserver 
       "id": vehicle.id,
     };
     try {
-      final response =
-          await http.delete(Uri.parse("http://${IP.current}:${IP.port}/v1/user/vehicle"), body: jsonEncode(postBody));
+      final response = await http.delete(Uri.parse("http://${IP.current}/v1/user/vehicle"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
         _analyticsManager.logEvent("successful vehicle type removed");
         await _accountManager.updateAccountInfo();

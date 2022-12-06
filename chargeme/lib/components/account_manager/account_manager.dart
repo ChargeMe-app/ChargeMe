@@ -40,8 +40,7 @@ class AccountManager {
           "user_identifier": account.id,
           "google_credentials": {"id_token": auth.idToken, "access_token": auth.accessToken}
         };
-        final response =
-            await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
+        final response = await http.post(Uri.parse("http://${IP.current}/v1/auth"), body: jsonEncode(postBody));
         if (response.statusCode == 200) {
           final body = jsonDecode(utf8.decode(response.bodyBytes));
           final userId = body["user_id"];
@@ -85,8 +84,7 @@ class AccountManager {
           "authorization_code": credential.authorizationCode
         }
       };
-      final response =
-          await http.post(Uri.parse("http://${IP.current}:${IP.port}/v1/auth"), body: jsonEncode(postBody));
+      final response = await http.post(Uri.parse("http://${IP.current}/v1/auth"), body: jsonEncode(postBody));
       if (response.statusCode == 200) {
         final body = jsonDecode(utf8.decode(response.bodyBytes));
         final userId = body["user_id"];
@@ -112,7 +110,7 @@ class AccountManager {
     }
     final userId = id ?? currentAccount!.id;
     try {
-      final response = await http.get(Uri.parse("http://${IP.current}:${IP.port}/v1/user/${userId}"));
+      final response = await http.get(Uri.parse("http://${IP.current}/v1/user/${userId}"));
       if (response.statusCode == 200) {
         final userData = jsonDecode(utf8.decode(response.bodyBytes));
         currentAccount = Account.fromUserData(userData, userId);
