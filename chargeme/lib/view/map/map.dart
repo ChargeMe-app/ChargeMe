@@ -3,7 +3,6 @@ import 'package:chargeme/view/map/search_bar_view.dart';
 import 'package:chargeme/view/map/search_results_view.dart';
 import 'package:chargeme/view_model/map_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -71,4 +70,5 @@ class _GMap extends State<GMap> {
   }
 }
 
-const CameraPosition _initialCameraPosition = CameraPosition(target: center, zoom: 11.0);
+const LatLng _center = LatLng(55.7558, 37.6173);
+const CameraPosition _initialCameraPosition = CameraPosition(target: _center, zoom: 11.0);
