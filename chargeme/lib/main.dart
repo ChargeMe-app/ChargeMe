@@ -2,6 +2,7 @@ import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/ip.dart';
 import 'package:chargeme/components/markers_manager/markers_manager.dart';
+import 'package:chargeme/components/root_observer/root_observer.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
@@ -23,8 +24,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() {
   runApp(MyApp());
 }
-
-final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
 class MyApp extends StatefulWidget {
   final AnalyticsManager analyticsManager = AnalyticsManager();

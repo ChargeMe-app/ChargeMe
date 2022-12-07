@@ -1,7 +1,7 @@
+import 'package:chargeme/components/root_observer/root_observer.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
-import 'package:chargeme/main.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
 import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
