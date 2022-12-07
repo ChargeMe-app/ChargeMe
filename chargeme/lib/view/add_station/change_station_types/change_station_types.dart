@@ -128,24 +128,3 @@ class ChangeStationTypesView extends StatelessWidget {
     ).showModal(context);
   }
 }
-
-// Widget _buildBottomPicker(Widget picker) {
-//   return Container(
-//     height: 200,
-//     padding: const EdgeInsets.only(top: 6.0),
-//     color: CupertinoColors.white,
-//     child: DefaultTextStyle(
-//       style: const TextStyle(
-//         color: CupertinoColors.black,
-//         fontSize: 22.0,
-//       ),
-//       child: GestureDetector(
-//         onTap: () {},
-//         child: SafeArea(
-//           top: false,
-//           child: picker,
-//         ),
-//       ),
-//     ),
-//   );
-// }
