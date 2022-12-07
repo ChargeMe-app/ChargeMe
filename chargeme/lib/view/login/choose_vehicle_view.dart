@@ -4,7 +4,6 @@ import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/main.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/extensions/string_extensions.dart';
-import 'package:chargeme/view/helper_views/app_bar_with_events.dart';
 import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

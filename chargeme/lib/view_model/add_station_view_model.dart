@@ -54,7 +54,7 @@ class AddStationViewModel extends ChangeNotifier {
     isEditingLocationMode = true;
   }
 
-  void clearAfterEditing() {
+  void resetModel() {
     id = "0";
     _name = "";
     _description = "";
@@ -71,6 +71,7 @@ class AddStationViewModel extends ChangeNotifier {
     _isOpenOrActive = true;
 
     isEditingLocationMode = false;
+    isHomeCharger = false;
     notifyListeners();
   }
 
@@ -129,6 +130,7 @@ class AddStationViewModel extends ChangeNotifier {
   Access get access => _access;
   set access(Access value) {
     _access = value;
+    _isOpenOrActive = value == Access.public;
     notifyListeners();
   }
 
