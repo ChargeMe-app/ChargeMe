@@ -100,7 +100,9 @@ class ChangeStationTypesView extends StatelessWidget {
 
   showPickerArray(BuildContext context, int i) {
     List<PickerItem> pickerItems = [];
-    for (var connectorType in ConnectorType.values) {
+    List<ConnectorType> sortedConnectorType = ConnectorType.values.toList();
+    sortedConnectorType.sort((a, b) => a.str.compareTo(b.str));
+    for (var connectorType in sortedConnectorType) {
       if (connectorType == ConnectorType.unknown) continue;
       pickerItems.add(PickerItem(
           value: connectorType,
@@ -113,7 +115,8 @@ class ChangeStationTypesView extends StatelessWidget {
     }
     Picker(
       adapter: PickerDataAdapter(data: pickerItems),
-      itemExtent: 52,
+      itemExtent: 56,
+      height: 200,
       title: Text(L10n.selectPlug.str),
       selectedTextStyle: TextStyle(color: Colors.blue, fontSize: 12),
       onConfirm: (Picker picker, List value) {
@@ -126,23 +129,23 @@ class ChangeStationTypesView extends StatelessWidget {
   }
 }
 
-Widget _buildBottomPicker(Widget picker) {
-  return Container(
-    height: 200,
-    padding: const EdgeInsets.only(top: 6.0),
-    color: CupertinoColors.white,
-    child: DefaultTextStyle(
-      style: const TextStyle(
-        color: CupertinoColors.black,
-        fontSize: 22.0,
-      ),
-      child: GestureDetector(
-        onTap: () {},
-        child: SafeArea(
-          top: false,
-          child: picker,
-        ),
-      ),
-    ),
-  );
-}
+// Widget _buildBottomPicker(Widget picker) {
+//   return Container(
+//     height: 200,
+//     padding: const EdgeInsets.only(top: 6.0),
+//     color: CupertinoColors.white,
+//     child: DefaultTextStyle(
+//       style: const TextStyle(
+//         color: CupertinoColors.black,
+//         fontSize: 22.0,
+//       ),
+//       child: GestureDetector(
+//         onTap: () {},
+//         child: SafeArea(
+//           top: false,
+//           child: picker,
+//         ),
+//       ),
+//     ),
+//   );
+// }

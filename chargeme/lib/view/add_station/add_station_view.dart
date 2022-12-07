@@ -1,5 +1,6 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/main.dart';
 import 'package:chargeme/view/add_station/change_access/change_access_view.dart';
 import 'package:chargeme/view/add_station/change_amenities/change_amenities_view.dart';
 import 'package:chargeme/view/add_station/change_cost_and_pricing/change_cost_and_pricing_view.dart';
@@ -27,28 +28,38 @@ class AddStationView extends StatefulWidget {
   _AddStationViewState createState() => _AddStationViewState();
 }
 
-class _AddStationViewState extends State<AddStationView> {
+class _AddStationViewState extends State<AddStationView> with RouteAware {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
+    super.initState();
+  }
+
+  @override
+  void didPop() {
+    final chooseVehicleVM = Provider.of<AddStationViewModel>(context, listen: false);
+    chooseVehicleVM.resetModel();
+    super.didPop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AddStationViewModel>(
         builder: (context, viewModel, child) => Scaffold(
-            appBar: AppBarWithEvents.create(
-                context: context,
+            appBar: AppBar(
+                backgroundColor: ColorPallete.violetBlue,
                 title: viewModel.isEditingLocationMode ? Text(L10n.editLocation.str) : Text(L10n.addNewLocation.str),
-                onBackButtonPressed: () {
-                  viewModel.clearAfterEditing();
-                },
                 actions: [
                   CupertinoButton(
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 0),
-                          child: Center(
-                              child: Text(viewModel.isEditingLocationMode ? L10n.save.str : L10n.create.str,
-                                  style: TextStyle(
-                                      color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16)))),
+                      child: Center(
+                          child: Text(viewModel.isEditingLocationMode ? L10n.save.str : L10n.create.str,
+                              style: TextStyle(
+                                  color: viewModel.isAbleToCreate() ? Colors.white : Colors.grey, fontSize: 16))),
                       onPressed: () {
                         viewModel.createLocation();
-                        viewModel.clearAfterEditing();
+                        viewModel.resetModel();
                         Navigator.pop(context);
                       })
                 ]),
@@ -115,12 +126,7 @@ class _AddStationViewState extends State<AddStationView> {
                           false,
                           (_) => ChangeHoursView()),
                       CardEntry(L10n.amenities.str, viewModel.amenities.map((e) => e.localizedTitle).join(", "), false,
-                          (_) => ChangeAmenitiesView()),
-                      CardEntry(
-                          "${L10n.locationOpenOrActive.str}?",
-                          viewModel.isOpenOrActive ? L10n.locationIsActive.str : L10n.locationComingSoon.str,
-                          true,
-                          (_) => ChangeIsOpenOrActiveView()),
+                          (_) => ChangeAmenitiesView())
                     ],
             )));
   }
