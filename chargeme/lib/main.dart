@@ -19,7 +19,6 @@ import 'package:chargeme/view/map/map.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -71,8 +70,6 @@ class _MyAppState extends State<MyApp> {
         ],
         child: MaterialApp(
           navigatorObservers: [routeObserver],
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
           home: HomeView(
             accountManager: widget.accountManager,
             analyticsManager: widget.analyticsManager,
