@@ -8,7 +8,7 @@ import 'package:chargeme/components/helpers/ip.dart';
 import 'package:http/http.dart' as http;
 
 class MarkersManager {
-  final String _baseUrl = "${IP.current}";
+  final String _baseUrl = IP.current;
   final String _stationsPath = "/v1/locations";
   final AnalyticsManager analyticsManager;
 

@@ -154,5 +154,17 @@
     "withWord": "с",
     "forNext": "в течение следующих",
     "hoursLowercased": "часов",
-    "minutes": "минут"
+    "minutes": "минут",
+
+    "filters": "Фильтры",
+    "reset": "Сбросить",
+    "connectors": "Разъемы",
+    "deselectAll": "Убрать выделение",
+    "scoreRange": "Диапазон оценки",
+    "showPublicPlaces": "Показывать публичные зарядные места",
+    "showPublicFastPlaces": "Показывать публичные быстрые зарядные места",
+    "showHomePlaces": "Показывать домашние зарядные места",
+    "showComingSoonPlaces": "Показывать зарядные места, которые появятся скоро",
+    "showPaidChargingPlaces": "Показывать платные зарядные места",
+    "showplacesWithCheckin": "Показывать зарядные места с чек-ином"
 }

@@ -154,5 +154,17 @@
     "withWord": "with",
     "forNext": "for next",
     "hoursLowercased": "hours",
-    "minutes": "minutes"
+    "minutes": "minutes",
+
+    "filters": "Filters",
+    "reset": "Reset",
+    "connectors": "Connectors",
+    "deselectAll": "Deselect all",
+    "scoreRange": "Score range",
+    "showPublicPlaces": "Show public places",
+    "showPublicFastPlaces": "Show public fast places",
+    "showHomePlaces": "Show home places",
+    "showComingSoonPlaces": "Show coming soon places",
+    "showPaidChargingPlaces": "Show paid charging places",
+    "showplacesWithCheckin": "Show places with check-in"
 }

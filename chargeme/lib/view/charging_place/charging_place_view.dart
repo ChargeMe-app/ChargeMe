@@ -123,7 +123,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
           return Consumer<ChargingPlaceViewModel>(builder: (context, chargingPlaceVM, child) {
             return Container(
                 color: Color(0xFF737373),
-                height: 180,
+                height: chargingPlaceVM.isHomeCharger ? 120 : 180,
                 child: Container(
                     decoration: const BoxDecoration(
                         color: Colors.white,
@@ -140,21 +140,24 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 ? chargingPlaceVM.removeFromFavourites()
                                 : chargingPlaceVM.saveToFavourites();
                           }),
-                      ListTile(
-                          leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.info.path)),
-                          title: Text(L10n.edit.str, style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
-                          onTap: () {
-                            if (chargingPlaceVM.place != null) {
-                              context.read<AddStationViewModel>().setupForEditing(chargingPlaceVM.place!);
-                              Navigator.pop(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const AddStationView(),
-                                ),
-                              );
-                            }
-                          })
+                      chargingPlaceVM.isHomeCharger
+                          ? Container()
+                          : ListTile(
+                              leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.info.path)),
+                              title:
+                                  Text(L10n.edit.str, style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
+                              onTap: () {
+                                if (chargingPlaceVM.place != null) {
+                                  context.read<AddStationViewModel>().setupForEditing(chargingPlaceVM.place!);
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AddStationView(),
+                                    ),
+                                  );
+                                }
+                              })
                     ])));
           });
         });

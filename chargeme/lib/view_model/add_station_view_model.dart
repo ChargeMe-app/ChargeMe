@@ -46,7 +46,7 @@ class AddStationViewModel extends ChangeNotifier {
     // _access = place.access ?? Access.public;
     _requiresFee = place.cost ?? false;
     _costDescription = place.costDescription ?? "";
-    _isOpen247 = place.open247 ?? true;
+    _isOpen247 = place.open247 ?? false;
     _hours = place.hours ?? "";
     _amenities = place.amenities ?? [];
     _isOpenOrActive = !(place.comingSoon ?? false);
