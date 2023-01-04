@@ -242,7 +242,7 @@ extension GetString on L10n {
         case L10n.emptyFavouritesTitle:
           return "Список пуст.";
         case L10n.enterAddress:
-          return "Введите адрес локации (либо он установится сам при установки геолокации)";
+          return "Введите адрес локации (либо он установится сам при установке геолокации)";
         case L10n.enterCodeFromSms:
           return "Введите код из SMS";
         case L10n.enterDescription:
