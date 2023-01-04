@@ -9,7 +9,7 @@ class ChangeStationDescriptionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(L10n.changeDescription.str),
+        title: Text(L10n.description.str),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(

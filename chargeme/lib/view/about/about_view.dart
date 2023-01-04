@@ -16,9 +16,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutView extends StatefulWidget {
-  AnalyticsManager analyticsManager;
+  final AnalyticsManager analyticsManager;
 
-  AboutView({required this.analyticsManager});
+  const AboutView({required this.analyticsManager});
 
   @override
   _AboutView createState() => _AboutView();
@@ -74,7 +74,7 @@ class _AboutView extends State<AboutView> {
       "device_name": deviceName
     };
 
-    // send to backend
+    // TODO: send to backend
   }
 
   @override
@@ -89,7 +89,7 @@ class _AboutView extends State<AboutView> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Center(
                 child: Padding(
-                    padding: EdgeInsets.all(padding),
+                    padding: const EdgeInsets.all(padding),
                     child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                       title(L10n.chargeme.str),
                       SizedBox(height: spacing),
@@ -109,7 +109,7 @@ class _AboutView extends State<AboutView> {
                               borderRadius: BorderRadius.circular(12),
                               child: Image.asset(Asset.icon.path, height: 100))),
                       SizedBox(height: spacing),
-                      Text(version, style: TextStyle(color: Colors.grey, fontSize: 14)),
+                      Text(version, style: const TextStyle(color: Colors.grey, fontSize: 14)),
                       SizedBox(height: spacing),
                       title(L10n.reportABug.str),
                       const SizedBox(height: 8),
@@ -164,7 +164,7 @@ class _AboutView extends State<AboutView> {
                           color: _controller.text.isEmpty ? Colors.grey : ColorPallete.violetBlue,
                           text: L10n.send.str,
                           onPressed: () {
-                            final success = limitator.tryExec(() {
+                            limitator.tryExec(() {
                               TelegramBot.shared.sendFeedback(_controller.text, imagesToUpload);
                             });
                             setState(() {
@@ -178,21 +178,22 @@ class _AboutView extends State<AboutView> {
                       Row(children: [
                         Image.asset(Asset.telegramLogo.path, height: logoWidth),
                         const SizedBox(width: 8),
-                        SizedBox(width: serviceTextWidth, child: Text("Telegram:")),
+                        const SizedBox(width: serviceTextWidth, child: Text("Telegram:")),
                         const SizedBox(width: 4),
                         GestureDetector(
                             onTap: () async {
                               launchUrl(Uri.parse(tgLink));
                             },
-                            child: Container(
+                            child: SizedBox(
                                 width: screenWidthWithPadding - serviceTextWidth - logoWidth - 8 - 4 - 16,
-                                child: Text(tgLink, overflow: TextOverflow.fade, style: TextStyle(color: Colors.blue))))
+                                child: Text(tgLink,
+                                    overflow: TextOverflow.fade, style: const TextStyle(color: Colors.blue))))
                       ]),
                       const SizedBox(height: 12),
                       Row(children: [
                         Image.asset(Asset.appleMail.path, height: logoWidth),
                         const SizedBox(width: 8),
-                        SizedBox(width: serviceTextWidth, child: Text("Email:")),
+                        const SizedBox(width: serviceTextWidth, child: Text("Email:")),
                         const SizedBox(width: 4),
                         GestureDetector(
                             onLongPress: () async {
@@ -205,7 +206,7 @@ class _AboutView extends State<AboutView> {
                             child: SizedBox(
                                 width: screenWidthWithPadding - serviceTextWidth - logoWidth - 8 - 4 - 16,
                                 child: Text(supportEmail,
-                                    overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.blue))))
+                                    overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.blue))))
                       ]),
                       const SizedBox(height: 24)
                     ])))));

@@ -6,6 +6,7 @@ import 'package:chargeme/view/add_station/change_amenities/change_amenities_view
 import 'package:chargeme/view/add_station/change_cost_and_pricing/change_cost_and_pricing_view.dart';
 import 'package:chargeme/view/add_station/change_hours/change_hours_view.dart';
 import 'package:chargeme/view/add_station/change_location/choose_location_view.dart';
+import 'package:chargeme/view/add_station/change_location_open/change_location_open_or_active_view.dart';
 import 'package:chargeme/view/add_station/change_station_name/change_station_name_view.dart';
 import 'package:chargeme/view/add_station/change_station_address/change_station_address_view.dart';
 import 'package:chargeme/view/add_station/change_station_description/change_station_description_view.dart';
@@ -124,7 +125,9 @@ class _AddStationViewState extends State<AddStationView> with RouteAware {
                           false,
                           (_) => ChangeHoursView()),
                       CardEntry(L10n.amenities.str, viewModel.amenities.map((e) => e.localizedTitle).join(", "), false,
-                          (_) => ChangeAmenitiesView())
+                          (_) => ChangeAmenitiesView()),
+                      CardEntry(L10n.locationOpenOrActive.str, viewModel.isOpenOrActive ? L10n.yes.str : L10n.no.str,
+                          true, (_) => ChangeIsOpenOrActiveView()),
                     ],
             )));
   }

@@ -9,7 +9,7 @@ class ChangeStationNameView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(L10n.changeName.str),
+        title: Text(L10n.name.str),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(

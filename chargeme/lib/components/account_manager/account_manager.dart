@@ -104,13 +104,13 @@ class AccountManager {
     }
   }
 
-  Future<bool> updateAccountInfo({String? id = null}) async {
+  Future<bool> updateAccountInfo({String? id}) async {
     if (currentAccount == null && id == null) {
       return false;
     }
     final userId = id ?? currentAccount!.id;
     try {
-      final response = await http.get(Uri.parse("http://${IP.current}/v1/user/${userId}"));
+      final response = await http.get(Uri.parse("http://${IP.current}/v1/user/$userId"));
       if (response.statusCode == 200) {
         final userData = jsonDecode(utf8.decode(response.bodyBytes));
         currentAccount = Account.fromUserData(userData, userId);

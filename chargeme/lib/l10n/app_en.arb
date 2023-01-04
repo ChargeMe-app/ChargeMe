@@ -1,4 +1,6 @@
 {
+    "yes": "Yes",
+    "no": "No",
     "loading": "Loading",
 
     "appTitle": "ChargeMe",
@@ -10,22 +12,11 @@
     "location": "Location",
     "station": "Station",
     "stations": "Stations",
+    "enterName": "Enter name of the location",
+    "enterDescription": "Enter description for the location",
+    "enterPhoneNumber": "Enter phone number which could be used if stations are broken",
+    "enterAddress": "Enter address of the location (or it will be automatically set when the geolocation is set)",
 
-    "changeName": "Change name",
-    "enterName": "Enter name",
-
-    "changeDescription": "Change description",
-    "enterDescription": "Enter description",
-
-    "changePhoneNumber": "Change phone number",
-    "enterPhoneNumber": "Enter phone number",
-
-    "changeAddress": "Change address",
-    "enterAddress": "Enter address",
-
-    "editLocation": "Edit location",
-
-    "editStationTypes": "Edit station types",
     "noAddedStations": "No added stations",
     "addStationType": "Add station type",
     "selectIcon": "Select Icon",
@@ -96,7 +87,8 @@
     "getSmsCode": "Get SMS code",
     "nice": "Nice",
     "enterValidPhoneNumber": "Enter valid phone number",
-    "addNewLocation": "Add new location",
+    "addNewLocation": "New location",
+    "editLocation": "Edit location",
     "create": "Create",
     "successfullySet": "Successfully set",
     "access": "Access",
@@ -105,8 +97,6 @@
     "empty": "Empty",
     "locationIsActive": "Location is Active",
     "locationComingSoon": "Location coming soon",
-    "changeOpenOrActiveStatus": "Change open or active status",
-    "changeWorkingHours": "Change working hours",
     "editStations": "Edit stations",
     "addPlug": "Add plug",
     "plugs": "Plugs",
@@ -115,18 +105,15 @@
     "targetlocation": "targetLocation",
     "chooseLocation": "Choose location",
     "locationIsSuccessfullySet": "Location is successfully set",
-    "changeCostAndPricing": "Change cost and pricing",
     "costDescription": "Cost description",
-    "changeAccess": "Change access",
-    "changeAmenities": "Change amenities",
     "chooseAmenitiesPresentOnThisLocation": "Choose amenities present on this location",
     "badFormat": "Bad format",
     "theFormatIsOk": "The format is OK",
     "isThisLocationRestricted": "Is this location restricted",
     "public": "Public",
     "private": "Private",
-    "locationOpenOrActive": "Location Open or Active",
-    "isThisLocationOpenOrActive": "Is this location open/active",
+    "locationOpenOrActive": "Location Open/Active",
+    "areStationsInUse": "Are stations already in use (not under repair)?",
 
     "about": "About",
     "chargeme": "ChargeMe",

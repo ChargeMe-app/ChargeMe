@@ -11,7 +11,7 @@ class ChangeAmenitiesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(L10n.changeAmenities.str),
+          title: Text(L10n.amenities.str),
           backgroundColor: ColorPallete.violetBlue,
         ),
         body: ListView(children: [

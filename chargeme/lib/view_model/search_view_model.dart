@@ -28,9 +28,9 @@ class SearchViewModel extends ChangeNotifier {
   List<SearchResult> get results => _results;
   final MarkersManager markersManager;
   final AnalyticsManager analyticsManager;
-  List<CancelableOperation> _cancelables = [];
+  final List<CancelableOperation> _cancelables = [];
 
-  late PlaceSearcher _placeSearcher = PlaceSearcher();
+  late final PlaceSearcher _placeSearcher = PlaceSearcher();
   TextEditingController controller = TextEditingController();
   FocusNode focusNode = FocusNode();
   Throttler throttler = Throttler();
@@ -40,9 +40,8 @@ class SearchViewModel extends ChangeNotifier {
   Future<void> fetchResults(String query) async {
     resetResults();
     try {
-      final List<String> res = await _placeSearcher.getOrganizations(text: query);
+      // final List<String> res = await _placeSearcher.getOrganizations(text: query);
       final List<Location> result = await locationFromAddress(query);
-      print(res);
 
       for (final entry in result) {
         final operation = CancelableOperation.fromFuture(markersManager.getStationMarkers(
@@ -83,7 +82,7 @@ class SearchViewModel extends ChangeNotifier {
         });
       }
     } catch (error) {
-      print(error);
+      analyticsManager.logErrorEvent(error.toString());
     }
   }
 

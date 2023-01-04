@@ -175,6 +175,31 @@ class AddStationViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  IconType calculateIconType() {
+    if (isHomeCharger) {
+      return IconType.home;
+    }
+    IconType iconType = IconType.publicStandard;
+    for (final station in _stations) {
+      for (final outlet in station.outlets) {
+        if (outlet.connectorType == ConnectorType.chademo ||
+            outlet.connectorType == ConnectorType.cssCombo ||
+            outlet.connectorType == ConnectorType.teslaRoadster) {
+          iconType = IconType.publicFast;
+        }
+      }
+    }
+    if (!isOpenOrActive) {
+      if (iconType == IconType.publicFast) {
+        iconType = IconType.repairFast;
+      }
+      if (iconType == IconType.publicStandard) {
+        iconType = IconType.repairStandard;
+      }
+    }
+    return iconType;
+  }
+
   bool isAbleToCreate() {
     if (name.isNotEmpty && location != null && stations.isNotEmpty) return true;
     return false;
@@ -185,7 +210,7 @@ class AddStationViewModel extends ChangeNotifier {
     final place = ChargingPlace(
       id: id,
       name: name,
-      iconType: IconType.publicStandard,
+      iconType: calculateIconType(),
       description: description,
       phoneNumber: phoneNumber,
       address: address,
@@ -208,10 +233,13 @@ class AddStationViewModel extends ChangeNotifier {
   }
 
   void sendLocation(ChargingPlace place) async {
-    // TODO: ADD IF EDITING CASE
     String encodedJson = jsonEncode(place);
     try {
-      final response = await http.post(Uri.parse("http://${IP.current}/v1/locations"), body: encodedJson);
+      if (isEditingLocationMode) {
+        await http.put(Uri.parse("http://${IP.current}/v1/locations"), body: encodedJson);
+      } else {
+        await http.post(Uri.parse("http://${IP.current}/v1/locations"), body: encodedJson);
+      }
     } catch (error) {
       analyticsManager.logErrorEvent(error.toString());
     }

@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ChangeDebugServerIPView extends StatelessWidget {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Server IP"),
+        title: const Text("Server IP"),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(
