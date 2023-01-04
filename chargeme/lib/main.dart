@@ -26,8 +26,8 @@ void main() {
 
 class MyApp extends StatefulWidget {
   final AnalyticsManager analyticsManager = AnalyticsManager();
-  late AccountManager accountManager = AccountManager(analytics: analyticsManager);
-  late MarkersManager markersManager = MarkersManager(analyticsManager: analyticsManager);
+  late final AccountManager accountManager = AccountManager(analytics: analyticsManager);
+  late final MarkersManager markersManager = MarkersManager(analyticsManager: analyticsManager);
 
   MyApp({super.key});
 
@@ -86,7 +86,7 @@ class HomeView extends StatelessWidget {
   final MarkersManager markersManager;
   final MapViewModel mapVM;
 
-  HomeView(
+  const HomeView(
       {required this.accountManager,
       required this.analyticsManager,
       required this.markersManager,
@@ -150,6 +150,6 @@ class HomeView extends StatelessWidget {
                 child: const Padding(padding: EdgeInsets.only(right: 12), child: Icon(Icons.account_circle_rounded)))
           ],
         ),
-        body: GMap());
+        body: const GMap());
   }
 }

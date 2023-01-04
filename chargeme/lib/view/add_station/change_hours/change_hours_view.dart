@@ -1,7 +1,6 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/l10n.dart';
-import 'package:chargeme/model/charging_place/station.dart';
-import 'package:chargeme/view/add_station/add_station_view.dart';
+import 'package:chargeme/view/helper_views/designed_switch.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ class ChangeHoursView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(L10n.changeWorkingHours.str),
+          title: Text(L10n.hours.str),
           backgroundColor: ColorPallete.violetBlue,
         ),
         body: Padding(
@@ -24,14 +23,14 @@ class ChangeHoursView extends StatelessWidget {
                         "${L10n.open247.str}?",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Spacer(),
-                      CupertinoSwitch(
+                      const Spacer(),
+                      DesignedSwitch(
                           value: addStationVM.isOpen247,
                           onChanged: (isOn) {
                             addStationVM.isOpen247 = isOn;
                           })
                     ]),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     TextFormField(
                       enabled: !addStationVM.isOpen247,
                       initialValue: addStationVM.hours,

@@ -3,9 +3,9 @@ extension CapExtension on String {
     if (isEmpty) {
       return "";
     }
-    return '${this[0].toUpperCase()}${this.substring(1)}';
+    return '${this[0].toUpperCase()}${substring(1)}';
   }
 
-  String get allInCaps => this.toUpperCase();
-  String get capitalizeEachWord => this.split(" ").map((str) => str.capitalize).join(" ");
+  String get allInCaps => toUpperCase();
+  String get capitalizeEachWord => split(" ").map((str) => str.capitalize).join(" ");
 }

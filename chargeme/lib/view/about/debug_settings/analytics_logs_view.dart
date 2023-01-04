@@ -4,15 +4,15 @@ import 'package:chargeme/model/event/event.dart';
 import 'package:flutter/material.dart';
 
 class AnalyticsLogsView extends StatelessWidget {
-  AnalyticsManager analyticsManager;
+  final AnalyticsManager analyticsManager;
 
-  AnalyticsLogsView({required this.analyticsManager});
+  const AnalyticsLogsView({required this.analyticsManager});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Analytics logs"),
+          title: const Text("Analytics logs"),
           backgroundColor: ColorPallete.violetBlue,
         ),
         body: SingleChildScrollView(
@@ -20,15 +20,15 @@ class AnalyticsLogsView extends StatelessWidget {
                 children: List.generate(analyticsManager.storedEvents.length, (i) {
           final event = analyticsManager.storedEvents[i];
           return Padding(
-              padding: EdgeInsets.all(4),
+              padding: const EdgeInsets.all(4),
               child: Column(children: [
                 Row(children: [
-                  Text("EVENT: " + event.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))
+                  Text("EVENT: " + event.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500))
                 ]),
                 Row(children: [
                   Flexible(
-                      child:
-                          SelectableText("Params: " + cleanedEventParams(event), style: TextStyle(color: Colors.grey)))
+                      child: SelectableText("Params: " + cleanedEventParams(event),
+                          style: const TextStyle(color: Colors.grey)))
                 ])
               ]));
         }))));

@@ -35,7 +35,7 @@ class _ChangeStationPhoneView extends State<ChangeStationPhoneView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(L10n.changePhoneNumber.str),
+        title: Text(L10n.phoneNumber.str),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(

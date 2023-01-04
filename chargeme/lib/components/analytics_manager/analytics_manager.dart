@@ -70,4 +70,5 @@ Future<String?> _getId() async {
     var androidDeviceInfo = await deviceInfo.androidInfo;
     return androidDeviceInfo.device;
   }
+  return null;
 }

@@ -10,14 +10,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class DebugSettingsView extends StatelessWidget {
-  AnalyticsManager analyticsManager;
+  final AnalyticsManager analyticsManager;
 
-  DebugSettingsView({required this.analyticsManager});
+  const DebugSettingsView({required this.analyticsManager});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Debug settings"), backgroundColor: ColorPallete.violetBlue),
+        appBar: AppBar(title: const Text("Debug settings"), backgroundColor: ColorPallete.violetBlue),
         body: Consumer<DebugSettingsViewModel>(
             builder: (context, debugSettingsVM, child) => Column(
                     children: List.generate(debugSettingsVM.model.length, (i) {
@@ -37,7 +37,7 @@ class DebugSettingsView extends StatelessWidget {
                         trailing: row.trailingText == ""
                             ? SvgPicture.asset(Asset.chevronRight.path)
                             : Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
-                                Text(row.trailingText, style: TextStyle(color: Colors.grey, fontSize: 16)),
+                                Text(row.trailingText, style: const TextStyle(color: Colors.grey, fontSize: 16)),
                                 const SizedBox(width: 8),
                                 SvgPicture.asset(Asset.chevronRight.path)
                               ]),

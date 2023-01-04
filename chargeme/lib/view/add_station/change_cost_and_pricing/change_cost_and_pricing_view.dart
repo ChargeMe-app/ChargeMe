@@ -1,7 +1,7 @@
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/view/helper_views/designed_switch.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +10,7 @@ class ChangeCostAndPricingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(L10n.changeCostAndPricing.str),
+          title: Text(L10n.costAndPricing.str),
           backgroundColor: ColorPallete.violetBlue,
         ),
         body: Padding(
@@ -20,16 +20,16 @@ class ChangeCostAndPricingView extends StatelessWidget {
                     Row(children: [
                       Text(
                         "${L10n.requiresFee.str}?",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Spacer(),
-                      CupertinoSwitch(
+                      const Spacer(),
+                      DesignedSwitch(
                           value: addStationVM.requiresFee,
                           onChanged: (isOn) {
                             addStationVM.requiresFee = isOn;
                           })
                     ]),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     TextFormField(
                       enabled: addStationVM.requiresFee,
                       minLines: 3,
