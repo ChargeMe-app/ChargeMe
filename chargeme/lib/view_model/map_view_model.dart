@@ -25,7 +25,11 @@ class MapViewModel extends ChangeNotifier {
 
   final Map<String, Marker> _markers = {};
   final Map<String, Marker> _permanentMarkers = {};
+  final Throttler _throttler = Throttler();
   final Map<IconType, BitmapDescriptor> _cachedMarkerIcons = {};
+  GoogleMapController? get _mapController {
+    return _customInfoWindowController.googleMapController;
+  }
 
   bool _isSearchEnabled = false;
   bool isLoading = false;
@@ -139,7 +143,7 @@ class MapViewModel extends ChangeNotifier {
   void processLongPress(LatLng latLng) {
     _markers["123"] = Marker(
         consumeTapEvents: true,
-        markerId: MarkerId("123"),
+        markerId: const MarkerId("123"),
         position: latLng,
         onTap: () {
           _customInfoWindowController.addInfoWindow!(

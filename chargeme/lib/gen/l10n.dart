@@ -16,17 +16,9 @@ enum L10n {
   allCheckins,
   amenities,
   appTitle,
+  areStationsInUse,
   badFormat,
   camping,
-  changeAccess,
-  changeAddress,
-  changeAmenities,
-  changeCostAndPricing,
-  changeDescription,
-  changeName,
-  changeOpenOrActiveStatus,
-  changePhoneNumber,
-  changeWorkingHours,
   chargeme,
   chargingNow,
   checkIn,
@@ -55,7 +47,6 @@ enum L10n {
   duration,
   edit,
   editLocation,
-  editStationTypes,
   editStations,
   email,
   empty,
@@ -84,7 +75,6 @@ enum L10n {
   hours,
   hoursLowercased,
   isCheckedInHere,
-  isThisLocationOpenOrActive,
   isThisLocationRestricted,
   joinChargemeCummunityForFree,
   limitOfPhotosReached,
@@ -102,6 +92,7 @@ enum L10n {
   myVehicle,
   name,
   nice,
+  no,
   noAddedStations,
   open247,
   outlet,
@@ -153,6 +144,7 @@ enum L10n {
   withWord,
   workingHours,
   writeAnyCommentsOrSuggestionsDirectlyToDevelopers,
+  yes,
   yourProfile,
   yourStatistics,
   yourStuff,
@@ -171,7 +163,7 @@ extension GetString on L10n {
         case L10n.addHomeCharger:
           return "Добавить домашнюю зарядку";
         case L10n.addNewLocation:
-          return "Добавить новую локацию";
+          return "Новая локация";
         case L10n.addPlug:
           return "Добавить разъем";
         case L10n.addScreenshot:
@@ -192,28 +184,12 @@ extension GetString on L10n {
           return "Удобства";
         case L10n.appTitle:
           return "ChargeMe";
+        case L10n.areStationsInUse:
+          return "Станции введены в эксплуатацию (не на ремонте)";
         case L10n.badFormat:
           return "Неверный формат";
         case L10n.camping:
           return "Кемпинг";
-        case L10n.changeAccess:
-          return "Изменить доступность";
-        case L10n.changeAddress:
-          return "Изменить адрес";
-        case L10n.changeAmenities:
-          return "Изменить удобства";
-        case L10n.changeCostAndPricing:
-          return "Изменить цену";
-        case L10n.changeDescription:
-          return "Изменить описание";
-        case L10n.changeName:
-          return "Изменить название";
-        case L10n.changeOpenOrActiveStatus:
-          return "Изменить статус доступности";
-        case L10n.changePhoneNumber:
-          return "Изменить номер телефона";
-        case L10n.changeWorkingHours:
-          return "Изменить часы работы";
         case L10n.chargeme:
           return "ChargeMe";
         case L10n.chargingNow:
@@ -269,9 +245,7 @@ extension GetString on L10n {
         case L10n.edit:
           return "Редактировать";
         case L10n.editLocation:
-          return "Изменить геолокацию";
-        case L10n.editStationTypes:
-          return "Изменить станции";
+          return "Редактировать локацию";
         case L10n.editStations:
           return "Редактировать станции";
         case L10n.email:
@@ -283,15 +257,15 @@ extension GetString on L10n {
         case L10n.emptyFavouritesTitle:
           return "Список пуст.";
         case L10n.enterAddress:
-          return "Введите адрес";
+          return "Введите адрес локации (либо он установится сам при установке геолокации)";
         case L10n.enterCodeFromSms:
           return "Введите код из SMS";
         case L10n.enterDescription:
-          return "Введите описание";
+          return "Введите описание для локации";
         case L10n.enterName:
-          return "Введите название";
+          return "Введите название локации";
         case L10n.enterPhoneNumber:
-          return "Введите номер телефона";
+          return "Введите номер телефона, по которому можно обратиться в случае поломки станций";
         case L10n.enterSmsCode:
           return "Введите SMS код";
         case L10n.enterValidPhoneNumber:
@@ -328,8 +302,6 @@ extension GetString on L10n {
           return "часов";
         case L10n.isCheckedInHere:
           return "зачек-инен здесь";
-        case L10n.isThisLocationOpenOrActive:
-          return "Эта локация открыта/доступна";
         case L10n.isThisLocationRestricted:
           return "Эта локация приватная";
         case L10n.joinChargemeCummunityForFree:
@@ -347,7 +319,7 @@ extension GetString on L10n {
         case L10n.locationIsSuccessfullySet:
           return "Локация успешно установлена";
         case L10n.locationOpenOrActive:
-          return "Локация открыта или доступна";
+          return "Локация уже открыта/доступна";
         case L10n.lodging:
           return "Ночллег";
         case L10n.logOut:
@@ -364,6 +336,8 @@ extension GetString on L10n {
           return "Название";
         case L10n.nice:
           return "Найс";
+        case L10n.no:
+          return "Нет";
         case L10n.noAddedStations:
           return "Нет станций";
         case L10n.open247:
@@ -466,6 +440,8 @@ extension GetString on L10n {
           return "Часы работы";
         case L10n.writeAnyCommentsOrSuggestionsDirectlyToDevelopers:
           return "Пишите любые комментарии или предложения напрямую разработчикам";
+        case L10n.yes:
+          return "Да";
         case L10n.yourProfile:
           return "Ваш профиль";
         case L10n.yourStatistics:
@@ -484,7 +460,7 @@ extension GetString on L10n {
         case L10n.addHomeCharger:
           return "Add home charger";
         case L10n.addNewLocation:
-          return "Add new location";
+          return "New location";
         case L10n.addPlug:
           return "Add plug";
         case L10n.addScreenshot:
@@ -505,28 +481,12 @@ extension GetString on L10n {
           return "Amenities";
         case L10n.appTitle:
           return "ChargeMe";
+        case L10n.areStationsInUse:
+          return "Are stations already in use (not under repair)?";
         case L10n.badFormat:
           return "Bad format";
         case L10n.camping:
           return "Camping";
-        case L10n.changeAccess:
-          return "Change access";
-        case L10n.changeAddress:
-          return "Change address";
-        case L10n.changeAmenities:
-          return "Change amenities";
-        case L10n.changeCostAndPricing:
-          return "Change cost and pricing";
-        case L10n.changeDescription:
-          return "Change description";
-        case L10n.changeName:
-          return "Change name";
-        case L10n.changeOpenOrActiveStatus:
-          return "Change open or active status";
-        case L10n.changePhoneNumber:
-          return "Change phone number";
-        case L10n.changeWorkingHours:
-          return "Change working hours";
         case L10n.chargeme:
           return "ChargeMe";
         case L10n.chargingNow:
@@ -583,8 +543,6 @@ extension GetString on L10n {
           return "Edit";
         case L10n.editLocation:
           return "Edit location";
-        case L10n.editStationTypes:
-          return "Edit station types";
         case L10n.editStations:
           return "Edit stations";
         case L10n.email:
@@ -596,15 +554,15 @@ extension GetString on L10n {
         case L10n.emptyFavouritesTitle:
           return "The list is empty.";
         case L10n.enterAddress:
-          return "Enter address";
+          return "Enter address of the location (or it will be automatically set when the geolocation is set)";
         case L10n.enterCodeFromSms:
           return "Enter code from SMS";
         case L10n.enterDescription:
-          return "Enter description";
+          return "Enter description for the location";
         case L10n.enterName:
-          return "Enter name";
+          return "Enter name of the location";
         case L10n.enterPhoneNumber:
-          return "Enter phone number";
+          return "Enter phone number which could be used if stations are broken";
         case L10n.enterSmsCode:
           return "Enter SMS code";
         case L10n.enterValidPhoneNumber:
@@ -641,8 +599,6 @@ extension GetString on L10n {
           return "hours";
         case L10n.isCheckedInHere:
           return "is checked in here";
-        case L10n.isThisLocationOpenOrActive:
-          return "Is this location open/active";
         case L10n.isThisLocationRestricted:
           return "Is this location restricted";
         case L10n.joinChargemeCummunityForFree:
@@ -660,7 +616,7 @@ extension GetString on L10n {
         case L10n.locationIsSuccessfullySet:
           return "Location is successfully set";
         case L10n.locationOpenOrActive:
-          return "Location Open or Active";
+          return "Location Open/Active";
         case L10n.lodging:
           return "Lodging";
         case L10n.logOut:
@@ -677,6 +633,8 @@ extension GetString on L10n {
           return "Name";
         case L10n.nice:
           return "Nice";
+        case L10n.no:
+          return "No";
         case L10n.noAddedStations:
           return "No added stations";
         case L10n.open247:
@@ -779,6 +737,8 @@ extension GetString on L10n {
           return "Working hours";
         case L10n.writeAnyCommentsOrSuggestionsDirectlyToDevelopers:
           return "Write any comments or suggestions directly to developers";
+        case L10n.yes:
+          return "Yes";
         case L10n.yourProfile:
           return "Your profile";
         case L10n.yourStatistics:

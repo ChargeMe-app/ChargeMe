@@ -91,7 +91,7 @@ class CheckInViewModel extends ChangeNotifier {
   ScreenOption? get screenOption => _screenOption;
   set screenOption(ScreenOption? value) {
     _screenOption = value;
-    if (value == ScreenOption.charging || value == ScreenOption.waiting) _duration = Duration(minutes: 30);
+    if (value == ScreenOption.charging || value == ScreenOption.waiting) _duration = const Duration(minutes: 30);
     if (value == null) _duration = null;
     notifyListeners();
   }

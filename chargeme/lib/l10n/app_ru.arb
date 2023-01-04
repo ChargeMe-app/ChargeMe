@@ -1,4 +1,6 @@
 {
+    "yes": "Да",
+    "no": "Нет",
     "loading": "Загрузка",
 
     "appTitle": "ChargeMe",
@@ -10,22 +12,11 @@
     "location": "Геолокация",
     "station": "Станция",
     "stations": "Станции",
+    "enterName": "Введите название локации",
+    "enterDescription": "Введите описание для локации",
+    "enterPhoneNumber": "Введите номер телефона, по которому можно обратиться в случае поломки станций",
+    "enterAddress": "Введите адрес локации (либо он установится сам при установке геолокации)",
 
-    "changeName": "Изменить название",
-    "enterName": "Введите название",
-
-    "changeDescription": "Изменить описание",
-    "enterDescription": "Введите описание",
-
-    "changePhoneNumber": "Изменить номер телефона",
-    "enterPhoneNumber": "Введите номер телефона",
-
-    "changeAddress": "Изменить адрес",
-    "enterAddress": "Введите адрес",
-
-    "editLocation": "Изменить геолокацию",
-
-    "editStationTypes": "Изменить станции",
     "noAddedStations": "Нет станций",
     "addStationType": "Добавить станцию",
     "selectIcon": "Выберите иконку",
@@ -96,7 +87,8 @@
     "getSmsCode": "Получить SMS код",
     "nice": "Найс",
     "enterValidPhoneNumber": "Введите правильный номер телефона",
-    "addNewLocation": "Добавить новую локацию",
+    "addNewLocation": "Новая локация",
+    "editLocation": "Редактировать локацию",
     "create": "Создать",
     "successfullySet": "Успешно установлено",
     "access": "Доступ",
@@ -105,8 +97,6 @@
     "empty": "Пусто",
     "locationIsActive": "Место активно",
     "locationComingSoon": "Место будет доступно в будущем",
-    "changeOpenOrActiveStatus": "Изменить статус доступности",
-    "changeWorkingHours": "Изменить часы работы",
     "editStations": "Редактировать станции",
     "addPlug": "Добавить разъем",
     "plugs": "Разъемы",
@@ -115,18 +105,15 @@
     "targetlocation": "",
     "chooseLocation": "Выбрать локацию",
     "locationIsSuccessfullySet": "Локация успешно установлена",
-    "changeCostAndPricing": "Изменить цену",
     "costDescription": "Описание цены",
-    "changeAccess": "Изменить доступность",
-    "changeAmenities": "Изменить удобства",
     "chooseAmenitiesPresentOnThisLocation": "Выберите удобсва на этой локации",
     "badFormat": "Неверный формат",
     "theFormatIsOk": "Подходящий формат",
     "isThisLocationRestricted": "Эта локация приватная",
     "public": "Публичная",
     "private": "Приватная",
-    "locationOpenOrActive": "Локация открыта или доступна",
-    "isThisLocationOpenOrActive": "Эта локация открыта/доступна",
+    "locationOpenOrActive": "Локация уже открыта/доступна",
+    "areStationsInUse": "Станции введены в эксплуатацию (не на ремонте)",
 
     "about": "О приложении",
     "chargeme": "ChargeMe",

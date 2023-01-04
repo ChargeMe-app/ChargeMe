@@ -9,7 +9,7 @@ class ChangeStationAddressView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(L10n.changeAddress.str),
+        title: Text(L10n.address.str),
         backgroundColor: ColorPallete.violetBlue,
       ),
       body: Padding(
