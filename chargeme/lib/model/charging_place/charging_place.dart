@@ -194,7 +194,9 @@ extension RatingIcon on Rating {
 extension BeautifulScore on double {
   String get beautifulScore => toInt() == this ? toInt().toString() : toStringAsFixed(1).toString();
   Color get bgColor {
-    if (this < 4) {
+    if (this == 0) {
+      return Colors.grey;
+    } else if (this < 4) {
       return ColorPallete.redCinnabar;
     } else if (this < 7.5) {
       return ColorPallete.yellow;

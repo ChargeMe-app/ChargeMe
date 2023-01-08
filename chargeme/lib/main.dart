@@ -7,11 +7,13 @@ import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/view/about/about_view.dart';
+import 'package:chargeme/view/filters/filters_view.dart';
 import 'package:chargeme/view/login/profile_view.dart';
 import 'package:chargeme/view_model/add_station_view_model.dart';
 import 'package:chargeme/view_model/charging_place_view_model.dart';
 import 'package:chargeme/view_model/choose_vehicle_view_model.dart';
 import 'package:chargeme/view_model/debug_settings_view_model.dart';
+import 'package:chargeme/view_model/filters_view_model.dart';
 import 'package:chargeme/view_model/map_view_model.dart';
 import 'package:chargeme/view_model/search_view_model.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +77,7 @@ class _MyAppState extends State<MyApp> {
               create: (context) => ChargingPlaceViewModel(
                   accountManager: widget.accountManager, analyticsManager: widget.analyticsManager)),
           ChangeNotifierProvider(create: (context) => DebugSettingsViewModel()),
+          ChangeNotifierProvider(create: (context) => FiltersViewModel(analyticsManager: widget.analyticsManager)),
           ChangeNotifierProvider.value(value: searchVM),
           ChangeNotifierProvider.value(value: mapVM),
           ChangeNotifierProvider.value(value: chooseVehicleVM),
@@ -115,6 +118,19 @@ class HomeView extends StatelessWidget {
           //       // mapVM.isSearchEnabled = !mapVM.isSearchEnabled;
           //     }),
           // const SizedBox(height: 8),
+          FloatingActionButton(
+              heroTag: "filters",
+              backgroundColor: ColorPallete.violetBlue,
+              child: const Icon(Icons.filter_list),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FiltersView(),
+                  ),
+                );
+              }),
+          const SizedBox(height: 8),
           FloatingActionButton(
               heroTag: "myLocation",
               backgroundColor: ColorPallete.violetBlue,

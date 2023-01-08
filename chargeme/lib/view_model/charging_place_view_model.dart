@@ -38,6 +38,10 @@ class ChargingPlaceViewModel extends ChangeNotifier {
     return result;
   }
 
+  bool get isHomeCharger {
+    return place?.isHomeCharger ?? false;
+  }
+
   ChargingPlaceViewModel({required this.analyticsManager, required this.accountManager}) {
     _initialSetup();
   }

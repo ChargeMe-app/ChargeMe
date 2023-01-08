@@ -140,21 +140,24 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 ? chargingPlaceVM.removeFromFavourites()
                                 : chargingPlaceVM.saveToFavourites();
                           }),
-                      ListTile(
-                          leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.info.path)),
-                          title: Text(L10n.edit.str, style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
-                          onTap: () {
-                            if (chargingPlaceVM.place != null) {
-                              context.read<AddStationViewModel>().setupForEditing(chargingPlaceVM.place!);
-                              Navigator.pop(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const AddStationView(),
-                                ),
-                              );
-                            }
-                          })
+                      chargingPlaceVM.isHomeCharger
+                          ? Container()
+                          : ListTile(
+                              leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.info.path)),
+                              title:
+                                  Text(L10n.edit.str, style: TextStyle(fontSize: 18, color: ColorPallete.violetBlue)),
+                              onTap: () {
+                                if (chargingPlaceVM.place != null) {
+                                  context.read<AddStationViewModel>().setupForEditing(chargingPlaceVM.place!);
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AddStationView(),
+                                    ),
+                                  );
+                                }
+                              })
                     ])));
           });
         });
