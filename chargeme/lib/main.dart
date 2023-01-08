@@ -19,6 +19,7 @@ import 'package:chargeme/view_model/search_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:chargeme/view/map/map.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -53,8 +54,18 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     IP.changeToDebugIPIfNeeded();
     widget.accountManager.tryLoadStoredAccount();
-    widget.analyticsManager.initialSetup();
-    widget.analyticsManager.logEvent("session_started", params: {"device_locale": Get.deviceLocale?.languageCode});
+    initAnalyticsManager();
+  }
+
+  void initAnalyticsManager() async {
+    await widget.analyticsManager.initialSetup();
+    final userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    widget.analyticsManager.logEvent("session_started", params: {
+      "device_locale": Get.deviceLocale?.languageCode,
+      "user_lat": userLocation.latitude,
+      "user_long": userLocation.longitude,
+      "isSignedIn": widget.accountManager.currentAccount != null
+    });
   }
 
   @override

@@ -59,7 +59,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                     showActions();
                   },
                   child: Padding(
-                      padding: EdgeInsets.only(right: 12),
+                      padding: const EdgeInsets.only(right: 12),
                       child: SizedBox(width: 32, child: Image.asset(Asset.threeDots.path))))
             ]),
             body: NotificationListener<ScrollNotification>(
@@ -122,8 +122,8 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
         builder: (context) {
           return Consumer<ChargingPlaceViewModel>(builder: (context, chargingPlaceVM, child) {
             return Container(
-                color: Color(0xFF737373),
-                height: chargingPlaceVM.isHomeCharger ? 120 : 180,
+                color: const Color(0xFF737373),
+                height: 180,
                 child: Container(
                     decoration: const BoxDecoration(
                         color: Colors.white,
@@ -194,7 +194,7 @@ class PhotosPreviewView extends StatelessWidget {
                     children: [Text("No added photos yet", style: TextStyle(color: Colors.white, fontSize: 16))])),
         hasPhotos
             ? Padding(
-                padding: EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.only(bottom: 12),
                 child: Container(
                     color: Colors.black54,
                     child: Padding(
@@ -256,9 +256,9 @@ class ChargingPlaceTitleView extends StatelessWidget {
 class CheckInButton extends StatelessWidget {
   CheckInButton({this.place, required this.analyticsManager, required this.accountManager});
 
-  ChargingPlace? place;
-  AnalyticsManager analyticsManager;
-  AccountManager accountManager;
+  final ChargingPlace? place;
+  final AnalyticsManager analyticsManager;
+  final AccountManager accountManager;
 
   @override
   Widget build(BuildContext context) {
@@ -270,6 +270,7 @@ class CheckInButton extends StatelessWidget {
       ),
       onPressed: () {
         if (place != null) {
+          analyticsManager.logEvent("check_in_button_tapped", params: {"placeId": place!.id});
           if (accountManager.currentAccount != null) {
             Navigator.push(
                 context,

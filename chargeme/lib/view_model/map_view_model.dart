@@ -122,6 +122,7 @@ class MapViewModel extends ChangeNotifier {
           markerId: MarkerId(stationMarker.id.toString()),
           position: LatLng(stationMarker.latitude, stationMarker.longitude),
           onTap: () {
+            analyticsManager.logEvent("marker_tap", params: {"place_id": stationMarker.id});
             _customInfoWindowController.addInfoWindow!(
                 MarkerInfoView(
                     stationMarker.id,

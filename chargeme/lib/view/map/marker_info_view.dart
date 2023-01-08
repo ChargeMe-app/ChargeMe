@@ -27,6 +27,7 @@ class MarkerInfoView extends StatelessWidget {
         duration: const Duration(milliseconds: 500),
         child: GestureDetector(
             onTap: () {
+              analyticsManager.logEvent("open_place_view", params: {"place_id": placeId});
               context.read<ChargingPlaceViewModel>().loadPlace(placeId);
               Navigator.push(
                 context,
