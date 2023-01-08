@@ -2,73 +2,101 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chargeme/model/event/event.dart';
-import 'package:chargeme/components/helpers/ip.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class AnalyticsManager {
-  String? deviceModel;
-  List<Event> storedEvents = [];
-  String filename;
+  String? _deviceModel;
+  String? _analyticsUserId;
 
-  AnalyticsManager() : filename = "events_${DateTime.now().toIso8601String()}";
+  final _baseUrl = "158.160.11.212:5001";
+  final List<Event> _storedEvents = [];
+  late final String _filename = "events_${DateTime.now().toIso8601String()}";
 
-  Future<File> get storedFile async {
+  List<Event> get storedEvents => _storedEvents;
+
+  Future<File> get _storedFile async {
     final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/analytics/$filename.json");
+    return File("${directory.path}/analytics/$_filename.json");
+  }
+
+  Future<Directory> get _storedFilesFolder async {
+    final directory = await getApplicationDocumentsDirectory();
+    return Directory("${directory.path}/analytics/");
   }
 
   Future<void> initialSetup() async {
-    (await storedFile).create(recursive: true);
-    deviceModel = await _getId();
+    (await _storedFile).create(recursive: true);
+    final prefs = await SharedPreferences.getInstance();
+    _attachUserIdIfNeeded(prefs);
+    _analyticsUserId = prefs.getString(_analyticsUserIdKey);
+    _deviceModel = await _getId();
+    _sendCachedEvents();
   }
 
   Future<void> logEvent(String name, {Map<String, dynamic>? params}) async {
     final event = Event(name: name, parameters: params ?? {});
-    event.parameters["model"] = deviceModel;
+    event.parameters["analytics_user_id"] = _analyticsUserId;
+    event.parameters["model"] = _deviceModel;
     event.parameters["timestamp"] = DateTime.now().toIso8601String();
     event.parameters["platform"] = Platform.operatingSystem.toString();
     print("EVENT: ${event.name}; PARAMETERS: ${event.parameters}");
 
-    final file = await storedFile;
-    storedEvents.add(event);
-    file.writeAsString(jsonEncode(storedEvents));
+    final file = await _storedFile;
+    _storedEvents.add(event);
+    file.writeAsString(jsonEncode(_storedEvents));
   }
 
   Future<void> logErrorEvent(String errorDescription) async {
     final event = Event(name: "error", parameters: {
+      "analytics_user_id": _analyticsUserId,
       "description": errorDescription,
-      "model": deviceModel,
+      "model": _deviceModel,
       "timestamp": DateTime.now().toIso8601String(),
       "platform": Platform.operatingSystem.toString()
     });
 
     print("ERROR. PARAMETERS: ${event.parameters}");
-    final file = await storedFile;
-    storedEvents.add(event);
-    file.writeAsString(jsonEncode(storedEvents));
+    final file = await _storedFile;
+    _storedEvents.add(event);
+    file.writeAsString(jsonEncode(_storedEvents));
   }
 
-  Future<void> sendCachedEvents() async {
-    // TODO: Implement this method
-    final encodedJson = jsonEncode(storedEvents);
-    try {
-      http.post(Uri.parse("http://${IP.current}/v1/"), body: encodedJson);
-    } catch (error) {
-      print(error);
+  void _attachUserIdIfNeeded(SharedPreferences prefs) async {
+    if (!prefs.containsKey(_analyticsUserIdKey)) {
+      prefs.setString(_analyticsUserIdKey, const Uuid().v4());
     }
+  }
+
+  Future<void> _sendCachedEvents() async {
+    (await _storedFilesFolder).list().forEach((element) async {
+      final File file = File(element.path);
+      try {
+        final content = await file.readAsString();
+        final response = await http.post(Uri.parse("http://$_baseUrl/analytics/event"), body: content);
+        if (response.statusCode == 200) {
+          file.delete();
+        }
+      } catch (error) {
+        print(error);
+      }
+    });
   }
 }
 
 Future<String?> _getId() async {
-  var deviceInfo = DeviceInfoPlugin();
+  final deviceInfo = DeviceInfoPlugin();
   if (Platform.isIOS) {
-    var iosDeviceInfo = await deviceInfo.iosInfo;
-    return iosDeviceInfo.model;
+    final iosDeviceInfo = await deviceInfo.iosInfo;
+    return iosDeviceInfo.name;
   } else if (Platform.isAndroid) {
-    var androidDeviceInfo = await deviceInfo.androidInfo;
-    return androidDeviceInfo.device;
+    final androidDeviceInfo = await deviceInfo.androidInfo;
+    return androidDeviceInfo.product;
   }
   return null;
 }
+
+String _analyticsUserIdKey = "analyticsUserId";

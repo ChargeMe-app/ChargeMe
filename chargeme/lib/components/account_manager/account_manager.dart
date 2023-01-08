@@ -92,7 +92,7 @@ class AccountManager {
         if (result) {
           final user = currentAccount!;
           storeAccount(user);
-          analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "google", "user_id": userId});
+          analytics.logEvent("sign_in", params: {"status": "success", "sign_type": "apple", "user_id": userId});
           return true;
         }
         return false;

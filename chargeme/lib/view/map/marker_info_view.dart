@@ -27,6 +27,7 @@ class MarkerInfoView extends StatelessWidget {
         duration: const Duration(milliseconds: 500),
         child: GestureDetector(
             onTap: () {
+              analyticsManager.logEvent("open_place_view", params: {"place_id": placeId});
               context.read<ChargingPlaceViewModel>().loadPlace(placeId);
               Navigator.push(
                 context,
@@ -42,8 +43,8 @@ class MarkerInfoView extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                     Container(
-                        decoration:
-                            BoxDecoration(color: score?.bgColor, borderRadius: BorderRadius.all(Radius.circular(4))),
+                        decoration: BoxDecoration(
+                            color: score?.bgColor, borderRadius: const BorderRadius.all(Radius.circular(4))),
                         child: score == null
                             ? Container()
                             : Padding(
