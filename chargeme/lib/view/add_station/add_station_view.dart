@@ -95,14 +95,18 @@ class _AddStationViewState extends State<AddStationView> with RouteAware {
                       CardEntry(
                           L10n.description.str, viewModel.description, false, (_) => ChangeStationDescriptionView()),
                       CardEntry(L10n.phoneNumber.str, viewModel.phoneNumber, false, (_) => ChangeStationPhoneView()),
-                      CardEntry(
-                          L10n.location.str,
-                          viewModel.location == null ? "" : L10n.successfullySet.str,
-                          true,
-                          (_) => ChooseLocationView(
-                              onLocationChosen: (address, latlng) => viewModel.setLocation(address, latlng),
-                              initialMarkerPosition: viewModel.location?.latLng)),
-                      CardEntry(L10n.address.str, viewModel.address, false, (_) => ChangeStationAddressView()),
+                      viewModel.isEditingLocationMode
+                          ? Container()
+                          : CardEntry(
+                              L10n.location.str,
+                              viewModel.location == null ? "" : L10n.successfullySet.str,
+                              true,
+                              (_) => ChooseLocationView(
+                                  onLocationChosen: (address, latlng) => viewModel.setLocation(address, latlng),
+                                  initialMarkerPosition: viewModel.location?.latLng)),
+                      viewModel.isEditingLocationMode
+                          ? Container()
+                          : CardEntry(L10n.address.str, viewModel.address, false, (_) => ChangeStationAddressView()),
                       CardEntry(
                           L10n.stations.str,
                           viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(),

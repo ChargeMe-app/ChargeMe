@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/throttler.dart';
@@ -11,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MapViewModel extends ChangeNotifier {
   final MarkersManager markersManager;
@@ -18,7 +23,6 @@ class MapViewModel extends ChangeNotifier {
   final AnalyticsManager analyticsManager;
   final SearchViewModel searchVM;
 
-  final CustomInfoWindowController _customInfoWindowController = CustomInfoWindowController();
   final Map<String, Marker> _markers = {};
   final Map<String, Marker> _permanentMarkers = {};
   final Throttler _throttler = Throttler();
@@ -30,14 +34,30 @@ class MapViewModel extends ChangeNotifier {
   bool _isSearchEnabled = false;
   bool isLoading = false;
   Map<String, Marker> get markers => _markers;
+
+  final Throttler _throttler = Throttler();
+  late final SharedPreferences _prefs;
+
+  String? _filtersString;
+
+  final CustomInfoWindowController _customInfoWindowController = CustomInfoWindowController();
   CustomInfoWindowController get customInfoWindowController => _customInfoWindowController;
+  GoogleMapController? get _mapController {
+    return _customInfoWindowController.googleMapController;
+  }
 
   MapViewModel(
       {required this.markersManager,
       required this.accountManager,
       required this.analyticsManager,
       required this.searchVM}) {
+    initialSetup();
+  }
+
+  void initialSetup() async {
+    _prefs = await SharedPreferences.getInstance();
     _setupCachedMarkerIcons();
+    _loadFilters();
   }
 
   bool get isSearchEnabled => _isSearchEnabled;
@@ -56,6 +76,18 @@ class MapViewModel extends ChangeNotifier {
         _cachedMarkerIcons[v] = icon;
       }
     }
+  }
+
+  void _loadFilters() async {
+    final shouldReload = _prefs.getBool("shouldReloadFilters") ?? false;
+    if (!shouldReload) {
+      return;
+    }
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File("${directory.path}/filters/saved_filters.json");
+    final contents = await file.readAsString();
+    _filtersString = jsonDecode(contents);
+    _prefs.setBool("shouldReloadFilters", false);
   }
 
   void onMapCreated(GoogleMapController controller) {

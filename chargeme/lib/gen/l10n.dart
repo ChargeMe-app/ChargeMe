@@ -30,6 +30,7 @@ enum L10n {
   close,
   comment,
   commentOnly,
+  connectors,
   contactUs,
   coolStation,
   copiedToClipboard,
@@ -39,6 +40,7 @@ enum L10n {
   create,
   deleteAccount,
   description,
+  deselectAll,
   details,
   dining,
   done,
@@ -60,6 +62,7 @@ enum L10n {
   enterYourPhoneNumber,
   evParking,
   favourites,
+  filters,
   forNext,
   free,
   getDirections,
@@ -107,12 +110,20 @@ enum L10n {
   removeFromFavourites,
   reportABug,
   requiresFee,
+  reset,
   restrooms,
   save,
+  scoreRange,
   selectIcon,
   selectPlug,
   send,
   shopping,
+  showComingSoonPlaces,
+  showHomePlaces,
+  showPaidChargingPlaces,
+  showPublicFastPlaces,
+  showPublicPlaces,
+  showplacesWithCheckin,
   signIn,
   signInWithGoogle,
   station,
@@ -201,6 +212,8 @@ extension GetString on L10n {
           return "Комментарий";
         case L10n.commentOnly:
           return "Оставить комментарий";
+        case L10n.connectors:
+          return "Разъемы";
         case L10n.contactUs:
           return "Связаться с нами";
         case L10n.coolStation:
@@ -219,6 +232,8 @@ extension GetString on L10n {
           return "Удалить аккаунт";
         case L10n.description:
           return "Описание";
+        case L10n.deselectAll:
+          return "Убрать выделение";
         case L10n.details:
           return "О станции";
         case L10n.dining:
@@ -261,6 +276,8 @@ extension GetString on L10n {
           return "Парковка для электромобилей";
         case L10n.favourites:
           return "Избранное";
+        case L10n.filters:
+          return "Фильтры";
         case L10n.forNext:
           return "в течение следующих";
         case L10n.free:
@@ -355,10 +372,14 @@ extension GetString on L10n {
           return "Сообщить об ошибке";
         case L10n.requiresFee:
           return "Платно";
+        case L10n.reset:
+          return "Сбросить";
         case L10n.restrooms:
           return "Туалеты";
         case L10n.save:
           return "Сохранить";
+        case L10n.scoreRange:
+          return "Диапазон оценки";
         case L10n.selectIcon:
           return "Выберите иконку";
         case L10n.selectPlug:
@@ -367,6 +388,18 @@ extension GetString on L10n {
           return "Отправить";
         case L10n.shopping:
           return "Магазины";
+        case L10n.showComingSoonPlaces:
+          return "Показывать зарядные места, которые появятся скоро";
+        case L10n.showHomePlaces:
+          return "Показывать домашние зарядные места";
+        case L10n.showPaidChargingPlaces:
+          return "Показывать платные зарядные места";
+        case L10n.showPublicFastPlaces:
+          return "Показывать публичные быстрые зарядные места";
+        case L10n.showPublicPlaces:
+          return "Показывать публичные зарядные места";
+        case L10n.showplacesWithCheckin:
+          return "Показывать зарядные места с чек-ином";
         case L10n.signIn:
           return "Войти";
         case L10n.signInWithGoogle:
@@ -476,6 +509,8 @@ extension GetString on L10n {
           return "Comment";
         case L10n.commentOnly:
           return "Comment only";
+        case L10n.connectors:
+          return "Connectors";
         case L10n.contactUs:
           return "Contact us";
         case L10n.coolStation:
@@ -494,6 +529,8 @@ extension GetString on L10n {
           return "Delete account";
         case L10n.description:
           return "Description";
+        case L10n.deselectAll:
+          return "Deselect all";
         case L10n.details:
           return "Details";
         case L10n.dining:
@@ -536,6 +573,8 @@ extension GetString on L10n {
           return "EV Parking";
         case L10n.favourites:
           return "Favourites";
+        case L10n.filters:
+          return "Filters";
         case L10n.forNext:
           return "for next";
         case L10n.free:
@@ -630,10 +669,14 @@ extension GetString on L10n {
           return "Report a bug";
         case L10n.requiresFee:
           return "Requires fee";
+        case L10n.reset:
+          return "Reset";
         case L10n.restrooms:
           return "Restrooms";
         case L10n.save:
           return "Save";
+        case L10n.scoreRange:
+          return "Score range";
         case L10n.selectIcon:
           return "Select Icon";
         case L10n.selectPlug:
@@ -642,6 +685,18 @@ extension GetString on L10n {
           return "Send";
         case L10n.shopping:
           return "Shopping";
+        case L10n.showComingSoonPlaces:
+          return "Show coming soon places";
+        case L10n.showHomePlaces:
+          return "Show home places";
+        case L10n.showPaidChargingPlaces:
+          return "Show paid charging places";
+        case L10n.showPublicFastPlaces:
+          return "Show public fast places";
+        case L10n.showPublicPlaces:
+          return "Show public places";
+        case L10n.showplacesWithCheckin:
+          return "Show places with check-in";
         case L10n.signIn:
           return "Sign in";
         case L10n.signInWithGoogle:

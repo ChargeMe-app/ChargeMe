@@ -2,9 +2,9 @@ import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/view/charging_place/charging_place_view.dart';
+import 'package:chargeme/view/common/place_score_view.dart';
 import 'package:chargeme/view_model/charging_place_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -41,17 +41,7 @@ class MarkerInfoView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                    Container(
-                        decoration:
-                            BoxDecoration(color: score?.bgColor, borderRadius: BorderRadius.all(Radius.circular(4))),
-                        child: score == null
-                            ? Container()
-                            : Padding(
-                                padding: const EdgeInsets.all(6),
-                                child: Text(
-                                  score!.beautifulScore,
-                                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                ))),
+                    PlaceScoreView(score: score),
                     score == null ? Container() : const SizedBox(width: 8),
                     Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Container(
