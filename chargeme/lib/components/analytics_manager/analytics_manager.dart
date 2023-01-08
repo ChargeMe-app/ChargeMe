@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chargeme/components/helpers/ip.dart';
 import 'package:chargeme/model/event/event.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
@@ -12,7 +13,6 @@ class AnalyticsManager {
   String? _deviceModel;
   String? _analyticsUserId;
 
-  final _baseUrl = "158.160.11.212:5001";
   final List<Event> _storedEvents = [];
   late final String _filename = "events_${DateTime.now().toIso8601String()}";
 
@@ -76,7 +76,7 @@ class AnalyticsManager {
       final File file = File(element.path);
       try {
         final content = await file.readAsString();
-        final response = await http.post(Uri.parse("http://$_baseUrl/analytics/event"), body: content);
+        final response = await http.post(Uri.parse("http://${IP.analytics}/analytics/event"), body: content);
         if (response.statusCode == 200) {
           file.delete();
         }
