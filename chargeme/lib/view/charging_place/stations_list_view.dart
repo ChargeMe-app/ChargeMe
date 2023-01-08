@@ -55,7 +55,7 @@ class StationsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BoxWithTitle(title: L10n.stations.str, children: [
       Container(
-          height: 160,
+          height: 168,
           child: ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(stations.length, (i) {
@@ -78,8 +78,9 @@ class StationsListView extends StatelessWidget {
               SizedBox(height: 12),
               Text(outlet.connectorType.str,
                   style: TextStyle(color: outletColor, fontSize: 16, fontWeight: FontWeight.bold)),
-              Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} kWh",
-                  style: TextStyle(fontSize: 12, color: outletColor))
+              Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} кВт",
+                  style: TextStyle(fontSize: 12, color: outletColor)),
+              Text(outlet.kilowatts == null ? "" : "17 ₽/кВт", style: TextStyle(fontSize: 12, color: outletColor))
             ]));
       })),
       isLast ? Container() : Container(width: 1, color: ColorPallete.violetBlue)

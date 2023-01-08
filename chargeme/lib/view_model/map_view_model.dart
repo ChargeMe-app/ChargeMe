@@ -25,7 +25,6 @@ class MapViewModel extends ChangeNotifier {
 
   final Map<String, Marker> _markers = {};
   final Map<String, Marker> _permanentMarkers = {};
-  final Throttler _throttler = Throttler();
   final Map<IconType, BitmapDescriptor> _cachedMarkerIcons = {};
   GoogleMapController? get _mapController {
     return _customInfoWindowController.googleMapController;
@@ -42,9 +41,6 @@ class MapViewModel extends ChangeNotifier {
 
   final CustomInfoWindowController _customInfoWindowController = CustomInfoWindowController();
   CustomInfoWindowController get customInfoWindowController => _customInfoWindowController;
-  GoogleMapController? get _mapController {
-    return _customInfoWindowController.googleMapController;
-  }
 
   MapViewModel(
       {required this.markersManager,
@@ -85,8 +81,7 @@ class MapViewModel extends ChangeNotifier {
     }
     final directory = await getApplicationDocumentsDirectory();
     final file = File("${directory.path}/filters/saved_filters.json");
-    final contents = await file.readAsString();
-    _filtersString = jsonDecode(contents);
+    _filtersString = await file.readAsString();
     _prefs.setBool("shouldReloadFilters", false);
   }
 
