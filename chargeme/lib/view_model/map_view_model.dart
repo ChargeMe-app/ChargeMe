@@ -38,9 +38,6 @@ class MapViewModel extends ChangeNotifier {
 
   final CustomInfoWindowController _customInfoWindowController = CustomInfoWindowController();
   CustomInfoWindowController get customInfoWindowController => _customInfoWindowController;
-  GoogleMapController? get _mapController {
-    return _customInfoWindowController.googleMapController;
-  }
 
   MapViewModel(
       {required this.markersManager,

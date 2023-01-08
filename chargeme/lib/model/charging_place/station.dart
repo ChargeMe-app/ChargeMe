@@ -52,6 +52,7 @@ class Outlet {
   @JsonKey(name: "connector")
   ConnectorType connectorType;
   double? kilowatts;
+  double? price;
   String? description;
 
   Outlet({required this.id, this.available, required this.connectorType, this.kilowatts, this.description});
