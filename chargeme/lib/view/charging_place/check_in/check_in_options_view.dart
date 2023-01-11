@@ -263,18 +263,24 @@ class _CheckInOptionsView extends State<CheckInOptionsView> {
               },
               child: Text(L10n.update.str, style: TextStyle(color: ColorPallete.violetBlue)))),
       const SizedBox(height: 12),
-      checkInRow(Asset.checkmarkRounded.path, L10n.successfulltyCharged.str, () {
-        checkInVM.screenOption = ScreenOption.success;
-      }),
-      checkInRow(Asset.xmarkRounded.path, L10n.couldNotCharge.str, () {
-        checkInVM.screenOption = ScreenOption.couldNotCharge;
-      }),
+      checkInVM.isRepair
+          ? Container()
+          : checkInRow(Asset.checkmarkRounded.path, L10n.successfulltyCharged.str, () {
+              checkInVM.screenOption = ScreenOption.success;
+            }),
+      checkInVM.isRepair
+          ? Container()
+          : checkInRow(Asset.xmarkRounded.path, L10n.couldNotCharge.str, () {
+              checkInVM.screenOption = ScreenOption.couldNotCharge;
+            }),
       checkInRow(Asset.infoRounded.path, L10n.commentOnly.str, () {
         checkInVM.screenOption = ScreenOption.comment;
       }),
-      checkInRow(Asset.charging.path, L10n.chargingNow.str, () {
-        checkInVM.screenOption = ScreenOption.charging;
-      })
+      checkInVM.isRepair
+          ? Container()
+          : checkInRow(Asset.charging.path, L10n.chargingNow.str, () {
+              checkInVM.screenOption = ScreenOption.charging;
+            })
       // checkInRow(Asset.waitingForCharge.path, L10n.waitingForCharge.str, () {
       //   checkInVM.screenOption = ScreenOption.waiting;
       // })

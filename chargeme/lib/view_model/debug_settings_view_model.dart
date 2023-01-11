@@ -27,11 +27,12 @@ class DebugSettingsViewModel extends ChangeNotifier {
           trailingText: IP.current,
           settingsKey: "debugServerIP",
           type: DebugSettingsRowType.chevron),
-      DebugSettingsRow(title: "Analytics logs", settingsKey: "analytics", type: DebugSettingsRowType.chevron)
+      DebugSettingsRow(title: "Analytics logs", settingsKey: "analytics", type: DebugSettingsRowType.chevron),
+      DebugSettingsRow(title: "Фильтры", settingsKey: "filters", type: DebugSettingsRowType.switch_)
     ];
   }
 
-  late SharedPreferences? _prefs;
+  SharedPreferences? _prefs;
 
   DebugSettingsViewModel() {
     initialSetup();
@@ -39,6 +40,7 @@ class DebugSettingsViewModel extends ChangeNotifier {
 
   void initialSetup() async {
     _prefs = await SharedPreferences.getInstance();
+    notifyListeners();
   }
 
   bool getBoolValueForKey(String key) {

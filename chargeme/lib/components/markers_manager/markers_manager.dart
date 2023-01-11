@@ -8,7 +8,6 @@ import 'package:chargeme/components/helpers/ip.dart';
 import 'package:http/http.dart' as http;
 
 class MarkersManager {
-  final String _baseUrl = IP.current;
   final String _stationsPath = "/v1/locations";
   final AnalyticsManager analyticsManager;
 
@@ -25,7 +24,7 @@ class MarkersManager {
     analyticsManager.logEvent("get_markers", params: queryParameters);
 
     try {
-      final response = await http.get(Uri.http(_baseUrl, _stationsPath, queryParameters), headers: headers);
+      final response = await http.get(Uri.http(IP.current, _stationsPath, queryParameters), headers: headers);
       if (response.statusCode == 200) {
         final body = jsonDecode(utf8.decode(response.bodyBytes));
 

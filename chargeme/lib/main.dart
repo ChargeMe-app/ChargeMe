@@ -98,36 +98,32 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-          // FloatingActionButton(
-          //     heroTag: "search",
-          //     backgroundColor: Colors.grey,
-          //     child: const Icon(Icons.search),
-          //     onPressed: () {
-          //       // mapVM.isSearchEnabled = !mapVM.isSearchEnabled;
-          //     }),
-          // const SizedBox(height: 8),
-          FloatingActionButton(
-              heroTag: "filters",
-              backgroundColor: ColorPallete.violetBlue,
-              child: const Icon(Icons.filter_list),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FiltersView(),
-                  ),
-                );
-              }),
-          const SizedBox(height: 8),
-          FloatingActionButton(
-              heroTag: "myLocation",
-              backgroundColor: ColorPallete.violetBlue,
-              child: const Icon(Icons.my_location),
-              onPressed: () {
-                mapVM.moveCameraToCurrentLocation();
-              }),
-        ]),
+        floatingActionButton: Consumer<MapViewModel>(
+            builder: (context, mapVM, child) =>
+                Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.end, children: [
+                  mapVM.showFilters
+                      ? FloatingActionButton(
+                          heroTag: "filters",
+                          backgroundColor: ColorPallete.violetBlue,
+                          child: const Icon(Icons.filter_list),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FiltersView(),
+                              ),
+                            );
+                          })
+                      : Container(),
+                  mapVM.showFilters ? const SizedBox(height: 8) : Container(),
+                  FloatingActionButton(
+                      heroTag: "myLocation",
+                      backgroundColor: ColorPallete.violetBlue,
+                      child: const Icon(Icons.my_location),
+                      onPressed: () {
+                        mapVM.moveCameraToCurrentLocation();
+                      }),
+                ])),
         appBar: AppBar(
           title: Text(L10n.appTitle.str),
           backgroundColor: ColorPallete.violetBlue,

@@ -1,8 +1,10 @@
 import 'package:chargeme/components/root_observer/root_observer.dart';
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/l10n.dart';
+import 'package:chargeme/gen/company.dart';
 import 'package:chargeme/view/add_station/change_access/change_access_view.dart';
 import 'package:chargeme/view/add_station/change_amenities/change_amenities_view.dart';
+import 'package:chargeme/view/add_station/change_company/change_company_view.dart';
 import 'package:chargeme/view/add_station/change_cost_and_pricing/change_cost_and_pricing_view.dart';
 import 'package:chargeme/view/add_station/change_hours/change_hours_view.dart';
 import 'package:chargeme/view/add_station/change_location/choose_location_view.dart';
@@ -112,6 +114,8 @@ class _AddStationViewState extends State<AddStationView> with RouteAware {
                           viewModel.stations.isEmpty ? "" : viewModel.stations.length.toString(),
                           true,
                           (_) => ChangeStationTypesView()),
+                      CardEntry("Company", viewModel.company != null ? viewModel.company!.title : "No company", false,
+                          (_) => ChangeCompanyView()),
                       CardEntry(L10n.access.str, viewModel.access.localizedTitle.capitalize, false,
                           (_) => ChangeAccessView()),
                       CardEntry(

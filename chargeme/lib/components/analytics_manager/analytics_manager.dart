@@ -25,7 +25,7 @@ class AnalyticsManager {
   }
 
   Future<void> logEvent(String name, {Map<String, dynamic>? params}) async {
-    final event = Event(name: name, parameters: params ?? {});
+    final event = Event(name: name, parameters: params == null ? {} : {...params});
     event.parameters["model"] = deviceModel;
     event.parameters["timestamp"] = DateTime.now().toIso8601String();
     event.parameters["platform"] = Platform.operatingSystem.toString();

@@ -3,8 +3,8 @@ import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/view/about/debug_settings/analytics_logs_view.dart';
 import 'package:chargeme/view/about/debug_settings/change_debug_server_ip.dart';
+import 'package:chargeme/view/helper_views/designed_switch.dart';
 import 'package:chargeme/view_model/debug_settings_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +26,7 @@ class DebugSettingsView extends StatelessWidget {
                     case DebugSettingsRowType.switch_:
                       return ListTile(
                           title: Text(row.title),
-                          trailing: CupertinoSwitch(
+                          trailing: DesignedSwitch(
                               value: debugSettingsVM.getBoolValueForKey(row.settingsKey),
                               onChanged: (_) {
                                 debugSettingsVM.toggleSwitchForKey(row.settingsKey);

@@ -1,0 +1,58 @@
+{
+    "sitronics": {
+        "AppStore": "https://apps.apple.com/ru/app/sitronics-electro/id1562693558",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.sitronics.app"
+    },
+    "myecars": {
+        "AppStore": "https://apps.apple.com/ru/app/my-ecars/id1561597058",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=su.ecars.my_eCars"
+    },
+    "itcharge": {
+        "AppStore": "https://apps.apple.com/ru/app/it-charge/id1544929411",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=me.itcharge.main"
+    },
+    "rushydro": {
+        "AppStore": "https://apps.apple.com/ru/app/%D1%8D%D0%B7%D1%81-%D1%80%D1%83%D1%81%D0%B3%D0%B8%D0%B4%D1%80%D0%BE/id1478285637",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.rucharge.rusgidro"
+    },
+    "mostransport": {
+        "AppStore": "https://apps.apple.com/ru/app/%D0%BC%D0%BE%D1%81%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9-%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D1%80%D1%82/id1227002793",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=ru.mosgorpass&hl=ru&gl=US"
+    },
+    "zevs": {
+        "AppStore": "https://apps.apple.com/ru/app/zevs-%D0%BA%D0%B0%D1%80%D1%82%D0%B0-%D0%B7%D0%B0%D1%80%D1%8F%D0%B4%D0%BE%D0%BA/id1474862938",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.rucharge.zevs&hl=ru"
+    },
+    "evtime": {
+        "AppStore": "https://apps.apple.com/ru/app/ev-time/id1620038223?l=en",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.evtime.app"
+    },
+    "touchStation": {
+        "AppStore": "https://apps.apple.com/ru/app/touch2/id1596919793",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.touchstation.android"
+    },
+    "nsp": {
+        "AppStore": "https://apps.apple.com/ru/app/non-stop-power/id1584182295",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=ru.nonstoppower.car"
+    },
+    "portalEnergy": {
+        "AppStore": "https://apps.apple.com/us/app/portal-energy/id1551935371",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.portal_energy.android"
+    },
+    "rosseti": {
+        "AppStore": "https://apps.apple.com/ru/app/%D1%8D%D0%B7%D1%81-%D1%81%D0%B5%D1%82%D0%B5%D0%B2%D0%B0%D1%8F-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F/id1643700958",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=ru.gridcomrt.car&hl=en_US&gl=BE"
+    },
+    "chargeNet": {
+        "AppStore": "https://apps.apple.com/ru/app/chargenet/id1555528822",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.chargenet.app"
+    },
+    "punktE": {
+        "AppStore": "https://apps.apple.com/us/app/e-way/id1601595469",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.punkte#"
+    },
+    "v4d": {
+        "AppStore": "https://apps.apple.com/ru/app/v4d-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA-%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B7%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D0%BA/id1441773150",
+        "GooglePlay": "https://play.google.com/store/apps/details?id=com.v4d.v4d"
+    }
+}

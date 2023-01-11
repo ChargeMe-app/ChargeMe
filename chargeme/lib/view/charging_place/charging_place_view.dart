@@ -4,6 +4,7 @@ import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
 import 'package:chargeme/gen/l10n.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
+import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:chargeme/view/add_station/add_station_view.dart';
 import 'package:chargeme/view/charging_place/amenities_view.dart';
 import 'package:chargeme/view/charging_place/check_in/check_in_options_view.dart';
@@ -95,10 +96,10 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                       place: place,
                                       analyticsManager: chargingPlaceVM.analyticsManager,
                                       accountManager: chargingPlaceVM.accountManager),
-                                  const SizedBox(height: 10),
+                                  SizedBox(height: chargingPlaceVM.isRepair ? 0 : 10),
                                   DetailsView(place: place, icon: chargingPlaceVM.icon),
                                   const SizedBox(height: 10),
-                                  StationsListView(stations: place.stations),
+                                  StationsListView(stations: place.stations, comingSoon: chargingPlaceVM.isRepair),
                                   place.amenities?.isEmpty ?? true ? Container() : const SizedBox(height: 10),
                                   place.amenities?.isEmpty ?? true
                                       ? Container()
@@ -121,9 +122,10 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
         context: context,
         builder: (context) {
           return Consumer<ChargingPlaceViewModel>(builder: (context, chargingPlaceVM, child) {
+            final bool canEdit = chargingPlaceVM.isHomeCharger || chargingPlaceVM.hasIntegration;
             return Container(
                 color: Color(0xFF737373),
-                height: chargingPlaceVM.isHomeCharger ? 120 : 180,
+                height: canEdit ? 120 : 180,
                 child: Container(
                     decoration: const BoxDecoration(
                         color: Colors.white,
@@ -140,7 +142,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 ? chargingPlaceVM.removeFromFavourites()
                                 : chargingPlaceVM.saveToFavourites();
                           }),
-                      chargingPlaceVM.isHomeCharger
+                      canEdit
                           ? Container()
                           : ListTile(
                               leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.info.path)),
