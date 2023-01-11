@@ -122,15 +122,10 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
         context: context,
         builder: (context) {
           return Consumer<ChargingPlaceViewModel>(builder: (context, chargingPlaceVM, child) {
-            final bool canEdit = chargingPlaceVM.isHomeCharger || chargingPlaceVM.hasIntegration;
+            final bool cannotEdit = chargingPlaceVM.isHomeCharger || chargingPlaceVM.hasIntegration;
             return Container(
-<<<<<<< HEAD
                 color: const Color(0xFF737373),
-                height: 180,
-=======
-                color: Color(0xFF737373),
-                height: canEdit ? 120 : 180,
->>>>>>> a5663062d9932a71bb5ca3064c27c84b07800c05
+                height: cannotEdit ? 120 : 180,
                 child: Container(
                     decoration: const BoxDecoration(
                         color: Colors.white,
@@ -147,7 +142,7 @@ class _ChargingPlaceView extends State<ChargingPlaceView> {
                                 ? chargingPlaceVM.removeFromFavourites()
                                 : chargingPlaceVM.saveToFavourites();
                           }),
-                      canEdit
+                      cannotEdit
                           ? Container()
                           : ListTile(
                               leading: SizedBox(width: 40, child: SvgPicture.asset(Asset.info.path)),
