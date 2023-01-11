@@ -31,15 +31,23 @@ class ChargingPlaceViewModel extends ChangeNotifier {
   List<CheckIn> get currentCheckins {
     List<CheckIn> result = [];
     place?.stations.forEach((e) {
-      if (e.checkin != null) {
-        result.add(e.checkin!);
-      }
+      e.checkins?.forEach((checkin) {
+        result.add(checkin);
+      });
     });
     return result;
   }
 
   bool get isHomeCharger {
     return place?.isHomeCharger ?? false;
+  }
+
+  bool get isRepair {
+    return place?.iconType == IconType.repairFast || place?.iconType == IconType.repairStandard;
+  }
+
+  bool get hasIntegration {
+    return place?.companyName != null;
   }
 
   ChargingPlaceViewModel({required this.analyticsManager, required this.accountManager}) {

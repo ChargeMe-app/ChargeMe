@@ -47,9 +47,10 @@ class BoxWithTitle extends StatelessWidget {
 }
 
 class StationsListView extends StatelessWidget {
-  StationsListView({required this.stations});
+  StationsListView({required this.stations, required this.comingSoon});
 
-  List<Station> stations;
+  final List<Station> stations;
+  final bool comingSoon;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,7 @@ class StationsListView extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: List.generate(stations.length, (i) {
                 return outletListView(
-                    context, stations[i].outlets, stations.length - 1 == i, stations[i].checkin != null);
+                    context, stations[i].outlets, stations.length - 1 == i, stations[i].checkins != null || comingSoon);
               })))
     ]);
   }
@@ -78,9 +79,13 @@ class StationsListView extends StatelessWidget {
               SizedBox(height: 12),
               Text(outlet.connectorType.str,
                   style: TextStyle(color: outletColor, fontSize: 16, fontWeight: FontWeight.bold)),
-              Text(outlet.kilowatts == null ? "" : "${outlet.kilowatts?.toInt().toString()} кВт",
-                  style: TextStyle(fontSize: 12, color: outletColor)),
-              Text(outlet.kilowatts == null ? "" : "17 ₽/кВт", style: TextStyle(fontSize: 12, color: outletColor))
+              outlet.kilowatts == null
+                  ? Container()
+                  : Text("${outlet.kilowatts?.toInt().toString()} кВт",
+                      style: TextStyle(fontSize: 12, color: outletColor)),
+              outlet.price == null
+                  ? Container()
+                  : Text("${outlet.price!} ₽/кВт", style: TextStyle(fontSize: 12, color: outletColor))
             ]));
       })),
       isLast ? Container() : Container(width: 1, color: ColorPallete.violetBlue)

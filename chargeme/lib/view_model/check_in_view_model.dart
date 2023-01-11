@@ -4,6 +4,7 @@ import 'package:chargeme/components/account_manager/account_manager.dart';
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
+import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
 import 'package:chargeme/components/helpers/ip.dart';
 import 'package:chargeme/view_model/charging_place_view_model.dart';
@@ -50,6 +51,10 @@ class CheckInViewModel extends ChangeNotifier {
 
   int get selectedConnectorType {
     return place.stations[_selectedStation].outlets[_selectedOutlet].connectorType.intValue;
+  }
+
+  bool get isRepair {
+    return place.iconType == IconType.repairFast || place.iconType == IconType.repairStandard;
   }
 
   ChargingPlace place;

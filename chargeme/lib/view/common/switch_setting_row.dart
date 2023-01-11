@@ -1,4 +1,5 @@
 import 'package:chargeme/extensions/color_pallete.dart';
+import 'package:chargeme/view/helper_views/designed_switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,9 @@ class SwitchSettingRow extends StatelessWidget {
           minLeadingWidth: 32,
           leading: SizedBox(width: 32, child: Image.asset(iconPath!)),
           title: Text(title),
-          trailing: CupertinoSwitch(activeColor: ColorPallete.violetBlue, value: value, onChanged: onChanged));
+          trailing: DesignedSwitch(value: value, onChanged: onChanged));
     }
     // When leading parameter is present, the title always has offset
-    return ListTile(
-        title: Text(title),
-        trailing: CupertinoSwitch(activeColor: ColorPallete.violetBlue, value: value, onChanged: onChanged));
+    return ListTile(title: Text(title), trailing: DesignedSwitch(value: value, onChanged: onChanged));
   }
 }

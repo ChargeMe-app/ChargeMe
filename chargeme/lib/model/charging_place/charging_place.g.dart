@@ -43,7 +43,8 @@ ChargingPlace _$ChargingPlaceFromJson(Map<String, dynamic> json) =>
       score: (json['score'] as num?)?.toDouble(),
       totalPhotos: json['total_photos'] as int?,
       totalReviews: json['total_reviews'] as int?,
-    );
+    )..companyName =
+        $enumDecodeNullable(_$CompanyEnumMap, json['company_name']);
 
 Map<String, dynamic> _$ChargingPlaceToJson(ChargingPlace instance) =>
     <String, dynamic>{
@@ -55,6 +56,7 @@ Map<String, dynamic> _$ChargingPlaceToJson(ChargingPlace instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'icon_type': _$IconTypeEnumMap[instance.iconType]!,
+      'company_name': _$CompanyEnumMap[instance.companyName],
       'access': instance.access,
       'access_restriction': instance.accessRestriction,
       'access_restriction_description': instance.accessRestrictionDescription,
@@ -80,6 +82,23 @@ const _$IconTypeEnumMap = {
   IconType.repairFast: 'YR',
   IconType.home: 'H',
   IconType.restricted: 'B',
+};
+
+const _$CompanyEnumMap = {
+  Company.sitronics: 'Sitronics',
+  Company.myecars: 'my.eCars',
+  Company.itcharge: 3,
+  Company.rushydro: 4,
+  Company.mostransport: 5,
+  Company.zevs: 6,
+  Company.evtime: 7,
+  Company.touchStation: 8,
+  Company.nsp: 9,
+  Company.portalEnergy: 10,
+  Company.rosseti: 11,
+  Company.chargeNet: 12,
+  Company.punktE: 13,
+  Company.v4d: 14,
 };
 
 Photo _$PhotoFromJson(Map<String, dynamic> json) => Photo(
@@ -333,6 +352,7 @@ CheckIn _$CheckInFromJson(Map<String, dynamic> json) => CheckIn(
           $enumDecodeNullable(_$VehicleTypeEnumMap, json['vehicle_type']),
       comment: json['comment'] as String? ?? "",
       kilowatts: (json['kilowatts'] as num?)?.toDouble(),
+      isAuto: json['is_auto'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$CheckInToJson(CheckIn instance) => <String, dynamic>{
@@ -345,6 +365,7 @@ Map<String, dynamic> _$CheckInToJson(CheckIn instance) => <String, dynamic>{
       'vehicle_type': _$VehicleTypeEnumMap[instance.vehicleType],
       'comment': instance.comment,
       'kilowatts': instance.kilowatts,
+      'is_auto': instance.isAuto,
     };
 
 PlugshareUser _$PlugshareUserFromJson(Map<String, dynamic> json) =>

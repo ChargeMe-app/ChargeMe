@@ -8,7 +8,7 @@ part of 'station_marker.dart';
 
 StationMarker _$StationMarkerFromJson(Map<String, dynamic> json) =>
     StationMarker(
-      access: json['access'] as int,
+      access: json['access'] as int? ?? 1,
       address: json['address'] as String,
       icon: json['icon'] as String?,
       iconType: $enumDecode(_$IconTypeEnumMap, json['icon_type']),

@@ -25,7 +25,7 @@ class StationMarker {
   String? url;
 
   StationMarker(
-      {required this.access,
+      {this.access = 1,
       required this.address,
       this.icon,
       required this.iconType,

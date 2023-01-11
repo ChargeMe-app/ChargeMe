@@ -29,6 +29,7 @@ class MapViewModel extends ChangeNotifier {
 
   bool _isSearchEnabled = false;
   bool isLoading = false;
+  bool showFilters = false;
   Map<String, Marker> get markers => _markers;
 
   final Throttler _throttler = Throttler();
@@ -38,6 +39,9 @@ class MapViewModel extends ChangeNotifier {
 
   final CustomInfoWindowController _customInfoWindowController = CustomInfoWindowController();
   CustomInfoWindowController get customInfoWindowController => _customInfoWindowController;
+  GoogleMapController? get _mapController {
+    return _customInfoWindowController.googleMapController;
+  }
 
   MapViewModel(
       {required this.markersManager,
@@ -49,6 +53,8 @@ class MapViewModel extends ChangeNotifier {
 
   void initialSetup() async {
     _prefs = await SharedPreferences.getInstance();
+    showFilters = _prefs.getBool("filters") ?? false;
+    notifyListeners();
     _setupCachedMarkerIcons();
     _loadFilters();
   }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:chargeme/components/analytics_manager/analytics_manager.dart';
 import 'package:chargeme/components/helpers/limitator.dart';
+import 'package:chargeme/gen/company.dart';
 import 'package:chargeme/model/charging_place/charging_place.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/components/helpers/ip.dart';
@@ -25,6 +26,7 @@ class AddStationViewModel extends ChangeNotifier {
   String _address = "";
   Location? location;
   List<Station> _stations = [];
+  Company? _company;
   Access _access = Access.public;
   bool _requiresFee = false;
   String _costDescription = "";
@@ -43,6 +45,7 @@ class AddStationViewModel extends ChangeNotifier {
     _address = place.address ?? "";
     location = Location(lat: place.latitude, lng: place.longitude);
     _stations = place.stations;
+    _company = place.companyName;
     // _access = place.access ?? Access.public;
     _requiresFee = place.cost ?? false;
     _costDescription = place.costDescription ?? "";
@@ -62,6 +65,7 @@ class AddStationViewModel extends ChangeNotifier {
     _address = "";
     location = null;
     _stations = [];
+    _company = null;
     _access = Access.public;
     _requiresFee = false;
     _costDescription = "";
@@ -124,6 +128,12 @@ class AddStationViewModel extends ChangeNotifier {
 
   void removeStation(int i) {
     _stations.removeAt(i);
+    notifyListeners();
+  }
+
+  Company? get company => _company;
+  set company(Company? value) {
+    _company = value;
     notifyListeners();
   }
 

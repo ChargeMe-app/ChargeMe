@@ -16,7 +16,7 @@ class Station {
   String? costDescription;
   String? hours;
   double? kilowatts;
-  CheckIn? checkin;
+  List<CheckIn>? checkins;
 
   Station(
       {required this.id,
@@ -29,7 +29,7 @@ class Station {
       this.costDescription,
       this.hours,
       this.kilowatts,
-      this.checkin});
+      this.checkins});
 
   factory Station.fromJson(Map<String, dynamic> json) => _$StationFromJson(json);
   Map<String, dynamic> toJson() => _$StationToJson(this);
