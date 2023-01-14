@@ -19,9 +19,9 @@ Station _$StationFromJson(Map<String, dynamic> json) => Station(
       costDescription: json['cost_description'] as String?,
       hours: json['hours'] as String?,
       kilowatts: (json['kilowatts'] as num?)?.toDouble(),
-      checkin: json['checkin'] == null
-          ? null
-          : CheckIn.fromJson(json['checkin'] as Map<String, dynamic>),
+      checkins: (json['checkins'] as List<dynamic>?)
+          ?.map((e) => CheckIn.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$StationToJson(Station instance) => <String, dynamic>{
@@ -35,7 +35,7 @@ Map<String, dynamic> _$StationToJson(Station instance) => <String, dynamic>{
       'cost_description': instance.costDescription,
       'hours': instance.hours,
       'kilowatts': instance.kilowatts,
-      'checkin': instance.checkin,
+      'checkins': instance.checkins,
     };
 
 Outlet _$OutletFromJson(Map<String, dynamic> json) => Outlet(
@@ -44,13 +44,14 @@ Outlet _$OutletFromJson(Map<String, dynamic> json) => Outlet(
       connectorType: $enumDecode(_$ConnectorTypeEnumMap, json['connector']),
       kilowatts: (json['kilowatts'] as num?)?.toDouble(),
       description: json['description'] as String?,
-    );
+    )..price = (json['price'] as num?)?.toDouble();
 
 Map<String, dynamic> _$OutletToJson(Outlet instance) => <String, dynamic>{
       'id': instance.id,
       'available': instance.available,
       'connector': _$ConnectorTypeEnumMap[instance.connectorType]!,
       'kilowatts': instance.kilowatts,
+      'price': instance.price,
       'description': instance.description,
     };
 

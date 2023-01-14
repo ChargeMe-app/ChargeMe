@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:chargeme/extensions/color_pallete.dart';
 import 'package:chargeme/gen/assets.dart';
+import 'package:chargeme/gen/company.dart';
 import 'package:chargeme/model/charging_place/station.dart';
 import 'package:chargeme/model/station_marker/station_marker.dart';
 import 'package:chargeme/model/vehicle/vehicle_type.dart';
@@ -23,6 +24,7 @@ class ChargingPlace {
   double latitude;
   double longitude;
   IconType iconType;
+  Company? companyName;
 
   int? access;
   String? accessRestriction;
@@ -137,6 +139,7 @@ class CheckIn {
   VehicleType? vehicleType;
   String comment;
   double? kilowatts;
+  bool isAuto;
 
   CheckIn(
       {required this.userId,
@@ -147,7 +150,8 @@ class CheckIn {
       required this.userName,
       this.vehicleType,
       this.comment = "",
-      this.kilowatts});
+      this.kilowatts,
+      this.isAuto = true});
 
   factory CheckIn.fromJson(Map<String, dynamic> json) => _$CheckInFromJson(json);
   Map<String, dynamic> toJson() => _$CheckInToJson(this);
